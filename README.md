@@ -9,6 +9,7 @@
     <br>
 </p>
 
+[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-bulma/v/stable.png)](https://packagist.org/packages/yiisoft/yii-bulma)
 [![Build status](https://github.com/yiisoft/yii-bulma/workflows/build/badge.svg)](https://github.com/yiisoft/yii-bulma/actions?query=workflow%3Abuild)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/?branch=master)
@@ -110,6 +111,3 @@ The code is statically analyzed with [Phan](https://github.com/phan/phan/wiki). 
 ```php
 ./vendor/bin/phan
 ```
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-bulma/v/stable.png)](https://packagist.org/packages/yiisoft/yii-bulma)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii-bulma/downloads.png)](https://packagist.org/packages/yiisoft/yii-bulma)
