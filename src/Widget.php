@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use Yiisoft\Html\Html;
 use Yiisoft\Widget\Widget as BaseWidget;
 
 abstract class Widget extends BaseWidget
@@ -12,20 +13,6 @@ abstract class Widget extends BaseWidget
     private bool $autoGenerate = true;
     private string $autoIdPrefix = 'w';
     private static int $counter = 0;
-
-    /**
-     * Returns the Id of the widget.
-     *
-     * @return string|null Id of the widget.
-     */
-    protected function getId(): ?string
-    {
-        if ($this->autoGenerate && $this->id === null) {
-            $this->id = $this->autoIdPrefix . ++self::$counter;
-        }
-
-        return $this->id;
-    }
 
     /**
      * Set the Id of the widget.
@@ -53,5 +40,48 @@ abstract class Widget extends BaseWidget
     {
         $this->autoIdPrefix = $value;
         return $this;
+    }
+
+    /**
+     * Returns the Id of the widget.
+     *
+     * @return string|null Id of the widget.
+     */
+    protected function getId(): ?string
+    {
+        if ($this->autoGenerate && $this->id === null) {
+            $this->id = $this->autoIdPrefix . ++self::$counter;
+        }
+
+        return $this->id;
+    }
+
+    /**
+     * Validate css class default options.
+     *
+     * @param array $options
+     * @param string $valueDefault
+     *
+     * @return array
+     */
+    protected function addOptions(array $options, string $valueDefault): array
+    {
+        $optionsTmp = '';
+
+        if (isset($options['class'])) {
+            $optionsTmp = $options['class'];
+
+            unset($options['class']);
+        }
+
+        if (!strstr($optionsTmp, $valueDefault)) {
+            Html::addCssClass($options, $valueDefault);
+        }
+
+        if (!empty($optionsTmp)) {
+            Html::addCssClass($options, $optionsTmp);
+        }
+
+        return $options;
     }
 }
