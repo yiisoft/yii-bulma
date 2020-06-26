@@ -88,7 +88,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function headerMessage(?string $value): self
+    public function headerMessage(string $value): self
     {
         $this->headerMessage = $value;
         return $this;

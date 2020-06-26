@@ -16,12 +16,12 @@ abstract class Widget extends BaseWidget
     /**
      * Returns the Id of the widget.
      *
-     * @return string Id of the widget.
+     * @return string|null Id of the widget.
      */
     protected function getId(): ?string
     {
         if ($this->autoGenerate && $this->id === null) {
-            $this->id = $this->autoIdPrefix . static::$counter++;
+            $this->id = $this->autoIdPrefix . ++self::$counter;
         }
 
         return $this->id;
