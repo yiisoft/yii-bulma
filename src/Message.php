@@ -38,10 +38,17 @@ final class Message extends Widget
             $this->options['id'] = "{$this->getId()}-message";
         }
 
-        $this->initOptions();
-        $this->initOptionsBody();
-        $this->initOptionsCloseButton();
-        $this->initOptionsHeader();
+        $this->options = $this->addOptions($this->options, 'message');
+
+        Html::addCssClass($this->options, $this->headerColor);
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        $this->optionsBody = $this->addOptions($this->optionsBody, 'message-body');
+        $this->optionsCloseButton = $this->addOptions($this->optionsCloseButton, 'delete');
+        $this->optionsHeader = $this->addOptions($this->optionsHeader, 'message-header');
 
         return
             Html::beginTag('div', $this->options) . "\n" .
@@ -238,67 +245,9 @@ final class Message extends Widget
         }
 
         if ($this->size !== '') {
-            Html::addCssClass($this->optionsCloseButton, ['class' => $this->size]);
+            Html::addCssClass($this->optionsCloseButton, [$this->size]);
         }
 
         return Html::tag($tag, $label, $this->optionsCloseButton);
-    }
-
-    private function initOptions(): void
-    {
-        if (isset($this->options['class'])) {
-            $options = $this->options['class'];
-
-            unset($this->options['class']);
-
-            Html::addCssClass($this->options, ['message', $this->headerColor, $options]);
-        } else {
-            Html::addCssClass($this->options, ['message', $this->headerColor]);
-        }
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, [$this->size]);
-        }
-    }
-
-    private function initOptionsBody(): void
-    {
-        if (isset($this->optionsBody['class'])) {
-            $optionsBody = $this->optionsBody['class'];
-
-            unset($this->optionsBody['class']);
-
-            Html::addCssClass($this->optionsBody, ['message-body', $optionsBody]);
-        } else {
-            Html::addCssClass($this->optionsBody, ['message-body']);
-        }
-    }
-
-    private function initOptionsHeader(): void
-    {
-        if (isset($this->optionsHeader['class'])) {
-            $optionsHeader = $this->optionsHeader['class'];
-
-            unset($this->optionsHeader['class']);
-
-            Html::addCssClass($this->optionsHeader, ['message-header', $optionsHeader]);
-        } else {
-            Html::addCssClass($this->optionsHeader, ['message-header']);
-        }
-    }
-
-    private function initOptionsCloseButton(): void
-    {
-        if ($this->withoutCloseButton !== true) {
-            if (isset($this->optionsCloseButton['class'])) {
-                $optionsCloseButton = $this->optionsCloseButton['class'];
-
-                unset($this->optionsCloseButton['class']);
-
-                Html::addCssClass($this->optionsCloseButton, ['delete', $optionsCloseButton]);
-            } else {
-                Html::addCssClass($this->optionsCloseButton, ['delete']);
-            }
-        }
     }
 }

@@ -93,7 +93,7 @@ HTML;
             ->render();
 
         $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark has-text-justified">
+<div id="w1-message" class="message has-text-justified is-dark">
 <div class="message-header">
 <p>Very important</p>
 <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
