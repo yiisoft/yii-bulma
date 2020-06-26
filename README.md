@@ -86,7 +86,10 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 ## Usage widgets
 
-- [Component Message](docs/message.md)
+### Components
+
+- [NavBar](docs/navbar.md)
+- [Message](docs/message.md)
 
 ## Unit testing
 
