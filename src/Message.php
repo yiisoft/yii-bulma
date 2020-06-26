@@ -84,7 +84,7 @@ final class Message extends Widget
      * The header message in the message component. Message widget will also be treated as the header content, and will
      * be rendered before body.
      *
-     * @param string|null $value
+     * @param string $value
      *
      * @return self
      */
