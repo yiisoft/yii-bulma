@@ -17,7 +17,6 @@ final class Dropdown extends Widget
     private array $items = [];
     private array $options = [];
     private array $optionsLink = ['aria-haspopup' => 'true', 'aria-expanded' => 'false'];
-    private array $submenuOptions = [];
 
     protected function run(): string
     {
@@ -128,7 +127,6 @@ final class Dropdown extends Widget
                 $label = $item['label'];
             }
 
-            $itemOptions = ArrayHelper::getValue($item, 'options', []);
             $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
