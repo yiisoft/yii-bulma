@@ -511,35 +511,4 @@ HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
-
-    public function testgenerate(): void
-    {
-        Nav::counter(0);
-
-        $html = NavBar::begin()
-        ->brandLabel('My Proyect')
-        ->brandImage('yii-logo.jpg')
-        ->brandUrl('/')
-        ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-        ->start();
-
-        $html .= Nav::widget()
-            ->items(
-                [
-                    [
-                        'label' => 'about',
-                        'url' => '/about'
-                    ],
-                    [
-                        'label' => 'contact',
-                        'url' => '/contact'
-                    ],
-                ]
-            )
-            ->render();
-
-        $html .= NavBar::end();
-
-        var_dump($html);
-    }
 }
