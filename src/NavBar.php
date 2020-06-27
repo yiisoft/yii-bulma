@@ -7,7 +7,7 @@ namespace Yiisoft\Yii\Bulma;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
-class NavBar extends Widget
+final class NavBar extends Widget
 {
     private string $brand = '';
     private string $brandLabel = '';

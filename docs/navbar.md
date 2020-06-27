@@ -16,6 +16,14 @@ NavBar demo:
     <img src="images/navbar.png">
 </p>
 
+<p align="center">
+    <img src="images/navbar-responsive-1.png">
+</p>
+
+<p align="center">
+    <img src="images/navbar-responsive-2.png">
+</p>
+
 Example usage:
 
 ```php
@@ -23,7 +31,23 @@ Example usage:
 
 declare(strict_types=1);
 
+use Yiisoft\Yii\Bulma\Nav;
 use Yiisoft\Yii\Bulma\NavBar;
+use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
+
+/**
+ * @var Yiisoft\Assets\AssetManager $assetManager
+ * @var Yiisoft\View\WebView $this
+ */
+
+$assetManager->register([
+    BulmaAsset::class,
+    BulmaJsAsset::class,
+]);
+
+$this->setCssFiles($assetManager->getCssFiles());
+$this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= NavBar::begin()
@@ -33,7 +57,12 @@ use Yiisoft\Yii\Bulma\NavBar;
     ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
     ->start(); ?>
 
-    // nav menu widget.
+    <?= Nav::widget()
+        ->items([
+            ['label' => 'about', 'url' => '/about'],
+            ['label' => 'contact', 'url' => '/contact'],
+        ]);
+    ?>
 
 <?= NavBar::end() 
 ```
