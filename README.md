@@ -39,7 +39,6 @@ To use widgets only, register `BulmaAsset::class`, which we can do in several wa
 
 By registering the Asset in the `resources/layout/main.php` it will be available for all views. If you need it registered for individual view (such as `resources/views/site/contact.php`) only, register it in that view.
 
-main.php or contact.php
 
 ```php
 use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
