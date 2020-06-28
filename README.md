@@ -33,7 +33,7 @@ Three Assets are provided:
 - [BulmaHelperAsset:](https://github.com/jmaczan/bulma-helpers) CSS, SASS, MIXINS it is an auxiliary library provide file helpers for Bulma CSS framework.
 - [BulmaJsAsset:](https://github.com/jgthms/bulma) Vizuaalog/BulmaJs it is an auxiliary library that has all the JS used by the Bulma CSS framework, you can decide to use this library, or alternatively write your own JS code.
 
-To use only the widgets, just register `BulmaAsset::class`, which we can do in several ways.
+To use widgets only, register `BulmaAsset::class`, which we can do in several ways explained below.
 
 ### Register asset in view layout or individual view
 
