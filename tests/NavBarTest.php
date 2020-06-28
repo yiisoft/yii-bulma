@@ -31,13 +31,13 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->start();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -68,14 +68,14 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->start();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -89,7 +89,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->start();
@@ -97,7 +97,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -111,7 +111,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
@@ -120,7 +120,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -131,7 +131,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'navbar is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
@@ -140,7 +140,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -154,7 +154,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsBrand(['class' => 'is-black'])
@@ -163,7 +163,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand is-black"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand is-black"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -177,7 +177,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsBrandImage(['class' => 'navbar-item', 'alt' => 'yii logo'])
@@ -186,7 +186,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item" alt="yii logo"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item" alt="yii logo"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -199,7 +199,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsBrandLabel(['class' => 'is-italic'])
@@ -208,7 +208,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item is-italic" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item is-italic" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -222,7 +222,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsItems(['class' => 'navbar-end'])
@@ -231,7 +231,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"></div>
 </div>
 </nav>
@@ -242,7 +242,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsItems(['class' => 'is-primary'])
@@ -251,7 +251,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start is-primary"></div>
 </div>
 </nav>
@@ -262,7 +262,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsItems(['class' => 'navbar-start', 'aria-label' => 'true'])
@@ -271,7 +271,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start" aria-label="true"></div>
 </div>
 </nav>
@@ -285,7 +285,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsMenu(['class' => 'is-black'])
@@ -294,7 +294,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu is-black"><div class="navbar-start"></div>
 </div>
 </nav>
@@ -308,7 +308,7 @@ HTML;
         NavBar::counter(0);
 
         $html = NavBar::begin()
-            ->brandLabel('My Proyect')
+            ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->optionsToggle(['class' => 'navbar-burger', 'role' => 'button'])
@@ -317,7 +317,7 @@ HTML;
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
-<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Proyect</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>
