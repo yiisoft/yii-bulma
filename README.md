@@ -56,7 +56,7 @@ $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 ```
 
-### Register in params application
+### Register asset in application params
 
 You can register it in the application parameters for which the Asset will be available for all views.
 
