@@ -57,7 +57,7 @@ abstract class Widget extends BaseWidget
     }
 
     /**
-     * Validate css class default options.
+     * Validate CSS class default options.
      *
      * @param array $options
      * @param string $valueDefault
@@ -74,7 +74,7 @@ abstract class Widget extends BaseWidget
             unset($options['class']);
         }
 
-        if (!strstr($optionsTmp, $valueDefault)) {
+        if (strpos($optionsTmp, $valueDefault) === false) {
             Html::addCssClass($options, $valueDefault);
         }
 
