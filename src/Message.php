@@ -8,7 +8,7 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
 /**
- * Message renders bulma component.
+ * Message renders Bulma message component.
  *
  * For example,
  *
