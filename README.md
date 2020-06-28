@@ -33,13 +33,12 @@ Three Assets are provided:
 - [BulmaHelperAsset:](https://github.com/jmaczan/bulma-helpers) CSS, SASS, MIXINS it is an auxiliary library provide file helpers for Bulma CSS framework.
 - [BulmaJsAsset:](https://github.com/jgthms/bulma) Vizuaalog/BulmaJs it is an auxiliary library that has all the JS used by the Bulma CSS framework, you can decide to use this library, or alternatively write your own JS code.
 
-To use only the widgets, just register `BulmaAsset::class`, which we can do in several ways.
+To use widgets only, register `BulmaAsset::class`, which we can do in several ways explained below.
 
-### Register in view layout or individual view
+### Register asset in view layout or individual view
 
-By registering the Asset in the `resources/layout/main.php` available for all views or `resources/views/site/contact.php` for an individual view.
+By registering the Asset in the `resources/layout/main.php` it will be available for all views. If you need it registered for individual view (such as `resources/views/site/contact.php`) only, register it in that view.
 
-main.php or contact.php
 
 ```php
 use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
@@ -57,12 +56,12 @@ $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 ```
 
-### Register in params application
+### Register asset in application params
 
-You can register it in the application parameters for which the Asset will be available for all views.
+You can register asset in the application parameters, `config/params.php`. Asset will be available for all views of this application.
 
 ```php
-use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 
 'yiisoft/asset' => [
     'assetManager' => [
