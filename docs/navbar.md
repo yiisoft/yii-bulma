@@ -1,4 +1,4 @@
-## Navbar component
+## Navbar and nav widget
 
 The navbar component is a responsive and versatile horizontal navigation bar with the following structure:
 
@@ -41,6 +41,8 @@ use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
  * @var Yiisoft\View\WebView $this
  */
 
+/* Register assets in view */
+
 $assetManager->register([
     BulmaAsset::class,
     BulmaJsAsset::class,
@@ -55,14 +57,13 @@ $this->setJsFiles($assetManager->getJsFiles());
     ->brandImage('yii-logo.jpg')
     ->brandUrl('/')
     ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-    ->start(); ?>
+    ->start() ?>
 
     <?= Nav::widget()
         ->items([
             ['label' => 'about', 'url' => '/about'],
             ['label' => 'contact', 'url' => '/contact'],
-        ]);
-    ?>
+        ]) ?>
 
 <?= NavBar::end() 
 ```

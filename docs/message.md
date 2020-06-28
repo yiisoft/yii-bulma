@@ -1,4 +1,4 @@
-## Message component
+## Message widget
 
 The Bulma message is a multi-part component:
 
@@ -22,6 +22,19 @@ Example usage:
 declare(strict_types=1);
 
 use Yiisoft\Yii\Bulma\Message;
+use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
+
+/* Register assets in view */
+
+$assetManager->register([
+    BulmaAsset::class,
+    BulmaJsAsset::class,
+]);
+
+$this->setCssFiles($assetManager->getCssFiles());
+$this->setJsFiles($assetManager->getJsFiles());
+?>
 
 <?= Message::widget()
     ->headerColor('is-success')
