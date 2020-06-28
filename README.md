@@ -58,7 +58,7 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 ### Register asset in application params
 
-You can register it in the application parameters for which the Asset will be available for all views.
+You can register asset in the application parameters, `config/params.php`. Asset will be available for all views of this application.
 
 ```php
 use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
