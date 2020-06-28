@@ -1,9 +1,15 @@
 {
-    "license": "BSD-3-Clause",
-    "dependencies": {
-        "@vizuaalog/bulmajs": "^0.11.0",
-        "bulma": "^0.8.2",
-        "bulma-helpers": "^0.3.11",
-        "sass": "^1.26.9"
-    }
+  "name": "yii-bulma",
+  "version": "1.0.0",
+  "description": "Assets for bulma.",
+  "author": "yiisoft",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "@vizuaalog/bulmajs": "^0.11.0",
+    "bulma": "^0.8.2",
+    "bulma-helpers": "^0.3.11"
+  },
+  "devDependencies": {
+    "sass": "^1.26.9"
+  }
 }
