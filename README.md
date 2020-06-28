@@ -35,7 +35,7 @@ Three Assets are provided:
 
 To use only the widgets, just register `BulmaAsset::class`, which we can do in several ways.
 
-### Register in view layout or individual view
+### Register asset in view layout or individual view
 
 By registering the Asset in the `resources/layout/main.php` available for all views or `resources/views/site/contact.php` for an individual view.
 
