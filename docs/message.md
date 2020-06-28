@@ -1,20 +1,21 @@
 ## Message widget
 
-The Bulma message is a multi-part component:
-
-- the `message` container
-- the optional `message-header` that can hold a title and a delete element
-- the `message-body` for the longer body of the message
-
-The css framework does not have any javascript, but you can use the asset `BulmaJsAsset::class`, which has the necessary javascript to close the notification with the close button, or use your own javascript.
-
-Message demo:
+The message widget renders HTML necessary to display a message like the following:
 
 <p align="center">
     <img src="images/message.png">
 </p>
 
-Example usage:
+HTML generated consists of:
+
+- A `message` container.
+- An optional `message-header` that can hold a title, and a "delete" element.
+- A `message-body` for the longer body of the message.
+
+In order for the message to be close-able you can use the asset `BulmaJsAsset::class`, which registers
+necessary JavaScript. Alternatively, you can use your own JavaScript code.
+
+### Usage
 
 ```php
 <?php
@@ -44,7 +45,7 @@ $this->setJsFiles($assetManager->getJsFiles());
     ->options(['class' => 'has-text-justified']) ?>
 ```
 
-Html structure:
+The code above generates the following HTML:
 
 ```html
 <div id="w1-message" class="message is-success">
