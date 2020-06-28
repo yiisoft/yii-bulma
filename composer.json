@@ -1,7 +1,7 @@
 {
     "name": "yiisoft/yii-bulma",
     "type": "library",
-    "description": "Collection of Widgets for Bulma.",
+    "description": "Collection of Widgets for Bulma CSS framework.",
     "keywords": [
         "yii",
         "bulma",
