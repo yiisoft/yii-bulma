@@ -85,6 +85,7 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 We will quickly and easily describe how to use widgets, and be able to use all the power of the Bulma CSS framework with php.
 
+- [Breadcrumbs](docs/breadcrumbs.md)
 - [NavBar](docs/navbar.md)
 - [Message](docs/message.md)
 
