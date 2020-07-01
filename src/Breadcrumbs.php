@@ -21,9 +21,10 @@ use Yiisoft\Widget\Exception\InvalidConfigException;
 class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
+    private bool $enclosedByIcon = true;
     private array $homeLink = [];
-    private string $itemTemplate = "<li>{link}</li>\n";
-    private string $itemTemplateActive = "<li class=\"is-active\"><a aria-current=\"page\">{label}</li>\n";
+    private string $itemTemplate = "<li>{icon}{link}</li>\n";
+    private string $itemTemplateActive = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
     private array $links = [];
     private array $options = [];
     private array $optionsItems = [];
@@ -36,11 +37,12 @@ class Breadcrumbs extends Widget
 
         $this->buildOptions();
 
-        return Html::tag(
-            'nav',
-            Html::tag('ul', implode('', $this->renderLinks()), $this->optionsItems),
-            $this->options
-        );
+        return
+            Html::beginTag('nav', $this->options) . "\n" .
+                Html::beginTag('ul', $this->optionsItems) . "\n" .
+                    implode('', $this->renderLinks()) .
+                Html::endTag('ul') . "\n" .
+            Html::endTag('nav');
     }
 
     /**
@@ -164,6 +166,19 @@ class Breadcrumbs extends Widget
         $this->options = array_merge(['aria-label' => 'breadcrumbs'], $this->options);
     }
 
+    private function renderIcon(string $icon, array $iconOptions): string
+    {
+        $html = '';
+
+        if ($icon !== '') {
+            $html = Html::beginTag('span', $iconOptions) .
+                Html::tag('i', '', ['class' => $icon]) .
+                Html::endTag('span');
+        }
+
+        return $html;
+    }
+
     /**
      * Renders a single breadcrumb item.
      *
@@ -178,6 +193,19 @@ class Breadcrumbs extends Widget
     private function renderItem(array $link, string $template): string
     {
         $encodeLabel = ArrayHelper::remove($link, 'encode', $this->encodeLabels);
+
+        $icon = '';
+        $iconOptions = [];
+
+        if (isset($link['icon'])) {
+            $icon = $link['icon'];
+        }
+
+        if (isset($link['iconOptions']) && is_array($link['iconOptions'])) {
+            $iconOptions = $this->addOptions($iconOptions, 'icon');
+        }
+
+        unset($link['icon'], $link['iconOptions']);
 
         if (array_key_exists('label', $link)) {
             $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
@@ -197,21 +225,15 @@ class Breadcrumbs extends Widget
             $linkHtml = $label;
         }
 
-        return strtr($template, ['{label}' => $label, '{link}' => $linkHtml]);
+        return strtr(
+            $template,
+            ['{label}' => $label, '{link}' => $linkHtml, '{icon}' => $this->renderIcon($icon, $iconOptions)]
+        );
     }
 
     private function renderLinks(): array
     {
-        $links = [];
-
-        if ($this->homeLink === array()) {
-            $links[] = $this->renderItem([
-                'label' => 'Home',
-                'url' => '/',
-            ], $this->itemTemplate);
-        } else {
-            $links[] = $this->renderItem($this->homeLink, $this->itemTemplate);
-        }
+        $links = $this->renderHomeLink();
 
         foreach ($this->links as $link) {
             if (!is_array($link)) {
@@ -222,5 +244,23 @@ class Breadcrumbs extends Widget
         }
 
         return $links;
+    }
+
+    private function renderHomeLink(): array
+    {
+        $homeLink = [];
+        $icon = '';
+        $iconOptions = [];
+
+        if ($this->homeLink === []) {
+            $homeLink[] = $this->renderItem([
+                'label' => 'Home',
+                'url' => '/',
+            ], $this->itemTemplate);
+        } else {
+            $homeLink[] = $this->renderItem($this->homeLink, $this->itemTemplate);
+        }
+
+        return $homeLink;
     }
 }

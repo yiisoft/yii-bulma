@@ -35,12 +35,20 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= Breadcrumbs::widget()
-    ->encodeLabels(false)
     ->homeLink([
-        'label' => '<span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span> Home',
-        'url' => '/index'
+        'label' => 'Index',
+        'url' => '/index',
+        'icon' => 'fas fa-home',
+        'iconOptions' => ['class' => 'icon']
     ])
-    ->links([['label' => 'About', 'url' => '/about']])
+    ->links([
+        [
+            'label' => 'About',
+            'url' => '/about',
+            'icon' => 'fas fa-thumbs-up',
+            'iconOptions' => ['class' => 'icon']
+        ]
+    ])
     ->options(['class' => 'is-centered'])
     ->render() ?>
 ```
@@ -48,10 +56,10 @@ $this->setJsFiles($assetManager->getJsFiles());
 The code above generates the following HTML:
 
 ```html
-<nav id="w2-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
-    <ul>
-        <li><a href="/index"><span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span> Home</a></li>
-        <li><a href="/about">About</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+    <ul class="testMe">
+        <li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
+        <li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
     </ul>
 </nav>
 ```

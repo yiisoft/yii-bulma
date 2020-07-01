@@ -18,9 +18,12 @@ final class BreadcrumbsTest extends TestCase
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -35,9 +38,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
 <li><a href="/about">Setting &amp;amp; Profile</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -47,8 +53,7 @@ HTML;
             ->links(
                 [
                     [
-                        'label' => '<span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i>' .
-                            '</span>' . 'About',
+                        'label' => 'Seeting &amp; profile',
                         'url' => '/about'
                     ]
                 ]
@@ -56,9 +61,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
-<li><a href="/about"><span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span>About</a></li>
-</ul></nav>
+<nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/about">Seeting &amp; profile</a></li>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -74,9 +82,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/index">Index</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/index">Index</a></li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -87,9 +98,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li>Index</li>
+<nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li>Index</li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -106,9 +120,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><div><a href="/index">Index</a></div>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<div><a href="/index">Index</a></div>
 <div><a href="/about">About</a></div>
-</ul></nav>
+</ul>
+</nav>
 HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
@@ -124,9 +141,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/index">Index</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/index">Index</a></li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -155,9 +175,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
 <li class="is-active"><a aria-current="page">about</li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -172,9 +195,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
 <div><a href="/about">about</a></div>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -187,13 +213,16 @@ HTML;
         $this->expectException(InvalidConfigException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
-            ->links([['url' => '/about', 'template' => "<div>{link}</div>\n"]])
+            ->links([['url' => '/about', 'template' => "<div>{link}</div>"]])
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/">Home</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/">Home</a></li>
 <div><a href="/about">about</a></div>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -210,9 +239,12 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs"><ul><li><a href="/index">Index</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+<ul>
+<li><a href="/index">Index</a></li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
@@ -229,9 +261,50 @@ HTML;
             ->render();
 
         $expected = <<<HTML
-<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs"><ul class="testMe"><li><a href="/index">Index</a></li>
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul class="testMe">
+<li><a href="/index">Index</a></li>
 <li><a href="/about">About</a></li>
-</ul></nav>
+</ul>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBreadcrumbsIcons()
+    {
+        Breadcrumbs::counter(0);
+
+        $html = Breadcrumbs::widget()
+            ->homeLink(
+                [
+                    'label' => 'Index',
+                    'url' => '/index',
+                    'icon' => 'fas fa-home',
+                    'iconOptions' => ['class' => 'icon']
+                ]
+            )
+            ->links(
+                [
+                    [
+                        'label' => 'About',
+                        'url' => '/about',
+                        'icon' => 'fas fa-thumbs-up',
+                        'iconOptions' => ['class' => 'icon']
+                    ]
+                ]
+            )
+            ->options(['class' => 'is-centered'])
+            ->render();
+
+        $expected = <<<HTML
+<nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+<ul>
+<li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
+<li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
+</ul>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expected, $html);
