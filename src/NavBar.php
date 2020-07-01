@@ -35,13 +35,7 @@ final class NavBar extends Widget
             $this->options['id'] = "{$id}-navbar";
         }
 
-        $this->options = $this->addOptions($this->options, 'navbar');
-        $this->optionsBrand = $this->addOptions($this->optionsBrand, 'navbar-brand');
-        $this->optionsBrandLabel = $this->addOptions($this->optionsBrandLabel, 'navbar-item');
-        $this->optionsBrandImage = $this->addOptions($this->optionsBrandImage, 'navbar-item');
-        $this->optionsMenu = $this->addOptions($this->optionsMenu, 'navbar-menu');
-
-        $this->initOptionsItems();
+        $this->buildOptions();
         $this->renderBrand();
 
         $navOptions = $this->options;
@@ -209,6 +203,17 @@ final class NavBar extends Widget
     {
         $this->optionsToggle = $value;
         return $this;
+    }
+
+    private function buildOptions(): void
+    {
+        $this->options = $this->addOptions($this->options, 'navbar');
+        $this->optionsBrand = $this->addOptions($this->optionsBrand, 'navbar-brand');
+        $this->optionsBrandLabel = $this->addOptions($this->optionsBrandLabel, 'navbar-item');
+        $this->optionsBrandImage = $this->addOptions($this->optionsBrandImage, 'navbar-item');
+        $this->optionsMenu = $this->addOptions($this->optionsMenu, 'navbar-menu');
+
+        $this->initOptionsItems();
     }
 
     private function initOptionsItems(): void
