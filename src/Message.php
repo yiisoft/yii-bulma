@@ -38,17 +38,7 @@ final class Message extends Widget
             $this->options['id'] = "{$this->getId()}-message";
         }
 
-        $this->options = $this->addOptions($this->options, 'message');
-
-        Html::addCssClass($this->options, $this->headerColor);
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
-        }
-
-        $this->optionsBody = $this->addOptions($this->optionsBody, 'message-body');
-        $this->optionsCloseButton = $this->addOptions($this->optionsCloseButton, 'delete');
-        $this->optionsHeader = $this->addOptions($this->optionsHeader, 'message-header');
+        $this->buildOptions();
 
         return
             Html::beginTag('div', $this->options) . "\n" .
@@ -199,6 +189,21 @@ final class Message extends Widget
     {
         $this->withoutHeader = $value;
         return $this;
+    }
+
+    private function buildOptions()
+    {
+        $this->options = $this->addOptions($this->options, 'message');
+
+        Html::addCssClass($this->options, $this->headerColor);
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        $this->optionsBody = $this->addOptions($this->optionsBody, 'message-body');
+        $this->optionsCloseButton = $this->addOptions($this->optionsCloseButton, 'delete');
+        $this->optionsHeader = $this->addOptions($this->optionsHeader, 'message-header');
     }
 
     private function renderHeader(): string
