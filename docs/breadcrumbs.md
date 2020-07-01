@@ -57,7 +57,7 @@ The code above generates the following HTML:
 
 ```html
 <nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
-    <ul class="testMe">
+    <ul>
         <li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
         <li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
     </ul>
