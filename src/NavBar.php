@@ -28,20 +28,11 @@ final class NavBar extends Widget
 
     public function start(): string
     {
-        $id = '';
-
-        if (!isset($this->options['id'])) {
-            $id = $this->getId();
-            $this->options['id'] = "{$id}-navbar";
-        }
-
         $this->buildOptions();
         $this->renderBrand();
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
-
-        $this->optionsMenu['id'] = "{$id}-navbar-Menu";
 
         return
             Html::beginTag($navTag, $navOptions) . "\n" .
@@ -207,11 +198,20 @@ final class NavBar extends Widget
 
     private function buildOptions(): void
     {
+        $id = '';
+
+        if (!isset($this->options['id'])) {
+            $id = $this->getId();
+            $this->options['id'] = "{$id}-navbar";
+        }
+
         $this->options = $this->addOptions($this->options, 'navbar');
         $this->optionsBrand = $this->addOptions($this->optionsBrand, 'navbar-brand');
         $this->optionsBrandLabel = $this->addOptions($this->optionsBrandLabel, 'navbar-item');
         $this->optionsBrandImage = $this->addOptions($this->optionsBrandImage, 'navbar-item');
         $this->optionsMenu = $this->addOptions($this->optionsMenu, 'navbar-menu');
+
+        $this->optionsMenu['id'] = "{$id}-navbar-Menu";
 
         $this->initOptionsItems();
     }
