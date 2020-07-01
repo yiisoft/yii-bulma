@@ -20,11 +20,7 @@ final class Dropdown extends Widget
 
     protected function run(): string
     {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-dropdown";
-        }
-
-        $this->options = $this->addOptions($this->options, $this->cssOptions);
+        $this->buildOptions();
 
         return $this->renderItems($this->items, $this->options);
     }
@@ -93,6 +89,15 @@ final class Dropdown extends Widget
     {
         $this->options = $value;
         return $this;
+    }
+
+    private function buildOptions(): void
+    {
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-dropdown";
+        }
+
+        $this->options = $this->addOptions($this->options, $this->cssOptions);
     }
 
     /**
