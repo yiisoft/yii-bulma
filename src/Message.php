@@ -34,10 +34,6 @@ final class Message extends Widget
 
     protected function run(): string
     {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-message";
-        }
-
         $this->buildOptions();
 
         return
@@ -193,6 +189,10 @@ final class Message extends Widget
 
     private function buildOptions()
     {
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-message";
+        }
+
         $this->options = $this->addOptions($this->options, 'message');
 
         Html::addCssClass($this->options, $this->headerColor);
