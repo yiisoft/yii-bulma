@@ -34,10 +34,6 @@ class Breadcrumbs extends Widget
             return '';
         }
 
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-breadcrumbs";
-        }
-
         $this->buildOptions();
 
         return Html::tag(
@@ -160,6 +156,10 @@ class Breadcrumbs extends Widget
 
     private function buildOptions(): void
     {
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-breadcrumbs";
+        }
+
         $this->options = $this->addOptions($this->options, 'breadcrumb');
         $this->options = array_merge(['aria-label' => 'breadcrumbs'], $this->options);
     }
