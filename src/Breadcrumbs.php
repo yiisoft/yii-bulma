@@ -30,37 +30,21 @@ class Breadcrumbs extends Widget
 
     protected function run(): string
     {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-breadcrumbs";
-        }
-
-        $this->options = $this->addOptions($this->options, 'breadcrumb');
-        $this->options = array_merge(['aria-label' => 'breadcrumbs'], $this->options);
-
         if (empty($this->links)) {
             return '';
         }
 
-        $links = [];
-
-        if ($this->homeLink === array()) {
-            $links[] = $this->renderItem([
-                'label' => 'Home',
-                'url' => '/',
-            ], $this->itemTemplate);
-        } else {
-            $links[] = $this->renderItem($this->homeLink, $this->itemTemplate);
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-breadcrumbs";
         }
 
-        foreach ($this->links as $link) {
-            if (!\is_array($link)) {
-                $link = ['label' => $link];
-            }
+        $this->buildOptions();
 
-            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->itemTemplateActive);
-        }
-
-        return Html::tag('nav', Html::tag('ul', implode('', $links), $this->optionsItems), $this->options);
+        return Html::tag(
+            'nav',
+            Html::tag('ul', implode('', $this->renderLinks()), $this->optionsItems),
+            $this->options
+        );
     }
 
     /**
@@ -174,6 +158,12 @@ class Breadcrumbs extends Widget
         return $this;
     }
 
+    private function buildOptions(): void
+    {
+        $this->options = $this->addOptions($this->options, 'breadcrumb');
+        $this->options = array_merge(['aria-label' => 'breadcrumbs'], $this->options);
+    }
+
     /**
      * Renders a single breadcrumb item.
      *
@@ -208,5 +198,29 @@ class Breadcrumbs extends Widget
         }
 
         return strtr($template, ['{label}' => $label, '{link}' => $linkHtml]);
+    }
+
+    private function renderLinks(): array
+    {
+        $links = [];
+
+        if ($this->homeLink === array()) {
+            $links[] = $this->renderItem([
+                'label' => 'Home',
+                'url' => '/',
+            ], $this->itemTemplate);
+        } else {
+            $links[] = $this->renderItem($this->homeLink, $this->itemTemplate);
+        }
+
+        foreach ($this->links as $link) {
+            if (!is_array($link)) {
+                $link = ['label' => $link];
+            }
+
+            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->itemTemplateActive);
+        }
+
+        return $links;
     }
 }
