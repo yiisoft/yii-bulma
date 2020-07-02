@@ -40,9 +40,6 @@ final class DropdownTest extends TestCase
 </div>
 HTML;
 
-        var_dump($html);
-        die;
-
         $this->assertEqualsWithoutLE($expected, $html);
     }
 }
