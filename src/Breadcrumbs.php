@@ -233,7 +233,7 @@ class Breadcrumbs extends Widget
 
     private function renderLinks(): array
     {
-        $links = $this->renderHomeLink();
+        $links[] = $this->renderHomeLink();
 
         foreach ($this->links as $link) {
             if (!is_array($link)) {
@@ -246,21 +246,12 @@ class Breadcrumbs extends Widget
         return $links;
     }
 
-    private function renderHomeLink(): array
+    private function renderHomeLink(): string
     {
-        $homeLink = [];
-        $icon = '';
-        $iconOptions = [];
-
         if ($this->homeLink === []) {
-            $homeLink[] = $this->renderItem([
-                'label' => 'Home',
-                'url' => '/',
-            ], $this->itemTemplate);
-        } else {
-            $homeLink[] = $this->renderItem($this->homeLink, $this->itemTemplate);
+            $this->homeLink = ['label' => 'Home', 'url' => '/'];
         }
 
-        return $homeLink;
+        return $this->renderItem($this->homeLink, $this->itemTemplate);
     }
 }
