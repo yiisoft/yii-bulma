@@ -15,24 +15,21 @@ You can inform the current page using the is-active modifier in a li tag. It wil
 
 declare(strict_types=1);
 
-/** 
- * The Font-Awesome Asset must be added, in this case we are going to use an external library.
- * {@see https://github.com/yii-extension/fontawesome}
- */
-use Yii\Extension\Fontawesome\Dev\Css\NpmAllAsset;
 use Yiisoft\Yii\Bulma\Breadcrumbs;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 
 /* Register assets in view */
 
 $assetManager->register([
-    BulmaAsset::class,
-    NpmAllAsset::class,
+    BulmaAsset::class
 ]);
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 ?>
+
+// The Font-Awesome Asset must be added, in this case we are going to use an external library.
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <?= Breadcrumbs::widget()
     ->homeLink([
