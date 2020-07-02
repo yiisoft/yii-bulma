@@ -57,7 +57,7 @@ final class Dropdown extends Widget
      */
     public function buttonLabelOptions(array $value): self
     {
-        $this->buttonLabelOption = $value;
+        $this->buttonLabelOptions = $value;
         return $this;
     }
 
