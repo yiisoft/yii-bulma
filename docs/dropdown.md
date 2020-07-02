@@ -49,6 +49,7 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 HTML produced is like the following:
 
+```html
 <div id="w1-dropdown" class="dropdown">
     <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -66,6 +67,7 @@ HTML produced is like the following:
         <a class="dropdown-item" href="#">Ekaterinburgo</a>
     </div>
 </div>
+```
 
 Method                            | Description |
 ----------------------------------|-------------|
