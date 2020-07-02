@@ -47,25 +47,52 @@ use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
 
 $assetManager->register([
     BulmaAsset::class,
-    BulmaJsAsset::class,
+    BulmaJsAsset::class
 ]);
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
+// The Font-Awesome Asset must be added, in this case we are going to use an external library.
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
 <?= NavBar::begin()
     ->brandLabel('My Project')
     ->brandImage('yii-logo.jpg')
     ->brandUrl('/')
     ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-    ->start() ?>
+    ->optionsItems(['class' => 'navbar-end'])
+    ->start()
+?>
 
-    <?= Nav::widget()
-        ->items([
-            ['label' => 'about', 'url' => '/about'],
-            ['label' => 'contact', 'url' => '/contact'],
-        ]) ?>
+<?= Nav::widget()
+    ->items([
+        [
+            'label' => 'Setting Account',
+            'url' => '/setting/account',
+            'icon' => 'fas fa-user-cog',
+            'iconOptions' => ['class' => 'icon']
+        ],
+        [
+            'label' => 'Profile',
+            'url' => '/profile',
+            'icon' => 'fas fa-users',
+            'iconOptions' => ['class' => 'icon']
+        ],
+        [
+            'label' => 'Admin' . Html::img(
+                '../../docs/images/icon-avatar.png',
+                ['class' => 'img-rounded', 'aria-expanded' => 'false']
+            ),
+            'items' => [
+                ['label' => 'Logout', 'url' => '/auth/logout'],
+            ],
+            'encode' => false
+        ]
+    ])
+    ->render()
+?>
 
 <?= NavBar::end() ?>
 ```
@@ -84,7 +111,15 @@ HTML produced is like the following:
         </a>
     </div>
     <div id="w1-navbar-Menu" class="navbar-menu">
-        <div class="navbar-start"></div>
+        <div class="navbar-end"><a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span><span>Setting Account</span></a>
+            <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span><span>Profile</span></a>
+            <div class="navbar-item has-dropdown">
+                <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt="" aria-expanded="false"></a>
+                <div id="w2-dropdown" class="navbar-dropdown is-hoverable">
+                    <a class="navbar-item" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 ```
@@ -92,8 +127,8 @@ HTML produced is like the following:
 ## Reference
 
 
-Method                       | Description | Default |
------------------------------|-------------|---------|
+Method                       | Description |
+-----------------------------|-------------|
 `brandLabel(string $value)`  | The text of the brand label| ''
 `brandImage(string $value)`  | The image of the brand. | ''
 `brandUrl(string $value)`    | The URL for the brand's hyperlink tag used for the "href". | `/`
