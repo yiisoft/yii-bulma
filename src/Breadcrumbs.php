@@ -21,7 +21,6 @@ use Yiisoft\Widget\Exception\InvalidConfigException;
 class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
-    private bool $enclosedByIcon = true;
     private array $homeLink = [];
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
     private string $itemTemplateActive = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
@@ -233,6 +232,8 @@ class Breadcrumbs extends Widget
 
     private function renderLinks(): array
     {
+        $links = [];
+
         $links[] = $this->renderHomeLink();
 
         foreach ($this->links as $link) {

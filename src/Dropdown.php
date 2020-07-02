@@ -36,7 +36,7 @@ final class Dropdown extends Widget
     /**
      * Set label button dropdown.
      *
-     * @param string
+     * @param string $value
      *
      * @return self
      */

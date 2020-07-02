@@ -178,7 +178,7 @@ final class Nav extends Widget
      * currentPath for the item and the rest of the elements are the associated parameters. Only when its currentPath
      * and parameters match {@see currentPath}, respectively, will a menu item be considered active.
      *
-     * @param array|string $item the menu item to be checked
+     * @param array|string|object $item the menu item to be checked
      *
      * @return bool whether the menu item is active
      */
