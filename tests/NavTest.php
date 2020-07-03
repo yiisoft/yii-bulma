@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use Yiisoft\Html\Html;
 use Yiisoft\Widget\Exception\InvalidConfigException;
 use Yiisoft\Yii\Bulma\Nav;
 use Yiisoft\Yii\Bulma\NavBar;
@@ -17,7 +18,7 @@ final class NavTest extends TestCase
             ->items([
                 [
                     'label' => 'Page1',
-                    'url' => '#',
+                    'url' => '#'
                 ]
             ])
             ->render();
@@ -67,10 +68,12 @@ HTML;
         $expectedHtml = <<<HTML
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Dropdown1</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="#">Page1</a>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="#">Page1</a>
 <a class="navbar-item" href="#">Page2</a>
 <div class="navbar-divider"></div>
-<a class="navbar-item" href="#">Page3</a></div>
+<a class="navbar-item" href="#">Page3</a>
+</div>
 </div>
 HTML;
 
@@ -111,8 +114,10 @@ HTML;
 <a class="navbar-item" href="#">Page1</a>
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Dropdown1</a>
-<div id="test1" class="navbar-dropdown test" data-id="t1"><a class="navbar-item" href="#">Page2</a>
-<a class="navbar-item" href="#">Page3</a></div>
+<div id="test1" class="navbar-dropdown test" data-id="t1">
+<a class="navbar-item" href="#">Page2</a>
+<a class="navbar-item" href="#">Page3</a>
+</div>
 </div>
 HTML;
 
@@ -140,7 +145,9 @@ HTML;
 <a class="navbar-item" href="#">Page1</a>
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Page4</a>
-<div id="w1-dropdown" class="navbar-dropdown"></div>
+<div id="w1-dropdown" class="navbar-dropdown">
+
+</div>
 </div>
 HTML;
 
@@ -224,8 +231,10 @@ HTML;
 <a class="navbar-item" href="#">Item1</a>
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Item2</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="site/index">Page2</a>
-<a class="navbar-item is-active" href="#">Page3</a></div>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="site/index">Page2</a>
+<a class="navbar-item is-active" href="#">Page3</a>
+</div>
 </div>
 HTML;
 
@@ -255,8 +264,10 @@ HTML;
 <a class="navbar-item" href="#">Item1</a>
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Item2</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="/site/index">Page2</a>
-<a class="navbar-item is-active">Page3</a></div>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="/site/index">Page2</a>
+<a class="navbar-item is-active">Page3</a>
+</div>
 </div>
 HTML;
 
@@ -287,8 +298,12 @@ HTML;
         $expectedHtml = <<<HTML
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Dropdown</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" aria-haspopup="true" aria-expanded="false">Sub-dropdown</a>
-<div id="w2-dropdown" class="navbar-dropdown"><a class="navbar-item is-active" href="#">Page</a></div></div>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" aria-haspopup="true" aria-expanded="false">Sub-dropdown</a>
+<div id="w2-dropdown" class="navbar-dropdown">
+<a class="navbar-item is-active" href="#">Page</a>
+</div>
+</div>
 </div>
 HTML;
 
@@ -379,9 +394,11 @@ HTML;
 <a class="navbar-item" href="#">index</a>
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Dropdown</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="#">Level 1</a>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="#">Level 1</a>
 <div class="navbar-divider"></div>
-<a class="navbar-item" href="#">Level 2</a></div>
+<a class="navbar-item" href="#">Level 2</a>
+</div>
 </div>
 HTML;
 
@@ -431,9 +448,11 @@ HTML;
         $expectedHtml = <<<HTML
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Dropdown</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="#">a &amp; b</a>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="#">a &amp; b</a>
 <div class="navbar-divider"></div>
-<a class="navbar-item" href="#">Level 2</a></div>
+<a class="navbar-item" href="#">Level 2</a>
+</div>
 </div>
 HTML;
         $this->assertEqualsWithoutLE($expectedHtml, $html);
@@ -504,9 +523,71 @@ HTML;
         $expectedHtml = <<<HTML
 <div class="navbar-item has-dropdown is-hoverable">
 <a class="navbar-link" href="#">Link disable</a>
-<div id="w1-dropdown" class="navbar-dropdown"><a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">Level 1</a>
-<a class="navbar-item" href="#">Level 2</a></div>
+<div id="w1-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">Level 1</a>
+<a class="navbar-item" href="#">Level 2</a>
 </div>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavIcon(): void
+    {
+        Nav::counter(0);
+        NavBar::counter(0);
+
+        $html = NavBar::begin()
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
+            ->optionsItems(['class' => 'navbar-end'])
+            ->start();
+
+        $html .= Nav::widget()
+            ->items([
+                [
+                    'label' => 'Setting Account',
+                    'url' => '/setting/account',
+                    'icon' => 'fas fa-user-cog',
+                    'iconOptions' => ['class' => 'icon']
+                ],
+                [
+                    'label' => 'Profile',
+                    'url' => '/profile',
+                    'icon' => 'fas fa-users',
+                    'iconOptions' => ['class' => 'icon']
+                ],
+                [
+                    'label' => 'Admin' . Html::img(
+                        '../../docs/images/icon-avatar.png',
+                        ['class' => 'img-rounded', 'aria-expanded' => 'false']
+                    ),
+                    'items' => [
+                        ['label' => 'Logout', 'url' => '/auth/logout'],
+                    ],
+                    'encode' => false
+                ]
+            ])
+            ->render();
+
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"><a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span><span>Setting Account</span></a>
+<a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span><span>Profile</span></a>
+<div class="navbar-item has-dropdown is-hoverable">
+<a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt="" aria-expanded="false"></a>
+<div id="w2-dropdown" class="navbar-dropdown">
+<a class="navbar-item" href="/auth/logout">Logout</a>
+</div>
+</div></div>
+</div>
+</nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);

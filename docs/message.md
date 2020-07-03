@@ -1,6 +1,6 @@
 ## Message widget
 
-The message widget renders HTML necessary to display a message like the following:
+[The message component](https://bulma.io/documentation/components/message/) displays a message like the following:
 
 <p align="center">
     <img src="images/message.png">

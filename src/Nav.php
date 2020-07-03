@@ -128,10 +128,11 @@ final class Nav extends Widget
         return Dropdown::widget()
             ->cssDivider('navbar-divider')
             ->cssItem('navbar-item')
-            ->cssOptions('navbar-dropdown')
+            ->cssItems('navbar-dropdown')
+            ->enclosedByContainer(false)
             ->encodeLabels($this->encodeLabels)
             ->items($items)
-            ->options(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
+            ->optionsItems(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
             ->render() . "\n";
     }
 
@@ -177,7 +178,7 @@ final class Nav extends Widget
      * currentPath for the item and the rest of the elements are the associated parameters. Only when its currentPath
      * and parameters match {@see currentPath}, respectively, will a menu item be considered active.
      *
-     * @param array|string $item the menu item to be checked
+     * @param array|string|object $item the menu item to be checked
      *
      * @return bool whether the menu item is active
      */
@@ -192,6 +193,18 @@ final class Nav extends Widget
         }
 
         return false;
+    }
+
+    private function renderIcon(string $label, string $icon, array $iconOptions): string
+    {
+        if ($icon !== '') {
+            $label = Html::beginTag('span', $iconOptions) .
+                Html::tag('i', '', ['class' => $icon]) .
+                Html::endTag('span') .
+                Html::tag('span', $label);
+        }
+
+        return $label;
     }
 
     /**
@@ -238,6 +251,19 @@ final class Nav extends Widget
         } else {
             $label = $item['label'];
         }
+
+        $icon = '';
+        $iconOptions = [];
+
+        if (isset($item['icon'])) {
+            $icon = $item['icon'];
+        }
+
+        if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
+            $iconOptions = $this->addOptions($iconOptions, 'icon');
+        }
+
+        $label = $this->renderIcon($label, $icon, $iconOptions);
 
         $options = ArrayHelper::getValue($item, 'options', []);
         $items = ArrayHelper::getValue($item, 'items');
