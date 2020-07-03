@@ -1,8 +1,6 @@
 ## Breadcrumbs widget
 
-The Bulma breadcrumb is a simple navigation component that only requires a breadcrumb `container` and `ul` list. The dividers are automatically created in the content of the ::before pseudo-element of li tags.
-
-You can inform the current page using the is-active modifier in a li tag. It will disable the navigation of inner links.
+[The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component.
 
 <p align="center">
     <img src="images/breadcrumbs.png">
@@ -65,9 +63,9 @@ Method                             | Description
 -----------------------------------|------------
 `id(string $value)`                | Widget ID.
 `encodeLabels(bool $value)`        | Whether to HTML-encode the link labels.
-`homeLink(array $value)`           | The first hyperlink in the breadcrumbs (called home link).
-`itemTemplate(string $value)`      | The template used to render each inactive item in the breadcrumbs.
-`itemTemplateActive(string $value)`| The template used to render each active item in the breadcrumbs.
+`homeLink(array $value)`           | First hyperlink in the breadcrumbs (called home link).
+`itemTemplate(string $value)`      | Template used to render each inactive item in the breadcrumbs.
+`itemTemplateActive(string $value)`| Template used to render each active item in the breadcrumbs.
 `links(array $value)`              | List of links to appear in the breadcrumbs.
-`options(array $value)`            | The HTML attributes for the widget container nav tag.
-`optionsItems(array $value)`       | The HTML attributes for the items widget. 
+`options(array $value)`            | HTML attributes for the widget container nav tag.
+`optionsItems(array $value)`       | HTML attributes for the items widget. 

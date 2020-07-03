@@ -1,6 +1,7 @@
 ## Dropdown widget
 
-The dropdown component is a container for a dropdown button and a dropdown menu.
+[The dropdown component](https://bulma.io/documentation/components/dropdown/) is a container for a dropdown button and
+a dropdown menu.
 
 <p align="center">
     <img src="images/dropdown.png">
@@ -10,7 +11,7 @@ HTML generated consists of:
 
 - `dropdown` the main container.
 - `dropdown-trigger` the container for a button.
-- `dropdown-menu` the toggable menu, hidden by default.
+- `dropdown-menu` the toggleable menu, hidden by default.
 - `dropdown-content` the dropdown box, with a white background and a shadow.
 - `dropdown-item` each single item of the dropdown, which can either be a a or a div.
 - `dropdown-divider` a horizontal line to separate dropdown items.
@@ -69,16 +70,16 @@ HTML produced is like the following:
 </div>
 ```
 
-Method                            | Description |
-----------------------------------|-------------|
+Method                            | Description 
+----------------------------------|-------------
 `id(string $value)`               | Widget ID.
 `buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown.
-`cssDivider(string $value)`       | Set css class divider dropdown.
-`cssItem(string $value)`          | Set css class item dropdown.
-`cssItems(string $value)`         | Set css class items container dropdown.
+`cssDivider(string $value)`       | Divider CSS class.
+`cssItem(string $value)`          | Item CSS class.
+`cssItems(string $value)`         | Item container CSS class.
 `encodeLabels(bool $value)`       | Whether the labels for header items should be HTML-encoded.
 `enclosedByContainer(bool $value)`| Set enclosed by container dropdown.
 `items(array $value)`             | List of menu items in the dropdown.
-`options(array $value)`           | The HTML attributes for the widget container tag.
-`optionsItems(array $value)`      | The HTML attributes for the widget items.
-`optionsTrigger(array $value)`    | The HTML attributes for the widget container trigger.
+`options(array $value)`           | HTML attributes for the widget container tag.
+`optionsItems(array $value)`      | HTML attributes for the widget items.
+`optionsTrigger(array $value)`    | HTML attributes for the widget container trigger.
