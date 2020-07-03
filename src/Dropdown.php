@@ -14,9 +14,9 @@ final class Dropdown extends Widget
     private array $buttonLabelOptions = [];
     private array $buttonIcon = ['class' => 'fas fa-angle-down', 'aria-hidden' => 'true'];
     private array $buttonIconOptions = [];
-    private string $cssDivider = 'dropdown-divider';
-    private string $cssItems = 'dropdown-menu';
-    private string $cssItem = 'dropdown-item';
+    private string $dividerClass = 'dropdown-divider';
+    private string $itemsClass = 'dropdown-menu';
+    private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
     private bool $enclosedByContainer = true;
     private array $items = [];
