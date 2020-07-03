@@ -70,7 +70,7 @@ final class Dropdown extends Widget
      */
     public function cssDivider(string $value): self
     {
-        $this->cssDivider  = $value;
+        $this->dividerClass  = $value;
         return $this;
     }
 
@@ -83,7 +83,7 @@ final class Dropdown extends Widget
      */
     public function cssItem(string $value): self
     {
-        $this->cssItem  = $value;
+        $this->itemClass  = $value;
         return $this;
     }
 
@@ -96,7 +96,7 @@ final class Dropdown extends Widget
      */
     public function cssItems(string $value): self
     {
-        $this->cssItems  = $value;
+        $this->itemsClass  = $value;
         return $this;
     }
 
@@ -250,7 +250,7 @@ final class Dropdown extends Widget
             $this->optionsItems['id'] = "{$this->getId()}-dropdown";
         }
 
-        $this->optionsItems = $this->addOptions($this->optionsItems, $this->cssItems);
+        $this->optionsItems = $this->addOptions($this->optionsItems, $this->itemsClass);
     }
 
     /**
@@ -269,7 +269,7 @@ final class Dropdown extends Widget
 
         foreach ($items as $item) {
             if ($item === '-') {
-                $lines[] = Html::tag('div', '', ['class' => $this->cssDivider]);
+                $lines[] = Html::tag('div', '', ['class' => $this->dividerClass]);
                 continue;
             }
 
@@ -289,7 +289,7 @@ final class Dropdown extends Widget
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
 
-            Html::addCssClass($linkOptions, $this->cssItem);
+            Html::addCssClass($linkOptions, $this->itemClass);
 
             if ($disabled) {
                 Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
@@ -307,9 +307,9 @@ final class Dropdown extends Widget
                 $lines[] = Html::a($label, $url, array_merge($this->optionsLink, $linkOptions));
 
                 $lines[] = Dropdown::widget()
-                    ->cssDivider($this->cssDivider)
-                    ->cssItem($this->cssItem)
-                    ->cssItems($this->cssItems)
+                    ->cssDivider($this->dividerClass)
+                    ->cssItem($this->itemClass)
+                    ->cssItems($this->itemsClass)
                     ->enclosedByContainer($this->enclosedByContainer)
                     ->encodeLabels($this->encodeLabels)
                     ->items($item['items'])

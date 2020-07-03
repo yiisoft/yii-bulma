@@ -136,7 +136,7 @@ HTML;
 
         $html = Breadcrumbs::widget()
             ->homeLink(['label' => 'Index', 'url' => '/index'])
-            ->itemTemplateActive("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
+            ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
             ->links([['label' => 'About', 'url' => '/about']])
             ->render();
 
@@ -257,7 +257,7 @@ HTML;
         $html = Breadcrumbs::widget()
             ->homeLink(['label' => 'Index', 'url' => '/index'])
             ->links([['label' => 'About', 'url' => '/about']])
-            ->optionsItems(['class' => 'testMe'])
+            ->itemsOptions(['class' => 'testMe'])
             ->render();
 
         $expected = <<<HTML

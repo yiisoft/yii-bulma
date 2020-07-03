@@ -23,10 +23,10 @@ class Breadcrumbs extends Widget
     private bool $encodeLabels = true;
     private array $homeLink = [];
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
-    private string $itemTemplateActive = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
+    private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
     private array $links = [];
     private array $options = [];
-    private array $optionsItems = [];
+    private array $itemsOptions = [];
 
     protected function run(): string
     {
@@ -38,7 +38,7 @@ class Breadcrumbs extends Widget
 
         return
             Html::beginTag('nav', $this->options) . "\n" .
-                Html::beginTag('ul', $this->optionsItems) . "\n" .
+                Html::beginTag('ul', $this->itemsOptions) . "\n" .
                     implode('', $this->renderLinks()) .
                 Html::endTag('ul') . "\n" .
             Html::endTag('nav');
@@ -97,9 +97,9 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function itemTemplateActive(string $value): self
+    public function activeItemTemplate(string $value): self
     {
-        $this->itemTemplateActive = $value;
+        $this->activeItemTemplate = $value;
         return $this;
     }
 
@@ -149,9 +149,9 @@ class Breadcrumbs extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsItems(array $value): self
+    public function itemsOptions(array $value): self
     {
-        $this->optionsItems = $value;
+        $this->itemsOptions = $value;
         return $this;
     }
 
@@ -241,7 +241,7 @@ class Breadcrumbs extends Widget
                 $link = ['label' => $link];
             }
 
-            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->itemTemplateActive);
+            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->activeItemTemplate);
         }
 
         return $links;
