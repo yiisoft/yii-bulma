@@ -9,7 +9,7 @@ use Yiisoft\Html\Html;
 use Yiisoft\Widget\Exception\InvalidConfigException;
 
 /**
- * The Bulma breadcrumb is a simple navigation component that only requires
+ * The Bulma breadcrumb is a simple navigation component
  *
  * For example,
  *
