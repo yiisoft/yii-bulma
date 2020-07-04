@@ -13,6 +13,7 @@ final class NavBar extends Widget
     private string $brandLabel = '';
     private string $brandImage = '';
     private string $brandUrl = '/';
+    private string $iconToggle = '';
     private array $options = [];
     private array $optionsBrand = [];
     private array $optionsBrandLabel = [];
@@ -52,6 +53,19 @@ final class NavBar extends Widget
     }
 
     /**
+     * Set render brand custom, {@see brandLabel} and {@see brandImage} are not generated.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function brand(string $value): self
+    {
+        $this->brand = $value;
+        return $this;
+    }
+
+    /**
      * The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
      *
      * @param string $value
@@ -88,6 +102,19 @@ final class NavBar extends Widget
     public function brandUrl(string $value): self
     {
         $this->brandUrl = $value;
+        return $this;
+    }
+
+    /**
+     * Set icon toggle.
+     *
+     * @param string $value.
+     *
+     * @return self
+     */
+    public function iconToggle(string $value): self
+    {
+        $this->iconToggle = $value;
         return $this;
     }
 
@@ -237,22 +264,24 @@ final class NavBar extends Widget
 
     private function renderBrand(): void
     {
-        $this->brand = Html::beginTag('div', $this->optionsBrand);
+        if ($this->brand === '') {
+            $this->brand = Html::beginTag('div', $this->optionsBrand);
 
-        if ($this->brandImage !== '' && $this->brandLabel !== '') {
-            $this->brand .= Html::tag('span', Html::img($this->brandImage), $this->optionsBrandImage);
+            if ($this->brandImage !== '' && $this->brandLabel !== '') {
+                $this->brand .= Html::tag('span', Html::img($this->brandImage), $this->optionsBrandImage);
+            }
+
+            if ($this->brandImage !== '' && $this->brandLabel === '') {
+                $this->brand .= Html::a(Html::img($this->brandImage), $this->brandUrl, $this->optionsBrandImage);
+            }
+
+            if ($this->brandLabel !== '') {
+                $this->brand .= Html::a($this->brandLabel, $this->brandUrl, $this->optionsBrandLabel);
+            }
+
+            $this->brand .= $this->renderToggleButton();
+            $this->brand .= Html::endTag('div');
         }
-
-        if ($this->brandImage !== '' && $this->brandLabel === '') {
-            $this->brand .= Html::a(Html::img($this->brandImage), $this->brandUrl, $this->optionsBrandImage);
-        }
-
-        if ($this->brandLabel !== '') {
-            $this->brand .= Html::a($this->brandLabel, $this->brandUrl, $this->optionsBrandLabel);
-        }
-
-        $this->brand .= $this->renderToggleButton();
-        $this->brand .= Html::endTag('div');
     }
 
     /**
@@ -264,9 +293,24 @@ final class NavBar extends Widget
     {
         return
             Html::beginTag('a', $this->optionsToggle) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
+                $this->renderIconToggle() .
+
             Html::endTag('a');
+    }
+
+    /**
+     * Render icon toggle.
+     *
+     * @return string
+     */
+    private function renderIconToggle(): string
+    {
+        if ($this->iconToggle === '') {
+            $this->iconToggle = Html::tag('span', '', ['aria-hidden' => 'true']) .
+                Html::tag('span', '', ['aria-hidden' => 'true']) .
+                Html::tag('span', '', ['aria-hidden' => 'true']);
+        }
+
+        return $this->iconToggle;
     }
 }

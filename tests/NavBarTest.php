@@ -325,4 +325,50 @@ HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
+
+    public function testNavBarBrand(): void
+    {
+        NavBar::counter(0);
+
+        $html = NavBar::begin()
+            ->brand('<div>testMe</div>')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->start();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar">
+<div>testMe</div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarIconToggle(): void
+    {
+        NavBar::counter(0);
+
+        $html = NavBar::begin()
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->iconToggle('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
+            ->start();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar">
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
 }
