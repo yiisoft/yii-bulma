@@ -134,7 +134,7 @@ Method                       | Description                                  | De
 `brandLabel(string $value)`  | Text of the brand label                      | ''
 `brandImage(string $value)`  | Image of the brand.                          | ''
 `brandUrl(string $value)`    | "href" of the brand's link.                  | `/`
-`iconToggle(string $value)`  | Set icon toggle.                             | <span aria-hidden='true'></span>
+`iconToggle(string $value)`  | Set icon toggle.                             | `<span aria-hidden='true'></span>`
 `options`                    | HTML attributes for the nav.                 | [`class` => `navbar`]
 `optionsBrand(array $value)` | HTML attributes of the brand.                | [`class` => `navbar-brand`]
 `optionsBrandLabel`          | HTML attributes of the brand label.          | [`class` => `navbar-item`]
