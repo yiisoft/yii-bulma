@@ -9,7 +9,7 @@ use Yiisoft\Yii\Bulma\Dropdown;
 
 final class DropdownTest extends TestCase
 {
-    public function testDropdown()
+    public function testDropdown(): void
     {
         Dropdown::counter(0);
 
@@ -47,7 +47,7 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testDropdownButtonLabelOptions()
+    public function testDropdownButtonLabelOptions(): void
     {
         Dropdown::counter(0);
 
@@ -86,7 +86,7 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testDropdownOptions()
+    public function testDropdownOptions(): void
     {
         Dropdown::counter(0);
 
@@ -125,12 +125,13 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testDropdownOptionsButton()
+    public function testDropdownButtonOptions(): void
     {
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
             ->buttonLabel('Russian cities')
+            ->buttonOptions(['class' => 'is-primary'])
             ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
@@ -138,7 +139,6 @@ HTML;
                 '-',
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
-            ->optionsButton(['class' => 'is-primary'])
             ->render();
 
         $expected = <<<HTML
@@ -164,7 +164,7 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testDropdownOptionsTrigger()
+    public function testDropdownTriggerOptions(): void
     {
         Dropdown::counter(0);
 
@@ -177,7 +177,7 @@ HTML;
                 '-',
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
-            ->optionsTrigger(['class' => 'testeMe'])
+            ->triggerOptions(['class' => 'testeMe'])
             ->render();
 
         $expected = <<<HTML

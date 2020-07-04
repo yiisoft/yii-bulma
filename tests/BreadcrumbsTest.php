@@ -272,7 +272,7 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testBreadcrumbsIcons()
+    public function testBreadcrumbsIcons(): void
     {
         Breadcrumbs::counter(0);
 
