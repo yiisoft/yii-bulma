@@ -73,13 +73,15 @@ HTML produced is like the following:
 Method                            | Description 
 ----------------------------------|-------------
 `id(string $value)`               | Widget ID.
+`buttonLabel(string $value)`      | Set label button dropdown.
 `buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown.
-`cssDivider(string $value)`       | Divider CSS class.
-`cssItem(string $value)`          | Item CSS class.
-`cssItems(string $value)`         | Item container CSS class.
+`buttonOptions(array $value)`     | The HTML attributes for the widget button tag.
+`dividerClass(string $value)`     | Divider CSS class.
+`itemClass(string $value)`        | Item CSS class.
+`itemsClass(string $value)`       | Item container CSS class.
+`itemsOptions(array $value)`      | HTML attributes for the widget items.
 `encodeLabels(bool $value)`       | Whether the labels for header items should be HTML-encoded.
-`enclosedByContainer(bool $value)`| Set enclosed by container dropdown.
+`encloseByContainer(bool $value)` | If component HTML should be enclosed by container tag.
 `items(array $value)`             | List of menu items in the dropdown.
 `options(array $value)`           | HTML attributes for the widget container tag.
-`optionsItems(array $value)`      | HTML attributes for the widget items.
-`optionsTrigger(array $value)`    | HTML attributes for the widget container trigger.
+`triggerOptions(array $value)`    | HTML attributes for the widget container trigger.

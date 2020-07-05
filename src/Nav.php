@@ -126,13 +126,13 @@ final class Nav extends Widget
     private function renderDropdown(array $items, array $parentItem): string
     {
         return Dropdown::widget()
-            ->cssDivider('navbar-divider')
-            ->cssItem('navbar-item')
-            ->cssItems('navbar-dropdown')
-            ->enclosedByContainer(false)
+            ->dividerClass('navbar-divider')
+            ->itemClass('navbar-item')
+            ->itemsClass('navbar-dropdown')
+            ->encloseByContainer(false)
             ->encodeLabels($this->encodeLabels)
             ->items($items)
-            ->optionsItems(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
+            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
             ->render() . "\n";
     }
 

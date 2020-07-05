@@ -126,7 +126,7 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container nav tag. The following special options are recognized.
+     * The HTML attributes for the widget container nav tag.
      *
      * @param array $value
      *
@@ -141,7 +141,7 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * The HTML attributes for the items widget. The following special options are recognized.
+     * The HTML attributes for the items widget.
      *
      * @param array $value
      *

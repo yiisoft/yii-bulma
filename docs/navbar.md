@@ -63,7 +63,7 @@ $this->setJsFiles($assetManager->getJsFiles());
     ->brandImage('yii-logo.jpg')
     ->brandUrl('/')
     ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-    ->optionsItems(['class' => 'navbar-end'])
+    ->itemsOptions(['class' => 'navbar-end'])
     ->start()
 ?>
 
@@ -130,9 +130,11 @@ HTML produced is like the following:
 
 Method                       | Description                                  | Default
 -----------------------------|----------------------------------------------|------
+`brand(string $value)`       | Custom brand HTML. Overrides `brandLabel` and `brandImage`. | ''
 `brandLabel(string $value)`  | Text of the brand label                      | ''
 `brandImage(string $value)`  | Image of the brand.                          | ''
 `brandUrl(string $value)`    | "href" of the brand's link.                  | `/`
+`toggleIcon(string $value)`  | Toggle icon.                                 | `<span aria-hidden='true'></span>`
 `options`                    | HTML attributes for the nav.                 | [`class` => `navbar`]
 `optionsBrand(array $value)` | HTML attributes of the brand.                | [`class` => `navbar-brand`]
 `optionsBrandLabel`          | HTML attributes of the brand label.          | [`class` => `navbar-item`]

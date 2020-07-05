@@ -157,7 +157,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrand(['class' => 'is-black'])
+            ->brandOptions(['class' => 'is-black'])
             ->start();
         $html .= NavBar::end();
 
@@ -180,7 +180,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrandImage(['class' => 'navbar-item', 'alt' => 'yii logo'])
+            ->brandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
             ->start();
         $html .= NavBar::end();
 
@@ -202,7 +202,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrandLabel(['class' => 'is-italic'])
+            ->brandLabelOptions(['class' => 'is-italic'])
             ->start();
         $html .= NavBar::end();
 
@@ -225,7 +225,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'navbar-end'])
+            ->itemsOptions(['class' => 'navbar-end'])
             ->start();
         $html .= NavBar::end();
 
@@ -245,7 +245,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'is-primary'])
+            ->itemsOptions(['class' => 'is-primary'])
             ->start();
         $html .= NavBar::end();
 
@@ -265,7 +265,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'navbar-start', 'aria-label' => 'true'])
+            ->itemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
             ->start();
         $html .= NavBar::end();
 
@@ -288,7 +288,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsMenu(['class' => 'is-black'])
+            ->menuOptions(['class' => 'is-black'])
             ->start();
         $html .= NavBar::end();
 
@@ -311,13 +311,59 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsToggle(['class' => 'navbar-burger', 'role' => 'button'])
+            ->toggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
             ->start();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
 <nav id="w1-navbar" class="navbar">
 <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarBrand(): void
+    {
+        NavBar::counter(0);
+
+        $html = NavBar::begin()
+            ->brand('<div>testMe</div>')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->start();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar">
+<div>testMe</div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarIconToggle(): void
+    {
+        NavBar::counter(0);
+
+        $html = NavBar::begin()
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->toggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
+            ->start();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar">
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
 </div>
 </nav>

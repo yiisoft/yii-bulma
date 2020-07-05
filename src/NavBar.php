@@ -13,13 +13,14 @@ final class NavBar extends Widget
     private string $brandLabel = '';
     private string $brandImage = '';
     private string $brandUrl = '/';
+    private string $toggleIcon = '';
     private array $options = [];
-    private array $optionsBrand = [];
-    private array $optionsBrandLabel = [];
-    private array $optionsBrandImage = [];
-    private array $optionsItems = [];
-    private array $optionsMenu = [];
-    private array $optionsToggle = [
+    private array $brandOptions = [];
+    private array $brandLabelOptions = [];
+    private array $brandImageOptions = [];
+    private array $itemsOptions = [];
+    private array $menuOptions = [];
+    private array $toggleOptions = [
         'aria-expanded' => 'false',
         'aria-label' => 'menu',
         'class' => 'navbar-burger',
@@ -37,8 +38,8 @@ final class NavBar extends Widget
         return
             Html::beginTag($navTag, $navOptions) . "\n" .
             $this->brand . "\n" .
-            Html::beginTag('div', $this->optionsMenu) .
-            Html::beginTag('div', $this->optionsItems);
+            Html::beginTag('div', $this->menuOptions) .
+            Html::beginTag('div', $this->itemsOptions);
     }
 
     protected function run(): string
@@ -49,6 +50,19 @@ final class NavBar extends Widget
             Html::endTag('div') . "\n" .
             Html::endTag('div') . "\n" .
             Html::endTag($tag);
+    }
+
+    /**
+     * Set render brand custom, {@see brandLabel} and {@see brandImage} are not generated.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function brand(string $value): self
+    {
+        $this->brand = $value;
+        return $this;
     }
 
     /**
@@ -92,6 +106,19 @@ final class NavBar extends Widget
     }
 
     /**
+     * Set toggle icon.
+     *
+     * @param string $value.
+     *
+     * @return self
+     */
+    public function toggleIcon(string $value): self
+    {
+        $this->toggleIcon = $value;
+        return $this;
+    }
+
+    /**
      * Options HTML attributes for the tag nav.
      *
      * @param array $value
@@ -115,9 +142,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsBrand(array $value): self
+    public function brandOptions(array $value): self
     {
-        $this->optionsBrand = $value;
+        $this->brandOptions = $value;
         return $this;
     }
 
@@ -130,9 +157,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsBrandLabel(array $value): self
+    public function brandLabelOptions(array $value): self
     {
-        $this->optionsBrandLabel = $value;
+        $this->brandLabelOptions = $value;
         return $this;
     }
 
@@ -145,9 +172,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsBrandImage(array $value): self
+    public function brandImageOptions(array $value): self
     {
-        $this->optionsBrandImage = $value;
+        $this->brandImageOptions = $value;
         return $this;
     }
 
@@ -160,9 +187,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsItems(array $value): self
+    public function itemsOptions(array $value): self
     {
-        $this->optionsItems = $value;
+        $this->itemsOptions = $value;
         return $this;
     }
 
@@ -175,9 +202,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsMenu(array $value): self
+    public function menuOptions(array $value): self
     {
-        $this->optionsMenu = $value;
+        $this->menuOptions = $value;
         return $this;
     }
 
@@ -190,9 +217,9 @@ final class NavBar extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function optionsToggle(array $value): self
+    public function toggleOptions(array $value): self
     {
-        $this->optionsToggle = $value;
+        $this->toggleOptions = $value;
         return $this;
     }
 
@@ -206,53 +233,55 @@ final class NavBar extends Widget
         }
 
         $this->options = $this->addOptions($this->options, 'navbar');
-        $this->optionsBrand = $this->addOptions($this->optionsBrand, 'navbar-brand');
-        $this->optionsBrandLabel = $this->addOptions($this->optionsBrandLabel, 'navbar-item');
-        $this->optionsBrandImage = $this->addOptions($this->optionsBrandImage, 'navbar-item');
-        $this->optionsMenu = $this->addOptions($this->optionsMenu, 'navbar-menu');
+        $this->brandOptions = $this->addOptions($this->brandOptions, 'navbar-brand');
+        $this->brandLabelOptions = $this->addOptions($this->brandLabelOptions, 'navbar-item');
+        $this->brandImageOptions = $this->addOptions($this->brandImageOptions, 'navbar-item');
+        $this->menuOptions = $this->addOptions($this->menuOptions, 'navbar-menu');
 
-        $this->optionsMenu['id'] = "{$id}-navbar-Menu";
+        $this->menuOptions['id'] = "{$id}-navbar-Menu";
 
-        $this->initOptionsItems();
+        $this->initItemsOptions();
     }
 
-    private function initOptionsItems(): void
+    private function initItemsOptions(): void
     {
         $optionsItems = '';
 
-        if (isset($this->optionsItems['class'])) {
-            $optionsItems = $this->optionsItems['class'];
+        if (isset($this->itemsOptions['class'])) {
+            $optionsItems = $this->itemsOptions['class'];
 
-            unset($this->optionsItems['class']);
+            unset($this->itemsOptions['class']);
         }
 
-        if (!strstr($optionsItems, 'navbar-end')) {
-            Html::addCssClass($this->optionsItems, 'navbar-start');
+        if (strpos($optionsItems, 'navbar-end') === false) {
+            Html::addCssClass($this->itemsOptions, 'navbar-start');
         }
 
         if (!empty($optionsItems)) {
-            Html::addCssClass($this->optionsItems, $optionsItems);
+            Html::addCssClass($this->itemsOptions, $optionsItems);
         }
     }
 
     private function renderBrand(): void
     {
-        $this->brand = Html::beginTag('div', $this->optionsBrand);
+        if ($this->brand === '') {
+            $this->brand = Html::beginTag('div', $this->brandOptions);
 
-        if ($this->brandImage !== '' && $this->brandLabel !== '') {
-            $this->brand .= Html::tag('span', Html::img($this->brandImage), $this->optionsBrandImage);
+            if ($this->brandImage !== '' && $this->brandLabel !== '') {
+                $this->brand .= Html::tag('span', Html::img($this->brandImage), $this->brandImageOptions);
+            }
+
+            if ($this->brandImage !== '' && $this->brandLabel === '') {
+                $this->brand .= Html::a(Html::img($this->brandImage), $this->brandUrl, $this->brandImageOptions);
+            }
+
+            if ($this->brandLabel !== '') {
+                $this->brand .= Html::a($this->brandLabel, $this->brandUrl, $this->brandLabelOptions);
+            }
+
+            $this->brand .= $this->renderToggleButton();
+            $this->brand .= Html::endTag('div');
         }
-
-        if ($this->brandImage !== '' && $this->brandLabel === '') {
-            $this->brand .= Html::a(Html::img($this->brandImage), $this->brandUrl, $this->optionsBrandImage);
-        }
-
-        if ($this->brandLabel !== '') {
-            $this->brand .= Html::a($this->brandLabel, $this->brandUrl, $this->optionsBrandLabel);
-        }
-
-        $this->brand .= $this->renderToggleButton();
-        $this->brand .= Html::endTag('div');
     }
 
     /**
@@ -263,10 +292,25 @@ final class NavBar extends Widget
     private function renderToggleButton(): string
     {
         return
-            Html::beginTag('a', $this->optionsToggle) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
+            Html::beginTag('a', $this->toggleOptions) .
+                $this->renderToggleIcon() .
+
             Html::endTag('a');
+    }
+
+    /**
+     * Render icon toggle.
+     *
+     * @return string
+     */
+    private function renderToggleIcon(): string
+    {
+        if ($this->toggleIcon === '') {
+            $this->toggleIcon = Html::tag('span', '', ['aria-hidden' => 'true']) .
+                Html::tag('span', '', ['aria-hidden' => 'true']) .
+                Html::tag('span', '', ['aria-hidden' => 'true']);
+        }
+
+        return $this->toggleIcon;
     }
 }
