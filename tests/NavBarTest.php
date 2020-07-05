@@ -157,7 +157,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrand(['class' => 'is-black'])
+            ->brandOptions(['class' => 'is-black'])
             ->start();
         $html .= NavBar::end();
 
@@ -180,7 +180,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrandImage(['class' => 'navbar-item', 'alt' => 'yii logo'])
+            ->brandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
             ->start();
         $html .= NavBar::end();
 
@@ -202,7 +202,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsBrandLabel(['class' => 'is-italic'])
+            ->brandLabelOptions(['class' => 'is-italic'])
             ->start();
         $html .= NavBar::end();
 
@@ -225,7 +225,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'navbar-end'])
+            ->itemsOptions(['class' => 'navbar-end'])
             ->start();
         $html .= NavBar::end();
 
@@ -245,7 +245,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'is-primary'])
+            ->itemsOptions(['class' => 'is-primary'])
             ->start();
         $html .= NavBar::end();
 
@@ -265,7 +265,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsItems(['class' => 'navbar-start', 'aria-label' => 'true'])
+            ->itemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
             ->start();
         $html .= NavBar::end();
 
@@ -288,7 +288,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsMenu(['class' => 'is-black'])
+            ->menuOptions(['class' => 'is-black'])
             ->start();
         $html .= NavBar::end();
 
@@ -311,7 +311,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->optionsToggle(['class' => 'navbar-burger', 'role' => 'button'])
+            ->toggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
             ->start();
         $html .= NavBar::end();
 
@@ -357,7 +357,7 @@ HTML;
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->iconToggle('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
+            ->toggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
             ->start();
         $html .= NavBar::end();
 

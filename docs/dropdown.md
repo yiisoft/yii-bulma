@@ -81,7 +81,7 @@ Method                            | Description
 `itemsClass(string $value)`       | Item container CSS class.
 `itemsOptions(array $value)`      | HTML attributes for the widget items.
 `encodeLabels(bool $value)`       | Whether the labels for header items should be HTML-encoded.
-`enclosedByContainer(bool $value)`| Set enclosed by container dropdown.
+`encloseByContainer(bool $value)` | If component HTML should be enclosed by container tag.
 `items(array $value)`             | List of menu items in the dropdown.
 `options(array $value)`           | HTML attributes for the widget container tag.
 `triggerOptions(array $value)`    | HTML attributes for the widget container trigger.

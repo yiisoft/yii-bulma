@@ -18,7 +18,7 @@ final class Dropdown extends Widget
     private string $itemsClass = 'dropdown-menu';
     private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
-    private bool $enclosedByContainer = true;
+    private bool $encloseByContainer = true;
     private array $items = [];
     private array $itemsOptions = [];
     private array $options = [];
@@ -47,7 +47,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the button dropdown. The following special options are recognized.
+     * The HTML attributes for the button dropdown.
      *
      * @param array $value
      *
@@ -120,9 +120,9 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function enclosedByContainer(bool $value): self
+    public function encloseByContainer(bool $value): self
     {
-        $this->enclosedByContainer = $value;
+        $this->encloseByContainer = $value;
         return $this;
     }
 
@@ -148,7 +148,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container tag. The following special options are recognized.
+     * The HTML attributes for the widget container tag.
      *
      * @param array $value
      *
@@ -163,7 +163,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget button tag. The following special options are recognized.
+     * The HTML attributes for the widget button tag.
      *
      * @param array $value
      *
@@ -178,7 +178,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget items. The following special options are recognized.
+     * The HTML attributes for the widget items.
      *
      * @param array $value
      *
@@ -193,7 +193,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container trigger. The following special options are recognized.
+     * The HTML attributes for the widget container trigger.
      *
      * @param array $value
      *
@@ -209,7 +209,7 @@ final class Dropdown extends Widget
 
     private function buildDropdown(): string
     {
-        if ($this->enclosedByContainer) {
+        if ($this->encloseByContainer) {
             $html = Html::beginTag('div', $this->options) . "\n";
             $html .= $this->buildDropdownTrigger();
             $html .= $this->renderItems($this->items, $this->itemsOptions) . "\n";
@@ -236,7 +236,7 @@ final class Dropdown extends Widget
 
     private function buildOptions(): void
     {
-        if ($this->enclosedByContainer && (!isset($this->options['id']))) {
+        if ($this->encloseByContainer && (!isset($this->options['id']))) {
             $this->options['id'] = "{$this->getId()}-dropdown";
             $this->options = $this->addOptions($this->options, 'dropdown');
             $this->triggerOptions = $this->addOptions($this->triggerOptions, 'dropdown-trigger');
@@ -310,7 +310,7 @@ final class Dropdown extends Widget
                     ->dividerClass($this->dividerClass)
                     ->itemClass($this->itemClass)
                     ->itemsClass($this->itemsClass)
-                    ->enclosedByContainer($this->enclosedByContainer)
+                    ->encloseByContainer($this->encloseByContainer)
                     ->encodeLabels($this->encodeLabels)
                     ->items($item['items'])
                     ->render();

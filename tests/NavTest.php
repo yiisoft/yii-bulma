@@ -543,7 +543,7 @@ HTML;
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->optionsItems(['class' => 'navbar-end'])
+            ->itemsOptions(['class' => 'navbar-end'])
             ->start();
 
         $html .= Nav::widget()

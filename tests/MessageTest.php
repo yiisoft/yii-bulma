@@ -114,7 +114,7 @@ HTML;
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->optionsBody(['class' => 'has-text-justified'])
+            ->bodyOptions(['class' => 'has-text-justified'])
             ->render();
 
         $expectedHtml = <<<HTML
@@ -139,7 +139,7 @@ HTML;
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->optionsCloseButton(['class' => 'btn'])
+            ->closeButtonOptions(['class' => 'btn'])
             ->render();
 
         $expectedHtml = <<<HTML
@@ -165,7 +165,7 @@ HTML;
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->optionsHeader(['class' => 'has-text-justified'])
+            ->headerOptions(['class' => 'has-text-justified'])
             ->render();
 
         $expectedHtml = <<<HTML

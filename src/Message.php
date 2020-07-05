@@ -25,9 +25,9 @@ final class Message extends Widget
     private string $headerColor = 'is-dark';
     private string $headerMessage = '';
     private array $options = [];
-    private array $optionsBody = [];
-    private array $optionsCloseButton = [];
-    private array $optionsHeader = [];
+    private array $bodyOptions = [];
+    private array $closeButtonOptions = [];
+    private array $headerOptions = [];
     private string $size = '';
     private bool $withoutCloseButton = false;
     private bool $withoutHeader = true;
@@ -39,7 +39,7 @@ final class Message extends Widget
         return
             Html::beginTag('div', $this->options) . "\n" .
                 $this->renderHeader() .
-                Html::beginTag('div', $this->optionsBody) . "\n" .
+                Html::beginTag('div', $this->bodyOptions) . "\n" .
                     $this->renderBodyEnd() . "\n" .
                 Html::endTag('div') . "\n" .
             Html::endTag('div');
@@ -88,7 +88,7 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container tag. The following special options are recognized.
+     * The HTML attributes for the widget container tag.
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
@@ -103,7 +103,7 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget body tag. The following special options are recognized.
+     * The HTML attributes for the widget body tag.
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
@@ -111,9 +111,9 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function optionsBody(array $value): self
+    public function bodyOptions(array $value): self
     {
-        $this->optionsBody = $value;
+        $this->bodyOptions = $value;
         return $this;
     }
 
@@ -127,14 +127,14 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function optionsCloseButton(array $value): self
+    public function closeButtonOptions(array $value): self
     {
-        $this->optionsCloseButton = $value;
+        $this->closeButtonOptions = $value;
         return $this;
     }
 
     /**
-     * The HTML attributes for the widget header tag. The following special options are recognized.
+     * The HTML attributes for the widget header tag.
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
@@ -142,9 +142,9 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function optionsHeader(array $value): self
+    public function headerOptions(array $value): self
     {
-        $this->optionsHeader = $value;
+        $this->headerOptions = $value;
         return $this;
     }
 
@@ -201,9 +201,9 @@ final class Message extends Widget
             Html::addCssClass($this->options, $this->size);
         }
 
-        $this->optionsBody = $this->addOptions($this->optionsBody, 'message-body');
-        $this->optionsCloseButton = $this->addOptions($this->optionsCloseButton, 'delete');
-        $this->optionsHeader = $this->addOptions($this->optionsHeader, 'message-header');
+        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'message-body');
+        $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
+        $this->headerOptions = $this->addOptions($this->headerOptions, 'message-header');
     }
 
     private function renderHeader(): string
@@ -211,7 +211,7 @@ final class Message extends Widget
         $html = '';
 
         if ($this->withoutHeader) {
-            $html = Html::beginTag('div', $this->optionsHeader) . "\n" . $this->renderHeaderMessage() . "\n" .
+            $html = Html::beginTag('div', $this->headerOptions) . "\n" . $this->renderHeaderMessage() . "\n" .
                 Html::endTag('div') . "\n";
         }
 
@@ -240,19 +240,19 @@ final class Message extends Widget
             return null;
         }
 
-        $tag = ArrayHelper::remove($this->optionsCloseButton, 'tag', 'button');
-        $label = ArrayHelper::remove($this->optionsCloseButton, 'label', Html::tag('span', '&times;', [
+        $tag = ArrayHelper::remove($this->closeButtonOptions, 'tag', 'button');
+        $label = ArrayHelper::remove($this->closeButtonOptions, 'label', Html::tag('span', '&times;', [
             'aria-hidden' => 'true'
         ]));
 
         if ($tag === 'button') {
-            $this->optionsCloseButton['type'] = 'button';
+            $this->closeButtonOptions['type'] = 'button';
         }
 
         if ($this->size !== '') {
-            Html::addCssClass($this->optionsCloseButton, [$this->size]);
+            Html::addCssClass($this->closeButtonOptions, [$this->size]);
         }
 
-        return Html::tag($tag, $label, $this->optionsCloseButton);
+        return Html::tag($tag, $label, $this->closeButtonOptions);
     }
 }

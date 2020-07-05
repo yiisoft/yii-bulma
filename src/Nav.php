@@ -129,7 +129,7 @@ final class Nav extends Widget
             ->dividerClass('navbar-divider')
             ->itemClass('navbar-item')
             ->itemsClass('navbar-dropdown')
-            ->enclosedByContainer(false)
+            ->encloseByContainer(false)
             ->encodeLabels($this->encodeLabels)
             ->items($items)
             ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
