@@ -88,6 +88,7 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [Breadcrumbs](docs/breadcrumbs.md)
 - [Dropdown](docs/dropdown.md)
 - [NavBar](docs/navbar.md)
+- [Menu](docs/menu.md)
 - [Message](docs/message.md)
 
 ## Unit testing
