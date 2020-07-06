@@ -61,16 +61,16 @@ The code above generates the following HTML:
 
 ## Reference
 
-Method                            | Description
-----------------------------------|------------
-`id(string $value)`               | Widget ID.
-`body(string $value)`             | Message body.
-`headerColor(string $value)`      | Message color (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). 
-`headerMessage(string $value)`    | Message header.
-`options(array $value)`           | HTML attributes for the widget container tag.
-`optionsBody(array $value)`       | HTML attributes for the widget body tag.
-`optionsCloseButton(array $value)`| Options for rendering the close button tag.
-`optionsHeader(array $value)`     | HTML attributes for the widget header tag.
-`size(string $value)`             | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.
-`withoutCloseButton(bool $value)` | Allows you to disable close button.
-`withoutHeader(bool $value)`      | Allows you to disable header.
+Method                            | Description                                                                           |Default
+----------------------------------|---------------------------------------------------------------------------------------|-----------
+`id(string $value)`               | Widget ID. | `''`
+`body(string $value)`             | Message body. | `''`
+`headerColor(string $value)`      | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
+`headerMessage(string $value)`    | Message header. | `''`
+`options(array $value)`           | HTML attributes for the widget container tag. | `[]`
+`optionsBody(array $value)`       | HTML attributes for the widget body tag. | `[]`
+`optionsCloseButton(array $value)`| Options for rendering the close button tag. | `[]`
+`optionsHeader(array $value)`     | HTML attributes for the widget header tag. | `[]`
+`size(string $value)`             | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`. | `normal`
+`withoutCloseButton(bool $value)` | Allows you to disable close button. | `false`
+`withoutHeader(bool $value)`      | Allows you to disable header. | `true`
