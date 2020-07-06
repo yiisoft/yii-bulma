@@ -8,6 +8,10 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Exception\InvalidConfigException;
 
+use function array_key_exists;
+use function is_array;
+use function strtr;
+
 /**
  * The Bulma breadcrumb is a simple navigation component
  *
@@ -161,8 +165,7 @@ class Breadcrumbs extends Widget
             $this->options['id'] = "{$this->getId()}-breadcrumbs";
         }
 
-        $this->options = $this->addOptions($this->options, 'breadcrumb');
-        $this->options = array_merge(['aria-label' => 'breadcrumbs'], $this->options);
+        $this->options = $this->addOptions($this->options, 'breadcrumb', ['aria-label' => 'breadcrumbs']);
     }
 
     private function renderIcon(string $icon, array $iconOptions): string

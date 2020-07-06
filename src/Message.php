@@ -187,7 +187,7 @@ final class Message extends Widget
         return $this;
     }
 
-    private function buildOptions()
+    private function buildOptions(): void
     {
         if (!isset($this->options['id'])) {
             $this->options['id'] = "{$this->getId()}-message";

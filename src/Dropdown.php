@@ -8,6 +8,9 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Exception\InvalidConfigException;
 
+use function array_merge;
+use function implode;
+
 final class Dropdown extends Widget
 {
     private string $buttonLabel = '';
@@ -140,6 +143,10 @@ final class Dropdown extends Widget
      * - items: array, optional, the submenu items. The structure is the same as this property.
      *
      * To insert divider use `-`.
+     *
+     * @param array $value
+     *
+     * @return self
      */
     public function items(array $value): self
     {
@@ -240,10 +247,10 @@ final class Dropdown extends Widget
             $this->options['id'] = "{$this->getId()}-dropdown";
             $this->options = $this->addOptions($this->options, 'dropdown');
             $this->triggerOptions = $this->addOptions($this->triggerOptions, 'dropdown-trigger');
-            $this->buttonOptions = $this->addOptions($this->buttonOptions, 'button');
-            $this->buttonOptions = array_merge(
-                ['aria-haspopup' => 'true', 'aria-controls' => 'dropdown-menu'],
-                $this->buttonOptions
+            $this->buttonOptions = $this->addOptions(
+                $this->buttonOptions,
+                'button',
+                [ 'aria-haspopup' => 'true', 'aria-controls' => 'dropdown-menu']
             );
             $this->buttonIconOptions = $this->addOptions($this->buttonIconOptions, 'icon is-small');
         } elseif (!isset($this->itemsOptions['id'])) {

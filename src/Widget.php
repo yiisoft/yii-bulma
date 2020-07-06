@@ -16,6 +16,10 @@ abstract class Widget extends BaseWidget
 
     /**
      * Set the Id of the widget.
+     *
+     * @param string $value
+     *
+     * @return Widget
      */
     public function id(string $value): self
     {
@@ -25,6 +29,8 @@ abstract class Widget extends BaseWidget
 
     /**
      * Counter used to generate {@see id} for widgets.
+     *
+     * @param int $value
      */
     public static function counter(int $value): void
     {
@@ -33,6 +39,10 @@ abstract class Widget extends BaseWidget
 
     /**
      * The prefix to the automatically generated widget IDs.
+     *
+     * @param string $value
+     *
+     * @return Widget
      *
      * {@see getId()}
      */
@@ -64,9 +74,13 @@ abstract class Widget extends BaseWidget
      *
      * @return array
      */
-    protected function addOptions(array $options, string $valueDefault): array
+    protected function addOptions(array $options, string $valueDefault, array $params = []): array
     {
         $optionsTmp = '';
+
+        foreach ($params as $key => $value) {
+            $options[$key] = $value;
+        }
 
         if (isset($options['class'])) {
             $optionsTmp = $options['class'];
