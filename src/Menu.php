@@ -424,7 +424,7 @@ final class Menu extends Widget
 
     private function isItemActive(array $item): bool
     {
-        if (isset($item['url']) && $this->currentPath !== '/' && $item['url'] === $this->currentPath && $this->activateItems) {
+        if (isset($item['url']) && $item['url'] === $this->currentPath && $this->activateItems) {
             return true;
         }
 
