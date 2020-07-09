@@ -10,7 +10,7 @@ final class PlugInMessageAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@npm/@vizuaalog/bulmajs/';
+    public ?string $sourcePath = '@npm/@vizuaalog/bulmajs';
 
     public array $js = [
         'dist/message.js',

@@ -10,15 +10,15 @@ final class PlugInFileAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@npm/@vizuaalog/bulmajs/';
+    public ?string $sourcePath = '@npm/@vizuaalog/bulmajs';
 
     public array $js = [
-        'dist/message.js',
+        'dist/file.js',
     ];
 
     public array $publishOptions = [
         'only' => [
-            'dist/message.js',
+            'dist/file.js',
         ],
     ];
 }
