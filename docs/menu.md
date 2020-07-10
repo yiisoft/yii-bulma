@@ -19,7 +19,7 @@ HTML generated consists of:
  * @var Yiisoft\View\WebView $this
  */
 
-use \Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Menu;
 
 /* Register assets in view */
@@ -107,8 +107,7 @@ Method                            | Description                                 
 `currentPath(string $value)`      | Allows you to assign the current path of the URL from request controller. | `''`
 `encodeLabels(bool $value)`       | Whether the labels for menu items should be HTML-encoded. | `true`
 `firstItemCssClass(string $value)`| The CSS class for the first item in the main menu or each submenu. | `''`
-`hideEmptyItems(bool $value)`     | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no
-visible child menu items | `true`
+`hideEmptyItems(bool $value)`     | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `true`
 `items(array $value)`             | List of menu items. | `[]`
 `itemOptions(array $value)`       | List of HTML attributes shared by all menu. | `[]`
 `labelTemplate(string $value)`    | The template used to render the body of a menu which is NOT a link. | `''`
