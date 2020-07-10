@@ -315,7 +315,7 @@ final class Menu extends Widget
 
 
             if ($item['active']) {
-                $linkOptions = $this->addOptions($linkOptions, 'is-active');
+                $linkOptions = $this->addOptions($linkOptions, $this->activeCssClass);
             }
 
             if ($i === 0 && $this->firstItemCssClass !== '') {

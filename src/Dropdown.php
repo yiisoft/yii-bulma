@@ -248,10 +248,13 @@ final class Dropdown extends Widget
             $this->options = $this->addOptions($this->options, 'dropdown');
             $this->triggerOptions = $this->addOptions($this->triggerOptions, 'dropdown-trigger');
             $this->buttonOptions = $this->addOptions(
-                $this->buttonOptions,
-                'button',
-                [ 'aria-haspopup' => 'true', 'aria-controls' => 'dropdown-menu']
+                array_merge(
+                    $this->buttonOptions,
+                    [ 'aria-haspopup' => 'true', 'aria-controls' => 'dropdown-menu']
+                ),
+                'button'
             );
+
             $this->buttonIconOptions = $this->addOptions($this->buttonIconOptions, 'icon is-small');
         } elseif (!isset($this->itemsOptions['id'])) {
             $this->itemsOptions['id'] = "{$this->getId()}-dropdown";

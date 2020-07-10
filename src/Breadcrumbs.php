@@ -165,7 +165,13 @@ class Breadcrumbs extends Widget
             $this->options['id'] = "{$this->getId()}-breadcrumbs";
         }
 
-        $this->options = $this->addOptions($this->options, 'breadcrumb', ['aria-label' => 'breadcrumbs']);
+        $this->options = $this->addOptions(
+            array_merge(
+                $this->options,
+                ['aria-label' => 'breadcrumbs']
+            ),
+            'breadcrumb'
+        );
     }
 
     private function renderIcon(string $icon, array $iconOptions): string

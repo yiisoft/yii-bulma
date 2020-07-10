@@ -427,7 +427,7 @@ HTML;
         $expected = <<<'HTML'
 <aside class="menu">
 <ul class="menu-list">
-<li class="someclass"><a href="#" class="is-active">item1</a></li>
+<li class="someclass"><a href="#" class="item-active">item1</a></li>
 <li class="another-class other--class two classes"><a href="#">item2</a></li>
 <li><a href="#">item3</a></li>
 <li class="some-other-class foo_bar_baz_class"><a href="#">item4</a></li>
@@ -481,7 +481,7 @@ HTML;
 <li class="someclass"><a href="#">item1</a></li>
 <li><a href="#">item2</a></li>
 <li class="some classes"><a href="#">item3</a></li>
-<li class="another-class other--class two classes"><a href="#" class="is-active">item4</a></li>
+<li class="another-class other--class two classes"><a href="#" class="item-active">item4</a></li>
 </ul>
 </aside>
 HTML;

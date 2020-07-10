@@ -74,13 +74,9 @@ abstract class Widget extends BaseWidget
      *
      * @return array
      */
-    protected function addOptions(array $options, string $valueDefault, array $params = []): array
+    protected function addOptions(array $options, string $valueDefault): array
     {
         $optionsTmp = '';
-
-        foreach ($params as $key => $value) {
-            $options[$key] = $value;
-        }
 
         if (isset($options['class'])) {
             $optionsTmp = $options['class'];
