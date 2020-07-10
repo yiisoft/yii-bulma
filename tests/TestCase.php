@@ -6,16 +6,11 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\EventDispatcher\ListenerProviderInterface;
-use Psr\Log\LoggerInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Files\FileHelper;
 use Yiisoft\Di\Container;
-use Yiisoft\Widget\Widget;
-use Yiisoft\Widget\WidgetFactory;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -64,7 +59,7 @@ abstract class TestCase extends BaseTestCase
     {
         $expected = str_replace("\r\n", "\n", $expected);
         $actual = str_replace("\r\n", "\n", $actual);
-        $this->assertEquals($expected, $actual, $message);
+        self::assertEquals($expected, $actual, $message);
     }
 
     private function removeAssets(string $basePath): void

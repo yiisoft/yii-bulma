@@ -337,10 +337,12 @@ final class Menu extends Widget
                 ]);
             }
 
-            if (isset($item['label']) && !isset($item['url']) && !empty($menu)) {
-                $lines[] = $menu;
-            } elseif (isset($item['label']) && !isset($item['url'])) {
-                $lines[] = $item['label'];
+            if (isset($item['label']) && !isset($item['url'])) {
+                if (!empty($menu)) {
+                    $lines[] = $menu;
+                } else {
+                    $lines[] = $item['label'];
+                }
             } else {
                 $lines[] = Html::tag($tag, $menu, $options);
             }
@@ -424,11 +426,7 @@ final class Menu extends Widget
 
     private function isItemActive(array $item): bool
     {
-        if (isset($item['url']) && $item['url'] === $this->currentPath && $this->activateItems) {
-            return true;
-        }
-
-        return false;
+        return isset($item['url']) && $item['url'] === $this->currentPath && $this->activateItems;
     }
 
     private function renderIcon(string $icon, array $iconOptions): string

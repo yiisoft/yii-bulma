@@ -19,6 +19,9 @@ HTML generated consists of:
  * @var Yiisoft\View\WebView $this
  */
 
+use \Yiisoft\Yii\Bulma\Asset\BulmaAsset;
+use Yiisoft\Yii\Bulma\Menu;
+
 /* Register assets in view */
 
 $assetManager->register([
@@ -59,7 +62,7 @@ $this->setJsFiles($assetManager->getJsFiles());
             ]
         ],
     ])
-    ->render();
+    ->render() ?>
 ```
 
 HTML produced is like the following:
@@ -97,13 +100,13 @@ HTML produced is like the following:
 Method                            | Description                                  | Default
 ----------------------------------|----------------------------------------------|---------
 `id(string $value)`               | Widget ID.                                   | `''`
-`activateItems(bool $value)`      | Whether to automatically activate items according to whether their route setting matches the currently requested route. | `true`
-`activateParents(bool $value)`    | Whether to activate parent menu items when one of the corresponding child menu items is active. | `false`
+`activateItems(bool $value)`      | Whether to automatically activate item its route matches the currently requested route. | `true`
+`activateParents(bool $value)`    | Whether to activate parent menu items if any child menu item is active. | `false`
 `activeCssClass(string $value)`   | The CSS class to be appended to the active menu item. | `is-active`
-`brand(string $value)`            | Set render brand custom. | `''`
-`currentPath(string $value)`      | Allows you to assign the current path of the url from request controller. | `''`
+`brand(string $value)`            | Custom brand content. | `''`
+`currentPath(string $value)`      | Allows you to assign the current path of the URL from request controller. | `''`
 `encodeLabels(bool $value)`       | Whether the labels for menu items should be HTML-encoded. | `true`
-`firstItemCssClass(string $value)`| The CSS class that will be assigned to the first item in the main menu or each submenu. | `''`
+`firstItemCssClass(string $value)`| The CSS class for the first item in the main menu or each submenu. | `''`
 `hideEmptyItems(bool $value)`     | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no
 visible child menu items | `true`
 `items(array $value)`             | List of menu items. | `[]`
