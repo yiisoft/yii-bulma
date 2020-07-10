@@ -70,18 +70,18 @@ HTML produced is like the following:
 </div>
 ```
 
-Method                            | Description 
-----------------------------------|-------------
-`id(string $value)`               | Widget ID.
-`buttonLabel(string $value)`      | Set label button dropdown.
-`buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown.
-`buttonOptions(array $value)`     | The HTML attributes for the widget button tag.
-`dividerClass(string $value)`     | Divider CSS class.
-`itemClass(string $value)`        | Item CSS class.
-`itemsClass(string $value)`       | Item container CSS class.
-`itemsOptions(array $value)`      | HTML attributes for the widget items.
-`encodeLabels(bool $value)`       | Whether the labels for header items should be HTML-encoded.
-`encloseByContainer(bool $value)` | If component HTML should be enclosed by container tag.
-`items(array $value)`             | List of menu items in the dropdown.
-`options(array $value)`           | HTML attributes for the widget container tag.
-`triggerOptions(array $value)`    | HTML attributes for the widget container trigger.
+Method                            | Description                                                 | Default 
+----------------------------------|-------------------------------------------------------------|-----------
+`id(string $value)`               | Widget ID.                                                  | `''`
+`buttonLabel(string $value)`      | Set label button dropdown.                                  | `''`
+`buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown.                | `[]`
+`buttonOptions(array $value)`     | The HTML attributes for the widget button tag.              | `[]`
+`dividerClass(string $value)`     | Divider CSS class.                                          | `dropdown-divider` 
+`itemClass(string $value)`        | Item CSS class.                                             | `dropdown-item`
+`itemsClass(string $value)`       | Item container CSS class.                                   | `dropdown-menu`
+`itemsOptions(array $value)`      | HTML attributes for the widget items.                       | `[]`
+`encodeLabels(bool $value)`       | Whether the labels for header items should be HTML-encoded. | `true`
+`encloseByContainer(bool $value)` | If component HTML should be enclosed by container tag.      | `true`
+`items(array $value)`             | List of menu items in the dropdown.                         | `[]`
+`options(array $value)`           | HTML attributes for the widget container tag.               | `[]`
+`triggerOptions(array $value)`    | HTML attributes for the widget container trigger.           | `[]`

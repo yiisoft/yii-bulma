@@ -6,19 +6,17 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\EventDispatcher\ListenerProviderInterface;
-use Psr\Log\LoggerInterface;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Files\FileHelper;
 use Yiisoft\Di\Container;
-use Yiisoft\Widget\Widget;
-use Yiisoft\Widget\WidgetFactory;
 
 abstract class TestCase extends BaseTestCase
 {
+    private Aliases $aliases;
     private ContainerInterface $container;
+    protected AssetManager $assetManager;
 
     protected function setUp(): void
     {
@@ -28,11 +26,22 @@ abstract class TestCase extends BaseTestCase
             require Builder::path('web'),
             require Builder::path('providers')
         );
+
+        $this->aliases = $this->container->get(Aliases::class);
+
+        /* Set aliases tests */
+        $this->aliases->set('@assets', __DIR__ . '/data');
+        $this->aliases->set('@assetsUrl', '/');
+        $this->aliases->set('@npm', dirname(__DIR__) . '/node_modules');
+
+        $this->assetManager = $this->container->get(AssetManager::class);
     }
 
     protected function tearDown(): void
     {
-        unset($this->container);
+        $this->removeAssets('@assets');
+
+        unset($this->aliases, $this->container);
 
         parent::tearDown();
     }
@@ -50,6 +59,29 @@ abstract class TestCase extends BaseTestCase
     {
         $expected = str_replace("\r\n", "\n", $expected);
         $actual = str_replace("\r\n", "\n", $actual);
-        $this->assertEquals($expected, $actual, $message);
+        self::assertEquals($expected, $actual, $message);
+    }
+
+    private function removeAssets(string $basePath): void
+    {
+        $handle = opendir($dir = $this->aliases->get($basePath));
+
+        if ($handle === false) {
+            throw new \Exception("Unable to open directory: $dir");
+        }
+
+        while (($file = readdir($handle)) !== false) {
+            if ($file === '.' || $file === '..' || $file === '.gitignore') {
+                continue;
+            }
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($path)) {
+                FileHelper::removeDirectory($path);
+            } else {
+                FileHelper::unlink($path);
+            }
+        }
+
+        closedir($handle);
     }
 }

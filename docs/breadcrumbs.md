@@ -59,13 +59,13 @@ The code above generates the following HTML:
 </nav>
 ```
 
-Method                             | Description
------------------------------------|------------
-`id(string $value)`                | Widget ID.
-`encodeLabels(bool $value)`        | Whether to HTML-encode the link labels.
-`homeLink(array $value)`           | First hyperlink in the breadcrumbs (called home link).
-`itemTemplate(string $value)`      | Template used to render each inactive item in the breadcrumbs.
-`activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs.
-`itemsOptions(array $value)`       | HTML attributes for the items widget. 
-`links(array $value)`              | List of links to appear in the breadcrumbs.
-`options(array $value)`            | HTML attributes for the widget container nav tag.
+Method                             | Description                                                    | Default
+-----------------------------------|----------------------------------------------------------------|---------
+`id(string $value)`                | Widget ID.                                                     | `''`
+`encodeLabels(bool $value)`        | Whether to HTML-encode the link labels.                        | `true`
+`homeLink(array $value)`           | First hyperlink in the breadcrumbs (called home link).         | `''`
+`itemTemplate(string $value)`      | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
+`activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs.   | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
+`itemsOptions(array $value)`       | HTML attributes for the items widget.                          | `[]`
+`links(array $value)`              | List of links to appear in the breadcrumbs.                    | `[]`
+`options(array $value)`            | HTML attributes for the widget container nav tag.              | `[]`
