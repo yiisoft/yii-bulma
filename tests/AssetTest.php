@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaHelpersAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
-use Yiisoft\Yii\Bulma\Asset\PlugInFileAsset;
-use Yiisoft\Yii\Bulma\Asset\PlugInMessageAsset;
+use Yiisoft\Yii\Bulma\Asset\FilePluginAsset;
+use Yiisoft\Yii\Bulma\Asset\MessagePluginAsset;
 
 final class AssetTest extends TestCase
 {
@@ -33,11 +32,11 @@ final class AssetTest extends TestCase
             ],
             [
                 'Js',
-                PlugInFileAsset::class,
+                FilePluginAsset::class,
             ],
             [
                 'Js',
-                PlugInMessageAsset::class,
+                MessagePluginAsset::class,
             ],
         ];
     }
@@ -46,8 +45,8 @@ final class AssetTest extends TestCase
      * @dataProvider registerDataProvider
      *
      * @param string $type
-     * @param string $bundle
-     * @param string $depend
+     * @param string $asset
+     * @param string|null $depend
      */
     public function testAssetRegister(string $type, string $asset, ?string $depend = null): void
     {
@@ -59,24 +58,28 @@ final class AssetTest extends TestCase
             $depend = new $depend();
         }
 
-        $this->assertEmpty($this->assetManager->getAssetBundles());
+        self::assertEmpty($this->assetManager->getAssetBundles());
 
         $this->assetManager->register([$asset]);
 
-        if ($depend !== null && $type === 'Css') {
-            $dependUrl = $publisher->getPublishedUrl($depend->sourcePath) . '/' . $depend->css[0];
-            $this->assertEquals($dependUrl, $this->assetManager->getCssFiles()[$dependUrl]['url']);
-        } elseif ($type === 'Css') {
-            $bundleUrl = $publisher->getPublishedUrl($bundle->sourcePath) . '/' . $bundle->css[0];
-            $this->assertEquals($bundleUrl, $this->assetManager->getCssFiles()[$bundleUrl]['url']);
+        if ($type === 'Css') {
+            if ($depend !== null) {
+                $dependUrl = $publisher->getPublishedUrl($depend->sourcePath) . '/' . $depend->css[0];
+                self::assertEquals($dependUrl, $this->assetManager->getCssFiles()[$dependUrl]['url']);
+            } else {
+                $bundleUrl = $publisher->getPublishedUrl($bundle->sourcePath) . '/' . $bundle->css[0];
+                self::assertEquals($bundleUrl, $this->assetManager->getCssFiles()[$bundleUrl]['url']);
+            }
         }
 
-        if ($depend !== null && $type === 'Js') {
-            $dependUrl = $publisher->getPublishedUrl($depend->sourcePath) . '/' . $depend->js[0];
-            $this->assertEquals($dependUrl, $this->assetManager->getJsFiles()[$dependUrl]['url']);
-        } elseif ($type === 'Js') {
-            $bundleUrl = $publisher->getPublishedUrl($bundle->sourcePath) . '/' . $bundle->js[0];
-            $this->assertEquals($bundleUrl, $this->assetManager->getJsFiles()[$bundleUrl]['url']);
+        if ($type === 'Js') {
+            if ($depend !== null) {
+                $dependUrl = $publisher->getPublishedUrl($depend->sourcePath) . '/' . $depend->js[0];
+                self::assertEquals($dependUrl, $this->assetManager->getJsFiles()[$dependUrl]['url']);
+            } else {
+                $bundleUrl = $publisher->getPublishedUrl($bundle->sourcePath) . '/' . $bundle->js[0];
+                self::assertEquals($bundleUrl, $this->assetManager->getJsFiles()[$bundleUrl]['url']);
+            }
         }
     }
 }
