@@ -20,7 +20,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "foxy/foxy": "^1.1@dev",
         "yiisoft/assets": "@dev",
         "yiisoft/arrays": "@dev",
         "yiisoft/html": "@dev",
