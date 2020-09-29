@@ -290,6 +290,7 @@ final class Nav extends Widget
             Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
         }
 
+        /** @psalm-suppress ConflictingReferenceConstraint */
         if ($this->activateItems && $active) {
             Html::addCssClass($linkOptions, 'is-active');
         }

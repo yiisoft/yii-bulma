@@ -72,9 +72,9 @@ abstract class Widget extends BaseWidget
      * @param array $options
      * @param string $valueDefault
      *
-     * @return array
+     * @return array|null
      */
-    protected function addOptions(array $options, string $valueDefault): array
+    protected function addOptions(array $options, string $valueDefault): ?array
     {
         $optionsTmp = '';
 

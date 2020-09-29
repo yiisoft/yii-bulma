@@ -124,7 +124,7 @@ final class Menu extends Widget
     /**
      * Whether the labels for menu items should be HTML-encoded.
      *
-     * @param bool
+     * @param bool $value
      *
      * @return self
      */
