@@ -295,6 +295,19 @@ final class Dropdown extends Widget
                 $label = $item['label'];
             }
 
+            $icon = '';
+            $iconOptions = [];
+
+            if (isset($item['icon'])) {
+                $icon = $item['icon'];
+            }
+
+            if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
+                $iconOptions = $this->addOptions($iconOptions, 'icon');
+            }
+
+            $label = $this->renderIcon($label, $icon, $iconOptions);
+
             $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
@@ -331,5 +344,17 @@ final class Dropdown extends Widget
             Html::beginTag('div', $itemsOptions) . "\n" .
                 implode("\n", $lines) . "\n" .
             Html::endTag('div');
+    }
+
+    private function renderIcon(string $label, string $icon, array $iconOptions): string
+    {
+        if ($icon !== '') {
+            $label = Html::beginTag('span', $iconOptions) .
+                Html::tag('i', '', ['class' => $icon]) .
+                Html::endTag('span') .
+                Html::tag('span', $label);
+        }
+
+        return $label;
     }
 }
