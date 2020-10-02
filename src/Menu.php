@@ -13,6 +13,7 @@ use function array_values;
 use function call_user_func;
 use function count;
 use function implode;
+use function strtr;
 
 final class Menu extends Widget
 {
@@ -57,7 +58,7 @@ final class Menu extends Widget
      *
      * @var bool $value
      *
-     * @return self
+     * @return $this
      *
      * {@see isItemActive()}
      */
@@ -73,7 +74,7 @@ final class Menu extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function activateParents(bool $value): self
     {
@@ -86,7 +87,7 @@ final class Menu extends Widget
      *
      * @var string $value
      *
-     * @return self
+     * @return $this
      */
     public function activeCssClass(string $value): self
     {
@@ -100,7 +101,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function brand(string $value): self
     {
@@ -113,7 +114,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function currentPath(string $value): self
     {
@@ -126,7 +127,7 @@ final class Menu extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function encodeLabels(bool $value): self
     {
@@ -140,7 +141,7 @@ final class Menu extends Widget
      *
      * @var string $value
      *
-     * @return self
+     * @return $this
      */
     public function firstItemCssClass(string $value): self
     {
@@ -154,7 +155,7 @@ final class Menu extends Widget
      *
      * @var bool $value
      *
-     * @return self
+     * @return $this
      */
     public function hideEmptyItems(bool $value): self
     {
@@ -193,7 +194,7 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function items(array $value): self
     {
@@ -212,7 +213,7 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes() for details on how attributes are being rendered}
      */
@@ -231,7 +232,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function labelTemplate(string $value): self
     {
@@ -245,7 +246,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function lastItemCssClass(string $value): self
     {
@@ -261,7 +262,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function linkTemplate(string $value): self
     {
@@ -277,7 +278,7 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -294,7 +295,7 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function subMenuTemplate(string $value): self
     {

@@ -7,6 +7,8 @@ namespace Yiisoft\Yii\Bulma;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Widget as BaseWidget;
 
+use function strpos;
+
 abstract class Widget extends BaseWidget
 {
     private ?string $id = null;
@@ -72,9 +74,9 @@ abstract class Widget extends BaseWidget
      * @param array $options
      * @param string $valueDefault
      *
-     * @return array|null
+     * @return array
      */
-    protected function addOptions(array $options, string $valueDefault): ?array
+    protected function addOptions(array $options, string $valueDefault): array
     {
         $optionsTmp = '';
 
@@ -92,6 +94,6 @@ abstract class Widget extends BaseWidget
             Html::addCssClass($options, $optionsTmp);
         }
 
-        return $options;
+        return $options ?? [];
     }
 }

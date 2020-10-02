@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use Yiisoft\Html\Html;
-use Yiisoft\Widget\Exception\InvalidConfigException;
+use Yiisoft\Factory\Exceptions\InvalidConfigException;
 use Yiisoft\Yii\Bulma\Nav;
 use Yiisoft\Yii\Bulma\NavBar;
 
@@ -412,7 +412,7 @@ HTML;
         $this->expectException(InvalidConfigException::class);
         $this->expectExceptionMessage("The 'label' option is required.");
 
-        $html = Nav::widget()
+        Nav::widget()
             ->encodeLabels(true)
             ->items([
                 [
@@ -465,7 +465,7 @@ HTML;
         $this->expectException(InvalidConfigException::class);
         $this->expectExceptionMessage("The 'label' option is required.");
 
-        $html = Nav::widget()
+        Nav::widget()
             ->encodeLabels(true)
             ->items([
                 [

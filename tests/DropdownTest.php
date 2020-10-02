@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use Yiisoft\Widget\Exception\InvalidConfigException;
 use Yiisoft\Yii\Bulma\Dropdown;
 
 final class DropdownTest extends TestCase

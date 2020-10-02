@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Factory\Exceptions\InvalidConfigException;
 use Yiisoft\Html\Html;
-use Yiisoft\Widget\Exception\InvalidConfigException;
 
+use function array_key_exists;
 use function array_merge;
 use function implode;
+use function is_array;
 
 final class Dropdown extends Widget
 {
@@ -41,7 +44,7 @@ final class Dropdown extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function buttonLabel(string $value): self
     {
@@ -54,7 +57,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -69,7 +72,7 @@ final class Dropdown extends Widget
      *
      * @param $value
      *
-     * @return self
+     * @return $this
      */
     public function dividerClass(string $value): self
     {
@@ -82,7 +85,7 @@ final class Dropdown extends Widget
      *
      * @param $value
      *
-     * @return self
+     * @return $this
      */
     public function itemClass(string $value): self
     {
@@ -95,7 +98,7 @@ final class Dropdown extends Widget
      *
      * @param $value
      *
-     * @return self
+     * @return $this
      */
     public function itemsClass(string $value): self
     {
@@ -108,7 +111,7 @@ final class Dropdown extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function encodeLabels(bool $value): self
     {
@@ -121,7 +124,7 @@ final class Dropdown extends Widget
      *
      * @param $value
      *
-     * @return self
+     * @return $this
      */
     public function encloseByContainer(bool $value): self
     {
@@ -146,7 +149,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function items(array $value): self
     {
@@ -159,7 +162,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -174,7 +177,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -189,7 +192,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -204,7 +207,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -269,9 +272,9 @@ final class Dropdown extends Widget
      * @param array $items the menu items to be rendered
      * @param array $itemsOptions the container HTML attributes
      *
-     * @return string the rendering result.
+     * @throws InvalidConfigException|JsonException if the label option is not specified in one of the items.
      *
-     * @throws InvalidConfigException if the label option is not specified in one of the items.
+     * @return string the rendering result.
      */
     private function renderItems(array $items, array $itemsOptions = []): string
     {
@@ -295,14 +298,11 @@ final class Dropdown extends Widget
                 $label = $item['label'];
             }
 
-            $icon = '';
             $iconOptions = [];
 
-            if (isset($item['icon'])) {
-                $icon = $item['icon'];
-            }
+            $icon = $item['icon'] ?? '';
 
-            if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
+            if (array_key_exists('iconOptions', $item) && is_array($item['iconOptions'])) {
                 $iconOptions = $this->addOptions($iconOptions, 'icon');
             }
 
@@ -330,7 +330,7 @@ final class Dropdown extends Widget
             } else {
                 $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions));
 
-                $lines[] = Dropdown::widget()
+                $lines[] = self::widget()
                     ->dividerClass($this->dividerClass)
                     ->itemClass($this->itemClass)
                     ->itemsClass($this->itemsClass)
