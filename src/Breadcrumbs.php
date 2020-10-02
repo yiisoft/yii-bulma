@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Exception\InvalidConfigException;
 
 use function array_key_exists;
+use function array_merge;
 use function is_array;
 use function strtr;
 
@@ -53,7 +55,7 @@ class Breadcrumbs extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function encodeLabels(bool $value): self
     {
@@ -71,7 +73,7 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function homeLink(array $value): self
     {
@@ -85,7 +87,7 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function itemTemplate(string $value): self
     {
@@ -99,7 +101,7 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function activeItemTemplate(string $value): self
     {
@@ -121,7 +123,7 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function links(array $value): self
     {
@@ -134,7 +136,7 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -149,7 +151,7 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -194,9 +196,9 @@ class Breadcrumbs extends Widget
      * @param string $template the template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @return string the rendering result
+     * @throws InvalidConfigException|JsonException if `$link` does not have "label" element.
      *
-     * @throws InvalidConfigException if `$link` does not have "label" element.
+     * @return string the rendering result
      */
     private function renderItem(array $link, string $template): string
     {

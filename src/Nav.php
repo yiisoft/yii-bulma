@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Widget\Exception\InvalidConfigException;
+use Yiisoft\Factory\Exceptions\InvalidConfigException;
 
+use function array_key_exists;
 use function implode;
 use function is_array;
 
@@ -36,7 +38,7 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      *
      * {@see isItemActive}
      */
@@ -51,7 +53,7 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function activateParents(bool $value): self
     {
@@ -64,7 +66,7 @@ final class Nav extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function currentPath(string $value): self
     {
@@ -77,7 +79,7 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function encodeLabels(bool $value): self
     {
@@ -104,7 +106,8 @@ final class Nav extends Widget
      * If a menu item is a string, it will be rendered directly without HTML encoding.
      *
      * @param array $value
-     * @return Nav
+     *
+     * @return $this
      */
     public function items(array $value): self
     {
@@ -120,6 +123,8 @@ final class Nav extends Widget
      * @param array $items the given items. Please refer to {@see Dropdown::items} for the array structure.
      * @param array $parentItem the parent item information. Please refer to {@see items} for the structure of this
      * array.
+     *
+     * @throws InvalidConfigException
      *
      * @return string the rendering result.
      */
@@ -210,7 +215,7 @@ final class Nav extends Widget
     /**
      * Renders widget items.
      *
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|JsonException
      *
      * @return string
      */
@@ -234,9 +239,9 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @return string the rendering result.
+     * @throws InvalidConfigException|JsonException
      *
-     * @throws InvalidConfigException
+     * @return string the rendering result.
      */
     private function renderItem(array $item): string
     {
@@ -252,14 +257,11 @@ final class Nav extends Widget
             $label = $item['label'];
         }
 
-        $icon = '';
         $iconOptions = [];
 
-        if (isset($item['icon'])) {
-            $icon = $item['icon'];
-        }
+        $icon = $item['icon'] ?? '';
 
-        if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
+        if (array_key_exists('iconOptions', $item) && is_array($item['iconOptions'])) {
             $iconOptions = $this->addOptions($iconOptions, 'icon');
         }
 
@@ -290,6 +292,7 @@ final class Nav extends Widget
             Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
         }
 
+        /** @psalm-suppress ConflictingReferenceConstraint */
         if ($this->activateItems && $active) {
             Html::addCssClass($linkOptions, 'is-active');
         }

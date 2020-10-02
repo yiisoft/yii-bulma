@@ -51,7 +51,7 @@ final class Message extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function body(string $value): self
     {
@@ -65,7 +65,7 @@ final class Message extends Widget
      * @param string $value setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
      * 'is-danger'.
      *
-     * @return self
+     * @return $this
      */
     public function headerColor(string $value): self
     {
@@ -79,7 +79,7 @@ final class Message extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function headerMessage(string $value): self
     {
@@ -94,7 +94,7 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function options(array $value): self
     {
@@ -109,7 +109,7 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function bodyOptions(array $value): self
     {
@@ -125,7 +125,7 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function closeButtonOptions(array $value): self
     {
@@ -140,7 +140,7 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      */
     public function headerOptions(array $value): self
     {
@@ -153,7 +153,7 @@ final class Message extends Widget
      *
      * @param string $value default setting empty normal, 'is-small', 'is-medium', 'is-large'.
      *
-     * @return self
+     * @return $this
      */
     public function size(string $value): self
     {
@@ -166,7 +166,7 @@ final class Message extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function withoutCloseButton(bool $value): self
     {
@@ -179,7 +179,7 @@ final class Message extends Widget
      *
      * @param bool $value
      *
-     * @return self
+     * @return $this
      */
     public function withoutHeader(bool $value): self
     {

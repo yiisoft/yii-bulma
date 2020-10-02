@@ -7,6 +7,8 @@ namespace Yiisoft\Yii\Bulma;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
+use function strpos;
+
 final class NavBar extends Widget
 {
     private string $brand = '';
@@ -57,7 +59,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function brand(string $value): self
     {
@@ -70,7 +72,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function brandLabel(string $value): self
     {
@@ -83,7 +85,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function brandImage(string $value): self
     {
@@ -97,7 +99,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return self
+     * @return $this
      */
     public function brandUrl(string $value): self
     {
@@ -110,7 +112,7 @@ final class NavBar extends Widget
      *
      * @param string $value.
      *
-     * @return self
+     * @return $this
      */
     public function toggleIcon(string $value): self
     {
@@ -123,7 +125,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -138,7 +140,7 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -153,7 +155,7 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -168,7 +170,7 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -183,7 +185,7 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-start`.
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -198,7 +200,7 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-menu`.
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -213,7 +215,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return self
+     * @return $this
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
