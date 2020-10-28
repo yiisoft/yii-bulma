@@ -20,7 +20,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "foxy/foxy": "^1.1@dev",
+        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
         "yiisoft/assets": "@dev",
         "yiisoft/arrays": "@dev",
         "yiisoft/html": "@dev",
@@ -45,9 +45,32 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
+        },
+        "installer-types": [
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "./node_modules/{$name}": [
+                "type:npm-asset"
+            ]
+        },
+        "merge-plugin": {
+            "include": [
+                "composer.assets.json"
+            ]
         }
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mcaskill/composer-merge-plugin"
+        }
+    ]
 }
