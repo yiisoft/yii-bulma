@@ -44,13 +44,15 @@ HTML;
                             'label' => 'Dashboard',
                             'url' => 'site/index',
                             'icon' => 'mdi mdi-desktop-mac',
-                            'iconOptions' => ['class' => 'icon']
+                            'iconOptions' => ['class' => 'icon'],
+                            'linkOptions' => ['class' => 'testMe']
                         ],
                         [
                             'label' => 'Logout',
                             'url' => 'site/logout',
                             'icon' => 'mdi mdi-logout',
-                            'iconOptions' => ['class' => 'icon']
+                            'iconOptions' => ['class' => 'icon'],
+                            'linkOptions' => ['class' => 'testMe']
                         ],
                 ]
                 ],
@@ -68,8 +70,8 @@ HTML;
 <ul class="menu-list">
 <p class="menu-label">General</p>
 <ul class = menu-list>
-<li><a href="site/index"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
-<li><a href="site/logout"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
+<li><a href="site/index" class="testMe"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
+<li><a href="site/logout" class="testMe"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
 </ul>
 <p class="menu-label">Users</p>
 <ul class = menu-list>
