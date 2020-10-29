@@ -310,7 +310,7 @@ final class Menu extends Widget
 
         foreach ($items as $i => $item) {
             $class = [];
-            $linkOptions = [];
+            $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
             $tag = ArrayHelper::remove($options, 'tag', 'li');
 
