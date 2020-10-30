@@ -56,11 +56,6 @@
             "./node_modules/{$name}": [
                 "type:npm-asset"
             ]
-        },
-        "merge-plugin": {
-            "include": [
-                "composer.assets.json"
-            ]
         }
     },
     "config": {
