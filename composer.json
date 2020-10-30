@@ -27,7 +27,7 @@
         "yiisoft/widget": "@dev"
     },
     "require-dev": {
-        "infection/infection": "^0.18.0",
+        "infection/infection": "^0.19",
         "phpunit/phpunit": "^9.4",
         "vimeo/psalm": "^4.0",
         "yiisoft/di": "^3.0@dev"
