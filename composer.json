@@ -20,7 +20,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2",
+        "npm-asset/vizuaalog--bulmajs": "^0.11.0",
+        "npm-asset/bulma": "^0.9.1",
+        "npm-asset/bulma-helpers": "^0.3.12",
+        "oomphinc/composer-installers-extender": "@dev",
         "yiisoft/assets": "@dev",
         "yiisoft/arrays": "@dev",
         "yiisoft/html": "@dev",
@@ -67,10 +70,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcaskill/composer-merge-plugin"
         }
     ]
 }
