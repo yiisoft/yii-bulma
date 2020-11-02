@@ -20,7 +20,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4|^8.0",
-        "foxy/foxy": "^1.1@dev",
+        "npm-asset/vizuaalog--bulmajs": "^0.11.0",
+        "npm-asset/bulma": "^0.9.1",
+        "npm-asset/bulma-helpers": "^0.3.12",
+        "oomphinc/composer-installers-extender": "^2.0.0",
         "yiisoft/assets": "@dev",
         "yiisoft/arrays": "@dev",
         "yiisoft/html": "@dev",
@@ -45,9 +48,23 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
+        },
+        "installer-types": [
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "./node_modules/{$name}": [
+                "type:npm-asset"
+            ]
         }
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }

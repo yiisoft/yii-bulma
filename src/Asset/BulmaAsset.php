@@ -10,15 +10,15 @@ final class BulmaAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@npm/bulma/css';
+    public ?string $sourcePath = '@npm/bulma/';
 
     public array $css = [
-        'bulma.css',
+        'css/bulma.css',
     ];
 
     public array $publishOptions = [
         'only' => [
-            'bulma.css',
+            'css/bulma.css',
         ],
     ];
 }

@@ -10,7 +10,7 @@ final class FilePluginAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@npm/@vizuaalog/bulmajs';
+    public ?string $sourcePath = '@npm/vizuaalog--bulmajs';
 
     public array $js = [
         'dist/file.js',
