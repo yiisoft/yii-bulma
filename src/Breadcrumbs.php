@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Widget\Exception\InvalidConfigException;
 
 use function array_key_exists;
 use function array_merge;
@@ -196,7 +195,7 @@ class Breadcrumbs extends Widget
      * @param string $template the template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws InvalidConfigException|JsonException if `$link` does not have "label" element.
+     * @throws \InvalidArgumentException|JsonException if `$link` does not have "label" element.
      *
      * @return string the rendering result
      */
@@ -220,7 +219,7 @@ class Breadcrumbs extends Widget
         if (array_key_exists('label', $link)) {
             $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
         } else {
-            throw new InvalidConfigException('The "label" element is required for each link.');
+            throw new \InvalidArgumentException('The "label" element is required for each link.');
         }
 
         if (isset($link['template'])) {

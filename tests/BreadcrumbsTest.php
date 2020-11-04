@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use Yiisoft\Widget\Exception\InvalidConfigException;
 use Yiisoft\Yii\Bulma\Breadcrumbs;
 
 final class BreadcrumbsTest extends TestCase
@@ -210,7 +209,7 @@ HTML;
     {
         Breadcrumbs::counter(0);
 
-        $this->expectException(InvalidConfigException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
             ->links([['url' => '/about', 'template' => "<div>{link}</div>"]])

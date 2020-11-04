@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Factory\Exceptions\InvalidConfigException;
 
 use function array_key_exists;
 use function implode;
@@ -124,7 +123,7 @@ final class Nav extends Widget
      * @param array $parentItem the parent item information. Please refer to {@see items} for the structure of this
      * array.
      *
-     * @throws InvalidConfigException
+     * @throws \InvalidArgumentException
      *
      * @return string the rendering result.
      */
@@ -216,7 +215,7 @@ final class Nav extends Widget
     /**
      * Renders widget items.
      *
-     * @throws InvalidConfigException|JsonException
+     * @throws \InvalidArgumentException|JsonException
      *
      * @return string
      */
@@ -238,14 +237,14 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @throws InvalidConfigException|JsonException
+     * @throws \InvalidArgumentException|JsonException
      *
      * @return string the rendering result.
      */
     private function renderItem(array $item): string
     {
         if (!isset($item['label'])) {
-            throw new InvalidConfigException("The 'label' option is required.");
+            throw new \InvalidArgumentException('The "label" option is required.');
         }
 
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
@@ -304,6 +303,6 @@ final class Nav extends Widget
                     $items;
         }
 
-        return Html::a($label, $url, $linkOptions ?? []);
+        return Html::a($label, $url, $linkOptions);
     }
 }

@@ -72,28 +72,31 @@ abstract class Widget extends BaseWidget
      * Validate CSS class default options.
      *
      * @param array $options
-     * @param string $valueDefault
+     * @param string $defaultClass
      *
      * @return array
      */
-    protected function addOptions(array $options, string $valueDefault): array
+    protected function addOptions(array $options, string $defaultClass): array
     {
-        $optionsTmp = '';
+        $class = '';
 
         if (isset($options['class'])) {
-            $optionsTmp = $options['class'];
-
+            $class = $options['class'];
             unset($options['class']);
+            if (is_array($class)) {
+                $class = implode(' ', $class);
+            }
         }
 
-        if (strpos($optionsTmp, $valueDefault) === false) {
-            Html::addCssClass($options, $valueDefault);
+        /** @psalm-var string $class */
+        if (strpos($class, $defaultClass) === false) {
+            Html::addCssClass($options, $defaultClass);
         }
 
-        if (!empty($optionsTmp)) {
-            Html::addCssClass($options, $optionsTmp);
+        if (!empty($class)) {
+            Html::addCssClass($options, $class);
         }
 
-        return $options ?? [];
+        return $options;
     }
 }

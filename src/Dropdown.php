@@ -6,7 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Factory\Exceptions\InvalidConfigException;
 use Yiisoft\Html\Html;
 
 use function array_key_exists;
@@ -272,7 +271,7 @@ final class Dropdown extends Widget
      * @param array $items the menu items to be rendered
      * @param array $itemsOptions the container HTML attributes
      *
-     * @throws InvalidConfigException|JsonException if the label option is not specified in one of the items.
+     * @throws \InvalidArgumentException|JsonException if the label option is not specified in one of the items.
      *
      * @return string the rendering result.
      */
@@ -287,7 +286,7 @@ final class Dropdown extends Widget
             }
 
             if (!isset($item['label']) && $item !== '-') {
-                throw new InvalidConfigException("The 'label' option is required.");
+                throw new \InvalidArgumentException('The "label" option is required.');
             }
 
             $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;

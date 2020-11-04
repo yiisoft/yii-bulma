@@ -248,20 +248,22 @@ final class NavBar extends Widget
 
     private function initItemsOptions(): void
     {
-        $optionsItems = '';
+        $itemsClass = '';
 
         if (isset($this->itemsOptions['class'])) {
-            $optionsItems = $this->itemsOptions['class'];
-
+            $itemsClass = $this->itemsOptions['class'];
             unset($this->itemsOptions['class']);
+            if (is_array($itemsClass)) {
+                $itemsClass = implode(' ', $itemsClass);
+            }
         }
 
-        if (strpos($optionsItems, 'navbar-end') === false) {
+        if (strpos($itemsClass, 'navbar-end') === false) {
             Html::addCssClass($this->itemsOptions, 'navbar-start');
         }
 
-        if (!empty($optionsItems)) {
-            Html::addCssClass($this->itemsOptions, $optionsItems);
+        if (!empty($itemsClass)) {
+            Html::addCssClass($this->itemsOptions, $itemsClass);
         }
     }
 
