@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Widget\Exception\InvalidConfigException;
 
 use function array_key_exists;
 use function array_merge;
@@ -15,7 +14,7 @@ use function is_array;
 use function strtr;
 
 /**
- * The Bulma breadcrumb is a simple navigation component
+ * The Bulma breadcrumb is a simple navigation component.
  *
  * For example,
  *
@@ -55,12 +54,13 @@ class Breadcrumbs extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
@@ -73,12 +73,13 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function homeLink(array $value): self
     {
-        $this->homeLink = $value;
-        return $this;
+        $new = clone $this;
+        $new->homeLink = $value;
+        return $new;
     }
 
     /**
@@ -87,12 +88,13 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function itemTemplate(string $value): self
     {
-        $this->itemTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemTemplate = $value;
+        return $new;
     }
 
     /**
@@ -101,12 +103,13 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function activeItemTemplate(string $value): self
     {
-        $this->activeItemTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->activeItemTemplate = $value;
+        return $new;
     }
 
     /**
@@ -123,12 +126,13 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function links(array $value): self
     {
-        $this->links = $value;
-        return $this;
+        $new = clone $this;
+        $new->links = $value;
+        return $new;
     }
 
     /**
@@ -136,14 +140,15 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -151,14 +156,15 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
-        $this->itemsOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemsOptions = $value;
+        return $new;
     }
 
     private function buildOptions(): void
@@ -196,7 +202,7 @@ class Breadcrumbs extends Widget
      * @param string $template the template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws InvalidConfigException|JsonException if `$link` does not have "label" element.
+     * @throws \InvalidArgumentException|JsonException if `$link` does not have "label" element.
      *
      * @return string the rendering result
      */
@@ -220,7 +226,7 @@ class Breadcrumbs extends Widget
         if (array_key_exists('label', $link)) {
             $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
         } else {
-            throw new InvalidConfigException('The "label" element is required for each link.');
+            throw new \InvalidArgumentException('The "label" element is required for each link.');
         }
 
         if (isset($link['template'])) {

@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Factory\Exceptions\InvalidConfigException;
 
 use function array_key_exists;
 use function implode;
@@ -38,14 +37,15 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive}
      */
     public function activateItems(bool $value): self
     {
-        $this->activateItems = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateItems = $value;
+        return $new;
     }
 
     /**
@@ -53,12 +53,13 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(bool $value): self
     {
-        $this->activateParents = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateParents = $value;
+        return $new;
     }
 
     /**
@@ -66,12 +67,13 @@ final class Nav extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function currentPath(string $value): self
     {
-        $this->currentPath = $value;
-        return $this;
+        $new = clone $this;
+        $new->currentPath = $value;
+        return $new;
     }
 
     /**
@@ -79,12 +81,13 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
@@ -107,12 +110,13 @@ final class Nav extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function items(array $value): self
     {
-        $this->items = $value;
-        return $this;
+        $new = clone $this;
+        $new->items = $value;
+        return $new;
     }
 
     /**
@@ -124,7 +128,7 @@ final class Nav extends Widget
      * @param array $parentItem the parent item information. Please refer to {@see items} for the structure of this
      * array.
      *
-     * @throws InvalidConfigException
+     * @throws \InvalidArgumentException
      *
      * @return string the rendering result.
      */
@@ -166,6 +170,7 @@ final class Nav extends Widget
                 $items[$i]['items'] = $this->isChildActive($childItems, $activeParent);
 
                 if ($activeParent) {
+                    $items[$i]['options'] ??= [];
                     Html::addCssClass($items[$i]['options'], 'active');
                     $active = $activeParent;
                 }
@@ -215,7 +220,7 @@ final class Nav extends Widget
     /**
      * Renders widget items.
      *
-     * @throws InvalidConfigException|JsonException
+     * @throws \InvalidArgumentException|JsonException
      *
      * @return string
      */
@@ -237,14 +242,14 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @throws InvalidConfigException|JsonException
+     * @throws \InvalidArgumentException|JsonException
      *
      * @return string the rendering result.
      */
     private function renderItem(array $item): string
     {
         if (!isset($item['label'])) {
-            throw new InvalidConfigException("The 'label' option is required.");
+            throw new \InvalidArgumentException('The "label" option is required.');
         }
 
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
