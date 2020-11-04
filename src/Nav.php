@@ -224,11 +224,9 @@ final class Nav extends Widget
         $items = [];
 
         foreach ($this->items as $item) {
-            if (isset($item['visible']) && !$item['visible']) {
-                continue;
+            if (!isset($item['visible']) || $item['visible']) {
+                $items[] = $this->renderItem($item);
             }
-
-            $items[] = $this->renderItem($item);
         }
 
         return implode("\n", $items);
