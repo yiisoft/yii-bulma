@@ -409,7 +409,7 @@ final class Menu extends Widget
                     } else {
                         $items[$i]['active'] = false;
                     }
-                } elseif ($item['active'] instanceof Closure) {
+                } elseif (is_callable($item['active'])) {
                     $active = $items[$i]['active'] = call_user_func($item['active'], $item, $hasActiveChild, $this->isItemActive($item), $this);
                 } elseif ($item['active']) {
                     $active = $item['active'];
