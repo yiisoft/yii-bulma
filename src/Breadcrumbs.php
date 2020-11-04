@@ -14,7 +14,7 @@ use function is_array;
 use function strtr;
 
 /**
- * The Bulma breadcrumb is a simple navigation component
+ * The Bulma breadcrumb is a simple navigation component.
  *
  * For example,
  *
@@ -54,12 +54,13 @@ class Breadcrumbs extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
@@ -72,12 +73,13 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function homeLink(array $value): self
     {
-        $this->homeLink = $value;
-        return $this;
+        $new = clone $this;
+        $new->homeLink = $value;
+        return $new;
     }
 
     /**
@@ -86,12 +88,13 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function itemTemplate(string $value): self
     {
-        $this->itemTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemTemplate = $value;
+        return $new;
     }
 
     /**
@@ -100,12 +103,13 @@ class Breadcrumbs extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function activeItemTemplate(string $value): self
     {
-        $this->activeItemTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->activeItemTemplate = $value;
+        return $new;
     }
 
     /**
@@ -122,12 +126,13 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function links(array $value): self
     {
-        $this->links = $value;
-        return $this;
+        $new = clone $this;
+        $new->links = $value;
+        return $new;
     }
 
     /**
@@ -135,14 +140,15 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -150,14 +156,15 @@ class Breadcrumbs extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
-        $this->itemsOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemsOptions = $value;
+        return $new;
     }
 
     private function buildOptions(): void

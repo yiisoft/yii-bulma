@@ -37,14 +37,15 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive}
      */
     public function activateItems(bool $value): self
     {
-        $this->activateItems = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateItems = $value;
+        return $new;
     }
 
     /**
@@ -52,12 +53,13 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(bool $value): self
     {
-        $this->activateParents = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateParents = $value;
+        return $new;
     }
 
     /**
@@ -65,12 +67,13 @@ final class Nav extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function currentPath(string $value): self
     {
-        $this->currentPath = $value;
-        return $this;
+        $new = clone $this;
+        $new->currentPath = $value;
+        return $new;
     }
 
     /**
@@ -78,12 +81,13 @@ final class Nav extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
@@ -106,12 +110,13 @@ final class Nav extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function items(array $value): self
     {
-        $this->items = $value;
-        return $this;
+        $new = clone $this;
+        $new->items = $value;
+        return $new;
     }
 
     /**

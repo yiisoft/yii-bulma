@@ -21,12 +21,13 @@ abstract class Widget extends BaseWidget
      *
      * @param string $value
      *
-     * @return Widget
+     * @return static
      */
     public function id(string $value): self
     {
-        $this->id = $value;
-        return $this;
+        $new = clone $this;
+        $new->id = $value;
+        return $new;
     }
 
     /**
@@ -44,14 +45,15 @@ abstract class Widget extends BaseWidget
      *
      * @param string $value
      *
-     * @return Widget
+     * @return static
      *
      * {@see getId()}
      */
     public function autoIdPrefix(string $value): self
     {
-        $this->autoIdPrefix = $value;
-        return $this;
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
     }
 
     /**

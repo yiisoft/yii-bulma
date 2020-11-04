@@ -51,12 +51,13 @@ final class Message extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function body(string $value): self
     {
-        $this->body = $value;
-        return $this;
+        $new = clone $this;
+        $new->body = $value;
+        return $new;
     }
 
     /**
@@ -65,12 +66,13 @@ final class Message extends Widget
      * @param string $value setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
      * 'is-danger'.
      *
-     * @return $this
+     * @return self
      */
     public function headerColor(string $value): self
     {
-        $this->headerColor = $value;
-        return $this;
+        $new = clone $this;
+        $new->headerColor = $value;
+        return $new;
     }
 
     /**
@@ -79,12 +81,13 @@ final class Message extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function headerMessage(string $value): self
     {
-        $this->headerMessage = $value;
-        return $this;
+        $new = clone $this;
+        $new->headerMessage = $value;
+        return $new;
     }
 
     /**
@@ -94,12 +97,13 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -109,12 +113,13 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function bodyOptions(array $value): self
     {
-        $this->bodyOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->bodyOptions = $value;
+        return $new;
     }
 
     /**
@@ -125,12 +130,13 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function closeButtonOptions(array $value): self
     {
-        $this->closeButtonOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->closeButtonOptions = $value;
+        return $new;
     }
 
     /**
@@ -140,12 +146,13 @@ final class Message extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function headerOptions(array $value): self
     {
-        $this->headerOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->headerOptions = $value;
+        return $new;
     }
 
     /**
@@ -153,12 +160,13 @@ final class Message extends Widget
      *
      * @param string $value default setting empty normal, 'is-small', 'is-medium', 'is-large'.
      *
-     * @return $this
+     * @return self
      */
     public function size(string $value): self
     {
-        $this->size = $value;
-        return $this;
+        $new = clone $this;
+        $new->size = $value;
+        return $new;
     }
 
     /**
@@ -166,12 +174,13 @@ final class Message extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function withoutCloseButton(bool $value): self
     {
-        $this->withoutCloseButton = $value;
-        return $this;
+        $new = clone $this;
+        $new->withoutCloseButton = $value;
+        return $new;
     }
 
     /**
@@ -179,12 +188,13 @@ final class Message extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function withoutHeader(bool $value): self
     {
-        $this->withoutHeader = $value;
-        return $this;
+        $new = clone $this;
+        $new->withoutHeader = $value;
+        return $new;
     }
 
     private function buildOptions(): void

@@ -57,14 +57,15 @@ final class Menu extends Widget
      *
      * @var bool $value
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive()}
      */
     public function activateItems(bool $value): self
     {
-        $this->activateItems = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateItems = $value;
+        return $new;
     }
 
     /**
@@ -73,12 +74,13 @@ final class Menu extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(bool $value): self
     {
-        $this->activateParents = $value;
-        return $this;
+        $new = clone $this;
+        $new->activateParents = $value;
+        return $new;
     }
 
     /**
@@ -86,13 +88,13 @@ final class Menu extends Widget
      *
      * @var string $value
      *
-     * @return $this
+     * @return self
      */
     public function activeCssClass(string $value): self
     {
-        $this->activeCssClass = $value;
-
-        return $this;
+        $new = clone $this;
+        $new->activeCssClass = $value;
+        return $new;
     }
 
     /**
@@ -100,12 +102,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function brand(string $value): self
     {
-        $this->brand = $value;
-        return $this;
+        $new = clone $this;
+        $new->brand = $value;
+        return $new;
     }
 
     /**
@@ -113,12 +116,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function currentPath(string $value): self
     {
-        $this->currentPath = $value;
-        return $this;
+        $new = clone $this;
+        $new->currentPath = $value;
+        return $new;
     }
 
     /**
@@ -126,12 +130,13 @@ final class Menu extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
@@ -140,12 +145,13 @@ final class Menu extends Widget
      *
      * @var string $value
      *
-     * @return $this
+     * @return self
      */
     public function firstItemCssClass(string $value): self
     {
-        $this->firstItemCssClass = $value;
-        return $this;
+        $new = clone $this;
+        $new->firstItemCssClass = $value;
+        return $new;
     }
 
     /**
@@ -154,12 +160,13 @@ final class Menu extends Widget
      *
      * @var bool $value
      *
-     * @return $this
+     * @return self
      */
     public function hideEmptyItems(bool $value): self
     {
-        $this->hideEmptyItems = $value;
-        return $this;
+        $new = clone $this;
+        $new->hideEmptyItems = $value;
+        return $new;
     }
 
     /**
@@ -193,12 +200,13 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function items(array $value): self
     {
-        $this->items = $value;
-        return $this;
+        $new = clone $this;
+        $new->items = $value;
+        return $new;
     }
 
     /**
@@ -212,14 +220,15 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes() for details on how attributes are being rendered}
      */
     public function itemOptions(array $value): self
     {
-        $this->itemOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemOptions = $value;
+        return $new;
     }
 
     /**
@@ -231,12 +240,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function labelTemplate(string $value): self
     {
-        $this->labelTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->labelTemplate = $value;
+        return $new;
     }
 
     /**
@@ -245,12 +255,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function lastItemCssClass(string $value): self
     {
-        $this->lastItemCssClass = $value;
-        return $this;
+        $new = clone $this;
+        $new->lastItemCssClass = $value;
+        return $new;
     }
 
     /**
@@ -261,12 +272,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function linkTemplate(string $value): self
     {
-        $this->linkTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->linkTemplate = $value;
+        return $new;
     }
 
     /**
@@ -277,14 +289,15 @@ final class Menu extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -294,12 +307,13 @@ final class Menu extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function subMenuTemplate(string $value): self
     {
-        $this->subMenuTemplate = $value;
-        return $this;
+        $new = clone $this;
+        $new->subMenuTemplate = $value;
+        return $new;
     }
 
     private function renderItems(array $items): string

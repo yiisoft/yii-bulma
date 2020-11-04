@@ -66,12 +66,13 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function brand(string $value): self
     {
-        $this->brand = $value;
-        return $this;
+        $new = clone $this;
+        $new->brand = $value;
+        return $new;
     }
 
     /**
@@ -79,12 +80,13 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function brandLabel(string $value): self
     {
-        $this->brandLabel = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandLabel = $value;
+        return $new;
     }
 
     /**
@@ -92,12 +94,13 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function brandImage(string $value): self
     {
-        $this->brandImage = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandImage = $value;
+        return $new;
     }
 
     /**
@@ -106,12 +109,13 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function brandUrl(string $value): self
     {
-        $this->brandUrl = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandUrl = $value;
+        return $new;
     }
 
     /**
@@ -119,12 +123,13 @@ final class NavBar extends Widget
      *
      * @param string $value.
      *
-     * @return $this
+     * @return self
      */
     public function toggleIcon(string $value): self
     {
-        $this->toggleIcon = $value;
-        return $this;
+        $new = clone $this;
+        $new->toggleIcon = $value;
+        return $new;
     }
 
     /**
@@ -132,14 +137,15 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -147,14 +153,15 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandOptions(array $value): self
     {
-        $this->brandOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandOptions = $value;
+        return $new;
     }
 
     /**
@@ -162,14 +169,15 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandLabelOptions(array $value): self
     {
-        $this->brandLabelOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandLabelOptions = $value;
+        return $new;
     }
 
     /**
@@ -177,14 +185,15 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-item`.
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandImageOptions(array $value): self
     {
-        $this->brandImageOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->brandImageOptions = $value;
+        return $new;
     }
 
     /**
@@ -192,14 +201,15 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-start`.
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
-        $this->itemsOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemsOptions = $value;
+        return $new;
     }
 
     /**
@@ -207,14 +217,15 @@ final class NavBar extends Widget
      *
      * @param array $value default value `navbar-menu`.
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function menuOptions(array $value): self
     {
-        $this->menuOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->menuOptions = $value;
+        return $new;
     }
 
     /**
@@ -222,14 +233,15 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function toggleOptions(array $value): self
     {
-        $this->toggleOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->toggleOptions = $value;
+        return $new;
     }
 
     private function buildOptions(): void

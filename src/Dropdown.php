@@ -43,12 +43,13 @@ final class Dropdown extends Widget
      *
      * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function buttonLabel(string $value): self
     {
-        $this->buttonLabel = $value;
-        return $this;
+        $new = clone $this;
+        $new->buttonLabel = $value;
+        return $new;
     }
 
     /**
@@ -56,14 +57,15 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function buttonLabelOptions(array $value): self
     {
-        $this->buttonLabelOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->buttonLabelOptions = $value;
+        return $new;
     }
 
     /**
@@ -71,38 +73,41 @@ final class Dropdown extends Widget
      *
      * @param $value
      *
-     * @return $this
+     * @return self
      */
     public function dividerClass(string $value): self
     {
-        $this->dividerClass  = $value;
-        return $this;
+        $new = clone $this;
+        $new->dividerClass  = $value;
+        return $new;
     }
 
     /**
-     * Set css class item dropdown.
+     * Set CSS class item dropdown.
      *
      * @param $value
      *
-     * @return $this
+     * @return self
      */
     public function itemClass(string $value): self
     {
-        $this->itemClass  = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemClass  = $value;
+        return $new;
     }
 
     /**
-     * Set css class items container dropdown.
+     * Set CSS class items container dropdown.
      *
-     * @param $value
+     * @param string $value
      *
-     * @return $this
+     * @return self
      */
     public function itemsClass(string $value): self
     {
-        $this->itemsClass  = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemsClass  = $value;
+        return $new;
     }
 
     /**
@@ -110,25 +115,27 @@ final class Dropdown extends Widget
      *
      * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encodeLabels(bool $value): self
     {
-        $this->encodeLabels = $value;
-        return $this;
+        $new = clone $this;
+        $new->encodeLabels = $value;
+        return $new;
     }
 
     /**
      * Set enclosed by container dropdown.
      *
-     * @param $value
+     * @param bool $value
      *
-     * @return $this
+     * @return self
      */
     public function encloseByContainer(bool $value): self
     {
-        $this->encloseByContainer = $value;
-        return $this;
+        $new = clone $this;
+        $new->encloseByContainer = $value;
+        return $new;
     }
 
     /**
@@ -148,12 +155,13 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      */
     public function items(array $value): self
     {
-        $this->items = $value;
-        return $this;
+        $new = clone $this;
+        $new->items = $value;
+        return $new;
     }
 
     /**
@@ -161,14 +169,15 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
-        $this->options = $value;
-        return $this;
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
     }
 
     /**
@@ -176,14 +185,15 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function buttonOptions(array $value): self
     {
-        $this->buttonOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->buttonOptions = $value;
+        return $new;
     }
 
     /**
@@ -191,14 +201,15 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
-        $this->itemsOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->itemsOptions = $value;
+        return $new;
     }
 
     /**
@@ -206,14 +217,15 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return $this
+     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function triggerOptions(array $value): self
     {
-        $this->triggerOptions = $value;
-        return $this;
+        $new = clone $this;
+        $new->triggerOptions = $value;
+        return $new;
     }
 
     private function buildDropdown(): string
