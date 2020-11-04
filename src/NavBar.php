@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
@@ -289,6 +290,8 @@ final class NavBar extends Widget
     /**
      * Renders collapsible toggle button.
      *
+     * @throws JsonException
+     *
      * @return string the rendering toggle button.
      */
     private function renderToggleButton(): string
@@ -302,6 +305,8 @@ final class NavBar extends Widget
 
     /**
      * Render icon toggle.
+     *
+     * @throws JsonException
      *
      * @return string
      */
