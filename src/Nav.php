@@ -166,6 +166,7 @@ final class Nav extends Widget
                 $items[$i]['items'] = $this->isChildActive($childItems, $activeParent);
 
                 if ($activeParent) {
+                    $items[$i]['options'] ??= [];
                     Html::addCssClass($items[$i]['options'], 'active');
                     $active = $activeParent;
                 }
@@ -303,6 +304,6 @@ final class Nav extends Widget
                     $items;
         }
 
-        return Html::a($label, $url, $linkOptions);
+        return Html::a($label, $url, $linkOptions ?? []);
     }
 }
