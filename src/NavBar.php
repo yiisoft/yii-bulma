@@ -37,6 +37,9 @@ final class NavBar extends Widget
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
+        if (!is_string($navTag) && !is_bool($navTag) && $navTag !== null) {
+            throw new \InvalidArgumentException('Tag should be either string, bool or null.');
+        }
 
         return
             Html::beginTag($navTag, $navOptions) . "\n" .
@@ -48,6 +51,9 @@ final class NavBar extends Widget
     protected function run(): string
     {
         $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
+        if (!is_string($tag) && !is_bool($tag) && $tag !== null) {
+            throw new \InvalidArgumentException('Tag should be either string, bool or null.');
+        }
 
         return
             Html::endTag('div') . "\n" .
@@ -258,6 +264,7 @@ final class NavBar extends Widget
             }
         }
 
+        /** @var string $itemsClass */
         if (strpos($itemsClass, 'navbar-end') === false) {
             Html::addCssClass($this->itemsOptions, 'navbar-start');
         }
