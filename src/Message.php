@@ -18,6 +18,8 @@ use Yiisoft\Html\Html;
  *     ->header('System info')
  *     ->body('Say hello...') ?>
  * ```
+ *
+ * @link https://bulma.io/documentation/components/message/
  */
 final class Message extends Widget
 {

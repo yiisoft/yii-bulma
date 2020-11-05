@@ -13,7 +13,7 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -33,7 +33,7 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->links([['label' => 'Setting &amp; Profile', 'url' => '/about']])
+            ->items([['label' => 'Setting &amp; Profile', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -49,7 +49,7 @@ HTML;
 
         $html = Breadcrumbs::widget()
             ->encodeLabels(false)
-            ->links(
+            ->items(
                 [
                     [
                         'label' => 'Seeting &amp; profile',
@@ -76,8 +76,8 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index', 'url' => '/index'])
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -92,8 +92,8 @@ HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index'])
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -113,9 +113,9 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index', 'url' => '/index'])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
             ->itemTemplate("<div>{link}</div>\n")
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -134,9 +134,9 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index', 'url' => '/index'])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
             ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
 
         $expected = <<<HTML
@@ -156,7 +156,7 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->links([])
+            ->items([])
             ->render();
 
         $expected = <<<HTML
@@ -170,7 +170,7 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->links(['label' => 'about'])
+            ->items(['label' => 'about'])
             ->render();
 
         $expected = <<<HTML
@@ -190,7 +190,7 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->links([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
+            ->items([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
             ->render();
 
         $expected = <<<HTML
@@ -212,7 +212,7 @@ HTML;
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
-            ->links([['url' => '/about', 'template' => "<div>{link}</div>"]])
+            ->items([['url' => '/about', 'template' => "<div>{link}</div>"]])
             ->render();
 
         $expected = <<<HTML
@@ -232,8 +232,8 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index', 'url' => '/index'])
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->options(['class' => 'is-centered'])
             ->render();
 
@@ -254,8 +254,8 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(['label' => 'Index', 'url' => '/index'])
-            ->links([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->itemsOptions(['class' => 'testMe'])
             ->render();
 
@@ -276,7 +276,7 @@ HTML;
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->homeLink(
+            ->homeItem(
                 [
                     'label' => 'Index',
                     'url' => '/index',
@@ -284,7 +284,7 @@ HTML;
                     'iconOptions' => ['class' => 'icon']
                 ]
             )
-            ->links(
+            ->items(
                 [
                     [
                         'label' => 'About',

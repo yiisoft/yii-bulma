@@ -16,26 +16,29 @@ use function strtr;
 /**
  * The Bulma breadcrumb is a simple navigation component.
  *
- * For example,
- *
  * ```php
- * echo Breadcrumbs::widget()
- *     ->links(['label' => !empty($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []]);
+ * echo Breadcrumbs::widget()->items([
+ *     ['label' => 'Info'],
+ *     ['label' => 'Contacts'],
+ * ]);
  * ```
+ *
+ * @link https://bulma.io/documentation/components/breadcrumb/
  */
 class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
-    private array $homeLink = [];
+    private array $homeItem = [];
+    private bool $withoutHomeItem = false;
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
     private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
-    private array $links = [];
+    private array $items = [];
     private array $options = [];
     private array $itemsOptions = [];
 
     protected function run(): string
     {
-        if (empty($this->links)) {
+        if (empty($this->items)) {
             return '';
         }
 
@@ -44,7 +47,7 @@ class Breadcrumbs extends Widget
         return
             Html::beginTag('nav', $this->options) . "\n" .
                 Html::beginTag('ul', $this->itemsOptions) . "\n" .
-                    implode('', $this->renderLinks()) .
+                    implode('', $this->renderItems()) .
                 Html::endTag('ul') . "\n" .
             Html::endTag('nav');
     }
@@ -64,21 +67,29 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * The first hyperlink in the breadcrumbs (called home link).
+     * Do not render home item.
+     * @return self
+     */
+    public function withoutHomeItem(): self
+    {
+        $new = clone $this;
+        $new->withoutHomeItem = true;
+        return $new;
+    }
+
+    /**
+     * The first item in the breadcrumbs (called home link).
      *
-     * Please refer to {@see links} on the format of the link.
-     *
-     * If this property is not set, it will default to a link pointing with the label 'Home'. If this property is false,
-     * the home link will not be rendered.
+     * Please refer to {@see $items} on the format.
      *
      * @param array $value
      *
      * @return self
      */
-    public function homeLink(array $value): self
+    public function homeItem(array $value): self
     {
         $new = clone $this;
-        $new->homeLink = $value;
+        $new->homeItem = $value;
         return $new;
     }
 
@@ -113,8 +124,8 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * List of links to appear in the breadcrumbs. If this property is empty, the widget will not render anything. Each
-     * array element represents a single link in the breadcrumbs with the following structure:
+     * List of items to appear in the breadcrumb. If this property is empty, the widget will not render anything. Each
+     * array element represents a single link in the breadcrumb with the following structure:
      *
      * ```php
      * [
@@ -128,10 +139,10 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function links(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
-        $new->links = $value;
+        $new->items = $value;
         return $new;
     }
 
@@ -247,13 +258,15 @@ class Breadcrumbs extends Widget
         );
     }
 
-    private function renderLinks(): array
+    private function renderItems(): array
     {
         $links = [];
 
-        $links[] = $this->renderHomeLink();
+        if ($this->withoutHomeItem === false) {
+            $links[] = $this->renderHomeLink();
+        }
 
-        foreach ($this->links as $link) {
+        foreach ($this->items as $link) {
             if (!is_array($link)) {
                 $link = ['label' => $link];
             }
@@ -266,10 +279,10 @@ class Breadcrumbs extends Widget
 
     private function renderHomeLink(): string
     {
-        if ($this->homeLink === []) {
-            $this->homeLink = ['label' => 'Home', 'url' => '/'];
+        if ($this->homeItem === []) {
+            $this->homeItem = ['label' => 'Home', 'url' => '/'];
         }
 
-        return $this->renderItem($this->homeLink, $this->itemTemplate);
+        return $this->renderItem($this->homeItem, $this->itemTemplate);
     }
 }

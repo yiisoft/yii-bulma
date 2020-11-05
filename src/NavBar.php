@@ -10,6 +10,11 @@ use Yiisoft\Html\Html;
 
 use function strpos;
 
+/**
+ * The navbar component is a responsive and versatile horizontal navigation bar.
+ *
+ * @link https://bulma.io/documentation/components/navbar/
+ */
 final class NavBar extends Widget
 {
     private string $brand = '';
