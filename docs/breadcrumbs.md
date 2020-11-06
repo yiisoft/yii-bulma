@@ -30,13 +30,13 @@ $this->setJsFiles($assetManager->getJsFiles());
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <?= Breadcrumbs::widget()
-    ->homeLink([
+    ->homeItem([
         'label' => 'Index',
         'url' => '/index',
         'icon' => 'fas fa-home',
         'iconOptions' => ['class' => 'icon']
     ])
-    ->links([
+    ->items([
         [
             'label' => 'About',
             'url' => '/about',

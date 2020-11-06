@@ -13,6 +13,11 @@ use function array_merge;
 use function implode;
 use function is_array;
 
+/**
+ * The dropdown component is a container for a dropdown button and a dropdown menu.
+ *
+ * @link https://bulma.io/documentation/components/dropdown/
+ */
 final class Dropdown extends Widget
 {
     private string $buttonLabel = '';
@@ -39,7 +44,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set label button dropdown.
+     * Set label for the dropdown button.
      *
      * @param string $value
      *
@@ -53,7 +58,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the button dropdown.
+     * The HTML attributes for the dropdown button.
      *
      * @param array $value
      *
@@ -69,7 +74,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set css class divider dropdown.
+     * Set CSS class for dropdown divider.
      *
      * @param $value
      *
@@ -83,7 +88,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class item dropdown.
+     * Set CSS class for dropdown item.
      *
      * @param $value
      *
@@ -97,7 +102,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class items container dropdown.
+     * Set CSS class for dropdown items container.
      *
      * @param string $value
      *

@@ -14,6 +14,11 @@ use function count;
 use function implode;
 use function strtr;
 
+/**
+ * The Bulma menu is a vertical navigation component.
+ *
+ * @link https://bulma.io/documentation/components/menu/
+ */
 final class Menu extends Widget
 {
     private string $activeCssClass = 'is-active';
