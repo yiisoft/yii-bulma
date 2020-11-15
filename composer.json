@@ -66,5 +66,10 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "scripts": {
+        "test": [
+            "phpunit --colors --no-interaction"
+        ]
+    }
 }
