@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use Yiisoft\Html\Html;
-use Yiisoft\Widget\Widget as BaseWidget;
-
 use function strpos;
+use Yiisoft\Html\Html;
+
+use Yiisoft\Widget\Widget as BaseWidget;
 
 abstract class Widget extends BaseWidget
 {

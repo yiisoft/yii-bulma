@@ -45,22 +45,22 @@ HTML;
                             'url' => 'site/index',
                             'icon' => 'mdi mdi-desktop-mac',
                             'iconOptions' => ['class' => 'icon'],
-                            'linkOptions' => ['class' => 'testMe']
+                            'linkOptions' => ['class' => 'testMe'],
                         ],
                         [
                             'label' => 'Logout',
                             'url' => 'site/logout',
                             'icon' => 'mdi mdi-logout',
                             'iconOptions' => ['class' => 'icon'],
-                            'linkOptions' => ['class' => 'testMe']
+                            'linkOptions' => ['class' => 'testMe'],
                         ],
-                ]
+                    ],
                 ],
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
             ])
             ->render();
@@ -105,7 +105,7 @@ HTML;
 
         $html = Menu::widget()
             ->items([
-                ['url' => '#']
+                ['url' => '#'],
             ])
             ->render();
 
@@ -132,20 +132,20 @@ HTML;
                             'label' => 'Dashboard',
                             'url' => 'site/index',
                             'icon' => 'mdi mdi-desktop-mac',
-                            'iconOptions' => ['class' => 'icon']
+                            'iconOptions' => ['class' => 'icon'],
                         ],
-                ]
+                    ],
                 ],
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
                     'label' => 'Logout',
                     'url' => 'site/logout',
-                    'visible' => false
+                    'visible' => false,
                 ],
             ])
             ->render();
@@ -177,8 +177,8 @@ HTML;
             ->encodeLabels(false)
             ->items([
                 [
-                    'label'  => 'Authors & Publications',
-                    'url'    => '#',
+                    'label' => 'Authors & Publications',
+                    'url' => '#',
                     'encode' => true,
                 ],
             ])
@@ -200,8 +200,8 @@ HTML;
             ->encodeLabels(true)
             ->items([
                 [
-                    'label'  => 'Authors & Publications',
-                    'url'    => '#',
+                    'label' => 'Authors & Publications',
+                    'url' => '#',
                 ],
             ])
             ->render();
@@ -222,8 +222,8 @@ HTML;
             ->encodeLabels(false)
             ->items([
                 [
-                    'label'  => 'Authors & Publications',
-                    'url'    => '#',
+                    'label' => 'Authors & Publications',
+                    'url' => '#',
                 ],
             ])
             ->render();
@@ -250,13 +250,13 @@ HTML;
             ])
             ->items([
                 [
-                    'label'   => 'item1',
-                    'url'     => '#',
+                    'label' => 'item1',
+                    'url' => '#',
                     'options' => ['tag' => 'div'],
                 ],
                 [
-                    'label'   => 'item2',
-                    'url'     => '#',
+                    'label' => 'item2',
+                    'url' => '#',
                     'options' => ['tag' => false],
                 ],
             ])
@@ -283,11 +283,11 @@ HTML;
             ->items([
                 [
                     'label' => 'item1',
-                    'url'   => '#',
+                    'url' => '#',
                 ],
                 [
                     'label' => 'item2',
-                    'url'   => '#',
+                    'url' => '#',
                 ],
             ])
             ->itemOptions(['tag' => false])
@@ -314,12 +314,12 @@ HTML;
             ->linkTemplate('')
             ->items([
                 [
-                    'label'    => 'item1',
-                    'url'      => '#',
+                    'label' => 'item1',
+                    'url' => '#',
                     'template' => 'label: {label}; url: {url}',
                 ],
                 [
-                    'label'    => 'item2',
+                    'label' => 'item2',
                     'template' => 'label: {label}',
                 ],
                 [
@@ -351,17 +351,17 @@ HTML;
             ->labelTemplate('')
             ->items([
                 [
-                    'label'    => 'item1',
-                    'url'      => '#',
+                    'label' => 'item1',
+                    'url' => '#',
                     'template' => 'label: {label}; url: {url}',
-                    'active'   => function ($item, $hasActiveChild, $isItemActive, $widget) {
+                    'active' => function ($item, $hasActiveChild, $isItemActive, $widget) {
                         return isset($item, $hasActiveChild, $isItemActive, $widget);
                     },
                 ],
                 [
-                    'label'    => 'item2',
+                    'label' => 'item2',
                     'template' => 'label: {label}',
-                    'active'   => false,
+                    'active' => false,
                 ],
             ])
             ->render();
@@ -388,9 +388,9 @@ HTML;
             ->activeCssClass('item-active')
             ->items([
                 [
-                    'label'   => 'item1',
-                    'url'     => '#',
-                    'active'  => true,
+                    'label' => 'item1',
+                    'url' => '#',
+                    'active' => true,
                     'options' => [
                         'class' => [
                             'someclass',
@@ -398,8 +398,8 @@ HTML;
                     ],
                 ],
                 [
-                    'label'   => 'item2',
-                    'url'     => '#',
+                    'label' => 'item2',
+                    'url' => '#',
                     'options' => [
                         'class' => [
                             'another-class',
@@ -410,11 +410,11 @@ HTML;
                 ],
                 [
                     'label' => 'item3',
-                    'url'   => '#',
+                    'url' => '#',
                 ],
                 [
-                    'label'   => 'item4',
-                    'url'     => '#',
+                    'label' => 'item4',
+                    'url' => '#',
                     'options' => [
                         'class' => [
                             'some-other-class',
@@ -448,27 +448,27 @@ HTML;
             ->activeCssClass('item-active')
             ->items([
                 [
-                    'label'   => 'item1',
-                    'url'     => '#',
+                    'label' => 'item1',
+                    'url' => '#',
                     'options' => [
                         'class' => 'someclass',
                     ],
                 ],
                 [
                     'label' => 'item2',
-                    'url'   => '#',
+                    'url' => '#',
                 ],
                 [
-                    'label'   => 'item3',
-                    'url'     => '#',
+                    'label' => 'item3',
+                    'url' => '#',
                     'options' => [
                         'class' => 'some classes',
                     ],
                 ],
                 [
-                    'label'   => 'item4',
-                    'url'     => '#',
-                    'active'  => true,
+                    'label' => 'item4',
+                    'url' => '#',
+                    'active' => true,
                     'options' => [
                         'class' => 'another-class other--class two classes',
                     ],
@@ -498,12 +498,12 @@ HTML;
             ->currentPath('/setting')
             ->items([
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'url'   => '/profile',
+                    'url' => '/profile',
                 ],
             ])
             ->render();
@@ -531,16 +531,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'url'   => '/profile',
+                    'url' => '/profile',
                 ],
             ])
             ->render();
@@ -573,16 +573,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'url'   => '/profile',
+                    'url' => '/profile',
                 ],
             ])
             ->render();
@@ -622,11 +622,10 @@ HTML;
                             'items' => [
                                 ['label' => 'Update', 'url' => 'user/update'],
                                 ['label' => 'Block', 'url' => 'user/block'],
-                            ]
-
+                            ],
                         ],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
             ])
             ->render();
@@ -664,11 +663,10 @@ HTML;
                             'items' => [
                                 ['label' => 'Update', 'url' => 'user/update'],
                                 ['label' => 'Block', 'url' => 'user/block'],
-                            ]
-
+                            ],
                         ],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
             ])
             ->render();
@@ -709,11 +707,10 @@ HTML;
                             'items' => [
                                 ['label' => 'Update', 'url' => 'user/update'],
                                 ['label' => 'Block', 'url' => 'user/block'],
-                            ]
-
+                            ],
                         ],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
             ])
             ->render();
@@ -751,11 +748,10 @@ HTML;
                             'items' => [
                                 ['label' => 'Update', 'url' => 'user/update'],
                                 ['label' => 'Block', 'url' => 'user/block'],
-                            ]
-
+                            ],
                         ],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
             ])
             ->render();
@@ -793,16 +789,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'url'   => '/profile',
+                    'url' => '/profile',
                 ],
             ])
             ->render();
@@ -841,16 +837,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'items' => []
+                    'items' => [],
                 ],
             ])
             ->render();
@@ -882,16 +878,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'items' => []
+                    'items' => [],
                 ],
             ])
             ->render();
@@ -921,16 +917,16 @@ HTML;
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export']
-                    ]
+                        ['label' => 'Export', 'url' => 'user/export'],
+                    ],
                 ],
                 [
-                    'label'   => 'Setting',
-                    'url'     => '/setting',
+                    'label' => 'Setting',
+                    'url' => '/setting',
                 ],
                 [
                     'label' => 'Profile',
-                    'url'   => '/profile',
+                    'url' => '/profile',
                 ],
             ])
             ->subMenuTemplate('<ul>\n{items}\n</ul>')

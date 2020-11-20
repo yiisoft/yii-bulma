@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
-
 use function strpos;
+use Yiisoft\Arrays\ArrayHelper;
+
+use Yiisoft\Html\Html;
 
 /**
  * The navbar component is a responsive and versatile horizontal navigation bar.
@@ -32,7 +32,7 @@ final class NavBar extends Widget
         'aria-expanded' => 'false',
         'aria-label' => 'menu',
         'class' => 'navbar-burger',
-        'role' => 'button'
+        'role' => 'button',
     ];
 
     public function start(): string

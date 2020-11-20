@@ -17,8 +17,8 @@ final class NavTest extends TestCase
             ->items([
                 [
                     'label' => 'Page1',
-                    'url' => '#'
-                ]
+                    'url' => '#',
+                ],
             ])
             ->render();
 
@@ -35,8 +35,8 @@ HTML;
         $html = Nav::widget()
             ->items([
                 [
-                    'label' => 'Page1'
-                ]
+                    'label' => 'Page1',
+                ],
             ])
             ->render();
 
@@ -59,7 +59,7 @@ HTML;
                         ['label' => 'Page2', 'url' => '#'],
                         '-',
                         ['label' => 'Page3', 'url' => '#'],
-                    ]
+                    ],
                 ],
             ])
             ->render();
@@ -96,7 +96,7 @@ HTML;
                         ['label' => 'Page2', 'url' => '#'],
                         ['label' => 'Page3', 'url' => '#'],
                     ],
-                    'visible' => true
+                    'visible' => true,
                 ],
                 [
                     'label' => 'Dropdown2',
@@ -104,8 +104,8 @@ HTML;
                         ['label' => 'Page4', 'url' => '#'],
                         ['label' => 'Page5', 'url' => '#'],
                     ],
-                    'visible' => false
-                ]
+                    'visible' => false,
+                ],
             ])
             ->render();
 
@@ -136,7 +136,7 @@ HTML;
                 [
                     'label' => 'Page4',
                     'items' => [],
-                ]
+                ],
             ])
             ->render();
 
@@ -356,7 +356,7 @@ HTML;
             ->items([
                 [
                     'label' => 'a &amp; b',
-                    'encode' => false
+                    'encode' => false,
                 ],
             ])
             ->render();
@@ -376,7 +376,7 @@ HTML;
             ->items([
                 [
                     'label' => 'index',
-                    'url' => '#'
+                    'url' => '#',
                 ],
                 [
                     'label' => 'Dropdown',
@@ -424,7 +424,6 @@ HTML;
             ])
             ->render();
     }
-
 
     public function testNavDropdownItemsEncodeLabels(): void
     {
@@ -489,7 +488,7 @@ HTML;
                 [
                     'label' => 'Link disable',
                     'url' => '#',
-                    'disabled' => true
+                    'disabled' => true,
                 ],
             ])
             ->render();
@@ -515,7 +514,7 @@ HTML;
                         ['label' => 'Level 1', 'url' => '#', 'disabled' => true],
                         ['label' => 'Level 2', 'url' => '#'],
                     ],
-                ]
+                ],
             ])
             ->render();
 
@@ -551,13 +550,13 @@ HTML;
                     'label' => 'Setting Account',
                     'url' => '/setting/account',
                     'icon' => 'fas fa-user-cog',
-                    'iconOptions' => ['class' => 'icon']
+                    'iconOptions' => ['class' => 'icon'],
                 ],
                 [
                     'label' => 'Profile',
                     'url' => '/profile',
                     'icon' => 'fas fa-users',
-                    'iconOptions' => ['class' => 'icon']
+                    'iconOptions' => ['class' => 'icon'],
                 ],
                 [
                     'label' => 'Admin' . Html::img(
@@ -567,8 +566,8 @@ HTML;
                     'items' => [
                         ['label' => 'Logout', 'url' => '/auth/logout'],
                     ],
-                    'encode' => false
-                ]
+                    'encode' => false,
+                ],
             ])
             ->render();
 

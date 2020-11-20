@@ -254,7 +254,7 @@ final class Message extends Widget
 
         $tag = ArrayHelper::remove($this->closeButtonOptions, 'tag', 'button');
         $label = ArrayHelper::remove($this->closeButtonOptions, 'label', Html::tag('span', '&times;', [
-            'aria-hidden' => 'true'
+            'aria-hidden' => 'true',
         ]));
 
         if ($tag === 'button') {

@@ -53,8 +53,8 @@ HTML;
                 [
                     [
                         'label' => 'Seeting &amp; profile',
-                        'url' => '/about'
-                    ]
+                        'url' => '/about',
+                    ],
                 ]
             )
             ->render();
@@ -212,7 +212,7 @@ HTML;
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
-            ->items([['url' => '/about', 'template' => "<div>{link}</div>"]])
+            ->items([['url' => '/about', 'template' => '<div>{link}</div>']])
             ->render();
 
         $expected = <<<HTML
@@ -281,7 +281,7 @@ HTML;
                     'label' => 'Index',
                     'url' => '/index',
                     'icon' => 'fas fa-home',
-                    'iconOptions' => ['class' => 'icon']
+                    'iconOptions' => ['class' => 'icon'],
                 ]
             )
             ->items(
@@ -290,8 +290,8 @@ HTML;
                         'label' => 'About',
                         'url' => '/about',
                         'icon' => 'fas fa-thumbs-up',
-                        'iconOptions' => ['class' => 'icon']
-                    ]
+                        'iconOptions' => ['class' => 'icon'],
+                    ],
                 ]
             )
             ->options(['class' => 'is-centered'])

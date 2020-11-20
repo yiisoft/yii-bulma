@@ -9,12 +9,12 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetConverter;
 use Yiisoft\Assets\AssetConverterInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Assets\AssetPublisher;
 use Yiisoft\Assets\AssetPublisherInterface;
-use Yiisoft\Aliases\Aliases;
 use Yiisoft\Di\Container;
 use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Files\FileHelper;
@@ -59,8 +59,6 @@ abstract class TestCase extends BaseTestCase
      * @param string $expected
      * @param string $actual
      * @param string $message
-     *
-     * @return void
      */
     protected function assertEqualsWithoutLE(string $expected, string $actual, string $message = ''): void
     {
@@ -96,7 +94,7 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             Aliases::class => [
-                '__class' => Aliases::class
+                '__class' => Aliases::class,
             ],
 
             LoggerInterface::class => NullLogger::class,
@@ -105,15 +103,15 @@ abstract class TestCase extends BaseTestCase
                 '__class' => AssetConverter::class,
                 '__construct()' => [
                     Reference::to(Aliases::class),
-                    Reference::to(LoggerInterface::class)
-                ]
+                    Reference::to(LoggerInterface::class),
+                ],
             ],
 
             AssetPublisherInterface::class => [
                 '__class' => AssetPublisher::class,
                 '__construct()' => [
-                    Reference::to(Aliases::class)
-                ]
+                    Reference::to(Aliases::class),
+                ],
             ],
 
             AssetManager::class => static function (ContainerInterface $container) {
@@ -123,7 +121,7 @@ abstract class TestCase extends BaseTestCase
                 $assetManager->setPublisher($container->get(AssetPublisherInterface::class));
 
                 return $assetManager;
-            }
+            },
         ];
     }
 }

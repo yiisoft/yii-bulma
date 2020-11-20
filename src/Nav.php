@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
-
 use function array_key_exists;
 use function implode;
 use function is_array;
+
+use JsonException;
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Html\Html;
 
 final class Nav extends Widget
 {
@@ -188,7 +188,7 @@ final class Nav extends Widget
      * currentPath for the item and the rest of the elements are the associated parameters. Only when its currentPath
      * and parameters match {@see currentPath}, respectively, will a menu item be considered active.
      *
-     * @param array|string|object $item the menu item to be checked
+     * @param array|object|string $item the menu item to be checked
      *
      * @return bool whether the menu item is active
      */
@@ -198,11 +198,11 @@ final class Nav extends Widget
             return ArrayHelper::getValue($item, 'active');
         }
 
-        if (isset($item['url']) && $this->currentPath !== '/' && $item['url'] === $this->currentPath && $this->activateItems) {
-            return true;
-        }
+        return (bool) (isset($item['url']) && $this->currentPath !== '/' && $item['url'] === $this->currentPath && $this->activateItems)
 
-        return false;
+
+
+         ;
     }
 
     private function renderIcon(string $label, string $icon, array $iconOptions): string

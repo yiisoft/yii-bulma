@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
-
 use function array_key_exists;
 use function array_merge;
 use function implode;
+
 use function is_array;
+use JsonException;
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Html\Html;
 
 /**
  * The dropdown component is a container for a dropdown button and a dropdown menu.
@@ -83,7 +83,7 @@ final class Dropdown extends Widget
     public function dividerClass(string $value): self
     {
         $new = clone $this;
-        $new->dividerClass  = $value;
+        $new->dividerClass = $value;
         return $new;
     }
 
@@ -97,7 +97,7 @@ final class Dropdown extends Widget
     public function itemClass(string $value): self
     {
         $new = clone $this;
-        $new->itemClass  = $value;
+        $new->itemClass = $value;
         return $new;
     }
 
@@ -111,7 +111,7 @@ final class Dropdown extends Widget
     public function itemsClass(string $value): self
     {
         $new = clone $this;
-        $new->itemsClass  = $value;
+        $new->itemsClass = $value;
         return $new;
     }
 

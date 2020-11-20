@@ -56,7 +56,6 @@ HTML;
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
 
-
     public function testMessageHeaderColor(): void
     {
         Message::counter(0);
@@ -156,7 +155,6 @@ HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
-
 
     public function testMessageOptionsHeader(): void
     {

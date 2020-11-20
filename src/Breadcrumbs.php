@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
-
 use function array_key_exists;
 use function array_merge;
 use function is_array;
+
+use JsonException;
 use function strtr;
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Html\Html;
 
 /**
  * The Bulma breadcrumb is a simple navigation component.
@@ -68,6 +68,7 @@ class Breadcrumbs extends Widget
 
     /**
      * Do not render home item.
+     *
      * @return self
      */
     public function withoutHomeItem(): self

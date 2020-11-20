@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
-
 use function array_merge;
 use function array_values;
+
 use function call_user_func;
 use function count;
 use function implode;
 use function strtr;
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Html\Html;
 
 /**
  * The Bulma menu is a vertical navigation component.
@@ -60,7 +60,7 @@ final class Menu extends Widget
      * Whether to automatically activate items according to whether their route setting matches the currently requested
      * route.
      *
-     * @var bool $value
+     * @var bool
      *
      * @return self
      *
@@ -91,7 +91,7 @@ final class Menu extends Widget
     /**
      * The CSS class to be appended to the active menu item.
      *
-     * @var string $value
+     * @var string
      *
      * @return self
      */
@@ -148,7 +148,7 @@ final class Menu extends Widget
      * The CSS class that will be assigned to the first item in the main menu or each submenu. Defaults to null,
      * meaning no such CSS class will be assigned.
      *
-     * @var string $value
+     * @var string
      *
      * @return self
      */
@@ -163,7 +163,7 @@ final class Menu extends Widget
      * Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no
      * visible child menu items.
      *
-     * @var bool $value
+     * @var bool
      *
      * @return self
      */
@@ -352,7 +352,7 @@ final class Menu extends Widget
             if (!empty($item['items'])) {
                 $subMenuTemplate = ArrayHelper::getValue($item, 'subMenuTemplate', $this->subMenuTemplate);
                 $menu .= strtr($subMenuTemplate, [
-                    '{items}' => $this->renderItems($item['items'])
+                    '{items}' => $this->renderItems($item['items']),
                 ]);
             }
 
@@ -387,9 +387,9 @@ final class Menu extends Widget
                 $url = '"' . Html::encode($item['url']) . '"';
             }
             return strtr($template, [
-                '{url}'   => $url,
+                '{url}' => $url,
                 '{label}' => $item['label'],
-                '{icon}' => $htmlIcon
+                '{icon}' => $htmlIcon,
             ]);
         }
 
