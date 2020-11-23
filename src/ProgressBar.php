@@ -9,11 +9,11 @@ use Yiisoft\Html\Html;
 /**
  * Progress Bar widget
  * Native HTML progress bar
- * 
+ *
  * ```php
  * echo ProgressBar::widget()->progressValue(75);
  * ```
- * 
+ *
  * @link https://bulma.io/documentation/elements/progress/
  */
 final class ProgressBar extends Widget
@@ -74,12 +74,12 @@ final class ProgressBar extends Widget
 
     /**
      * The value of the progress.
-     * 
-     * @var float $value
-     * 
+     *
+     * @var float|null $value
+     *
      * @return self
      */
-    public function progressValue(float $value): self
+    public function progressValue(?float $value): self
     {
         $new = clone $this;
         $new->progressValue = $value;
@@ -89,9 +89,9 @@ final class ProgressBar extends Widget
 
     /**
      * Maximum progress value. Set null if need remove max attribute.
-     * 
+     *
      * @var int|null $value
-     * 
+     *
      * @return self
      */
     public function progressMax(?int $value): self
@@ -104,11 +104,11 @@ final class ProgressBar extends Widget
 
     /**
      * Set size progress bar.
-     * 
+     *
      * @var string $value
-     * 
+     *
      * @param string $value default setting empty, 'is-small', 'is-medium', 'is-large'.
-     * 
+     *
      * @return self
      */
     public function size(string $value): self
@@ -121,11 +121,11 @@ final class ProgressBar extends Widget
 
     /**
      * Set color progress bar.
-     * 
+     *
      * @var string $value
-     * 
+     *
      * @param string $value default setting empty, 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger'.
-     * 
+     *
      * @return self
      */
     public function color(string $value): self
