@@ -19,7 +19,7 @@ use Yiisoft\Html\Html;
 final class ProgressBar extends Widget
 {
     private array $options = [];
-    private float $progressValue = 0;
+    private ?float $progressValue = null;
     private ?int $progressMax = 100;
     private string $size = '';
     private string $color = '';
@@ -33,7 +33,11 @@ final class ProgressBar extends Widget
 
     private function renderProgressBar(): string
     {
-        return Html::tag('progress', "{$this->progressValue}%", $this->options);
+        $content = $this->progressValue !== null
+            ? $this->progressValue . '%'
+            : '';
+
+        return Html::tag('progress', $content, $this->options);
     }
 
     private function buildOptions(): void
@@ -48,7 +52,7 @@ final class ProgressBar extends Widget
             $this->options['max'] = $this->progressMax;
         }
 
-        if ($this->progressValue > 0) {
+        if ($this->progressValue !== null) {
             $this->options['value'] = $this->progressValue;
         }
 
@@ -73,7 +77,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * The value of the progress.
+     * The value of the progress. Set null if need remove value attribute.
      *
      * @var float|null $value
      *

@@ -15,7 +15,7 @@ final class ProgressBarTest extends TestCase
         $html = ProgressBar::widget()->render();
 
         $expectedHtml = <<<HTML
-<progress id="w1-progressbar" class="progress" max="100">0%</progress>
+<progress id="w1-progressbar" class="progress" max="100"></progress>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
@@ -32,7 +32,7 @@ HTML;
             ->render();
 
         $expectedHtml = <<<HTML
-<progress id="w1-progressbar" class="progress has-background-black" max="100">0%</progress>
+<progress id="w1-progressbar" class="progress has-background-black" max="100"></progress>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
@@ -47,7 +47,7 @@ HTML;
             ->render();
 
         $expectedHtml = <<<HTML
-<progress id="w1-progressbar" class="progress is-large" max="100">0%</progress>
+<progress id="w1-progressbar" class="progress is-large" max="100"></progress>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
@@ -62,7 +62,7 @@ HTML;
             ->render();
 
         $expectedHtml = <<<HTML
-<progress id="w1-progressbar" class="progress is-primary" max="100">0%</progress>
+<progress id="w1-progressbar" class="progress is-primary" max="100"></progress>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
@@ -77,7 +77,7 @@ HTML;
             ->render();
 
         $expectedHtml = <<<HTML
-<progress id="w1-progressbar" class="progress" max="50">0%</progress>
+<progress id="w1-progressbar" class="progress" max="50"></progress>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
