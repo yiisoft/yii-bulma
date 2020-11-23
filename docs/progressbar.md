@@ -38,8 +38,8 @@ The code above generates the following HTML:
 
 Method                         | Description                                                                                                       | Default
 -------------------------------|-------------------------------------------------------------------------------------------------------------------|-----
-`progressValue(int $value)`    | The value of the progress.                                                                                        | `0`
-`progressMax(int|null $value)` | Maximum progress value. Set null if need remove max attribute.                                                    | `100`
+`progressValue(float $value)`    | The value of the progress.                                                                                        | `0`
+`progressMax(int\|null $value)` | Maximum progress value. Set null if need remove max attribute.                                                    | `100`
 `options(array $value)`        | HTML attributes for the widget container tag.                                                                     | [`class` => `progress`]
 `size(string $value)`          | Progress bar widget size. Options available [are here](https://bulma.io/documentation/elements/progress/#colors). | `''`
 `color(string $value)`         | Progress bar widget color. Options available [are here](https://bulma.io/documentation/elements/progress/#sizes). | `''`
