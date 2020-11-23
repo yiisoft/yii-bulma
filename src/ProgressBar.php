@@ -31,7 +31,7 @@ final class ProgressBar extends Widget
         return $this->renderProgressBar();
     }
 
-    protected function renderProgressBar(): string
+    private function renderProgressBar(): string
     {
         return Html::tag('progress', "{$this->progressValue}%", $this->options);
     }
