@@ -104,7 +104,7 @@ final class ProgressBar extends Widget
      * Set the value of the progress.
      *
      * @var float|null $value The value of the progress. Set `null` to display loading animation.
-     * 
+     *
      * @return self
      */
     public function value(?float $value): self
