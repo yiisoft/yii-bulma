@@ -43,7 +43,7 @@ HTML;
         ProgressBar::counter(0);
 
         $html = ProgressBar::widget()
-            ->size('is-large')
+            ->size(ProgressBar::SIZE_LARGE)
             ->render();
 
         $expectedHtml = <<<HTML
@@ -58,7 +58,7 @@ HTML;
         ProgressBar::counter(0);
 
         $html = ProgressBar::widget()
-            ->color('is-primary')
+            ->color(ProgressBar::COLOR_PRIMARY)
             ->render();
 
         $expectedHtml = <<<HTML
@@ -73,7 +73,7 @@ HTML;
         ProgressBar::counter(0);
 
         $html = ProgressBar::widget()
-            ->progressMax(50)
+            ->maxValue(50)
             ->render();
 
         $expectedHtml = <<<HTML
@@ -88,7 +88,7 @@ HTML;
         ProgressBar::counter(0);
 
         $html = ProgressBar::widget()
-            ->progressValue(75)
+            ->value(75)
             ->render();
 
         $expectedHtml = <<<HTML

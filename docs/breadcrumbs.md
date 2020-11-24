@@ -1,4 +1,4 @@
-## Breadcrumbs widget
+# Breadcrumbs widget
 
 [The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component.
 
@@ -6,7 +6,7 @@
     <img src="images/breadcrumbs.png">
 </p>
 
-### Usage
+## Usage
 
 ```php
 <?php

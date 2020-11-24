@@ -1,4 +1,4 @@
-## Message widget
+# Message widget
 
 [The message component](https://bulma.io/documentation/components/message/) displays a message like the following:
 
@@ -15,7 +15,7 @@ HTML generated consists of:
 In order for the message to be close-able you can use the asset `BulmaJsAsset::class`, which registers
 necessary JavaScript. Alternatively, you can use your own JavaScript code.
 
-### Usage
+## Usage
 
 ```php
 <?php

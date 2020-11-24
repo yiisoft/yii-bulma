@@ -1,20 +1,21 @@
-## Progress Bar widget
+# Progress Bar widget
 
-[The Bulma progress bar](https://bulma.io/documentation/elements/progress/) is a simple CSS class that styles the native `<progress>` [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress).
+[The Bulma progress bar](https://bulma.io/documentation/elements/progress/) is a simple CSS class that styles the native
+`<progress>` [HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress).
 
-### In progress
+Loading widget looks like the following:
 
 <p align="center">
     <img src="images/progressbar.png">
 </p>
 
-### Indeterminate
+In progress widget looks like this:
 
 <p align="center">
     <img src="images/progressbar-indeterminate.gif">
 </p>
 
-### Usage
+## Usage
 
 ```php
 <?php
@@ -35,8 +36,8 @@ $this->setCssFiles($assetManager->getCssFiles());
 echo ProgressBar::widget()
     ->size('is-medium')
     ->color('is-info')
-    ->progressMax(100)
-    ->progressValue(75);
+    ->maxValue(100)
+    ->value(75);
 ```
 
 The code above generates the following HTML:
@@ -47,10 +48,10 @@ The code above generates the following HTML:
 
 ## Reference
 
-Method                         | Description                                                                                                       | Default
--------------------------------|-------------------------------------------------------------------------------------------------------------------|-----
-`progressValue(float\|null $value)` | The value of the progress. Set null if need display an indeterminate.                                        | `null`
-`progressMax(int\|null $value)` | Maximum progress value. Set null if need remove max attribute.                                                   | `100`
-`options(array $value)`        | HTML attributes for the widget container tag.                                                                     | [`class` => `progress`]
-`size(string $value)`          | Progress bar widget size. Options available [are here](https://bulma.io/documentation/elements/progress/#colors). | `''`
-`color(string $value)`         | Progress bar widget color. Options available [are here](https://bulma.io/documentation/elements/progress/#sizes). | `''`
+Method                              | Description                                                                                       | Default
+------------------------------------|---------------------------------------------------------------------------------------------------|-----
+`progressValue(float\|null $value)` | The progress value. Set to `null` to display a loading animation.                                 | `null`
+`progressMax(int\|null $value)`     | Maximum progress value. `null` means no maximum.                                                  | `100`
+`options(array $value)`             | HTML attributes for the widget container tag.                                                     | `['class' => 'progress']`
+`size(string $value)`               | Bar size. Options available [are here](https://bulma.io/documentation/elements/progress/#colors). | `''`
+`color(string $value)`              | Bar color. Options available [are here](https://bulma.io/documentation/elements/progress/#sizes). | `''`

@@ -4,23 +4,48 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use InvalidArgumentException;
 use Yiisoft\Html\Html;
 
 /**
- * Progress Bar widget
- * Native HTML progress bar
+ * Progress Bar widget.
+ * Native HTML progress bar.
  *
  * ```php
- * echo ProgressBar::widget()->progressValue(75);
+ * echo ProgressBar::widget()->value(75);
  * ```
  *
  * @link https://bulma.io/documentation/elements/progress/
  */
 final class ProgressBar extends Widget
 {
+    public const SIZE_SMALL = 'is-small';
+    public const SIZE_MEDIUM = 'is-medium';
+    public const SIZE_LARGE = 'is-large';
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
+
+    public const COLOR_PRIMARY = 'is-primary';
+    public const COLOR_LINK = 'is-link';
+    public const COLOR_INFO = 'is-info';
+    public const COLOR_SUCCESS = 'is-success';
+    public const COLOR_WARNING = 'is-warning';
+    public const COLOR_DANGER = 'is-danger';
+    private const COLOR_ALL = [
+        self::COLOR_PRIMARY,
+        self::COLOR_LINK,
+        self::COLOR_INFO,
+        self::COLOR_SUCCESS,
+        self::COLOR_WARNING,
+        self::COLOR_DANGER,
+    ];
+
     private array $options = [];
-    private ?float $progressValue = null;
-    private ?int $progressMax = 100;
+    private ?float $value = null;
+    private ?int $maxValue = 100;
     private string $size = '';
     private string $color = '';
 
@@ -28,13 +53,8 @@ final class ProgressBar extends Widget
     {
         $this->buildOptions();
 
-        return $this->renderProgressBar();
-    }
-
-    private function renderProgressBar(): string
-    {
-        $content = $this->progressValue !== null
-            ? $this->progressValue . '%'
+        $content = $this->value !== null
+            ? $this->value . '%'
             : '';
 
         return Html::tag('progress', $content, $this->options);
@@ -48,12 +68,12 @@ final class ProgressBar extends Widget
 
         $this->options = $this->addOptions($this->options, 'progress');
 
-        if ($this->progressMax !== null) {
-            $this->options['max'] = $this->progressMax;
+        if ($this->maxValue !== null) {
+            $this->options['max'] = $this->maxValue;
         }
 
-        if ($this->progressValue !== null) {
-            $this->options['value'] = $this->progressValue;
+        if ($this->value !== null) {
+            $this->options['value'] = $this->value;
         }
 
         if ($this->size !== '') {
@@ -66,7 +86,10 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container tag.
+     * HTML attributes for the widget container tag.
+     *
+     * @param array $value The HTML attributes for the widget container tag.
+     * @return self
      */
     public function options(array $value): self
     {
@@ -77,46 +100,48 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * The value of the progress. Set null if need remove value attribute.
+     * Set the value of the progress.
      *
-     * @var float|null $value
-     *
+     * @var float|null $value The value of the progress. Set `null` to display loading animation.
      * @return self
      */
-    public function progressValue(?float $value): self
+    public function value(?float $value): self
     {
         $new = clone $this;
-        $new->progressValue = $value;
+        $new->value = $value;
 
         return $new;
     }
 
     /**
-     * Maximum progress value. Set null if need remove max attribute.
+     * Set maximum progress value.
      *
-     * @var int|null $value
+     * @var int|null $value Maximum progress value. Set `null` for no maximum.
      *
      * @return self
      */
-    public function progressMax(?int $value): self
+    public function maxValue(?int $value): self
     {
         $new = clone $this;
-        $new->progressMax = $value;
+        $new->maxValue = $value;
 
         return $new;
     }
 
     /**
-     * Set size progress bar.
+     * Set progress bar size.
      *
-     * @var string $value
-     *
-     * @param string $value default setting empty, 'is-small', 'is-medium', 'is-large'.
+     * @param string $value Size class.
      *
      * @return self
      */
     public function size(string $value): self
     {
+        if (!in_array($value, self::SIZE_ALL)) {
+            $values = implode('"', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
         $new = clone $this;
         $new->size = $value;
 
@@ -124,16 +149,19 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Set color progress bar.
+     * Set progress bar color.
      *
-     * @var string $value
-     *
-     * @param string $value default setting empty, 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger'.
+     * @var string $value Color class.
      *
      * @return self
      */
     public function color(string $value): self
     {
+        if (!in_array($value, self::COLOR_ALL)) {
+            $values = implode('"', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
         $new = clone $this;
         $new->color = $value;
 
