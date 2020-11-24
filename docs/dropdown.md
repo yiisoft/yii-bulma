@@ -1,4 +1,4 @@
-## Dropdown widget
+# Dropdown widget
 
 [The dropdown component](https://bulma.io/documentation/components/dropdown/) is a container for a dropdown button and
 a dropdown menu.

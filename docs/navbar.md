@@ -1,4 +1,4 @@
-## Navbar and nav widget
+# Navbar and nav widget
 
 [The navbar component](https://bulma.io/documentation/components/navbar/) is a responsive and versatile horizontal
 navigation bar.

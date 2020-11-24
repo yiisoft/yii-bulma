@@ -1,4 +1,4 @@
-## Menu widget
+# Menu widget
 
 [The Bulma menu](https://bulma.io/documentation/components/menu/) is a vertical navigation component.
 
