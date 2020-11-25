@@ -32,18 +32,22 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 <?= Modal::widget()->start() ?>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut neque error ipsa totam pariatur obcaecati odit, magnam deserunt ex officia, temporibus minus voluptatem assumenda earum eum voluptatum commodi accusamus reiciendis.
+<div class="box">
+    Say hello...
+</div>
 
 <?= Modal::end() ?>
 ```
 
 HTML produced is like the following:
 ```html
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Launch modal</button>
+<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
 <div id="w1-modal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut neque error ipsa totam pariatur obcaecati odit, magnam deserunt ex officia, temporibus minus voluptatem assumenda earum eum voluptatum commodi accusamus reiciendis.
+        <div class="box">
+            Say hello...
+        </div>
     </div>
     <button type="button" class="modal-close" aria-label="close"></button>
 </div>
@@ -53,4 +57,13 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`]
+options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`, `id` => `w{$counter}-modal`]
+contentOptions(array $value) | | `[]`
+closeButtonOptions(array $value) | | [`class` => `modal-close`]
+closeButtonSize(string $value) | | `''`
+toggleButtonLabel(string $value) | | `Toggle button`
+toggleButtonSize(string $value) | | `''`
+toggleButtonColor(string $value) | | `''`
+toggleButtonOptions(array $value) | | [`class` => `button`, `data-target` => `#w{$counter}-modal`, `aria-haspopup` => `true`]
+closeButtonEnabled(bool $value) | | `true`
+toggleButtonEnabled(bool $value) | | `true`
