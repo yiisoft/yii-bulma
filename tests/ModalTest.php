@@ -16,10 +16,33 @@ final class ModalTest extends TestCase
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Launch modal</button>
+<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
 <div id="w1-modal" class="modal">
 <div class="modal-background"></div>
-<div class="modal-content"></div>
+<div class="modal-content">
+</div>
+<button type="button" class="modal-close" aria-label="close"></button>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testModalOptions(): void
+    {
+        Modal::counter(0);
+
+        $html = Modal::begin()
+            ->options(['class' => 'widescreen'])
+            ->start();
+        $html .= Modal::end();
+
+        $expectedHtml = <<<HTML
+<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+<div id="w1-modal" class="modal widescreen">
+<div class="modal-background"></div>
+<div class="modal-content">
+</div>
 <button type="button" class="modal-close" aria-label="close"></button>
 </div>
 HTML;
