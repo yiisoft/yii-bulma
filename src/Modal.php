@@ -53,11 +53,11 @@ final class Modal extends Widget
     private array $contentOptions = [];
     private array $closeButtonOptions = [];
     private string $closeButtonSize = '';
+    private bool $closeButtonEnabled = true;
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
     private string $toggleButtonColor = '';
     private array $toggleButtonOptions = [];
-    private bool $closeButtonEnabled = true;
     private bool $toggleButtonEnabled = true;
 
     public function start(): string
@@ -66,9 +66,10 @@ final class Modal extends Widget
 
         $html = '';
         $html .= $this->renderToggleButton() . "\n";
-        $html .= Html::beginTag('div', $this->options) . "\n";
+        $html .= Html::beginTag('div', $this->options) . "\n"; // .modal
         $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
-        $html .= Html::beginTag('div', $this->contentOptions) . "\n";
+        $html .= $this->renderCloseButton() . "\n";
+        $html .= Html::beginTag('div', $this->contentOptions) . "\n"; // .modal-content
 
         return $html;
     }
@@ -77,7 +78,6 @@ final class Modal extends Widget
     {
         $html = '';
         $html .= Html::endTag('div') . "\n"; // .modal-content
-        $html .= $this->renderCloseButton() . "\n";
         $html .= Html::endTag('div'); // .modal
 
         return $html;
@@ -169,7 +169,7 @@ final class Modal extends Widget
     public function toggleButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
-            $values = implode('"', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -189,7 +189,7 @@ final class Modal extends Widget
     public function toggleButtonColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL)) {
-            $values = implode('"', self::COLOR_ALL);
+            $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
