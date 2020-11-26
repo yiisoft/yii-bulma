@@ -92,6 +92,7 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [Menu](docs/menu.md)
 - [Message](docs/message.md)
 - [ProgressBar](docs/progressbar.md)
+- [Modal](docs/modal.md)
 
 ### Unit testing
 

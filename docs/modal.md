@@ -19,7 +19,10 @@ use Yiisoft\Yii\Bulma\Modal;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
 
-/** Register assets in view */
+/**
+ * @var \Yiisoft\Assets\AssetManager $assetManager
+ * @var \Yiisoft\View\WebView $this
+ */
 
 $assetManager->register([
     BulmaAsset::class,
