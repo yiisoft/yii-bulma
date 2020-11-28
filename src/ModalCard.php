@@ -15,7 +15,12 @@ use Yiisoft\Html\Html;
  * modal window:
  *
  * ```php
- * ModalCard::begin()->start();
+ * echo ModalCard::begin()
+ *     ->title('Modal title')
+ *     ->footer(
+ *         Html::button('Cancel', ['class' => 'button'])
+ *     )
+ *     ->start();
  *
  * echo 'Say hello...';
  *
@@ -60,10 +65,11 @@ final class ModalCard extends Widget
     private array $toggleButtonOptions = [];
     private bool $toggleButtonEnabled = true;
     private string $title = '';
-    private array $titleOptions = [];
     private string $footer = '';
-    private array $footerOptions = [];
+    private array $titleOptions = [];
     private array $headerOptions = [];
+    private array $bodyOptions = [];
+    private array $footerOptions = [];
 
     public function start(): string
     {
@@ -115,8 +121,9 @@ final class ModalCard extends Widget
             Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
         }
 
-        $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
         $this->headerOptions = $this->addOptions($this->headerOptions, 'modal-card-head');
+        $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
+        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
         $this->footerOptions = $this->addOptions($this->footerOptions, 'modal-card-foot');
     }
 
@@ -227,8 +234,9 @@ final class ModalCard extends Widget
     /**
      * Renders the toggle button.
      *
-     * @return string
      * @throws JsonException
+     *
+     * @return string
      */
     private function renderToggleButton(): string
     {
@@ -294,8 +302,9 @@ final class ModalCard extends Widget
     /**
      * Renders the close button.
      *
-     * @return string
      * @throws JsonException
+     *
+     * @return string
      */
     private function renderCloseButton(): string
     {
@@ -307,7 +316,7 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Header options
+     * Header options.
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
@@ -323,6 +332,13 @@ final class ModalCard extends Widget
         return $new;
     }
 
+    /**
+     * Renders header.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
     private function renderHeader(): string
     {
         $html = '';
@@ -334,11 +350,25 @@ final class ModalCard extends Widget
         return $html;
     }
 
+    /**
+     * Renders begin body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
     private function renderBodyBegin(): string
     {
-        return Html::beginTag('section', ['class' => 'modal-card-body']);
+        return Html::beginTag('section', $this->bodyOptions);
     }
 
+    /**
+     * Renders end body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
     private function renderBodyEnd(): string
     {
         return Html::endTag('section');
@@ -362,11 +392,41 @@ final class ModalCard extends Widget
     }
 
     /**
+     * The foolter content in the modal window.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function footer(string $value): self
+    {
+        $new = clone $this;
+        $new->footer = $value;
+
+        return $new;
+    }
+
+    /**
+     * The title content in the modal window.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function title(string $value): self
+    {
+        $new = clone $this;
+        $new->title = $value;
+
+        return $new;
+    }
+
+    /**
      * Renders the footer.
      *
-     * @return string
      * @throws JsonException
      *
+     * @return string
      */
     private function renderFooter(): string
     {
