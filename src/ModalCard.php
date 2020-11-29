@@ -15,16 +15,17 @@ use Yiisoft\Html\Html;
  * modal window:
  *
  * ```php
- * echo ModalCard::begin()
+ * $widget = ModalCard::begin()
  *     ->title('Modal title')
  *     ->footer(
  *         Html::button('Cancel', ['class' => 'button'])
- *     )
- *     ->start();
+ *     );
+ *
+ * echo $widget->start();
  *
  * echo 'Say hello...';
  *
- * echo ModalCard::end();
+ * echo $widget->end();
  * ```
  *
  * @link https://bulma.io/documentation/components/modal/
@@ -56,6 +57,7 @@ final class ModalCard extends Widget
     ];
 
     private array $options = [];
+    private array $contentOptions = [];
     private array $closeButtonOptions = [];
     private string $closeButtonSize = '';
     private bool $closeButtonEnabled = true;
@@ -78,8 +80,8 @@ final class ModalCard extends Widget
         $html = '';
         $html .= $this->renderToggleButton() . "\n";
         $html .= Html::beginTag('div', $this->options) . "\n"; // .modal
-        $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
-        $html .= Html::beginTag('div', ['class' => 'modal-card']) . "\n"; // .modal-card
+        $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
+        $html .= Html::beginTag('div', $this->contentOptions) . "\n"; // .modal-card
         $html .= $this->renderHeader();
         $html .= $this->renderBodyBegin() . "\n";
 
@@ -121,6 +123,7 @@ final class ModalCard extends Widget
             Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
         }
 
+        $this->contentOptions = $this->addOptions($this->contentOptions, 'modal-card');
         $this->headerOptions = $this->addOptions($this->headerOptions, 'modal-card-head');
         $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
         $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
@@ -140,6 +143,23 @@ final class ModalCard extends Widget
     {
         $new = clone $this;
         $new->options = $value;
+
+        return $new;
+    }
+
+    /**
+     * Main content container options.
+     *
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function contentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->contentOptions = $value;
 
         return $new;
     }
@@ -351,6 +371,23 @@ final class ModalCard extends Widget
     }
 
     /**
+     * Body options.
+     *
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function bodyOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->bodyOptions = $value;
+
+        return $new;
+    }
+
+    /**
      * Renders begin body tag.
      *
      * @throws JsonException
@@ -407,6 +444,23 @@ final class ModalCard extends Widget
     }
 
     /**
+     * Title options.
+     *
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function titleOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->titleOptions = $value;
+
+        return $new;
+    }
+
+    /**
      * The title content in the modal window.
      *
      * @param string $value
@@ -431,5 +485,17 @@ final class ModalCard extends Widget
     private function renderFooter(): string
     {
         return Html::tag('footer', $this->footer, $this->footerOptions);
+    }
+
+    /**
+     * Renders the background transparent overlay.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBackgroundTransparentOverlay(): string
+    {
+        return Html::tag('div', '', ['class' => 'modal-background']);
     }
 }
