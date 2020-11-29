@@ -429,7 +429,7 @@ final class ModalCard extends Widget
     }
 
     /**
-     * The foolter content in the modal window.
+     * The footer content in the modal window.
      *
      * @param string $value
      *
