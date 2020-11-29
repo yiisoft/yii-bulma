@@ -1,6 +1,6 @@
 # Modal widget
 
-A classic [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
+A base [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
 
 The modal structure:
 - `modal`: the main container
@@ -15,6 +15,7 @@ The modal structure:
 
 declare(strict_types=1);
 
+use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Modal;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
@@ -31,15 +32,12 @@ $assetManager->register([
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
-?>
 
-<?= Modal::widget()->start() ?>
+$widget = Modal::begin()->closeButtonSize(Modal::SIZE_LARGE);
 
-<div class="box">
-    Say hello...
-</div>
-
-<?= Modal::end() ?>
+echo $widget->start();
+echo Html::tag('div', 'Say hello...', ['class' => 'box']);
+echo $widget->end();
 ```
 
 HTML produced is like the following:
@@ -52,7 +50,7 @@ HTML produced is like the following:
             Say hello...
         </div>
     </div>
-    <button type="button" class="modal-close" aria-label="close"></button>
+    <button type="button" class="modal-close is-large" aria-label="close"></button>
 </div>
 ```
 
@@ -60,13 +58,13 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`, `id` => `w{$counter}-modal`]
+options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`]
 contentOptions(array $value) | | `[]`
-closeButtonOptions(array $value) | | [`class` => `modal-close`]
+closeButtonOptions(array $value) | | [`class` => `modal-close`, `aria-label` => `close`]
 closeButtonSize(string $value) | | `''`
 toggleButtonLabel(string $value) | | `Toggle button`
 toggleButtonSize(string $value) | | `''`
 toggleButtonColor(string $value) | | `''`
-toggleButtonOptions(array $value) | | [`class` => `button`, `data-target` => `#w{$counter}-modal`, `aria-haspopup` => `true`]
+toggleButtonOptions(array $value) | | [`class` => `button`, `aria-haspopup` => `true`]
 closeButtonEnabled(bool $value) | | `true`
 toggleButtonEnabled(bool $value) | | `true`
