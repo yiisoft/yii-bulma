@@ -93,6 +93,7 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [Message](docs/message.md)
 - [ProgressBar](docs/progressbar.md)
 - [Modal](docs/modal.md)
+- [ModalCard](docs/modalcard.md)
 
 ### Unit testing
 
