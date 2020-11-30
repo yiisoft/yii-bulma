@@ -12,7 +12,7 @@ final class NavBarTest extends TestCase
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()->start();
+        $html = NavBar::widget()->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -30,9 +30,9 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -50,9 +50,9 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandImage('yii-logo.jpg')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -67,10 +67,10 @@ HTML;
 
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -88,11 +88,11 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -110,12 +110,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -130,12 +130,12 @@ HTML;
 
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'navbar is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -153,12 +153,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->brandOptions(['class' => 'is-black'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -176,12 +176,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->brandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -198,12 +198,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->brandLabelOptions(['class' => 'is-italic'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -221,12 +221,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->itemsOptions(['class' => 'navbar-end'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -241,12 +241,12 @@ HTML;
 
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->itemsOptions(['class' => 'is-primary'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -261,12 +261,12 @@ HTML;
 
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->itemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -284,12 +284,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->menuOptions(['class' => 'is-black'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -307,12 +307,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->toggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -330,12 +330,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brand('<div>testMe</div>')
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML
@@ -353,12 +353,12 @@ HTML;
     {
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->toggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
-            ->start();
+            ->begin();
         $html .= NavBar::end();
 
         $expectedHtml = <<<HTML

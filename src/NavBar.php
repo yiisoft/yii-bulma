@@ -35,8 +35,10 @@ final class NavBar extends Widget
         'role' => 'button',
     ];
 
-    public function start(): string
+    public function begin(): ?string
     {
+        parent::begin();
+
         $this->buildOptions();
         $this->renderBrand();
 
