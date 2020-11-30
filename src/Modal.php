@@ -219,8 +219,9 @@ final class Modal extends Widget
     /**
      * Renders the toggle button.
      *
-     * @return string
      * @throws \JsonException
+     *
+     * @return string
      */
     private function renderToggleButton(): string
     {
@@ -286,8 +287,9 @@ final class Modal extends Widget
     /**
      * Renders the close button.
      *
-     * @return string
      * @throws \JsonException
+     *
+     * @return string
      */
     private function renderCloseButton(): string
     {

@@ -271,7 +271,7 @@ HTML;
 
         $html = ModalCard::widget()
             ->closeButtonOptions([
-                'disabled' => true
+                'disabled' => true,
             ])
             ->begin();
         $html .= ModalCard::end();
@@ -415,7 +415,7 @@ HTML;
 
         $html = ModalCard::widget()
             ->bodyOptions([
-                'class' => 'bg-white'
+                'class' => 'bg-white',
             ])
             ->begin();
         $html .= ModalCard::end();
@@ -445,7 +445,7 @@ HTML;
 
         $html = ModalCard::widget()
             ->titleOptions([
-                'class' => 'text-info'
+                'class' => 'text-info',
             ])
             ->begin();
         $html .= ModalCard::end();
