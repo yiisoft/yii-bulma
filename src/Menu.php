@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Html\Html;
+
 use function array_merge;
 use function array_values;
-
 use function call_user_func;
 use function count;
 use function implode;
 use function strtr;
-use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Html\Html;
 
 /**
  * The Bulma menu is a vertical navigation component.

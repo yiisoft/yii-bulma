@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use function array_key_exists;
-use function implode;
-use function is_array;
-
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
+
+use function array_key_exists;
+use function implode;
+use function is_array;
 
 final class Nav extends Widget
 {

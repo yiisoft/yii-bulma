@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use JsonException;
-use function strpos;
 use Yiisoft\Arrays\ArrayHelper;
-
 use Yiisoft\Html\Html;
+
+use function strpos;
 
 /**
  * The navbar component is a responsive and versatile horizontal navigation bar.

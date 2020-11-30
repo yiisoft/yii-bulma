@@ -58,13 +58,13 @@ $this->setJsFiles($assetManager->getJsFiles());
 // The Font-Awesome Asset must be added, in this case we are going to use an external library.
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
-<?= NavBar::begin()
+<?= NavBar::widget()
     ->brandLabel('My Project')
     ->brandImage('yii-logo.jpg')
     ->brandUrl('/')
     ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
     ->itemsOptions(['class' => 'navbar-end'])
-    ->start()
+    ->begin()
 ?>
 
 <?= Nav::widget()
