@@ -536,13 +536,13 @@ HTML;
         Nav::counter(0);
         NavBar::counter(0);
 
-        $html = NavBar::begin()
+        $html = NavBar::widget()
             ->brandLabel('My Project')
             ->brandImage('yii-logo.jpg')
             ->brandUrl('/')
             ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
             ->itemsOptions(['class' => 'navbar-end'])
-            ->start();
+            ->begin();
 
         $html .= Nav::widget()
             ->items([
