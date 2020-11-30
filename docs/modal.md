@@ -33,11 +33,11 @@ $assetManager->register([
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 
-$widget = Modal::begin()->closeButtonSize(Modal::SIZE_LARGE);
-
-echo $widget->start();
+echo Modal::widget()
+    ->closeButtonSize(Modal::SIZE_LARGE)
+    ->begin();
 echo Html::tag('div', 'Say hello...', ['class' => 'box']);
-echo $widget->end();
+echo Modal::end();
 ```
 
 HTML produced is like the following:

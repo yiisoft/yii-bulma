@@ -36,15 +36,14 @@ $assetManager->register([
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 
-$widget = ModalCard::begin()
+$widget = ModalCard::widget()
     ->title('Modal title')
     ->footer(
         Html::button('Cancel', ['class' => 'button'])
-    );
-
-echo $widget->start();
+    )
+    ->begin();
 echo "Say hello...";
-echo $widget->end();
+echo ModalCard::end();
 ```
 
 HTML produced is like the following:

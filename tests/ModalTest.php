@@ -12,10 +12,10 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonEnabled(false)
             ->closeButtonEnabled(false)
-            ->start();
+            ->begin();
         $html .= 'Say hello...';
         $html .= Modal::end();
 
@@ -36,11 +36,11 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonEnabled(false)
             ->closeButtonEnabled(false)
             ->options(['class' => 'widescreen'])
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -60,9 +60,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->closeButtonEnabled(false)
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -82,9 +82,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonLabel('Click to open.')
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -104,9 +104,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonColor(Modal::COLOR_INFO)
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -126,9 +126,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonSize(Modal::SIZE_LARGE)
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -148,9 +148,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->toggleButtonEnabled(false)
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -170,9 +170,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->closeButtonSize(Modal::SIZE_LARGE)
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -192,9 +192,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->closeButtonOptions(['class' => 'some-class'])
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML
@@ -214,9 +214,9 @@ HTML;
     {
         Modal::counter(0);
 
-        $html = Modal::begin()
+        $html = Modal::widget()
             ->contentOptions(['class' => 'some-class'])
-            ->start();
+            ->begin();
         $html .= Modal::end();
 
         $expectedHtml = <<<HTML

@@ -15,17 +15,16 @@ use Yiisoft\Html\Html;
  * modal window:
  *
  * ```php
- * $widget = ModalCard::begin()
+ * echo ModalCard::widget()
  *     ->title('Modal title')
  *     ->footer(
  *         Html::button('Cancel', ['class' => 'button'])
- *     );
- *
- * echo $widget->start();
+ *     )
+ *     ->begin();
  *
  * echo 'Say hello...';
  *
- * echo $widget->end();
+ * echo ModalCard::end();
  * ```
  *
  * @link https://bulma.io/documentation/components/modal/
@@ -73,8 +72,10 @@ final class ModalCard extends Widget
     private array $bodyOptions = [];
     private array $footerOptions = [];
 
-    public function start(): string
+    public function begin(): ?string
     {
+        parent::begin();
+
         $this->buildOptions();
 
         $html = '';

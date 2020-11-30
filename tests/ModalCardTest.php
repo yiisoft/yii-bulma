@@ -12,11 +12,9 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin();
-
-        $html = $widget->start();
+        $html = ModalCard::widget()->begin();
         $html .= 'Say hello...';
-        $html .= $widget->end();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -41,13 +39,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->footerOptions([
                 'class' => 'bg-transparent',
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -72,13 +69,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->contentOptions([
                 'class' => 'bg-white',
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -103,11 +99,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->toggleButtonLabel('Launch modal');
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->toggleButtonLabel('Launch modal')
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Launch modal</button>
@@ -132,13 +127,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->toggleButtonOptions([
                 'disabled' => true,
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" disabled data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -163,11 +157,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->toggleButtonSize(ModalCard::SIZE_LARGE);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->toggleButtonSize(ModalCard::SIZE_LARGE)
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button is-large" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -192,11 +185,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->toggleButtonColor(ModalCard::COLOR_PRIMARY);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->toggleButtonColor(ModalCard::COLOR_PRIMARY)
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button is-primary" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -221,11 +213,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->toggleButtonEnabled(false);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->toggleButtonEnabled(false)
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 
@@ -250,11 +241,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->closeButtonSize(ModalCard::SIZE_LARGE);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->closeButtonSize(ModalCard::SIZE_LARGE)
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -279,13 +269,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->closeButtonOptions([
                 'disabled' => true
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -310,11 +299,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->closeButtonEnabled(false);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->closeButtonEnabled(false)
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -339,13 +327,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->headerOptions([
                 'class' => 'bg-info',
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -370,11 +357,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->footer('Some text');
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->footer('Some text')
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -387,8 +373,7 @@ HTML;
 </header>
 <section class="modal-card-body">
 </section>
-<footer class="modal-card-foot">
-Some text</footer>
+<footer class="modal-card-foot">Some text</footer>
 </div>
 </div>
 HTML;
@@ -400,11 +385,10 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
-            ->title('Some title');
-
-        $html = $widget->start();
-        $html .= $widget->end();
+        $html = ModalCard::widget()
+            ->title('Some title')
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -429,13 +413,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->bodyOptions([
                 'class' => 'bg-white'
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -460,13 +443,12 @@ HTML;
     {
         ModalCard::counter(0);
 
-        $widget = ModalCard::begin()
+        $html = ModalCard::widget()
             ->titleOptions([
                 'class' => 'text-info'
-            ]);
-
-        $html = $widget->start();
-        $html .= $widget->end();
+            ])
+            ->begin();
+        $html .= ModalCard::end();
 
         $expectedHtml = <<<HTML
 <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>

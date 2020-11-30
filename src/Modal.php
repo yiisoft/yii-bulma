@@ -14,7 +14,7 @@ use Yiisoft\Html\Html;
  * modal window:
  *
  * ```php
- * Modal::begin()->start();
+ * echo Modal::widget()->begin();
  *
  * echo 'Say hello...';
  *
@@ -60,8 +60,10 @@ final class Modal extends Widget
     private array $toggleButtonOptions = [];
     private bool $toggleButtonEnabled = true;
 
-    public function start(): string
+    public function begin(): ?string
     {
+        parent::begin();
+
         $this->buildOptions();
 
         $html = '';
