@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use function array_key_exists;
-use function array_merge;
-use function implode;
-
-use function is_array;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
+
+use function array_key_exists;
+use function array_merge;
+use function implode;
+use function is_array;
 
 /**
  * The dropdown component is a container for a dropdown button and a dropdown menu.
