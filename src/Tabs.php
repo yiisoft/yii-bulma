@@ -97,6 +97,8 @@ final class Tabs extends Widget
      * - options: array, optional, the HTML attributes of the item container (LI).
      * - active: bool, optional, whether the item should be on active state or not.
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for only this item.
+     * - icon: string, the nav item icon.
+     * - iconOptions: array, optional, the HTML attributes of the item's icon.
      *
      * @param array $value
      *
