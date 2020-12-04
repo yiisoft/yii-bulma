@@ -216,7 +216,7 @@ HTML;
 
         $html = Tabs::widget()
             ->items([
-                ['label' => 'Music', 'icon' => 'fas fa-music', 'iconOptions' => ['class' => 'some-class']],
+                ['label' => 'Music', 'icon' => 'fas fa-music', 'iconOptions' => ['class' => 'some-class', 'rightSide' => true]],
                 ['label' => 'Videos', 'icon' => 'fas fa-film'],
             ])
             ->render();
@@ -224,7 +224,7 @@ HTML;
         $expectedHtml = <<<HTML
 <div id="w1-tabs" class="tabs">
 <ul>
-<li id="w1-tabs-0"><a><span class="icon is-small some-class"><i class="fas fa-music" aria-hidden="true"></i></span><span>Music</span></a></li>
+<li id="w1-tabs-0"><a><span>Music</span><span class="icon is-small some-class"><i class="fas fa-music" aria-hidden="true"></i></span></a></li>
 <li id="w1-tabs-1"><a><span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span><span>Videos</span></a></li>
 </ul>
 </div>

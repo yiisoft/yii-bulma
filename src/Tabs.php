@@ -296,8 +296,18 @@ final class Tabs extends Widget
      */
     private function renderIcon(string $label, string $icon, array $iconOptions): string
     {
-        return
-            Html::tag('span', Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']), $iconOptions) .
-            Html::tag('span', $label);
+        $rightSide = ArrayHelper::getValue($iconOptions, 'rightSide', false);
+        unset($iconOptions['rightSide']);
+
+        $elements = [
+            Html::tag('span', Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']), $iconOptions),
+            Html::tag('span', $label),
+        ];
+
+        if ($rightSide === true) {
+            $elements = array_reverse($elements);
+        }
+
+        return implode('', $elements);
     }
 }
