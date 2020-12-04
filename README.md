@@ -94,6 +94,7 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [ProgressBar](docs/progressbar.md)
 - [Modal](docs/modal.md)
 - [ModalCard](docs/modalcard.md)
+- [Tabs](docs/tabs.md)
 
 ### Unit testing
 
