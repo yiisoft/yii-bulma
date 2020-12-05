@@ -218,11 +218,10 @@ final class Tabs extends Widget
             return (bool)ArrayHelper::getValue($item, 'active');
         }
 
-        return (
+        return
             $this->activateItems
             && isset($item['url'])
-            && $item['url'] === $this->currentPath
-        );
+            && $item['url'] === $this->currentPath;
     }
 
     /**

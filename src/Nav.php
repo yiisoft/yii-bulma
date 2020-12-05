@@ -198,11 +198,11 @@ final class Nav extends Widget
             return ArrayHelper::getValue($item, 'active');
         }
 
-        return (bool) (isset($item['url']) && $this->currentPath !== '/' && $item['url'] === $this->currentPath && $this->activateItems)
-
-
-
-         ;
+        return
+            isset($item['url'])
+            && $this->currentPath !== '/'
+            && $item['url'] === $this->currentPath
+            && $this->activateItems;
     }
 
     private function renderIcon(string $label, string $icon, array $iconOptions): string
