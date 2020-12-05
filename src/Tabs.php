@@ -8,6 +8,8 @@ use InvalidArgumentException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
+use function array_reverse;
+
 final class Tabs extends Widget
 {
     public const SIZE_SMALL = 'is-small';
@@ -49,7 +51,8 @@ final class Tabs extends Widget
     private function buildOptions(): void
     {
         $this->options['id'] ??= "{$this->getId()}-tabs";
-        $this->options = $this->addOptions($this->options, 'tabs');
+
+        Html::addCssClass($this->options, 'tabs');
 
         if ($this->size !== '') {
             Html::addCssClass($this->options, $this->size);
@@ -99,6 +102,7 @@ final class Tabs extends Widget
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for only this item.
      * - icon: string, the nav item icon.
      * - iconOptions: array, optional, the HTML attributes of the item's icon.
+     *     - rightSide: bool, position the icon to the right.
      *
      * @param array $value
      *
@@ -163,7 +167,7 @@ final class Tabs extends Widget
      * @param int $index
      * @param array $item
      *
-     * @throws \JsonException|InvalidArgumentException
+     * @throws InvalidArgumentException|\JsonException
      *
      * @return string
      */
@@ -188,7 +192,7 @@ final class Tabs extends Widget
         }
 
         if ($icon !== '') {
-            $iconOptions = $this->addOptions($iconOptions, 'icon is-small');
+            Html::addCssClass($iconOptions, 'icon is-small');
             $label = $this->renderIcon($label, $icon, $iconOptions);
         }
 
@@ -214,15 +218,11 @@ final class Tabs extends Widget
             return (bool)ArrayHelper::getValue($item, 'active');
         }
 
-        if (
+        return (
             $this->activateItems
             && isset($item['url'])
             && $item['url'] === $this->currentPath
-        ) {
-            return true;
-        }
-
-        return false;
+        );
     }
 
     /**
