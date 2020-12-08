@@ -200,12 +200,10 @@ final class Nav extends Widget
         }
 
         return
-            (
-                isset($item['url']) &&
-                $this->currentPath !== '/' &&
-                $item['url'] === $this->currentPath &&
-                $this->activateItems
-            );
+            isset($item['url']) &&
+            $this->currentPath !== '/' &&
+            $item['url'] === $this->currentPath &&
+            $this->activateItems;
     }
 
     private function renderIcon(string $label, string $icon, array $iconOptions): string
