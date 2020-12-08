@@ -85,9 +85,6 @@ abstract class Widget extends BaseWidget
         if (isset($options['class'])) {
             $class = $options['class'];
             unset($options['class']);
-            if (is_array($class)) {
-                $class = implode(' ', $class);
-            }
         }
 
         /** @psalm-var string $class */
