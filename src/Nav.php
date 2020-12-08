@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
@@ -128,7 +129,7 @@ final class Nav extends Widget
      * @param array $parentItem the parent item information. Please refer to {@see items} for the structure of this
      * array.
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @return string the rendering result.
      */
@@ -198,11 +199,13 @@ final class Nav extends Widget
             return ArrayHelper::getValue($item, 'active');
         }
 
-        return (bool) (isset($item['url']) && $this->currentPath !== '/' && $item['url'] === $this->currentPath && $this->activateItems)
-
-
-
-         ;
+        return
+            (
+                isset($item['url']) &&
+                $this->currentPath !== '/' &&
+                $item['url'] === $this->currentPath &&
+                $this->activateItems
+            );
     }
 
     private function renderIcon(string $label, string $icon, array $iconOptions): string
@@ -220,7 +223,7 @@ final class Nav extends Widget
     /**
      * Renders widget items.
      *
-     * @throws \InvalidArgumentException|JsonException
+     * @throws InvalidArgumentException|JsonException
      *
      * @return string
      */
@@ -242,14 +245,14 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @throws \InvalidArgumentException|JsonException
+     * @throws InvalidArgumentException|JsonException
      *
      * @return string the rendering result.
      */
     private function renderItem(array $item): string
     {
         if (!isset($item['label'])) {
-            throw new \InvalidArgumentException('The "label" option is required.');
+            throw new InvalidArgumentException('The "label" option is required.');
         }
 
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
