@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\ModalCard;
 
 final class ModalCardTest extends TestCase
@@ -461,6 +462,54 @@ HTML;
 </header>
 <section class="modal-card-body">
 </section>
+<footer class="modal-card-foot"></footer>
+</div>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testExceptionToggleButtonSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        ModalCard::widget()->toggleButtonSize('is-non-existent')->begin();
+    }
+
+    public function testExceptionToggleButtonColor(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        ModalCard::widget()->toggleButtonColor('is-non-existent')->begin();
+    }
+
+    public function testExceptionToggleCloseButtonSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        ModalCard::widget()->closeButtonSize('is-non-existent')->begin();
+    }
+
+    public function testModalCardOptions(): void
+    {
+        ModalCard::counter(0);
+
+        $html = ModalCard::widget()->options(['class' => 'testMe'])->begin();
+        $html .= 'Say hello...';
+        $html .= ModalCard::end();
+
+        $expectedHtml = <<<HTML
+<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+<div id="w1-modal" class="modal testMe">
+<div class="modal-background"></div>
+<div class="modal-card">
+<header class="modal-card-head">
+<p class="modal-card-title"></p>
+<button type="button" class="delete" aria-label="close"></button>
+</header>
+<section class="modal-card-body">
+Say hello...</section>
 <footer class="modal-card-foot"></footer>
 </div>
 </div>

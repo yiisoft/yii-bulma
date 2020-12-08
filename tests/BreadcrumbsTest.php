@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\Breadcrumbs;
 
 final class BreadcrumbsTest extends TestCase
@@ -209,7 +210,7 @@ HTML;
     {
         Breadcrumbs::counter(0);
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
             ->items([['url' => '/about', 'template' => '<div>{link}</div>']])
@@ -302,6 +303,26 @@ HTML;
 <ul>
 <li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
 <li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
+</ul>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBreadcrumbsWithoutHomeItem(): void
+    {
+        Breadcrumbs::counter(0);
+
+        $html = Breadcrumbs::widget()
+            ->items([['label' => 'About', 'url' => '/about']])
+            ->withoutHomeItem()
+            ->render();
+
+        $expected = <<<HTML
+<nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+<ul>
+<li><a href="/about">About</a></li>
 </ul>
 </nav>
 HTML;

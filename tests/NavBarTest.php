@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavBarTest extends TestCase
@@ -370,5 +371,21 @@ HTML;
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarBeginExceptionTag(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+
+        NavBar::widget()->options(['tag' => ['testMe']])->begin();
+    }
+
+    public function testNavBarRunExceptionTag(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+
+        NavBar::widget()->options(['tag' => ['testMe']])->render();
     }
 }
