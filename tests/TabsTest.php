@@ -266,4 +266,25 @@ HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
+
+    public function testExceptionSize(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        Tabs::widget()->size('is-non-existent')->begin();
+    }
+
+    public function testExceptionAlignment(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        Tabs::widget()->alignment('is-non-existent')->begin();
+    }
+
+    public function testExceptionStyle(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        Tabs::widget()->style('is-non-existent')->begin();
+    }
 }
