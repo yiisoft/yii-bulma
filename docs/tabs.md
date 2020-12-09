@@ -28,6 +28,8 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 echo Tabs::widget()
     ->alignment(Tabs::ALIGNMENT_CENTERED)
+    ->size(Tabs::SIZE_LARGE)
+    ->style(Tabs::STYLE_BOX)
     ->items([
         ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true],
         ['label' => 'Music', 'icon' => 'fas fa-music'],
@@ -39,7 +41,7 @@ echo Tabs::widget()
 HTML produced is like the following:
 
 ```html
-<div class="tabs is-centered">
+<div class="tabs is-centered is-large is-boxed">
   <ul>
     <li class="is-active">
       <a>
@@ -74,10 +76,10 @@ HTML produced is like the following:
 Method | Description | Default
 -------|-------------|---------
 options(array $value) | HTML attributes for the widget container tag. | [`class` => `tabs`]
-items(array $value) | | `[]`
-currentPath(?string $value) | | `null`
-activateItems(bool $value) | | `true`
-encodeLabels(bool $value) | | `true`
-size(string $value) | | `''`
-alignment(string $value) | | `''`
-style(string $value) | | `''`
+items(array $value) | List of tab items. | `[]`
+currentPath(?string $value) | Allows you to assign the current path of the URL from request controller. | `null`
+activateItems(bool $value) | Whether to automatically activate item its route matches the currently requested route. | `true`
+encodeLabels(bool $value) | Whether the labels for menu items should be HTML-encoded. | `true`
+size(string $value) | Size the tabs list. | `''`
+alignment(string $value) | Alignment the tabs list. | `''`
+style(string $value) | Style the tabs list. | `''`

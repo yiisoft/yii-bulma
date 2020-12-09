@@ -19,7 +19,7 @@ use function array_reverse;
  *     ->size(Tabs::SIZE_LARGE)
  *     ->style(Tabs::STYLE_BOX)
  *     ->items([
- *         ['label' => 'Pictures', 'icon' => 'fas fa-image'],
+ *         ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true],
  *         ['label' => 'Music', 'icon' => 'fas fa-music'],
  *         ['label' => 'Videos', 'icon' => 'fas fa-film'],
  *         ['label' => 'Documents', 'icon' => 'far fa-file-alt'],
