@@ -279,6 +279,10 @@ final class NavBar extends Widget
         if (isset($this->itemsOptions['class'])) {
             $itemsClass = $this->itemsOptions['class'];
             unset($this->itemsOptions['class']);
+
+            if (is_array($itemsClass)) {
+                $itemsClass = implode(' ', $itemsClass);
+            }
         }
 
         /** @var string $itemsClass */
