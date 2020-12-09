@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavBarTest extends TestCase
@@ -365,6 +366,74 @@ HTML;
 <nav id="w1-navbar" class="navbar">
 <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
 <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarBeginExceptionTag(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+
+        NavBar::widget()->options(['tag' => ['testMe']])->begin();
+    }
+
+    public function testNavBarRunExceptionTag(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+
+        NavBar::widget()->options(['tag' => ['testMe']])->render();
+    }
+
+    public function testNavBarOptionsClassArray(): void
+    {
+        NavBar::counter(0);
+
+        $class = ['nav'];
+        $class[] = 'dark';
+
+        $html = NavBar::widget()
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => $class])
+            ->begin();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar nav dark">
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testNavBarItemsOptionsClassArray(): void
+    {
+        NavBar::counter(0);
+
+        $class = ['nav'];
+        $class[] = 'dark';
+
+        $html = NavBar::widget()
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->itemsOptions(['class' => $class])
+            ->begin();
+        $html .= NavBar::end();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-navbar" class="navbar">
+<div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+<div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start nav dark"></div>
 </div>
 </nav>
 HTML;

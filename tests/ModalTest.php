@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\Modal;
 
 final class ModalTest extends TestCase
@@ -232,12 +233,47 @@ HTML;
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
 
-    public function testException()
+    public function testExceptionToggleButtonSize(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         Modal::widget()->toggleButtonSize('is-non-existent');
+    }
+
+    public function testExceptionToggleButtonColor(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
         Modal::widget()->toggleButtonColor('is-non-existent');
+    }
+
+    public function testExceptionToggleCloseButtonSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
         Modal::widget()->closeButtonSize('is-non-existent');
+    }
+
+    public function testToggleButtonOptions(): void
+    {
+        Modal::counter(0);
+
+        $html = Modal::widget()
+            ->closeButtonEnabled(false)
+            ->toggleButtonOptions(['class' => 'testMe'])
+            ->begin();
+        $html .= Modal::end();
+
+        $expectedHtml = <<<HTML
+<button type="button" class="button testMe" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+<div id="w1-modal" class="modal">
+<div class="modal-background"></div>
+
+<div class="modal-content">
+</div>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
 }
