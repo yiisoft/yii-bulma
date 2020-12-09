@@ -9,6 +9,7 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
 use function array_reverse;
+use function in_array;
 
 /**
  * Simple responsive horizontal navigation tabs, with different styles.
@@ -115,16 +116,16 @@ final class Tabs extends Widget
      *
      * Each tab item should be an array of the following structure:
      *
-     * - label: string, required, the nav item label.
-     * - url: optional, the item's URL.
-     * - visible: bool, optional, whether this menu item is visible.
-     * - linkOptions: array, optional, the HTML attributes of the item's link.
-     * - options: array, optional, the HTML attributes of the item container (LI).
-     * - active: bool, optional, whether the item should be on active state or not.
-     * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for only this item.
-     * - icon: string, the tab item icon.
-     * - iconOptions: array, optional, the HTML attributes of the item's icon.
-     *     - rightSide: bool, position the icon to the right.
+     * - `label`: string, required, the nav item label.
+     * - `url`: string, optional, the item's URL.
+     * - `visible`: bool, optional, whether this menu item is visible.
+     * - `linkOptions`: array, optional, the HTML attributes of the item's link.
+     * - `options`: array, optional, the HTML attributes of the item container (LI).
+     * - `active`: bool, optional, whether the item should be on active state or not.
+     * - `encode`: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for only this item.
+     * - `icon`: string, the tab item icon.
+     * - `iconOptions`: array, optional, the HTML attributes of the item's icon.
+     *     - `rightSide`: bool, position the icon to the right.
      *
      * @param array $value
      *
@@ -139,7 +140,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param bool $value
+     * @param bool $value Whether to automatically activate item its route matches the currently requested route.
      *
      * @return self
      */
@@ -152,7 +153,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param bool $value
+     * @param bool $value Whether the labels for menu items should be HTML-encoded.
      *
      * @return self
      */
@@ -165,7 +166,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string|null $value allows you to assign the current path of the url from request controller.
+     * @param string|null $value Allows you to assign the current path of the URL from request controller.
      *
      * @return self
      */
@@ -257,7 +258,8 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value
+     * @param string $value Size of the tabs list.
+     * @see self::SIZE_ALL
      *
      * @throws InvalidArgumentException
      *
@@ -265,7 +267,7 @@ final class Tabs extends Widget
      */
     public function size(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -277,7 +279,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value
+     * @param string $value Alignment the tabs list.
      *
      * @throws InvalidArgumentException
      *
@@ -285,7 +287,7 @@ final class Tabs extends Widget
      */
     public function alignment(string $value): self
     {
-        if (!in_array($value, self::ALIGNMENT_ALL)) {
+        if (!in_array($value, self::ALIGNMENT_ALL, true)) {
             $values = implode('", "', self::ALIGNMENT_ALL);
             throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
         }
@@ -297,7 +299,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value
+     * @param string $value Style of the tabs list.
      *
      * @throws InvalidArgumentException
      *
@@ -305,7 +307,7 @@ final class Tabs extends Widget
      */
     public function style(string $value): self
     {
-        if (!in_array($value, self::STYLE_ALL)) {
+        if (!in_array($value, self::STYLE_ALL, true)) {
             $values = implode('", "', self::STYLE_ALL);
             throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
         }
