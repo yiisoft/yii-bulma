@@ -10,6 +10,24 @@ use Yiisoft\Html\Html;
 
 use function array_reverse;
 
+/**
+ * Simple responsive horizontal navigation tabs, with different styles.
+ *
+ * ```php
+ * echo Tabs::widget()
+ *     ->alignment(Tabs::ALIGNMENT_CENTERED)
+ *     ->size(Tabs::SIZE_LARGE)
+ *     ->style(Tabs::STYLE_BOX)
+ *     ->items([
+ *         ['label' => 'Pictures', 'icon' => 'fas fa-image'],
+ *         ['label' => 'Music', 'icon' => 'fas fa-music'],
+ *         ['label' => 'Videos', 'icon' => 'fas fa-film'],
+ *         ['label' => 'Documents', 'icon' => 'far fa-file-alt'],
+ *     ]);
+ * ```
+ *
+ * @link https://bulma.io/documentation/components/tabs/
+ */
 final class Tabs extends Widget
 {
     public const SIZE_SMALL = 'is-small';
@@ -93,14 +111,18 @@ final class Tabs extends Widget
     }
 
     /**
+     * List of tabs items.
+     *
+     * Each tab item should be an array of the following structure:
+     *
      * - label: string, required, the nav item label.
      * - url: optional, the item's URL.
-     * - visible: bool, optional, whether this menu item is visible. Defaults to true.
+     * - visible: bool, optional, whether this menu item is visible.
      * - linkOptions: array, optional, the HTML attributes of the item's link.
      * - options: array, optional, the HTML attributes of the item container (LI).
      * - active: bool, optional, whether the item should be on active state or not.
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for only this item.
-     * - icon: string, the nav item icon.
+     * - icon: string, the tab item icon.
      * - iconOptions: array, optional, the HTML attributes of the item's icon.
      *     - rightSide: bool, position the icon to the right.
      *
@@ -116,6 +138,11 @@ final class Tabs extends Widget
         return $new;
     }
 
+    /**
+     * @param bool $value
+     *
+     * @return self
+     */
     public function activateItems(bool $value): self
     {
         $new = clone $this;
@@ -124,6 +151,11 @@ final class Tabs extends Widget
         return $new;
     }
 
+    /**
+     * @param bool $value
+     *
+     * @return self
+     */
     public function encodeLabels(bool $value): self
     {
         $new = clone $this;
