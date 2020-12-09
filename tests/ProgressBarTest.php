@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\ProgressBar;
 
 final class ProgressBarTest extends TestCase
@@ -96,5 +97,19 @@ HTML;
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testExceptionSize(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        ProgressBar::widget()->size('is-non-existent')->render();
+    }
+
+    public function testExceptionColor(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        ProgressBar::widget()->color('is-non-existent')->render();
     }
 }

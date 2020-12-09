@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
@@ -214,7 +215,7 @@ class Breadcrumbs extends Widget
      * @param string $template the template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws \InvalidArgumentException|JsonException if `$link` does not have "label" element.
+     * @throws InvalidArgumentException|JsonException if `$link` does not have "label" element.
      *
      * @return string the rendering result
      */
@@ -238,7 +239,7 @@ class Breadcrumbs extends Widget
         if (array_key_exists('label', $link)) {
             $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
         } else {
-            throw new \InvalidArgumentException('The "label" element is required for each link.');
+            throw new InvalidArgumentException('The "label" element is required for each link.');
         }
 
         if (isset($link['template'])) {

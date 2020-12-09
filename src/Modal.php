@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
+use JsonException;
 use Yiisoft\Html\Html;
 
 /**
@@ -219,7 +220,7 @@ final class Modal extends Widget
     /**
      * Renders the toggle button.
      *
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -287,7 +288,7 @@ final class Modal extends Widget
     /**
      * Renders the close button.
      *
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
