@@ -73,13 +73,13 @@ HTML produced is like the following:
 
 ## Reference
 
-Method | Description | Default
--------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `tabs`]
-items(array $value) | List of tab items. | `[]`
-currentPath(?string $value) | Allows you to assign the current path of the URL from request controller. | `null`
-activateItems(bool $value) | Whether to automatically activate item its route matches the currently requested route. | `true`
-encodeLabels(bool $value) | Whether the labels for menu items should be HTML-encoded. | `true`
-size(string $value) | Size the tabs list. | `''`
-alignment(string $value) | Alignment the tabs list. | `''`
-style(string $value) | Style the tabs list. | `''`
+Method                        | Description                                                                  | Default
+------------------------------|------------------------------------------------------------------------------|---------
+`options(array $value)`       | HTML attributes for the widget container tag.                                | [`class` => `tabs`]
+`items(array $value)`         | List of tab items.                                                           | `[]`
+`currentPath(?string $value)` | Allows you to assign the current path of the URL from request controller.    | `null`
+`activateItems(bool $value)`  | Whether to activate item if its route matches the currently requested route. | `true`
+`encodeLabels(bool $value)`   | Whether the labels for menu items should be HTML-encoded.                    | `true`
+`size(string $value)`         | Size of the tabs list.                                                       | `''`
+`alignment(string $value)`    | Alignment of the tabs list.                                                  | `''`
+`style(string $value)`        | Style of the tabs list.                                                      | `''`

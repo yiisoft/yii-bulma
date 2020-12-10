@@ -21,7 +21,7 @@ This Yii Framework package encapsulates Bulma components and plugins in terms of
 
 ## Installation
 
-```php
+```shell
 composer require yiisoft/yii-bulma
 ```
 ## Using assets

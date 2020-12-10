@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
+use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
@@ -45,7 +46,7 @@ final class NavBar extends Widget
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
         if (!is_string($navTag) && !is_bool($navTag) && $navTag !== null) {
-            throw new \InvalidArgumentException('Tag should be either string, bool or null.');
+            throw new InvalidArgumentException('Tag should be either string, bool or null.');
         }
 
         return
@@ -59,7 +60,7 @@ final class NavBar extends Widget
     {
         $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
         if (!is_string($tag) && !is_bool($tag) && $tag !== null) {
-            throw new \InvalidArgumentException('Tag should be either string, bool or null.');
+            throw new InvalidArgumentException('Tag should be either string, bool or null.');
         }
 
         return
@@ -278,6 +279,7 @@ final class NavBar extends Widget
         if (isset($this->itemsOptions['class'])) {
             $itemsClass = $this->itemsOptions['class'];
             unset($this->itemsOptions['class']);
+
             if (is_array($itemsClass)) {
                 $itemsClass = implode(' ', $itemsClass);
             }
