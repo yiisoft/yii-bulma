@@ -259,6 +259,7 @@ final class Tabs extends Widget
 
     /**
      * @param string $value Size of the tabs list.
+     *
      * @see self::SIZE_ALL
      *
      * @throws InvalidArgumentException
