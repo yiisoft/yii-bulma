@@ -68,9 +68,9 @@ final class Tabs extends Widget
 
     private function buildOptions(): void
     {
-        $this->options['id'] ??= "{$this->getId()}-tabs";
-
         Html::addCssClass($this->options, 'tabs');
+
+        $this->options['id'] ??= "{$this->getId()}-tabs";
 
         if ($this->size !== '') {
             Html::addCssClass($this->options, $this->size);
