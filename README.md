@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://github.com/yiisoft.png" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="80px">
     </a>
     <a href="https://bulma.io/" target="_blank" rel="external">
         <img src="docs/images/bulma-logo.png" height="80px">
