@@ -24,7 +24,6 @@
         "npm-asset/bulma-helpers": "^0.3.12",
         "npm-asset/vizuaalog--bulmajs": "^0.11.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "yiisoft/composer-config-plugin": "^1.0",
         "yiisoft/arrays": "@dev",
         "yiisoft/assets": "@dev",
         "yiisoft/html": "@dev",
