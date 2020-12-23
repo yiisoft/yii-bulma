@@ -39,7 +39,8 @@ abstract class TestCase extends BaseTestCase
         /* Set aliases tests */
         $this->aliases->set('@assets', __DIR__ . '/data');
         $this->aliases->set('@assetsUrl', '/');
-        $this->aliases->set('@npm', dirname(__DIR__) . '/node_modules');
+        $this->aliases->set('@vendor', dirname(__DIR__) . '/vendor');
+        $this->aliases->set('@npm', '@vendor/npm-asset');
 
         $this->assetManager = $this->container->get(AssetManager::class);
     }
@@ -115,7 +116,7 @@ abstract class TestCase extends BaseTestCase
             ],
 
             AssetManager::class => static function (ContainerInterface $container) {
-                $assetManager = new AssetManager($container->get(LoggerInterface::class));
+                $assetManager = new AssetManager($container->get(Aliases::class));
 
                 $assetManager->setConverter($container->get(AssetConverterInterface::class));
                 $assetManager->setPublisher($container->get(AssetPublisherInterface::class));
