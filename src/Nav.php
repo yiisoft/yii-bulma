@@ -252,7 +252,7 @@ final class Nav extends Widget
         if (!isset($item['label'])) {
             throw new InvalidArgumentException('The "label" option is required.');
         }
-
+        $this->dropdown = false;
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
 
         if ($this->encodeLabels) {
@@ -304,9 +304,10 @@ final class Nav extends Widget
 
         if ($this->dropdown) {
             return
-                html::beginTag('div', $options) . "\n" .
+                Html::beginTag('div', $options) . "\n" .
                     Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
-                    $items;
+                    $items. "\n" .
+                Html::endTag('div');
         }
 
         return Html::a($label, $url, $linkOptions);
