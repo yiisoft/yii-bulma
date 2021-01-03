@@ -301,7 +301,7 @@ final class Nav extends Widget
             return
                 Html::beginTag('div', $options) . "\n" .
                 Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
-                $items .  "\n" .
+                $items .
                 Html::endTag('div');
         }
 
