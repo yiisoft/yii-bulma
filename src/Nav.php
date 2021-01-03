@@ -24,9 +24,7 @@ final class Nav extends Widget
 
     protected function run(): string
     {
-        $html = $this->renderItems();
-
-        return $html;
+        return $this->renderItems();
     }
 
     /**
