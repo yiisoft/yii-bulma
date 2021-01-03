@@ -26,10 +26,6 @@ final class Nav extends Widget
     {
         $html = $this->renderItems();
 
-        if ($this->dropdown) {
-            $html .= Html::endTag('div');
-        }
-
         return $html;
     }
 
@@ -136,14 +132,14 @@ final class Nav extends Widget
     private function renderDropdown(array $items, array $parentItem): string
     {
         return Dropdown::widget()
-            ->dividerClass('navbar-divider')
-            ->itemClass('navbar-item')
-            ->itemsClass('navbar-dropdown')
-            ->encloseByContainer(false)
-            ->encodeLabels($this->encodeLabels)
-            ->items($items)
-            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
-            ->render() . "\n";
+                ->dividerClass('navbar-divider')
+                ->itemClass('navbar-item')
+                ->itemsClass('navbar-dropdown')
+                ->encloseByContainer(false)
+                ->encodeLabels($this->encodeLabels)
+                ->items($items)
+                ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
+                ->render() . "\n";
     }
 
     /**
@@ -301,12 +297,11 @@ final class Nav extends Widget
             Html::addCssClass($linkOptions, 'is-active');
         }
 
-
         if ($this->dropdown) {
             return
                 Html::beginTag('div', $options) . "\n" .
-                    Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
-                    $items. "\n" .
+                Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
+                $items .  "\n" .
                 Html::endTag('div');
         }
 
