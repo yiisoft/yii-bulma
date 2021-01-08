@@ -20,10 +20,10 @@ use function in_array;
  *     ->size(Tabs::SIZE_LARGE)
  *     ->style(Tabs::STYLE_BOX)
  *     ->items([
- *         ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true],
- *         ['label' => 'Music', 'icon' => 'fas fa-music'],
- *         ['label' => 'Videos', 'icon' => 'fas fa-film'],
- *         ['label' => 'Documents', 'icon' => 'far fa-file-alt'],
+ *         ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true, 'content' => 'Some text about pictures'],
+ *         ['label' => 'Music', 'icon' => 'fas fa-music', 'content' => 'Some text about music'],
+ *         ['label' => 'Videos', 'icon' => 'fas fa-film', 'content' => 'Some text about videos'],
+ *         ['label' => 'Documents', 'icon' => 'far fa-file-alt', 'content' => 'Some text about documents'],
  *     ]);
  * ```
  *
@@ -66,12 +66,16 @@ final class Tabs extends Widget
     private string $size = '';
     private string $alignment = '';
     private string $style = '';
+    private array $tabsContent = [];
+    private array $tabsContentOptions = [];
+    private bool $renderTabsContent = true;
 
     private function buildOptions(): void
     {
         Html::addCssClass($this->options, 'tabs');
+        Html::addCssClass($this->tabsContentOptions, 'tabs-content');
 
-        $this->options['id'] ??= "{$this->getId()}-tabs";
+        $this->options['id'] ??= $this->getId();
 
         if ($this->size !== '') {
             Html::addCssClass($this->options, $this->size);
@@ -95,7 +99,8 @@ final class Tabs extends Widget
     {
         $this->buildOptions();
 
-        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options);
+        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)
+            . $this->renderContent();
     }
 
     /**
@@ -210,11 +215,11 @@ final class Tabs extends Widget
         $icon = ArrayHelper::getValue($item, 'icon', '');
         $label = ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
+        $content = ArrayHelper::getValue($item, 'content');
         $options = ArrayHelper::getValue($item, 'options', []);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
         $iconOptions = ArrayHelper::getValue($item, 'iconOptions', []);
-
-        $options['id'] = ArrayHelper::getValue($item, 'id', $this->options['id'] . '-' . $index);
+        $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -231,10 +236,18 @@ final class Tabs extends Widget
 
         if ($this->isItemActive($item)) {
             Html::addCssClass($options, 'is-active');
+            Html::addCssClass($contentOptions, 'is-block');
+        } else {
+            Html::addCssClass($contentOptions, 'is-hidden');
         }
 
         if ($url !== '') {
             $linkOptions['href'] = $url;
+        } elseif ($this->renderTabsContent && $content !== null) {
+            $contentId = $this->getId() . '-c' . $index;
+            $linkOptions['href'] = '#' . $contentId;
+            $contentOptions['id'] = $contentId;
+            $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
         }
 
         return Html::tag('li', Html::tag('a', $label, $linkOptions), $options);
@@ -343,5 +356,62 @@ final class Tabs extends Widget
         }
 
         return implode('', $elements);
+    }
+
+    /**
+     * Returns the Id of the widget.
+     *
+     * @return string|null Id of the widget.
+     */
+    protected function getId(): ?string
+    {
+        return parent::getId() . '-tabs';
+    }
+
+    /**
+     * Renders tabs content.
+     *
+     * @throws JsonException
+     *
+     * @return string the rendering result.
+     */
+    private function renderContent(): string
+    {
+        return $this->renderTabsContent
+            ? "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions)
+            : '';
+    }
+
+    /**
+     * Whether to render the `tabs-content` container and its content. You may set this property to be false so that you
+     * can manually render `tabs-content` yourself in case your tab contents are complex.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function renderTabsContent(bool $value): self
+    {
+        $new = clone $this;
+        $new->renderTabsContent = $value;
+
+        return $new;
+    }
+
+    /**
+     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     *
+     * @param array $value
+     *
+     * @return self
+     *
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function tabContentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->tabsContentOptions = $value;
+
+        return $new;
     }
 }
