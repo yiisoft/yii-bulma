@@ -31,10 +31,10 @@ echo Tabs::widget()
     ->size(Tabs::SIZE_LARGE)
     ->style(Tabs::STYLE_BOX)
     ->items([
-        ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true],
-        ['label' => 'Music', 'icon' => 'fas fa-music'],
-        ['label' => 'Videos', 'icon' => 'fas fa-film'],
-        ['label' => 'Documents', 'icon' => 'far fa-file-alt'],
+        ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true, 'content' => 'Some text about pictures'],
+        ['label' => 'Music', 'icon' => 'fas fa-music', 'content' => 'Some text about music'],
+        ['label' => 'Videos', 'icon' => 'fas fa-film', 'content' => 'Some text about videos'],
+        ['label' => 'Documents', 'icon' => 'far fa-file-alt', 'content' => 'Some text about documents'],
     ]);
 ```
 
@@ -44,30 +44,37 @@ HTML produced is like the following:
 <div class="tabs is-centered is-large is-boxed">
   <ul>
     <li class="is-active">
-      <a>
+      <a href="#w0-tabs-c1">
         <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
         <span>Pictures</span>
       </a>
     </li>
     <li>
-      <a>
+      <a href="#w0-tabs-c2">
         <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
         <span>Music</span>
       </a>
     </li>
     <li>
-      <a>
+      <a href="#w0-tabs-c3">
         <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
         <span>Videos</span>
       </a>
     </li>
     <li>
-      <a>
+      <a href="#w0-tabs-c4">
         <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
         <span>Documents</span>
       </a>
     </li>
   </ul>
+</div>
+
+<div class="tabs-content">
+  <div id="w0-tabs-c1" class="is-active">Some text about pictures</div>
+  <div id="w0-tabs-c2">Some text about music</div>
+  <div id="w0-tabs-c3">Some text about videos</div>
+  <div id="w0-tabs-c4">Some text about documents</div>
 </div>
 ```
 
@@ -83,3 +90,5 @@ Method                        | Description                                     
 `size(string $value)`         | Size of the tabs list.                                                       | `''`
 `alignment(string $value)`    | Alignment of the tabs list.                                                  | `''`
 `style(string $value)`        | Style of the tabs list.                                                      | `''`
+`renderTabsContent(bool $value)` | Whether to render the `tabs-content` container and its content. | `true`
+`tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
