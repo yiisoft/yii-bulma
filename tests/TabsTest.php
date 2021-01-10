@@ -321,10 +321,10 @@ HTML;
 </ul>
 </div>
 <div class="tabs-content">
-<div id="w1-tabs-c0">Some text about pictures</div>
-<div id="w1-tabs-c1" class="is-hidden">Some text about music</div>
-<div id="w1-tabs-c2" class="is-hidden">Some text about videos</div>
-<div id="w1-tabs-c3" class="is-hidden">Some text about documents</div>
+<div id="w1-tabs-c0" class="is-active">Some text about pictures</div>
+<div id="w1-tabs-c1">Some text about music</div>
+<div id="w1-tabs-c2">Some text about videos</div>
+<div id="w1-tabs-c3">Some text about documents</div>
 </div>
 HTML;
 
@@ -385,10 +385,10 @@ HTML;
 </ul>
 </div>
 <div class="some-class-name tabs-content">
-<div id="w1-tabs-c0">Some text about pictures</div>
-<div id="w1-tabs-c1" class="is-hidden">Some text about music</div>
-<div id="w1-tabs-c2" class="is-hidden">Some text about videos</div>
-<div id="w1-tabs-c3" class="is-hidden">Some text about documents</div>
+<div id="w1-tabs-c0" class="is-active">Some text about pictures</div>
+<div id="w1-tabs-c1">Some text about music</div>
+<div id="w1-tabs-c2">Some text about videos</div>
+<div id="w1-tabs-c3">Some text about documents</div>
 </div>
 HTML;
 

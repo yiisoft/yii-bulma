@@ -226,6 +226,7 @@ final class Tabs extends Widget
         $content = ArrayHelper::getValue($item, 'content');
         $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
         $id = ArrayHelper::getValue($contentOptions, 'id', $this->getId() . '-c' . $index);
+        $active = $this->isItemActive($item);
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -240,10 +241,8 @@ final class Tabs extends Widget
             $label = $this->renderIcon($label, $icon, $iconOptions);
         }
 
-        if ($this->isItemActive($item)) {
+        if ($active) {
             Html::addCssClass($options, 'is-active');
-        } else {
-            Html::addCssClass($contentOptions, 'is-hidden');
         }
 
         if ($url !== '') {
@@ -251,8 +250,12 @@ final class Tabs extends Widget
         } elseif ($this->renderTabsContent) {
             $linkOptions['href'] = '#' . $id;
         }
-        
+
         if ($this->renderTabsContent) {
+            $activeClass = ArrayHelper::getValue($contentOptions, 'activeClass', 'is-active');
+            if ($active) {
+                Html::addCssClass($contentOptions, $activeClass);
+            }
             $contentOptions['id'] = $id;
             $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
         }
