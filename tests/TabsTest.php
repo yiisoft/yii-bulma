@@ -321,7 +321,71 @@ HTML;
 </ul>
 </div>
 <div class="tabs-content">
-<div id="w1-tabs-c0" class="is-block">Some text about pictures</div>
+<div id="w1-tabs-c0">Some text about pictures</div>
+<div id="w1-tabs-c1" class="is-hidden">Some text about music</div>
+<div id="w1-tabs-c2" class="is-hidden">Some text about videos</div>
+<div id="w1-tabs-c3" class="is-hidden">Some text about documents</div>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testRenderTabsContent()
+    {
+        Tabs::counter(0);
+
+        $html = Tabs::widget()
+            ->renderTabsContent(false)
+            ->items([
+                ['label' => 'Pictures', 'active' => true, 'content' => 'Some text about pictures'],
+                ['label' => 'Music', 'content' => 'Some text about music'],
+                ['label' => 'Videos', 'content' => 'Some text about videos'],
+                ['label' => 'Documents', 'content' => 'Some text about documents'],
+            ])
+            ->render();
+
+        $expectedHtml = <<<HTML
+<div id="w1-tabs" class="tabs">
+<ul>
+<li class="is-active"><a>Pictures</a></li>
+<li><a>Music</a></li>
+<li><a>Videos</a></li>
+<li><a>Documents</a></li>
+</ul>
+</div>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testTabsContentOptions()
+    {
+        Tabs::counter(0);
+
+        $html = Tabs::widget()
+            ->tabsContentOptions([
+                'class' => 'some-class-name',
+            ])
+            ->items([
+                ['label' => 'Pictures', 'active' => true, 'content' => 'Some text about pictures'],
+                ['label' => 'Music', 'content' => 'Some text about music'],
+                ['label' => 'Videos', 'content' => 'Some text about videos'],
+                ['label' => 'Documents', 'content' => 'Some text about documents'],
+            ])
+            ->render();
+
+        $expectedHtml = <<<HTML
+<div id="w1-tabs" class="tabs">
+<ul>
+<li class="is-active"><a href="#w1-tabs-c0">Pictures</a></li>
+<li><a href="#w1-tabs-c1">Music</a></li>
+<li><a href="#w1-tabs-c2">Videos</a></li>
+<li><a href="#w1-tabs-c3">Documents</a></li>
+</ul>
+</div>
+<div class="some-class-name tabs-content">
+<div id="w1-tabs-c0">Some text about pictures</div>
 <div id="w1-tabs-c1" class="is-hidden">Some text about music</div>
 <div id="w1-tabs-c2" class="is-hidden">Some text about videos</div>
 <div id="w1-tabs-c3" class="is-hidden">Some text about documents</div>

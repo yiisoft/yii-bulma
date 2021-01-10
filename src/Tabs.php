@@ -99,8 +99,13 @@ final class Tabs extends Widget
     {
         $this->buildOptions();
 
-        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)
-            . $this->renderContent();
+        $html = Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options);
+
+        if ($this->renderTabsContent) {
+            $html .= "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions);
+        }
+
+        return $html;
     }
 
     /**
@@ -215,11 +220,12 @@ final class Tabs extends Widget
         $icon = ArrayHelper::getValue($item, 'icon', '');
         $label = ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
-        $content = ArrayHelper::getValue($item, 'content');
         $options = ArrayHelper::getValue($item, 'options', []);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
         $iconOptions = ArrayHelper::getValue($item, 'iconOptions', []);
+        $content = ArrayHelper::getValue($item, 'content');
         $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
+        $id = ArrayHelper::getValue($contentOptions, 'id', $this->getId() . '-c' . $index);
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -236,17 +242,18 @@ final class Tabs extends Widget
 
         if ($this->isItemActive($item)) {
             Html::addCssClass($options, 'is-active');
-            Html::addCssClass($contentOptions, 'is-block');
         } else {
             Html::addCssClass($contentOptions, 'is-hidden');
         }
 
         if ($url !== '') {
             $linkOptions['href'] = $url;
-        } elseif ($this->renderTabsContent && $content !== null) {
-            $contentId = $this->getId() . '-c' . $index;
-            $linkOptions['href'] = '#' . $contentId;
-            $contentOptions['id'] = $contentId;
+        } elseif ($this->renderTabsContent) {
+            $linkOptions['href'] = '#' . $id;
+        }
+        
+        if ($this->renderTabsContent) {
+            $contentOptions['id'] = $id;
             $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
         }
 
@@ -369,20 +376,6 @@ final class Tabs extends Widget
     }
 
     /**
-     * Renders tabs content.
-     *
-     * @throws JsonException
-     *
-     * @return string the rendering result.
-     */
-    private function renderContent(): string
-    {
-        return $this->renderTabsContent
-            ? "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions)
-            : '';
-    }
-
-    /**
      * Whether to render the `tabs-content` container and its content. You may set this property to be false so that you
      * can manually render `tabs-content` yourself in case your tab contents are complex.
      *
@@ -407,7 +400,7 @@ final class Tabs extends Widget
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function tabContentOptions(array $value): self
+    public function tabsContentOptions(array $value): self
     {
         $new = clone $this;
         $new->tabsContentOptions = $value;
