@@ -138,7 +138,6 @@ HTML;
 
         $html = Tabs::widget()
             ->encodeLabels(false)
-            
             ->items([
                 ['label' => Html::tag('span', 'Tab 1')],
                 ['label' => Html::tag('span', 'Tab 2')],
