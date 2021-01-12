@@ -31,7 +31,15 @@ echo Tabs::widget()
     ->size(Tabs::SIZE_LARGE)
     ->style(Tabs::STYLE_BOX)
     ->items([
-        ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true, 'content' => 'Some text about pictures'],
+        [
+            'label' => 'Pictures',
+            'icon' => 'fas fa-image',
+            'active' => true,
+            'content' => 'Some text about pictures',
+            'contentOptions' => [
+                'class' => 'is-active',
+            ],
+        ],
         ['label' => 'Music', 'icon' => 'fas fa-music', 'content' => 'Some text about music'],
         ['label' => 'Videos', 'icon' => 'fas fa-film', 'content' => 'Some text about videos'],
         ['label' => 'Documents', 'icon' => 'far fa-file-alt', 'content' => 'Some text about documents'],
@@ -90,5 +98,4 @@ Method                        | Description                                     
 `size(string $value)`         | Size of the tabs list.                                                       | `''`
 `alignment(string $value)`    | Alignment of the tabs list.                                                  | `''`
 `style(string $value)`        | Style of the tabs list.                                                      | `''`
-`renderTabsContent(bool $value)` | Whether to render the `tabs-content` container and its content. | `true`
 `tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`

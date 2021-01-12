@@ -20,7 +20,15 @@ use function in_array;
  *     ->size(Tabs::SIZE_LARGE)
  *     ->style(Tabs::STYLE_BOX)
  *     ->items([
- *         ['label' => 'Pictures', 'icon' => 'fas fa-image', 'active' => true, 'content' => 'Some text about pictures'],
+ *         [
+ *             'label' => 'Pictures',
+ *             'icon' => 'fas fa-image',
+ *             'active' => true,
+ *             'content' => 'Some text about pictures',
+ *             'contentOptions' => [
+ *                 'class' => 'is-active',
+ *             ],
+ *         ],
  *         ['label' => 'Music', 'icon' => 'fas fa-music', 'content' => 'Some text about music'],
  *         ['label' => 'Videos', 'icon' => 'fas fa-film', 'content' => 'Some text about videos'],
  *         ['label' => 'Documents', 'icon' => 'far fa-file-alt', 'content' => 'Some text about documents'],
@@ -68,7 +76,6 @@ final class Tabs extends Widget
     private string $style = '';
     private array $tabsContent = [];
     private array $tabsContentOptions = [];
-    private bool $renderTabsContent = true;
 
     private function buildOptions(): void
     {
@@ -99,13 +106,8 @@ final class Tabs extends Widget
     {
         $this->buildOptions();
 
-        $html = Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options);
-
-        if ($this->renderTabsContent) {
-            $html .= "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions);
-        }
-
-        return $html;
+        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)
+            . $this->renderTabsContent();
     }
 
     /**
@@ -136,6 +138,8 @@ final class Tabs extends Widget
      * - `icon`: string, the tab item icon.
      * - `iconOptions`: array, optional, the HTML attributes of the item's icon.
      *     - `rightSide`: bool, position the icon to the right.
+     * - `content`: string, required if `items` is not set. The content (HTML) of the tab.
+     * - `contentOptions`: array, array, the HTML attributes of the tab content container.
      *
      * @param array $value
      *
@@ -216,6 +220,7 @@ final class Tabs extends Widget
      */
     private function renderItem(int $index, array $item): string
     {
+        $id = $this->getId() . '-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $icon = ArrayHelper::getValue($item, 'icon', '');
         $label = ArrayHelper::getValue($item, 'label', '');
@@ -225,7 +230,6 @@ final class Tabs extends Widget
         $iconOptions = ArrayHelper::getValue($item, 'iconOptions', []);
         $content = ArrayHelper::getValue($item, 'content');
         $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
-        $id = ArrayHelper::getValue($contentOptions, 'id', $this->getId() . '-c' . $index);
         $active = $this->isItemActive($item);
 
         if ($label === '') {
@@ -241,22 +245,21 @@ final class Tabs extends Widget
             $label = $this->renderIcon($label, $icon, $iconOptions);
         }
 
+        if ($url !== '') {
+            $linkOptions['href'] = $url;
+        }
+
         if ($active) {
             Html::addCssClass($options, 'is-active');
         }
 
-        if ($url !== '') {
-            $linkOptions['href'] = $url;
-        } elseif ($this->renderTabsContent) {
-            $linkOptions['href'] = '#' . $id;
-        }
-
-        if ($this->renderTabsContent) {
-            $activeClass = ArrayHelper::getValue($contentOptions, 'activeClass', 'is-active');
-            if ($active) {
-                Html::addCssClass($contentOptions, $activeClass);
+        if ($content !== null) {
+            if ($url === '') {
+                $linkOptions['href'] = '#' . $id;
             }
-            $contentOptions['id'] = $id;
+
+            $contentOptions['id'] = ArrayHelper::getValue($contentOptions, 'id', $id);
+
             $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
         }
 
@@ -379,19 +382,19 @@ final class Tabs extends Widget
     }
 
     /**
-     * Whether to render the `tabs-content` container and its content. You may set this property to be false so that you
-     * can manually render `tabs-content` yourself in case your tab contents are complex.
+     * Renders tabs content.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return string
      */
-    public function renderTabsContent(bool $value): self
+    private function renderTabsContent(): string
     {
-        $new = clone $this;
-        $new->renderTabsContent = $value;
+        $html = '';
 
-        return $new;
+        if (!empty($this->tabsContent)) {
+            $html .= "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions);
+        }
+
+        return $html;
     }
 
     /**
