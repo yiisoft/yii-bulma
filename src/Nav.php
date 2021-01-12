@@ -18,19 +18,20 @@ final class Nav extends Widget
     private bool $activateItems = true;
     private bool $activateParents = false;
     private string $currentPath = '';
-    private bool $dropdown = false;
     private bool $encodeLabels = true;
     private array $items = [];
 
     protected function run(): string
     {
-        $html = $this->renderItems();
+        $items = [];
 
-        if ($this->dropdown) {
-            $html .= Html::endTag('div');
+        foreach ($this->items as $item) {
+            if (!isset($item['visible']) || $item['visible']) {
+                $items[] = $this->renderItem($item);
+            }
         }
 
-        return $html;
+        return implode("\n", $items);
     }
 
     /**
@@ -136,14 +137,14 @@ final class Nav extends Widget
     private function renderDropdown(array $items, array $parentItem): string
     {
         return Dropdown::widget()
-            ->dividerClass('navbar-divider')
-            ->itemClass('navbar-item')
-            ->itemsClass('navbar-dropdown')
-            ->encloseByContainer(false)
-            ->encodeLabels($this->encodeLabels)
-            ->items($items)
-            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
-            ->render() . "\n";
+                ->dividerClass('navbar-divider')
+                ->itemClass('navbar-item')
+                ->itemsClass('navbar-dropdown')
+                ->encloseByContainer(false)
+                ->encodeLabels($this->encodeLabels)
+                ->items($items)
+                ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
+                ->render() . "\n";
     }
 
     /**
@@ -219,26 +220,6 @@ final class Nav extends Widget
     }
 
     /**
-     * Renders widget items.
-     *
-     * @throws InvalidArgumentException|JsonException
-     *
-     * @return string
-     */
-    private function renderItems(): string
-    {
-        $items = [];
-
-        foreach ($this->items as $item) {
-            if (!isset($item['visible']) || $item['visible']) {
-                $items[] = $this->renderItem($item);
-            }
-        }
-
-        return implode("\n", $items);
-    }
-
-    /**
      * Renders a widget's item.
      *
      * @param array $item the item to render.
@@ -252,7 +233,7 @@ final class Nav extends Widget
         if (!isset($item['label'])) {
             throw new InvalidArgumentException('The "label" option is required.');
         }
-
+        $dropdown = false;
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
 
         if ($this->encodeLabels) {
@@ -280,7 +261,7 @@ final class Nav extends Widget
         $active = $this->isItemActive($item);
 
         if (isset($items)) {
-            $this->dropdown = true;
+            $dropdown = true;
 
             Html::addCssClass($options, 'navbar-item has-dropdown is-hoverable');
 
@@ -301,12 +282,12 @@ final class Nav extends Widget
             Html::addCssClass($linkOptions, 'is-active');
         }
 
-
-        if ($this->dropdown) {
+        if ($dropdown) {
             return
-                html::beginTag('div', $options) . "\n" .
-                    Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
-                    $items;
+                Html::beginTag('div', $options) . "\n" .
+                Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
+                $items .
+                Html::endTag('div');
         }
 
         return Html::a($label, $url, $linkOptions);
