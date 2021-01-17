@@ -326,4 +326,98 @@ HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
     }
+
+    public function testPanelTemplate(): void
+    {
+        Panel::counter(0);
+
+        $template =<<<HTML
+{panelBegin}
+{panelHeading}
+{panelTabs}
+<div class="panel-block">
+<p class="control has-icons-left">
+<input class="input" type="text" placeholder="Search" />
+<span class="icon is-left">
+<i class="fas fa-search" aria-hidden="true"></i>
+</span>
+</p>
+</div>
+{panelItems}
+<div class="panel-block">
+<button class="button is-link is-outlined is-fullwidth">
+Reset all filters
+</button>
+</div>
+{panelEnd}
+HTML;
+
+        $html = Panel::widget()
+            ->template($template)
+            ->tabs([
+                [
+                    'label' => 'All',
+                    'active' => true,
+                    'items' => [
+                        [
+                            'label' => 'bulma',
+                            'icon' => 'fas fa-book',
+                        ],
+                        [
+                            'label' => 'marksheet',
+                            'icon' => 'fas fa-book',
+                        ],
+                    ],
+                ],
+                ['label' => 'Public'],
+                ['label' => 'Private'],
+                ['label' => 'Sources'],
+                ['label' => 'Forks'],
+            ])
+            ->render();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-panel" class="panel">
+
+
+<p class="panel-tabs">
+<a class="is-active" href="#w1-panel-c0">All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a>Forks</a>
+</p>
+
+<div class="panel-block">
+<p class="control has-icons-left">
+<input class="input" type="text" placeholder="Search" />
+<span class="icon is-left">
+<i class="fas fa-search" aria-hidden="true"></i>
+</span>
+</p>
+</div>
+<div id="w1-panel-c0">
+<a class="panel-block">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+bulma
+</a>
+<a class="panel-block">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+marksheet
+</a>
+</div>
+<div class="panel-block">
+<button class="button is-link is-outlined is-fullwidth">
+Reset all filters
+</button>
+</div>
+</nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
 }

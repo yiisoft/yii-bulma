@@ -39,12 +39,14 @@ final class Panel extends Widget
     {
         $this->buildOptions();
 
+        $tag = ArrayHelper::getValue($this->options, 'tag', 'nav');
+
         return strtr($this->template, [
-            '{panelBegin}' => Html::beginTag('nav', $this->options),
+            '{panelBegin}' => Html::beginTag($tag, $this->options),
             '{panelHeading}' => $this->renderHeading(),
             '{panelTabs}' => $this->renderTabs(),
             '{panelItems}' => implode("\n", $this->items),
-            '{panelEnd}' => Html::endTag('nav'),
+            '{panelEnd}' => Html::endTag($tag),
         ]);
     }
 

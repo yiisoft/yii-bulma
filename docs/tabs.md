@@ -50,52 +50,60 @@ HTML produced is like the following:
 
 ```html
 <div class="tabs is-centered is-large is-boxed">
-  <ul>
-    <li class="is-active">
-      <a href="#w0-tabs-c1">
-        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-        <span>Pictures</span>
-      </a>
-    </li>
-    <li>
-      <a href="#w0-tabs-c2">
-        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-        <span>Music</span>
-      </a>
-    </li>
-    <li>
-      <a href="#w0-tabs-c3">
-        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-        <span>Videos</span>
-      </a>
-    </li>
-    <li>
-      <a href="#w0-tabs-c4">
-        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-        <span>Documents</span>
-      </a>
-    </li>
-  </ul>
+    <ul>
+        <li class="is-active">
+            <a href="#w0-tabs-c1">
+                <span class="icon is-small"
+                    ><i class="fas fa-image" aria-hidden="true"></i
+                ></span>
+                <span>Pictures</span>
+            </a>
+        </li>
+        <li>
+            <a href="#w0-tabs-c2">
+                <span class="icon is-small"
+                    ><i class="fas fa-music" aria-hidden="true"></i
+                ></span>
+                <span>Music</span>
+            </a>
+        </li>
+        <li>
+            <a href="#w0-tabs-c3">
+                <span class="icon is-small"
+                    ><i class="fas fa-film" aria-hidden="true"></i
+                ></span>
+                <span>Videos</span>
+            </a>
+        </li>
+        <li>
+            <a href="#w0-tabs-c4">
+                <span class="icon is-small"
+                    ><i class="far fa-file-alt" aria-hidden="true"></i
+                ></span>
+                <span>Documents</span>
+            </a>
+        </li>
+    </ul>
 </div>
 
 <div class="tabs-content">
-  <div id="w0-tabs-c1" class="is-active">Some text about pictures</div>
-  <div id="w0-tabs-c2">Some text about music</div>
-  <div id="w0-tabs-c3">Some text about videos</div>
-  <div id="w0-tabs-c4">Some text about documents</div>
+    <div id="w0-tabs-c1" class="is-active">Some text about pictures</div>
+    <div id="w0-tabs-c2">Some text about music</div>
+    <div id="w0-tabs-c3">Some text about videos</div>
+    <div id="w0-tabs-c4">Some text about documents</div>
 </div>
 ```
 
 ## Reference
 
-Method                        | Description                                                                  | Default
-------------------------------|------------------------------------------------------------------------------|---------
-`options(array $value)`       | HTML attributes for the widget container tag.                                | [`class` => `tabs`]
-`items(array $value)`         | List of tab items.                                                           | `[]`
-`currentPath(?string $value)` | Allows you to assign the current path of the URL from request controller.    | `null`
-`activateItems(bool $value)`  | Whether to activate item if its route matches the currently requested route. | `true`
-`encodeLabels(bool $value)`   | Whether the labels for menu items should be HTML-encoded.                    | `true`
-`size(string $value)`         | Size of the tabs list.                                                       | `''`
-`alignment(string $value)`    | Alignment of the tabs list.                                                  | `''`
-`style(string $value)`        | Style of the tabs list.                                                      | `''`
-`tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
+| Method                             | Description                                                                  | Default             |
+| ---------------------------------- | ---------------------------------------------------------------------------- | ------------------- |
+| `options(array $value)`            | HTML attributes for the widget container tag.                                | [`class` => `tabs`] |
+| `items(array $value)`              | List of tab items.                                                           | `[]`                |
+| `currentPath(?string $value)`      | Allows you to assign the current path of the URL from request controller.    | `null`              |
+| `activateItems(bool $value)`       | Whether to activate item if its route matches the currently requested route. | `true`              |
+| `encodeLabels(bool $value)`        | Whether the labels for menu items should be HTML-encoded.                    | `true`              |
+| `size(string $value)`              | Size of the tabs list.                                                       | `''`                |
+| `alignment(string $value)`         | Alignment of the tabs list.                                                  | `''`                |
+| `style(string $value)`             | Style of the tabs list.                                                      | `''`                |
+| `tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container.                    | `[]`                |

@@ -52,7 +52,20 @@ echo Panel::widget()
     ->heading('Repositories')
     ->color(Panel::COLOR_PRIMARY)
     ->tabs([
-        ['label' => 'All', 'active' => true],
+        [
+            'label' => 'All',
+            'active' => true,
+            'items' => [
+                [
+                    'label' => 'bulma',
+                    'icon' => 'fas fa-book',
+                ],
+                [
+                    'label' => 'marksheet',
+                    'icon' => 'fas fa-book',
+                ],
+            ],
+        ],
         ['label' => 'Public'],
         ['label' => 'Private'],
         ['label' => 'Sources'],
@@ -66,7 +79,7 @@ HTML produced is like the following:
 <article class="panel is-primary">
     <p class="panel-heading">Repositories</p>
     <p class="panel-tabs">
-        <a class="is-active">All</a>
+        <a class="is-active" href="#w1-panel-c0">All</a>
         <a>Public</a>
         <a>Private</a>
         <a>Sources</a>
@@ -74,36 +87,26 @@ HTML produced is like the following:
     </p>
     <div class="panel-block">
         <p class="control has-icons-left">
-            <input class="input is-primary" type="text" placeholder="Search" />
+            <input class="input" type="text" placeholder="Search" />
             <span class="icon is-left">
                 <i class="fas fa-search" aria-hidden="true"></i>
             </span>
         </p>
     </div>
-    <a class="panel-block is-active">
-        <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        bulma
-    </a>
-    <a class="panel-block">
-        <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        marksheet
-    </a>
-    <a class="panel-block">
-        <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        minireset.css
-    </a>
-    <a class="panel-block">
-        <span class="panel-icon">
-            <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        jgthms.github.io
-    </a>
+    <div id="w1-panel-c0">
+        <a class="panel-block is-active">
+            <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            bulma
+        </a>
+        <a class="panel-block">
+            <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+            </span>
+            marksheet
+        </a>
+    </div>
     <div class="panel-block">
         <button class="button is-link is-outlined is-fullwidth">
             Reset all filters
@@ -114,12 +117,13 @@ HTML produced is like the following:
 
 ## Reference
 
-| Method                         | Description                                   | Default                      |
-| ------------------------------ | --------------------------------------------- | ---------------------------- |
-| `options(array $value)`        | HTML attributes for the widget container tag. | [`class` => `panel`]         |
-| `headingOptions(array $value)` |                                               | [`class` => `panel-heading`] |
-| `heading(?string $value)`      |                                               | `''`                         |
-| `color(string $value)`         |                                               | `''`                         |
-| `tabs(array $value)`           |                                               | `[]`                         |
-| `tabsOptions(array $value)`    |                                               | `[]`                         |
-| `encodeLabels(bool $value)`    |                                               | `true`                       |
+| Method                         | Description                                               | Default                                                       |
+| ------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------- |
+| `options(array $value)`        | HTML attributes for the widget container tag.             | [`class` => `panel`]                                          |
+| `headingOptions(array $value)` | HTML attributes of the heading.                           | [`class` => `panel-heading`]                                  |
+| `heading(?string $value)`      | Text of the brand heading.                                | `''`                                                          |
+| `color(string $value)`         | Color panel.                                              | `''`                                                          |
+| `tabs(array $value)`           | List of panel tabs items.                                 | `[]`                                                          |
+| `tabsOptions(array $value)`    | HTML attributes for the tabs container tag.               | `[]`                                                          |
+| `encodeLabels(bool $value)`    | Whether the labels for tabs items should be HTML-encoded. | `true`                                                        |
+| `template(string $value)`      | String the template for rendering panel.                  | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}` |
