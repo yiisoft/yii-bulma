@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use Yiisoft\Yii\Bulma\Panel;
