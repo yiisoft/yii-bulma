@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
@@ -50,7 +52,7 @@ final class Panel extends Widget
     {
         Html::addCssClass($this->options, 'panel');
 
-        $this->options['id'] ??= "{$this->getId()}-panel";
+        $this->options['id'] ??= $this->getId();
 
         if ($this->color !== '') {
             Html::addCssClass($this->options, $this->color);
@@ -209,12 +211,17 @@ final class Panel extends Widget
      */
     private function renderTab(int $index, array $item): string
     {
+        $id = $this->getId() . '-c' . $index;
+        $url = ArrayHelper::getValue($item, 'url', '');
         $label = ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
         $items = ArrayHelper::getValue($item, 'items', []);
+        $itemsContainerOptions = ArrayHelper::getValue($item, 'itemsContainerOptions', []);
 
-        $linkOptions['id'] = ArrayHelper::getValue($item, 'id', $this->options['id'] . '-tab-' . $index);
+        if ($url !== '') {
+            $linkOptions['href'] = $url;
+        }
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -229,19 +236,35 @@ final class Panel extends Widget
         }
 
         if (is_array($items) && !empty($items)) {
+            $linkOptions['href'] ??= '#' . $id;
+            $itemsContainerOptions['id'] ??= $id;
+
+            $itemsContainer = Html::beginTag('div', $itemsContainerOptions) . "\n";
             foreach ($items as $item) {
-                $this->items[$index] = $this->renderItem($index, $item);
+                $itemsContainer .= $this->renderItem($item) . "\n";
             }
+            $itemsContainer .= Html::endTag('div');
+
+            $this->items[$index] = $itemsContainer;
         }
 
         return Html::tag('a', $label, $linkOptions);
     }
 
-    private function renderItem(int $index, array $item): string
+    private function renderItem(array $item): string
     {
-        $options = (array)ArrayHelper::getValue($item, 'options', []);
-        $label = (string)ArrayHelper::getValue($item, 'label', '');
-        $icon = (string)ArrayHelper::getValue($item, 'icon', '');
+        $options = ArrayHelper::getValue($item, 'options', []);
+        $label = ArrayHelper::getValue($item, 'label', '');
+        $icon = ArrayHelper::getValue($item, 'icon', '');
+        $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
+
+        if ($label === '') {
+            throw new InvalidArgumentException("The 'label' option is required.");
+        }
+
+        if ($encode === true) {
+            $label = Html::encode($label);
+        }
 
         Html::addCssClass($options, 'panel-block');
 
@@ -250,11 +273,11 @@ final class Panel extends Widget
         }
 
         if ($icon !== '') {
-            $icon = "\n". Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
+            $icon = "\n" . Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
             $label = "\n" . Html::tag('span', $icon, ['class' => 'panel-icon']) . "\n" . $label . "\n";
         }
 
-        return Html::tag('a', $label, $options) . "\n";
+        return Html::tag('a', $label, $options);
     }
 
     /**
@@ -267,5 +290,15 @@ final class Panel extends Widget
     private function isActive(array $item): bool
     {
         return (bool)ArrayHelper::getValue($item, 'active', false);
+    }
+
+    /**
+     * Returns the Id of the widget.
+     *
+     * @return string|null Id of the widget.
+     */
+    protected function getId(): ?string
+    {
+        return parent::getId() . '-panel';
     }
 }

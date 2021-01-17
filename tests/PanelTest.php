@@ -112,11 +112,11 @@ HTML;
         $expectedHtml = <<<HTML
 <nav id="w1-panel" class="panel">
 <p class="panel-tabs">
-<a id="w1-panel-tab-0">All</a>
-<a id="w1-panel-tab-1">Public</a>
-<a id="w1-panel-tab-2">Private</a>
-<a id="w1-panel-tab-3">Sources</a>
-<a id="w1-panel-tab-4">Forks</a>
+<a>All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a>Forks</a>
 </p>
 </nav>
 HTML;
@@ -142,11 +142,11 @@ HTML;
         $expectedHtml = <<<HTML
 <nav id="w1-panel" class="panel">
 <p class="my-class panel-tabs">
-<a id="w1-panel-tab-0">All</a>
-<a id="w1-panel-tab-1">Public</a>
-<a id="w1-panel-tab-2">Private</a>
-<a id="w1-panel-tab-3">Sources</a>
-<a id="w1-panel-tab-4">Forks</a>
+<a>All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a>Forks</a>
 </p>
 </nav>
 HTML;
@@ -171,11 +171,11 @@ HTML;
         $expectedHtml = <<<HTML
 <nav id="w1-panel" class="panel">
 <p class="panel-tabs">
-<a id="w1-panel-tab-0" class="is-active">All</a>
-<a id="w1-panel-tab-1">Public</a>
-<a id="w1-panel-tab-2">Private</a>
-<a id="w1-panel-tab-3">Sources</a>
-<a id="w1-panel-tab-4">Forks</a>
+<a class="is-active">All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a>Forks</a>
 </p>
 </nav>
 HTML;
@@ -198,6 +198,10 @@ HTML;
                             'icon' => 'fas fa-book',
                             'active' => true,
                         ],
+                        [
+                            'label' => 'marksheet',
+                            'icon' => 'fas fa-book',
+                        ],
                     ],
                 ],
                 ['label' => 'Public'],
@@ -210,19 +214,112 @@ HTML;
         $expectedHtml = <<<HTML
 <nav id="w1-panel" class="panel">
 <p class="panel-tabs">
-<a id="w1-panel-tab-0" class="is-active">All</a>
-<a id="w1-panel-tab-1">Public</a>
-<a id="w1-panel-tab-2">Private</a>
-<a id="w1-panel-tab-3">Sources</a>
-<a id="w1-panel-tab-4">Forks</a>
+<a class="is-active" href="#w1-panel-c0">All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a>Forks</a>
 </p>
+<div id="w1-panel-c0">
 <a class="panel-block is-active">
 <span class="panel-icon">
 <i class="fas fa-book" aria-hidden="true"></i>
 </span>
 bulma
 </a>
-</nav>
+<a class="panel-block">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+marksheet
+</a>
+</div></nav>
+HTML;
+
+        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    }
+
+    public function testPanelItemsContainerOptions(): void
+    {
+        Panel::counter(0);
+
+        $html = Panel::widget()
+            ->tabs([
+                [
+                    'label' => 'All',
+                    'active' => true,
+                    'itemsContainerOptions' => [
+                        'class' => 'some-class-name',
+                    ],
+                    'items' => [
+                        [
+                            'label' => 'bulma',
+                            'icon' => 'fas fa-book',
+                            'active' => true,
+                        ],
+                        [
+                            'label' => 'marksheet',
+                            'icon' => 'fas fa-book',
+                        ],
+                    ],
+                ],
+                ['label' => 'Public'],
+                ['label' => 'Private'],
+                ['label' => 'Sources'],
+                [
+                    'label' => 'Forks',
+                    'items' => [
+                        [
+                            'label' => 'minireset.css',
+                            'icon' => 'fas fa-book',
+                            'active' => true,
+                        ],
+                        [
+                            'label' => 'jgthms.github.io',
+                            'icon' => 'fas fa-book',
+                        ],
+                    ],
+                ],
+            ])
+            ->render();
+
+        $expectedHtml = <<<HTML
+<nav id="w1-panel" class="panel">
+<p class="panel-tabs">
+<a class="is-active" href="#w1-panel-c0">All</a>
+<a>Public</a>
+<a>Private</a>
+<a>Sources</a>
+<a href="#w1-panel-c4">Forks</a>
+</p>
+<div id="w1-panel-c0" class="some-class-name">
+<a class="panel-block is-active">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+bulma
+</a>
+<a class="panel-block">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+marksheet
+</a>
+</div>
+<div id="w1-panel-c4">
+<a class="panel-block is-active">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+minireset.css
+</a>
+<a class="panel-block">
+<span class="panel-icon">
+<i class="fas fa-book" aria-hidden="true"></i>
+</span>
+jgthms.github.io
+</a>
+</div></nav>
 HTML;
 
         $this->assertEqualsWithoutLE($expectedHtml, $html);
