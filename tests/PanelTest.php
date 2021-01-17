@@ -331,7 +331,7 @@ HTML;
     {
         Panel::counter(0);
 
-        $template =<<<HTML
+        $template = <<<HTML
 {panelBegin}
 {panelHeading}
 {panelTabs}
