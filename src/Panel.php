@@ -33,7 +33,7 @@ final class Panel extends Widget
     private array $tabsOptions = [];
     private bool $encodeLabels = true;
     private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
-    private array $items = [];
+    private array $tabItems = [];
 
     protected function run(): string
     {
@@ -45,7 +45,7 @@ final class Panel extends Widget
             '{panelBegin}' => Html::beginTag($tag, $this->options),
             '{panelHeading}' => $this->renderHeading(),
             '{panelTabs}' => $this->renderTabs(),
-            '{panelItems}' => implode("\n", $this->items),
+            '{panelItems}' => implode("\n", $this->tabItems),
             '{panelEnd}' => Html::endTag($tag),
         ]);
     }
@@ -218,8 +218,8 @@ final class Panel extends Widget
         $label = ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
-        $items = ArrayHelper::getValue($item, 'items', []);
-        $itemsContainerOptions = ArrayHelper::getValue($item, 'itemsContainerOptions', []);
+        $tabItems = ArrayHelper::getValue($item, 'items', []);
+        $tabItemsContainerOptions = ArrayHelper::getValue($item, 'itemsContainerOptions', []);
 
         if ($url !== '') {
             $linkOptions['href'] = $url;
@@ -237,17 +237,17 @@ final class Panel extends Widget
             Html::addCssClass($linkOptions, 'is-active');
         }
 
-        if (is_array($items) && !empty($items)) {
+        if (is_array($tabItems) && !empty($tabItems)) {
             $linkOptions['href'] ??= '#' . $id;
-            $itemsContainerOptions['id'] ??= $id;
+            $tabItemsContainerOptions['id'] ??= $id;
 
-            $itemsContainer = Html::beginTag('div', $itemsContainerOptions) . "\n";
-            foreach ($items as $item) {
-                $itemsContainer .= $this->renderItem($item) . "\n";
+            $tabItemsContainer = Html::beginTag('div', $tabItemsContainerOptions) . "\n";
+            foreach ($tabItems as $tabItem) {
+                $tabItemsContainer .= $this->renderItem($tabItem) . "\n";
             }
-            $itemsContainer .= Html::endTag('div');
+            $tabItemsContainer .= Html::endTag('div');
 
-            $this->items[$index] = $itemsContainer;
+            $this->tabItems[$index] = $tabItemsContainer;
         }
 
         return Html::tag('a', $label, $linkOptions);
