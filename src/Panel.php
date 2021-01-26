@@ -226,7 +226,7 @@ final class Panel extends Widget
         }
 
         if ($label === '') {
-            throw new InvalidArgumentException("The 'label' option is required.");
+            throw new InvalidArgumentException('The "label" option is required.');
         }
 
         if ($encode === true) {
