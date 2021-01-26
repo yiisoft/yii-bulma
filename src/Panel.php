@@ -130,7 +130,7 @@ final class Panel extends Widget
      */
     public function color(string $value): self
     {
-        if (!in_array($value, self::COLOR_ALL)) {
+        if (!in_array($value, self::COLOR_ALL, true)) {
             $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
