@@ -95,6 +95,7 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [Modal](docs/modal.md)
 - [ModalCard](docs/modalcard.md)
 - [Tabs](docs/tabs.md)
+- [Panel](docs/panel.md)
 
 ### Unit testing
 
