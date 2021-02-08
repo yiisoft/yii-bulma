@@ -29,6 +29,7 @@ use function strtr;
 class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private array $homeItem = [];
     private bool $withoutHomeItem = false;
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
@@ -54,16 +55,14 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * Whether to HTML-encode the link labels.
+     * When tags Labels HTML should not be encoded.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
         return $new;
     }
 
@@ -88,7 +87,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function homeItem(array $value): self
+    public function withHomeItem(array $value): self
     {
         $new = clone $this;
         $new->homeItem = $value;
@@ -103,7 +102,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function itemTemplate(string $value): self
+    public function withItemTemplate(string $value): self
     {
         $new = clone $this;
         $new->itemTemplate = $value;
@@ -118,7 +117,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function activeItemTemplate(string $value): self
+    public function withActiveItemTemplate(string $value): self
     {
         $new = clone $this;
         $new->activeItemTemplate = $value;
@@ -141,7 +140,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function items(array $value): self
+    public function withItems(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -155,9 +154,9 @@ class Breadcrumbs extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -171,12 +170,25 @@ class Breadcrumbs extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function itemsOptions(array $value): self
+    public function withItemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Allows you to enable the encoding tags html.
+     *
+     * @return self
+     */
+    public function withEncodeTags(): self
+    {
+        $new = clone $this;
+        $new->encodeTags = true;
+
         return $new;
     }
 
@@ -244,6 +256,10 @@ class Breadcrumbs extends Widget
 
         if (isset($link['template'])) {
             $template = $link['template'];
+        }
+
+        if ($this->encodeTags === false) {
+            $link['encode'] = false;
         }
 
         if (isset($link['url'])) {

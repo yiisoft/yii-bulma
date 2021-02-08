@@ -54,12 +54,12 @@ final class Modal extends Widget
     private array $contentOptions = [];
     private array $closeButtonOptions = [];
     private string $closeButtonSize = '';
-    private bool $closeButtonEnabled = true;
+    private bool $withoutCloseButton = true;
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
     private string $toggleButtonColor = '';
     private array $toggleButtonOptions = [];
-    private bool $toggleButtonEnabled = true;
+    private bool $withoutToggleButton = true;
 
     public function begin(): ?string
     {
@@ -84,6 +84,209 @@ final class Modal extends Widget
         $html .= Html::endTag('div'); // .modal
 
         return $html;
+    }
+
+    /**
+     * Main container options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->options = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button label.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonLabel = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withToggleButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button size.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button color.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonColor(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL)) {
+            $values = implode('", "', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonColor = $value;
+
+        return $new;
+    }
+
+    /**
+     * Disable toggle button.
+     *
+     * @return self
+     */
+    public function withoutToggleButton(): self
+    {
+        $new = clone $this;
+        $new->withoutToggleButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Close button size.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withCloseButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL)) {
+            $values = implode('"', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->closeButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Close button options
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withCloseButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->closeButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Disable close button.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function withoutCloseButton(): self
+    {
+        $new = clone $this;
+        $new->withoutCloseButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Content options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withContentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->contentOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Renders the toggle button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderToggleButton(): string
+    {
+        if ($this->withoutToggleButton) {
+            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
+        }
+
+        return '';
+    }
+
+    /**
+     * Renders the close button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderCloseButton(): string
+    {
+        if ($this->withoutCloseButton) {
+            return Html::button('', $this->closeButtonOptions);
+        }
+
+        return '';
     }
 
     private function buildOptions(): void
@@ -111,210 +314,5 @@ final class Modal extends Widget
         if ($this->toggleButtonColor !== '') {
             Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
         }
-    }
-
-    /**
-     * Main container options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button label.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonLabel = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function toggleButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button color.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonColor(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonColor = $value;
-
-        return $new;
-    }
-
-    /**
-     * Enable/Disable toggle button.
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function toggleButtonEnabled(bool $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonEnabled = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders the toggle button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderToggleButton(): string
-    {
-        if ($this->toggleButtonEnabled) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
-        }
-
-        return '';
-    }
-
-    /**
-     * Close button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function closeButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL)) {
-            $values = implode('"', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->closeButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Close button options
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Enable/Disable close button.
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function closeButtonEnabled(bool $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonEnabled = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders the close button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderCloseButton(): string
-    {
-        if ($this->closeButtonEnabled) {
-            return Html::button('', $this->closeButtonOptions);
-        }
-
-        return '';
-    }
-
-    /**
-     * Content options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function contentOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->contentOptions = $value;
-
-        return $new;
     }
 }

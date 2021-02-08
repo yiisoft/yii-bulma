@@ -37,8 +37,8 @@ $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 
 $widget = ModalCard::widget()
-    ->title('Modal title')
-    ->footer(
+    ->withTitle('Modal title')
+    ->withFooter(
         Html::button('Cancel', ['class' => 'button'])
     )
     ->begin();
@@ -69,19 +69,19 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`]
-contentOptions(array $value) | | [`class` => `modal-card`]
-headerOptions(array $value) | | [`class` => `modal-card-head`]
-title(string $value) | | `''`
-titleOptions(array $value) | | [`class` => `modal-card-title`]
-bodyOptions(bool $value) | | [`class` => `modal-card-body`]
-footer(string $value) | | `''`
-footerOptions(bool $value) | | [`class` => `modal-card-foot`]
-closeButtonOptions(array $value) | | [`class` => `delete`, `aria-label` => `close`]
-closeButtonSize(string $value) | | `''`
-toggleButtonLabel(string $value) | | `Toggle button`
-toggleButtonSize(string $value) | | `''`
-toggleButtonColor(string $value) | | `''`
-toggleButtonOptions(array $value) | | [`class` => `button`, `aria-haspopup` => `true`]
-closeButtonEnabled(bool $value) | | `true`
-toggleButtonEnabled(bool $value) | | `true`
+`withOptions(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
+`withContentOptions(array $value)` | HTML attributes for the widget content tag. | [`class` => `modal-card`]
+`withHeaderOptions(array $value)` | HTML attributes for the widget header tag. | [`class` => `modal-card-head`]
+`withTitle(string $value)` | The title content in the modal window. | `''`
+`withTitleOptions(array $value)` | HTML attributes for the widget title tag. | [`class` => `modal-card-title`]
+`withBodyOptions(array $value)` | HTML attributes for the widget body tag.| [`class` => `modal-card-body`]
+`withFooter(string $value)` | The footer content in the modal window. | `''`
+`withFooterOptions(array $value)` | HTML attributes for the widget footer tag. | [`class` => `modal-card-foot`]
+`withCloseButtonOptions(array $value)` | HTML attributes for the widget close button tag. | [`class` => `delete`, `aria-label` => `close`]
+`withCloseButtonSize(string $value)` | Size close button. | `is-small`, `is-medium`, `is-large`
+`withToggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
+`withToggleButtonSize(string $value)` | Size toggle button. | `is-small`, `is-medium`, `is-large`
+`withToggleButtonColor(string $value)` | Toggle button color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
+`withToggleButtonOptions(array $value)` |  HTML attributes for the widget toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
+`withoutCloseButton()` | Disable close button. | `false`
+`withoutToggleButton()` | Disable toggle button. | `false`

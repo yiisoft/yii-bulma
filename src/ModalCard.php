@@ -16,8 +16,8 @@ use Yiisoft\Html\Html;
  *
  * ```php
  * echo ModalCard::widget()
- *     ->title('Modal title')
- *     ->footer(
+ *     ->withTitle('Modal title')
+ *     ->withFooter(
  *         Html::button('Cancel', ['class' => 'button'])
  *     )
  *     ->begin();
@@ -59,12 +59,12 @@ final class ModalCard extends Widget
     private array $contentOptions = [];
     private array $closeButtonOptions = [];
     private string $closeButtonSize = '';
-    private bool $closeButtonEnabled = true;
+    private bool $withoutCloseButton = true;
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
     private string $toggleButtonColor = '';
     private array $toggleButtonOptions = [];
-    private bool $toggleButtonEnabled = true;
+    private bool $withoutToggleButton = true;
     private string $title = '';
     private string $footer = '';
     private array $titleOptions = [];
@@ -100,6 +100,375 @@ final class ModalCard extends Widget
         return $html;
     }
 
+    /**
+     * Main container options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->options = $value;
+
+        return $new;
+    }
+
+    /**
+     * Main content container options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withContentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->contentOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button label.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonLabel = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withToggleButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button size.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Toggle button color.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withToggleButtonColor(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL)) {
+            $values = implode('", "', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonColor = $value;
+
+        return $new;
+    }
+
+    /**
+     * Disable toggle button.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function withoutToggleButton(): self
+    {
+        $new = clone $this;
+        $new->withoutToggleButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Close button size.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withCloseButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL)) {
+            $values = implode('"', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->closeButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Close button options
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withCloseButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->closeButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Disable close button.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function withoutCloseButton(): self
+    {
+        $new = clone $this;
+        $new->withoutCloseButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Header options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withHeaderOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->headerOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Body options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withBodyOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->bodyOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Footer options
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withFooterOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->footerOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * The footer content in the modal window.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withFooter(string $value): self
+    {
+        $new = clone $this;
+        $new->footer = $value;
+
+        return $new;
+    }
+
+    /**
+     * Title options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function withTitleOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->titleOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * The title content in the modal window.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function withTitle(string $value): self
+    {
+        $new = clone $this;
+        $new->title = $value;
+
+        return $new;
+    }
+
+    /**
+     * Renders the toggle button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderToggleButton(): string
+    {
+        if ($this->withoutToggleButton) {
+            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
+        }
+
+        return '';
+    }
+
+    /**
+     * Renders the close button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderCloseButton(): string
+    {
+        if ($this->withoutCloseButton) {
+            return Html::button('', $this->closeButtonOptions);
+        }
+
+        return '';
+    }
+
+    /**
+     * Renders header.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderHeader(): string
+    {
+        $html = '';
+        $html .= Html::beginTag('header', $this->headerOptions) . "\n";
+        $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
+        $html .= $this->renderCloseButton() . "\n";
+        $html .= Html::endTag('header') . "\n";
+
+        return $html;
+    }
+
+    /**
+     * Renders begin body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBodyBegin(): string
+    {
+        return Html::beginTag('section', $this->bodyOptions);
+    }
+
+    /**
+     * Renders end body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBodyEnd(): string
+    {
+        return Html::endTag('section');
+    }
+
+    /**
+     * Renders the footer.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderFooter(): string
+    {
+        return Html::tag('footer', $this->footer, $this->footerOptions);
+    }
+
+    /**
+     * Renders the background transparent overlay.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBackgroundTransparentOverlay(): string
+    {
+        return Html::tag('div', '', ['class' => 'modal-background']);
+    }
+
     private function buildOptions(): void
     {
         $this->options['id'] ??= "{$this->getId()}-modal";
@@ -129,374 +498,5 @@ final class ModalCard extends Widget
         $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
         $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
         $this->footerOptions = $this->addOptions($this->footerOptions, 'modal-card-foot');
-    }
-
-    /**
-     * Main container options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-
-        return $new;
-    }
-
-    /**
-     * Main content container options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function contentOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->contentOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button label.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonLabel = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function toggleButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button color.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonColor(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonColor = $value;
-
-        return $new;
-    }
-
-    /**
-     * Enable/Disable toggle button.
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function toggleButtonEnabled(bool $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonEnabled = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders the toggle button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderToggleButton(): string
-    {
-        if ($this->toggleButtonEnabled) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
-        }
-
-        return '';
-    }
-
-    /**
-     * Close button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function closeButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL)) {
-            $values = implode('"', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->closeButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Close button options
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Enable/Disable close button.
-     *
-     * @param bool $value
-     *
-     * @return self
-     */
-    public function closeButtonEnabled(bool $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonEnabled = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders the close button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderCloseButton(): string
-    {
-        if ($this->closeButtonEnabled) {
-            return Html::button('', $this->closeButtonOptions);
-        }
-
-        return '';
-    }
-
-    /**
-     * Header options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function headerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->headerOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders header.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderHeader(): string
-    {
-        $html = '';
-        $html .= Html::beginTag('header', $this->headerOptions) . "\n";
-        $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
-        $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::endTag('header') . "\n";
-
-        return $html;
-    }
-
-    /**
-     * Body options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function bodyOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->bodyOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders begin body tag.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderBodyBegin(): string
-    {
-        return Html::beginTag('section', $this->bodyOptions);
-    }
-
-    /**
-     * Renders end body tag.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderBodyEnd(): string
-    {
-        return Html::endTag('section');
-    }
-
-    /**
-     * Footer options
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function footerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->footerOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * The footer content in the modal window.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function footer(string $value): self
-    {
-        $new = clone $this;
-        $new->footer = $value;
-
-        return $new;
-    }
-
-    /**
-     * Title options.
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function titleOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->titleOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * The title content in the modal window.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function title(string $value): self
-    {
-        $new = clone $this;
-        $new->title = $value;
-
-        return $new;
-    }
-
-    /**
-     * Renders the footer.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderFooter(): string
-    {
-        return Html::tag('footer', $this->footer, $this->footerOptions);
-    }
-
-    /**
-     * Renders the background transparent overlay.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderBackgroundTransparentOverlay(): string
-    {
-        return Html::tag('div', '', ['class' => 'modal-background']);
     }
 }

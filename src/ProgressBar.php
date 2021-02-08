@@ -12,7 +12,7 @@ use Yiisoft\Html\Html;
  * Native HTML progress bar.
  *
  * ```php
- * echo ProgressBar::widget()->value(75);
+ * echo ProgressBar::widget()->withValue(75);
  * ```
  *
  * @link https://bulma.io/documentation/elements/progress/
@@ -44,8 +44,8 @@ final class ProgressBar extends Widget
     ];
 
     private array $options = [];
-    private ?float $value = null;
-    private ?int $maxValue = 100;
+    private float $value = 0;
+    private int $maxValue = 100;
     private string $size = '';
     private string $color = '';
 
@@ -53,36 +53,9 @@ final class ProgressBar extends Widget
     {
         $this->buildOptions();
 
-        $content = $this->value !== null
-            ? $this->value . '%'
-            : '';
+        $content = $this->value > 0 ? $this->value . '%' : '';
 
         return Html::tag('progress', $content, $this->options);
-    }
-
-    private function buildOptions(): void
-    {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-progressbar";
-        }
-
-        $this->options = $this->addOptions($this->options, 'progress');
-
-        if ($this->maxValue !== null) {
-            $this->options['max'] = $this->maxValue;
-        }
-
-        if ($this->value !== null) {
-            $this->options['value'] = $this->value;
-        }
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
-        }
-
-        if ($this->color !== '') {
-            Html::addCssClass($this->options, $this->color);
-        }
     }
 
     /**
@@ -92,7 +65,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -103,11 +76,11 @@ final class ProgressBar extends Widget
     /**
      * Set the value of the progress.
      *
-     * @var float|null $value The value of the progress. Set `null` to display loading animation.
+     * @var float $value The value of the progress. Set `0` to display loading animation.
      *
      * @return self
      */
-    public function value(?float $value): self
+    public function withValue(float $value): self
     {
         $new = clone $this;
         $new->value = $value;
@@ -118,11 +91,11 @@ final class ProgressBar extends Widget
     /**
      * Set maximum progress value.
      *
-     * @var int|null $value Maximum progress value. Set `null` for no maximum.
+     * @var int $value Maximum progress value. Set `0` for no maximum.
      *
      * @return self
      */
-    public function maxValue(?int $value): self
+    public function withMaxValue(int $value): self
     {
         $new = clone $this;
         $new->maxValue = $value;
@@ -137,7 +110,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function size(string $value): self
+    public function withSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('"', self::SIZE_ALL);
@@ -157,7 +130,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function color(string $value): self
+    public function withColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL)) {
             $values = implode('"', self::COLOR_ALL);
@@ -168,5 +141,30 @@ final class ProgressBar extends Widget
         $new->color = $value;
 
         return $new;
+    }
+
+    private function buildOptions(): void
+    {
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-progressbar";
+        }
+
+        $this->options = $this->addOptions($this->options, 'progress');
+
+        if ($this->maxValue !== 0) {
+            $this->options['max'] = $this->maxValue;
+        }
+
+        if ($this->value > 0) {
+            $this->options['value'] = $this->value;
+        }
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        if ($this->color !== '') {
+            Html::addCssClass($this->options, $this->color);
+        }
     }
 }

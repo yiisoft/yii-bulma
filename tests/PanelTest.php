@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use Yiisoft\Yii\Bulma\Panel;
 use InvalidArgumentException;
+use Yiisoft\Yii\Bulma\Panel;
 
 final class PanelTest extends TestCase
 {
@@ -14,87 +14,66 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel"></nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel"></nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelOptions(): void
     {
         Panel::counter(0);
 
-        $html = Panel::widget()
-            ->options(['class' => 'my-class'])
-            ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="my-class panel"></nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $html = Panel::widget()->withOptions(['class' => 'my-class'])->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="my-class panel"></nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelHeading(): void
     {
         Panel::counter(0);
 
-        $html = Panel::widget()
-            ->heading('Repositories')
-            ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="panel-heading">Repositories</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $html = Panel::widget()->withHeading('Repositories')->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-heading">Repositories</p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelHeadingOptions(): void
     {
         Panel::counter(0);
 
-        $html = Panel::widget()
-            ->heading('Repositories')
-            ->headingOptions(['class' => 'my-class'])
-            ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="my-class panel-heading">Repositories</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $html = Panel::widget()->withHeading('Repositories')->withHeadingOptions(['class' => 'my-class'])->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="my-class panel-heading">Repositories</p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelColor(): void
     {
         Panel::counter(0);
 
-        $html = Panel::widget()
-            ->heading('Repositories')
-            ->color(Panel::COLOR_PRIMARY)
-            ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel is-primary">
-<p class="panel-heading">Repositories</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $html = Panel::widget()->withHeading('Repositories')->withColor(Panel::COLOR_PRIMARY)->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel is-primary">
+        <p class="panel-heading">Repositories</p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testExceptionPanelColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-
-        Panel::widget()->color('is-non-existent')->begin();
+        Panel::widget()->withColor('is-non-existent')->render();
     }
 
     public function testPanelTabs(): void
@@ -102,7 +81,7 @@ HTML;
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->tabs([
+            ->withTabs([
                 ['label' => 'All'],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
@@ -110,20 +89,18 @@ HTML;
                 ['label' => 'Forks'],
             ])
             ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="panel-tabs">
-<a>All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a>Forks</a>
-</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        <a>All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a>Forks</a>
+        </p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelTabsOptions(): void
@@ -131,29 +108,27 @@ HTML;
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->tabs([
+            ->withTabs([
                 ['label' => 'All'],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
                 ['label' => 'Sources'],
                 ['label' => 'Forks'],
             ])
-            ->tabsOptions(['class' => 'my-class'])
+            ->withTabsOptions(['class' => 'my-class'])
             ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="my-class panel-tabs">
-<a>All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a>Forks</a>
-</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="my-class panel-tabs">
+        <a>All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a>Forks</a>
+        </p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelTabActive(): void
@@ -161,7 +136,7 @@ HTML;
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->tabs([
+            ->withTabs([
                 ['label' => 'All', 'active' => true],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
@@ -169,20 +144,18 @@ HTML;
                 ['label' => 'Forks'],
             ])
             ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="panel-tabs">
-<a class="is-active">All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a>Forks</a>
-</p>
-</nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        <a class="is-active">All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a>Forks</a>
+        </p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelItems(): void
@@ -190,7 +163,7 @@ HTML;
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->tabs([
+            ->withTabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -207,38 +180,36 @@ HTML;
                     ],
                 ],
                 ['label' => 'Public'],
-                ['label' => 'Private'],
-                ['label' => 'Sources'],
-                ['label' => 'Forks'],
+                ['label' => 'Private', 'url' => '/private'],
+                ['label' => 'Sources', 'url' => '/sources'],
+                ['label' => 'Forks', 'url' => '#'],
             ])
             ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="panel-tabs">
-<a class="is-active" href="#w1-panel-c0">All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a>Forks</a>
-</p>
-<div id="w1-panel-c0">
-<a class="panel-block is-active">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-bulma
-</a>
-<a class="panel-block">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-marksheet
-</a>
-</div></nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        <a class="is-active" href="#w1-panel-c0">All</a>
+        <a>Public</a>
+        <a href="/private">Private</a>
+        <a href="/sources">Sources</a>
+        <a href="#">Forks</a>
+        </p>
+        <div id="w1-panel-c0">
+        <a class="panel-block is-active">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        bulma
+        </a>
+        <a class="panel-block">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        marksheet
+        </a>
+        </div></nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelItemsContainerOptions(): void
@@ -246,7 +217,7 @@ HTML;
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->tabs([
+            ->withTabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -284,77 +255,74 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
-<p class="panel-tabs">
-<a class="is-active" href="#w1-panel-c0">All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a href="#w1-panel-c4">Forks</a>
-</p>
-<div id="w1-panel-c0" class="some-class-name">
-<a class="panel-block is-active">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-bulma
-</a>
-<a class="panel-block">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-marksheet
-</a>
-</div>
-<div id="w1-panel-c4">
-<a class="panel-block is-active">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-minireset.css
-</a>
-<a class="panel-block">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-jgthms.github.io
-</a>
-</div></nav>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        <a class="is-active" href="#w1-panel-c0">All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a href="#w1-panel-c4">Forks</a>
+        </p>
+        <div id="w1-panel-c0" class="some-class-name">
+        <a class="panel-block is-active">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        bulma
+        </a>
+        <a class="panel-block">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        marksheet
+        </a>
+        </div>
+        <div id="w1-panel-c4">
+        <a class="panel-block is-active">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        minireset.css
+        </a>
+        <a class="panel-block">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        jgthms.github.io
+        </a>
+        </div></nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testPanelTemplate(): void
     {
         Panel::counter(0);
 
-        $template = <<<HTML
-{panelBegin}
-{panelHeading}
-{panelTabs}
-<div class="panel-block">
-<p class="control has-icons-left">
-<input class="input" type="text" placeholder="Search" />
-<span class="icon is-left">
-<i class="fas fa-search" aria-hidden="true"></i>
-</span>
-</p>
-</div>
-{panelItems}
-<div class="panel-block">
-<button class="button is-link is-outlined is-fullwidth">
-Reset all filters
-</button>
-</div>
-{panelEnd}
-HTML;
-
+        $template = <<<'HTML'
+        {panelBegin}
+        {panelHeading}
+        {panelTabs}
+        <div class="panel-block">
+        <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search" />
+        <span class="icon is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+        </p>
+        </div>
+        {panelItems}
+        <div class="panel-block">
+        <button class="button is-link is-outlined is-fullwidth">
+        Reset all filters
+        </button>
+        </div>
+        {panelEnd}
+        HTML;
         $html = Panel::widget()
-            ->template($template)
-            ->tabs([
+            ->withTemplate($template)
+            ->withTabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -375,49 +343,114 @@ HTML;
                 ['label' => 'Forks'],
             ])
             ->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
 
-        $expectedHtml = <<<HTML
-<nav id="w1-panel" class="panel">
 
+        <p class="panel-tabs">
+        <a class="is-active" href="#w1-panel-c0">All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a>Forks</a>
+        </p>
 
-<p class="panel-tabs">
-<a class="is-active" href="#w1-panel-c0">All</a>
-<a>Public</a>
-<a>Private</a>
-<a>Sources</a>
-<a>Forks</a>
-</p>
+        <div class="panel-block">
+        <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search" />
+        <span class="icon is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+        </p>
+        </div>
+        <div id="w1-panel-c0">
+        <a class="panel-block">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        bulma
+        </a>
+        <a class="panel-block">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        marksheet
+        </a>
+        </div>
+        <div class="panel-block">
+        <button class="button is-link is-outlined is-fullwidth">
+        Reset all filters
+        </button>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
 
-<div class="panel-block">
-<p class="control has-icons-left">
-<input class="input" type="text" placeholder="Search" />
-<span class="icon is-left">
-<i class="fas fa-search" aria-hidden="true"></i>
-</span>
-</p>
-</div>
-<div id="w1-panel-c0">
-<a class="panel-block">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-bulma
-</a>
-<a class="panel-block">
-<span class="panel-icon">
-<i class="fas fa-book" aria-hidden="true"></i>
-</span>
-marksheet
-</a>
-</div>
-<div class="panel-block">
-<button class="button is-link is-outlined is-fullwidth">
-Reset all filters
-</button>
-</div>
-</nav>
-HTML;
+    public function testTabMissigLabel(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        Panel::widget()->withTabs([[]])->render();
+    }
 
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+    public function testItemMissigLabel(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        Panel::widget()->withTabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])->render();
+    }
+
+    public function testEncodeTags(): void
+    {
+        Panel::counter(0);
+
+        $html = Panel::widget()
+            ->withEncodeTags()
+            ->withTabs([
+                [
+                    'label' => 'All',
+                    'active' => true,
+                    'items' => [
+                        [
+                            'label' => 'bulma',
+                            'icon' => 'fas fa-book',
+                            'active' => true,
+                        ],
+                        [
+                            'label' => 'marksheet',
+                            'icon' => 'fas fa-book',
+                        ],
+                    ],
+                ],
+                ['label' => 'Public'],
+                ['label' => 'Private', 'url' => '/private'],
+                ['label' => 'Sources', 'url' => '/sources'],
+                ['label' => 'Forks', 'url' => '#'],
+            ])
+            ->render();
+        $expected = <<<'HTML'
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        &lt;a class="is-active" href="#w1-panel-c0"&gt;All&lt;/a&gt;
+        &lt;a&gt;Public&lt;/a&gt;
+        &lt;a href="/private"&gt;Private&lt;/a&gt;
+        &lt;a href="/sources"&gt;Sources&lt;/a&gt;
+        &lt;a href="#"&gt;Forks&lt;/a&gt;
+        </p>
+        <div id="w1-panel-c0">
+        <a class="panel-block is-active">
+        &lt;span class="panel-icon"&gt;
+        &amp;lt;i class="fas fa-book" aria-hidden="true"&amp;gt;&amp;lt;/i&amp;gt;
+        &lt;/span&gt;
+        bulma
+        </a>
+        <a class="panel-block">
+        &lt;span class="panel-icon"&gt;
+        &amp;lt;i class="fas fa-book" aria-hidden="true"&amp;gt;&amp;lt;/i&amp;gt;
+        &lt;/span&gt;
+        marksheet
+        </a>
+        </div></nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 }

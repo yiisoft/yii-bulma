@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
@@ -16,10 +17,10 @@ use function in_array;
  *
  * ```php
  * echo Tabs::widget()
- *     ->alignment(Tabs::ALIGNMENT_CENTERED)
- *     ->size(Tabs::SIZE_LARGE)
- *     ->style(Tabs::STYLE_BOX)
- *     ->items([
+ *     ->withAlignment(Tabs::ALIGNMENT_CENTERED)
+ *     ->withSize(Tabs::SIZE_LARGE)
+ *     ->withStyle(Tabs::STYLE_BOX)
+ *     ->withItems([
  *         [
  *             'label' => 'Pictures',
  *             'icon' => 'fas fa-image',
@@ -71,34 +72,15 @@ final class Tabs extends Widget
     private ?string $currentPath = null;
     private bool $activateItems = true;
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private string $size = '';
     private string $alignment = '';
     private string $style = '';
     private array $tabsContent = [];
     private array $tabsContentOptions = [];
 
-    private function buildOptions(): void
-    {
-        Html::addCssClass($this->options, 'tabs');
-        Html::addCssClass($this->tabsContentOptions, 'tabs-content');
-
-        $this->options['id'] ??= $this->getId();
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
-        }
-
-        if ($this->alignment !== '') {
-            Html::addCssClass($this->options, $this->alignment);
-        }
-
-        if ($this->style !== '') {
-            Html::addCssClass($this->options, $this->style);
-        }
-    }
-
     /**
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -115,7 +97,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -145,7 +127,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function items(array $value): self
+    public function withItems(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -154,37 +136,37 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param bool $value Whether to automatically activate item its route matches the currently requested route.
+     * Disable activate items according to whether their currentPath.
      *
      * @return self
      */
-    public function activateItems(bool $value): self
+    public function withoutActivateItems(): self
     {
         $new = clone $this;
-        $new->activateItems = $value;
+        $new->activateItems = false;
 
         return $new;
     }
 
     /**
-     * @param bool $value Whether the labels for menu items should be HTML-encoded.
+     * When tags Labels HTML should not be encoded.
      *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
 
         return $new;
     }
 
     /**
-     * @param string|null $value Allows you to assign the current path of the URL from request controller.
+     * @param string $value Allows you to assign the current path of the URL from request controller.
      *
      * @return self
      */
-    public function currentPath(?string $value): self
+    public function withCurrentPath(string $value): self
     {
         $new = clone $this;
         $new->currentPath = $value;
@@ -193,34 +175,159 @@ final class Tabs extends Widget
     }
 
     /**
-     * @throws \JsonException
+     * @param string $value Size of the tabs list.
+     *
+     * @see self::SIZE_ALL
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return self
+     */
+    public function withSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->size = $value;
+
+        return $new;
+    }
+
+    /**
+     * @param string $value Alignment the tabs list.
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return self
+     */
+    public function withAlignment(string $value): self
+    {
+        if (!in_array($value, self::ALIGNMENT_ALL, true)) {
+            $values = implode('", "', self::ALIGNMENT_ALL);
+            throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->alignment = $value;
+
+        return $new;
+    }
+
+    /**
+     * @param string $value Style of the tabs list.
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return self
+     */
+    public function withStyle(string $value): self
+    {
+        if (!in_array($value, self::STYLE_ALL, true)) {
+            $values = implode('", "', self::STYLE_ALL);
+            throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->style = $value;
+
+        return $new;
+    }
+
+    /**
+     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     *
+     * @param array $value
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function withTabsContentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->tabsContentOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Allows you to enable the encoding tags html.
+     *
+     * @return self
+     */
+    public function withEncodeTags(): self
+    {
+        $new = clone $this;
+        $new->encodeTags = true;
+
+        return $new;
+    }
+
+    private function buildOptions(): void
+    {
+        Html::addCssClass($this->options, 'tabs');
+        Html::addCssClass($this->tabsContentOptions, 'tabs-content');
+
+        $this->options['id'] ??= $this->getId() . '-tabs';
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        if ($this->alignment !== '') {
+            Html::addCssClass($this->options, $this->alignment);
+        }
+
+        if ($this->style !== '') {
+            Html::addCssClass($this->options, $this->style);
+        }
+
+        if ($this->encodeTags === false) {
+            $this->options['encode'] = false;
+            $this->tabsContentOptions['encode'] = false;
+        }
+    }
+
+    /**
+     * @throws JsonException
      *
      * @return string
      */
     private function renderItems(): string
     {
         $items = '';
+
         foreach ($this->items as $index => $item) {
             if (isset($item['visible']) && $item['visible'] === false) {
                 continue;
             }
+
             $items .= "\n" . $this->renderItem($index, $item);
         }
 
-        return Html::tag('ul', $items . "\n");
+        $itemOptions = [];
+
+        if ($this->encodeTags === false) {
+            $itemOptions['encode'] = false;
+        }
+
+        return Html::tag('ul', $items . "\n", $itemOptions);
     }
 
     /**
      * @param int $index
      * @param array $item
      *
-     * @throws InvalidArgumentException|\JsonException
-     *
      * @return string
+     *@throws InvalidArgumentException|JsonException
+     *
      */
     private function renderItem(int $index, array $item): string
     {
-        $id = $this->getId() . '-c' . $index;
+        $id = $this->getId() . '-tabs-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $icon = ArrayHelper::getValue($item, 'icon', '');
         $label = ArrayHelper::getValue($item, 'label', '');
@@ -231,6 +338,13 @@ final class Tabs extends Widget
         $content = ArrayHelper::getValue($item, 'content');
         $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
         $active = $this->isItemActive($item);
+
+        if ($this->encodeTags === false) {
+            $contentOptions['encode'] = false;
+            $iconOptions['encode'] = false;
+            $linkOptions['encode'] = false;
+            $options['encode'] = false;
+        }
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -267,90 +381,11 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param array $item
-     *
-     * @return bool
-     */
-    private function isItemActive(array $item): bool
-    {
-        if (isset($item['active'])) {
-            return (bool)ArrayHelper::getValue($item, 'active');
-        }
-
-        return
-            $this->activateItems
-            && isset($item['url'])
-            && $item['url'] === $this->currentPath;
-    }
-
-    /**
-     * @param string $value Size of the tabs list.
-     *
-     * @see self::SIZE_ALL
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return self
-     */
-    public function size(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->size = $value;
-
-        return $new;
-    }
-
-    /**
-     * @param string $value Alignment the tabs list.
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return self
-     */
-    public function alignment(string $value): self
-    {
-        if (!in_array($value, self::ALIGNMENT_ALL, true)) {
-            $values = implode('", "', self::ALIGNMENT_ALL);
-            throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->alignment = $value;
-
-        return $new;
-    }
-
-    /**
-     * @param string $value Style of the tabs list.
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return self
-     */
-    public function style(string $value): self
-    {
-        if (!in_array($value, self::STYLE_ALL, true)) {
-            $values = implode('", "', self::STYLE_ALL);
-            throw new InvalidArgumentException("Invalid alignment. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->style = $value;
-
-        return $new;
-    }
-
-    /**
      * @param string $label
      * @param string $icon
      * @param array $iconOptions
      *
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -372,17 +407,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * Returns the Id of the widget.
-     *
-     * @return string|null Id of the widget.
-     */
-    protected function getId(): ?string
-    {
-        return parent::getId() . '-tabs';
-    }
-
-    /**
      * Renders tabs content.
+     *
+     * @throws JsonException
      *
      * @return string
      */
@@ -398,19 +425,19 @@ final class Tabs extends Widget
     }
 
     /**
-     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     * @param array $item
      *
-     * @param array $value
-     *
-     * @return self
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @return bool
      */
-    public function tabsContentOptions(array $value): self
+    private function isItemActive(array $item): bool
     {
-        $new = clone $this;
-        $new->tabsContentOptions = $value;
+        if (isset($item['active'])) {
+            return (bool)ArrayHelper::getValue($item, 'active');
+        }
 
-        return $new;
+        return
+            $this->activateItems
+            && isset($item['url'])
+            && $item['url'] === $this->currentPath;
     }
 }

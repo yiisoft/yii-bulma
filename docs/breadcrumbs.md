@@ -30,13 +30,13 @@ $this->setJsFiles($assetManager->getJsFiles());
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <?= Breadcrumbs::widget()
-    ->homeItem([
+    ->withHomeItem([
         'label' => 'Index',
         'url' => '/index',
         'icon' => 'fas fa-home',
         'iconOptions' => ['class' => 'icon']
     ])
-    ->items([
+    ->withItems([
         [
             'label' => 'About',
             'url' => '/about',
@@ -44,7 +44,7 @@ $this->setJsFiles($assetManager->getJsFiles());
             'iconOptions' => ['class' => 'icon']
         ]
     ])
-    ->options(['class' => 'is-centered'])
+    ->withOptions(['class' => 'is-centered'])
     ->render() ?>
 ```
 
@@ -59,13 +59,14 @@ The code above generates the following HTML:
 </nav>
 ```
 
-Method                             | Description                                                    | Default
------------------------------------|----------------------------------------------------------------|---------
-`id(string $value)`                | Widget ID.                                                     | `''`
-`encodeLabels(bool $value)`        | Whether to HTML-encode the link labels.                        | `true`
-`homeLink(array $value)`           | First hyperlink in the breadcrumbs (called home link).         | `''`
-`itemTemplate(string $value)`      | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
-`activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs.   | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
-`itemsOptions(array $value)`       | HTML attributes for the items widget.                          | `[]`
-`links(array $value)`              | List of links to appear in the breadcrumbs.                    | `[]`
-`options(array $value)`            | HTML attributes for the widget container nav tag.              | `[]`
+Method | Description | Default
+-------|-------------|---------
+`withId(string $value)` | Widget ID. | `''`
+`withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
+`withHomeLink(array $value)` | First hyperlink in the breadcrumbs (called home link). | `''`
+`withItemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
+`withActiveItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs. | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
+`withItemsOptions(array $value)` | HTML attributes for the items widget. | `[]`
+`withLinks(array $value)` | List of links to appear in the breadcrumbs. | `[]`
+`withOptions(array $value)` | HTML attributes for the widget container nav tag. | `[]`
+`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`

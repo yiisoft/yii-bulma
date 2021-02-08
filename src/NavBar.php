@@ -35,6 +35,7 @@ final class NavBar extends Widget
         'class' => 'navbar-burger',
         'role' => 'button',
     ];
+    private bool $encodeTags = false;
 
     public function begin(): ?string
     {
@@ -45,6 +46,7 @@ final class NavBar extends Widget
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
+
         if (!is_string($navTag) && !is_bool($navTag) && $navTag !== null) {
             throw new InvalidArgumentException('Tag should be either string, bool or null.');
         }
@@ -76,7 +78,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function brand(string $value): self
+    public function withBrand(string $value): self
     {
         $new = clone $this;
         $new->brand = $value;
@@ -90,7 +92,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function brandLabel(string $value): self
+    public function withBrandLabel(string $value): self
     {
         $new = clone $this;
         $new->brandLabel = $value;
@@ -104,7 +106,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function brandImage(string $value): self
+    public function withBrandImage(string $value): self
     {
         $new = clone $this;
         $new->brandImage = $value;
@@ -119,7 +121,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function brandUrl(string $value): self
+    public function withBrandUrl(string $value): self
     {
         $new = clone $this;
         $new->brandUrl = $value;
@@ -133,7 +135,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function toggleIcon(string $value): self
+    public function withToggleIcon(string $value): self
     {
         $new = clone $this;
         $new->toggleIcon = $value;
@@ -147,9 +149,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -163,9 +165,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandOptions(array $value): self
+    public function withBrandOptions(array $value): self
     {
         $new = clone $this;
         $new->brandOptions = $value;
@@ -179,9 +181,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandLabelOptions(array $value): self
+    public function withBrandLabelOptions(array $value): self
     {
         $new = clone $this;
         $new->brandLabelOptions = $value;
@@ -195,9 +197,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandImageOptions(array $value): self
+    public function withBrandImageOptions(array $value): self
     {
         $new = clone $this;
         $new->brandImageOptions = $value;
@@ -211,9 +213,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function itemsOptions(array $value): self
+    public function withItemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;
@@ -227,9 +229,9 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function menuOptions(array $value): self
+    public function withMenuOptions(array $value): self
     {
         $new = clone $this;
         $new->menuOptions = $value;
@@ -243,12 +245,25 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function toggleOptions(array $value): self
+    public function withToggleOptions(array $value): self
     {
         $new = clone $this;
         $new->toggleOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Allows you to enable the encoding tags html.
+     *
+     * @return self
+     */
+    public function withEncodeTags(): self
+    {
+        $new = clone $this;
+        $new->encodeTags = true;
+
         return $new;
     }
 
@@ -266,6 +281,10 @@ final class NavBar extends Widget
         $this->brandLabelOptions = $this->addOptions($this->brandLabelOptions, 'navbar-item');
         $this->brandImageOptions = $this->addOptions($this->brandImageOptions, 'navbar-item');
         $this->menuOptions = $this->addOptions($this->menuOptions, 'navbar-menu');
+
+        if ($this->encodeTags === false) {
+            $this->brandImageOptions['encode'] = false;
+        }
 
         $this->menuOptions['id'] = "{$id}-navbar-Menu";
 

@@ -38,11 +38,11 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= Message::widget()
-    ->headerColor('is-success')
-    ->headerMessage('Very important')
-    ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-    ->size('is-large')
-    ->options(['class' => 'has-text-justified']) ?>
+    ->withHeaderColor('is-success')
+    ->withHeaderMessage('Very important')
+    ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+    ->withSize('is-large')
+    ->withOptions(['class' => 'has-text-justified']) ?>
 ```
 
 The code above generates the following HTML:
@@ -61,16 +61,17 @@ The code above generates the following HTML:
 
 ## Reference
 
-Method                            | Description                                                                           |Default
-----------------------------------|---------------------------------------------------------------------------------------|-----------
-`id(string $value)`               | Widget ID. | `''`
-`body(string $value)`             | Message body. | `''`
-`headerColor(string $value)`      | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
-`headerMessage(string $value)`    | Message header. | `''`
-`options(array $value)`           | HTML attributes for the widget container tag. | `[]`
-`optionsBody(array $value)`       | HTML attributes for the widget body tag. | `[]`
-`optionsCloseButton(array $value)`| Options for rendering the close button tag. | `[]`
-`optionsHeader(array $value)`     | HTML attributes for the widget header tag. | `[]`
-`size(string $value)`             | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`. | `normal`
-`withoutCloseButton(bool $value)` | Allows you to disable close button. | `false`
-`withoutHeader(bool $value)`      | Allows you to disable header. | `true`
+Method | Description | Default
+-------|-------------|---------
+`withId(string $value)` | Widget ID. | `''`
+`withBody(string $value)` | Message body. | `''`
+`withHeaderColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
+`withHeaderMessage(string $value)` | Message header. | `''`
+`withOptions(array $value)` | HTML attributes for the widget container tag. | `[]`
+`withOptionsBody(array $value)` | HTML attributes for the widget body tag. | `[]`
+`withOptionsCloseButton(array $value)`| Options for rendering the close button tag. | `[]`
+`withOptionsHeader(array $value)` | HTML attributes for the widget header tag. | `[]`
+`withSize(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
+`withCloseButton()` | Allows you to enable close button. | `true`
+`withoutHeader()` | Allows you to disable header. | `false`
+`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`

@@ -23,7 +23,7 @@ abstract class Widget extends BaseWidget
      *
      * @return static
      */
-    public function id(string $value): self
+    public function withId(string $value): self
     {
         $new = clone $this;
         $new->id = $value;

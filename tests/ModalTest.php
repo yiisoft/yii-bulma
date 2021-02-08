@@ -13,24 +13,19 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->toggleButtonEnabled(false)
-            ->closeButtonEnabled(false)
-            ->begin();
+        $html = Modal::widget()->withoutToggleButton()->withoutCloseButton()->begin();
         $html .= 'Say hello...';
         $html .= Modal::end();
+        $expected = <<<'HTML'
 
-        $expectedHtml = <<<HTML
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
 
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-
-<div class="modal-content">
-Say hello...</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        <div class="modal-content">
+        Say hello...</div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testOptions(): void
@@ -38,242 +33,201 @@ HTML;
         Modal::counter(0);
 
         $html = Modal::widget()
-            ->toggleButtonEnabled(false)
-            ->closeButtonEnabled(false)
-            ->options(['class' => 'widescreen'])
+            ->withoutToggleButton()
+            ->withoutCloseButton()
+            ->withOptions(['class' => 'widescreen'])
             ->begin();
         $html .= Modal::end();
+        $expected = <<<'HTML'
 
-        $expectedHtml = <<<HTML
+        <div id="w1-modal" class="modal widescreen">
+        <div class="modal-background"></div>
 
-<div id="w1-modal" class="modal widescreen">
-<div class="modal-background"></div>
-
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testToggleButtonEnabled(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->closeButtonEnabled(false)
-            ->begin();
+        $html = Modal::widget()->withoutCloseButton()->begin();
         $html .= Modal::end();
 
-        $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
+        $expected = <<<'HTML'
+        <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
 
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testToggleButtonLabel(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->toggleButtonLabel('Click to open.')
-            ->begin();
+        $html = Modal::widget()->withToggleButtonLabel('Click to open.')->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Click to open.</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Click to open.</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testToggleButtonColor(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->toggleButtonColor(Modal::COLOR_INFO)
-            ->begin();
+        $html = Modal::widget()->withToggleButtonColor(Modal::COLOR_INFO)->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button is-info" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button is-info" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testToggleButtonSize(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->toggleButtonSize(Modal::SIZE_LARGE)
-            ->begin();
+        $html = Modal::widget()->withToggleButtonSize(Modal::SIZE_LARGE)->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button is-large" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button is-large" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testCloseButtonEnabled(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->toggleButtonEnabled(false)
-            ->begin();
+        $html = Modal::widget()->withoutToggleButton()->begin();
         $html .= Modal::end();
+        $expected = <<<'HTML'
 
-        $expectedHtml = <<<HTML
-
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testCloseButtonSize(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->closeButtonSize(Modal::SIZE_LARGE)
-            ->begin();
+        $html = Modal::widget()->withCloseButtonSize(Modal::SIZE_LARGE)->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close is-large" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close is-large" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testCloseButtonOptions(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->closeButtonOptions(['class' => 'some-class'])
-            ->begin();
+        $html = Modal::widget()->withCloseButtonOptions(['class' => 'some-class'])->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close some-class" aria-label="close"></button>
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close some-class" aria-label="close"></button>
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testContentOptions(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->contentOptions(['class' => 'some-class'])
-            ->begin();
+        $html = Modal::widget()->withContentOptions(['class' => 'some-class'])->begin();
         $html .= Modal::end();
-
-        $expectedHtml = <<<HTML
-<button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-<button type="button" class="modal-close" aria-label="close"></button>
-<div class="modal-content some-class">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
+        <button type="button" class="modal-close" aria-label="close"></button>
+        <div class="modal-content some-class">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-
-        Modal::widget()->toggleButtonSize('is-non-existent');
+        Modal::widget()->withToggleButtonSize('is-non-existent');
     }
 
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-
-        Modal::widget()->toggleButtonColor('is-non-existent');
+        Modal::widget()->withToggleButtonColor('is-non-existent');
     }
 
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-
-        Modal::widget()->closeButtonSize('is-non-existent');
+        Modal::widget()->withCloseButtonSize('is-non-existent');
     }
 
     public function testToggleButtonOptions(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()
-            ->closeButtonEnabled(false)
-            ->toggleButtonOptions(['class' => 'testMe'])
-            ->begin();
+        $html = Modal::widget()->withoutCloseButton()->withToggleButtonOptions(['class' => 'testMe'])->begin();
         $html .= Modal::end();
+        $expected = <<<'HTML'
+        <button type="button" class="button testMe" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <div id="w1-modal" class="modal">
+        <div class="modal-background"></div>
 
-        $expectedHtml = <<<HTML
-<button type="button" class="button testMe" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-<div id="w1-modal" class="modal">
-<div class="modal-background"></div>
-
-<div class="modal-content">
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        <div class="modal-content">
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 }

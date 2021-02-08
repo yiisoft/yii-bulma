@@ -13,10 +13,7 @@ use Yiisoft\Html\Html;
  * For example,
  *
  * ```php
- * <?= Message::widget()
- *     ->headerColor('success')
- *     ->header('System info')
- *     ->body('Say hello...') ?>
+ * <?= Message::widget()->withHeaderColor('success')->withHeader('System info')->withBody('Say hello...') ?>
  * ```
  *
  * @link https://bulma.io/documentation/components/message/
@@ -33,6 +30,7 @@ final class Message extends Widget
     private string $size = '';
     private bool $withoutCloseButton = false;
     private bool $withoutHeader = true;
+    private bool $encodeTags = false;
 
     protected function run(): string
     {
@@ -55,7 +53,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function body(string $value): self
+    public function withBody(string $value): self
     {
         $new = clone $this;
         $new->body = $value;
@@ -70,7 +68,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function headerColor(string $value): self
+    public function withHeaderColor(string $value): self
     {
         $new = clone $this;
         $new->headerColor = $value;
@@ -85,7 +83,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function headerMessage(string $value): self
+    public function withHeaderMessage(string $value): self
     {
         $new = clone $this;
         $new->headerMessage = $value;
@@ -95,13 +93,13 @@ final class Message extends Widget
     /**
      * The HTML attributes for the widget container tag.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
      * @return self
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -111,13 +109,13 @@ final class Message extends Widget
     /**
      * The HTML attributes for the widget body tag.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
      * @return self
      */
-    public function bodyOptions(array $value): self
+    public function withBodyOptions(array $value): self
     {
         $new = clone $this;
         $new->bodyOptions = $value;
@@ -134,7 +132,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function closeButtonOptions(array $value): self
+    public function withCloseButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->closeButtonOptions = $value;
@@ -144,13 +142,13 @@ final class Message extends Widget
     /**
      * The HTML attributes for the widget header tag.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
      * @return self
      */
-    public function headerOptions(array $value): self
+    public function withHeaderOptions(array $value): self
     {
         $new = clone $this;
         $new->headerOptions = $value;
@@ -164,7 +162,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function size(string $value): self
+    public function withSize(string $value): self
     {
         $new = clone $this;
         $new->size = $value;
@@ -172,30 +170,39 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to disable close button message widget.
-     *
-     * @param bool $value
+     * Allows you to enable close button message widget.
      *
      * @return self
      */
-    public function withoutCloseButton(bool $value): self
+    public function withCloseButton(): self
     {
         $new = clone $this;
-        $new->withoutCloseButton = $value;
+        $new->withoutCloseButton = true;
         return $new;
     }
 
     /**
      * Allows you to disable header widget.
      *
-     * @param bool $value
+     * @return self
+     */
+    public function withoutHeader(): self
+    {
+        $new = clone $this;
+        $new->withoutHeader = false;
+        return $new;
+    }
+
+    /**
+     * Allows you to enable the encoding tags html.
      *
      * @return self
      */
-    public function withoutHeader(bool $value): self
+    public function withEncodeTags(): self
     {
         $new = clone $this;
-        $new->withoutHeader = $value;
+        $new->encodeTags = true;
+
         return $new;
     }
 
@@ -216,6 +223,11 @@ final class Message extends Widget
         $this->bodyOptions = $this->addOptions($this->bodyOptions, 'message-body');
         $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
         $this->headerOptions = $this->addOptions($this->headerOptions, 'message-header');
+
+        if ($this->encodeTags === false) {
+            $this->closeButtonOptions['encode'] = false;
+            $this->options['encode'] = false;
+        }
     }
 
     private function renderHeader(): string
@@ -252,10 +264,13 @@ final class Message extends Widget
             return null;
         }
 
+        $spanOptions = ['aria-hidden' => 'true', 'encode' => false];
         $tag = ArrayHelper::remove($this->closeButtonOptions, 'tag', 'button');
-        $label = ArrayHelper::remove($this->closeButtonOptions, 'label', Html::tag('span', '&times;', [
-            'aria-hidden' => 'true',
-        ]));
+        $label = ArrayHelper::remove(
+            $this->closeButtonOptions,
+            'label',
+            Html::tag('span', '&times;', $spanOptions)
+        );
 
         if ($tag === 'button') {
             $this->closeButtonOptions['type'] = 'button';

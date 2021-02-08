@@ -29,6 +29,7 @@ final class Dropdown extends Widget
     private string $itemsClass = 'dropdown-menu';
     private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private bool $encloseByContainer = true;
     private array $items = [];
     private array $itemsOptions = [];
@@ -51,7 +52,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function buttonLabel(string $value): self
+    public function withButtonLabel(string $value): self
     {
         $new = clone $this;
         $new->buttonLabel = $value;
@@ -65,9 +66,9 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function buttonLabelOptions(array $value): self
+    public function withButtonLabelOptions(array $value): self
     {
         $new = clone $this;
         $new->buttonLabelOptions = $value;
@@ -81,7 +82,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function dividerClass(string $value): self
+    public function withDividerClass(string $value): self
     {
         $new = clone $this;
         $new->dividerClass = $value;
@@ -95,7 +96,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function itemClass(string $value): self
+    public function withItemClass(string $value): self
     {
         $new = clone $this;
         $new->itemClass = $value;
@@ -109,7 +110,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function itemsClass(string $value): self
+    public function withItemsClass(string $value): self
     {
         $new = clone $this;
         $new->itemsClass = $value;
@@ -117,30 +118,26 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Whether the labels for header items should be HTML-encoded.
+     * When tags Labels HTML should not be encoded.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
         return $new;
     }
 
     /**
-     * Set enclosed by container dropdown.
-     *
-     * @param bool $value
+     * Disable enclosed by container dropdown.
      *
      * @return self
      */
-    public function encloseByContainer(bool $value): self
+    public function withoutEncloseByContainer(): self
     {
         $new = clone $this;
-        $new->encloseByContainer = $value;
+        $new->encloseByContainer = false;
         return $new;
     }
 
@@ -163,7 +160,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function items(array $value): self
+    public function withItems(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -177,9 +174,9 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function options(array $value): self
+    public function withOptions(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -193,9 +190,9 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function buttonOptions(array $value): self
+    public function withButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->buttonOptions = $value;
@@ -209,9 +206,9 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function itemsOptions(array $value): self
+    public function withItemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;
@@ -225,12 +222,25 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function triggerOptions(array $value): self
+    public function withTriggerOptions(array $value): self
     {
         $new = clone $this;
         $new->triggerOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Allows you to enable the encoding tags html.
+     *
+     * @return self
+     */
+    public function withEncodeTags(): self
+    {
+        $new = clone $this;
+        $new->encodeTags = true;
+
         return $new;
     }
 
@@ -329,6 +339,10 @@ final class Dropdown extends Widget
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
 
+            if ($this->encodeTags === false) {
+                $linkOptions['encode'] = false;
+            }
+
             Html::addCssClass($linkOptions, $this->itemClass);
 
             if ($disabled) {
@@ -347,14 +361,21 @@ final class Dropdown extends Widget
             } else {
                 $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions));
 
-                $lines[] = self::widget()
-                    ->dividerClass($this->dividerClass)
-                    ->itemClass($this->itemClass)
-                    ->itemsClass($this->itemsClass)
-                    ->encloseByContainer($this->encloseByContainer)
-                    ->encodeLabels($this->encodeLabels)
-                    ->items($item['items'])
-                    ->render();
+                $dropdownWidget = self::widget()
+                    ->withDividerClass($this->dividerClass)
+                    ->withItemClass($this->itemClass)
+                    ->withItemsClass($this->itemsClass)
+                    ->withItems($item['items']);
+
+                if ($this->encloseByContainer === false) {
+                    $dropdownWidget = $dropdownWidget->withoutEncloseByContainer();
+                }
+
+                if ($this->encodeLabels === false) {
+                    $dropdownWidget = $dropdownWidget->withoutEncodeLabels();
+                }
+
+                $lines[] = $dropdownWidget->render();
             }
         }
 
@@ -368,9 +389,9 @@ final class Dropdown extends Widget
     {
         if ($icon !== '') {
             $label = Html::beginTag('span', $iconOptions) .
-                Html::tag('i', '', ['class' => $icon]) .
+                Html::tag('i', '', ['class' => $icon, 'encode' => false]) .
                 Html::endTag('span') .
-                Html::tag('span', $label);
+                Html::tag('span', $label, ['encode' => false]);
         }
 
         return $label;
