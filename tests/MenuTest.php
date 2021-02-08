@@ -12,7 +12,7 @@ final class MenuTest extends TestCase
     {
         Menu::counter(0);
 
-        $html = Menu::widget()->withItems([['label' => 'Login', 'url' => 'auth/login']])->render();
+        $html = Menu::widget()->items([['label' => 'Login', 'url' => 'auth/login']])->render();
         $expected = <<<'HTML'
         <aside class="menu">
         <ul class="menu-list">
@@ -28,7 +28,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withItems([
+            ->items([
                 ['label' => 'General',
                     'items' => [
                         [
@@ -78,7 +78,7 @@ final class MenuTest extends TestCase
     {
         Menu::counter(0);
 
-        $html = Menu::widget()->withItems([])->render();
+        $html = Menu::widget()->items([])->render();
         $this->assertEmpty($html);
     }
 
@@ -86,7 +86,7 @@ final class MenuTest extends TestCase
     {
         Menu::counter(0);
 
-        $html = Menu::widget()->withItems([['url' => '#']])->render();
+        $html = Menu::widget()->items([['url' => '#']])->render();
         $expected = <<<'HTML'
         <aside class="menu">
         <ul class="menu-list">
@@ -102,7 +102,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withItems([
+            ->items([
                 ['label' => 'General',
                     'items' => [
                         [
@@ -150,7 +150,7 @@ final class MenuTest extends TestCase
 
         $html = Menu::widget()
             ->withoutEncodeLabels()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Authors & Publications',
                     'url' => '#',
@@ -170,7 +170,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Authors & Publications',
                     'url' => '#',
@@ -190,7 +190,7 @@ final class MenuTest extends TestCase
 
         $html = Menu::widget()
             ->withoutEncodeLabels()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Authors & Publications',
                     'url' => '#',
@@ -212,10 +212,10 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withOptions([
+            ->options([
                 'tag' => false,
             ])
-            ->withItems([
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -241,10 +241,10 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withOptions([
+            ->options([
                 'tag' => false,
             ])
-            ->withItems([
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -254,7 +254,7 @@ final class MenuTest extends TestCase
                     'url' => '#',
                 ],
             ])
-            ->withItemOptions(['tag' => false])
+            ->itemOptions(['tag' => false])
             ->render();
         $expected = <<<'HTML'
         <aside class="menu">
@@ -272,9 +272,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withLabelTemplate('')
-            ->withLinkTemplate('')
-            ->withItems([
+            ->labelTemplate('')
+            ->linkTemplate('')
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -307,9 +307,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withLinkTemplate('')
-            ->withLabelTemplate('')
-            ->withItems([
+            ->linkTemplate('')
+            ->labelTemplate('')
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -342,8 +342,8 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withActiveCssClass('item-active')
-            ->withItems([
+            ->activeCssClass('item-active')
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -399,8 +399,8 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withActiveCssClass('item-active')
-            ->withItems([
+            ->activeCssClass('item-active')
+            ->items([
                 [
                     'label' => 'item1',
                     'url' => '#',
@@ -447,8 +447,8 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('/setting')
-            ->withItems([
+            ->currentPath('/setting')
+            ->items([
                 [
                     'label' => 'Setting',
                     'url' => '/setting',
@@ -475,9 +475,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('/setting')
-            ->withFirstItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('/setting')
+            ->firstItemCssClass('testMe')
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -515,9 +515,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('/setting')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('/setting')
+            ->lastItemCssClass('testMe')
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -556,9 +556,9 @@ final class MenuTest extends TestCase
 
         $html = Menu::widget()
             ->withoutActivateItems()
-            ->withCurrentPath('user/block')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('user/block')
+            ->lastItemCssClass('testMe')
+            ->items([
                 [
                     'label' => 'Users',
                     'items' => [
@@ -594,9 +594,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('user/block')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('user/block')
+            ->lastItemCssClass('testMe')
+            ->items([
                 [
                     'label' => 'Users',
                     'items' => [
@@ -635,9 +635,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('user/block')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('user/block')
+            ->lastItemCssClass('testMe')
+            ->items([
                 [
                     'label' => 'Users',
                     'items' => [
@@ -674,9 +674,9 @@ final class MenuTest extends TestCase
 
         $html = Menu::widget()
             ->withActivateParents()
-            ->withCurrentPath('user/block')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('user/block')
+            ->lastItemCssClass('testMe')
+            ->items([
                 [
                     'label' => 'Users',
                     'items' => [
@@ -715,13 +715,13 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withBrand(
+            ->brand(
                 '<div class=aside-tools>' . "\n" . '<div class=aside-tools-label>' . "\n" .
                 '<span><b>Brand</b> Example</span>' . "\n" . '</div>' . "\n" . '</div>'
             )
-            ->withCurrentPath('/setting')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('/setting')
+            ->lastItemCssClass('testMe')
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -764,10 +764,10 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('/setting')
+            ->currentPath('/setting')
             ->withoutHideEmptyItems()
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->lastItemCssClass('testMe')
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -803,9 +803,9 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withCurrentPath('/setting')
-            ->withLastItemCssClass('testMe')
-            ->withItems([
+            ->currentPath('/setting')
+            ->lastItemCssClass('testMe')
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -842,7 +842,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withItems([
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],
@@ -858,7 +858,7 @@ final class MenuTest extends TestCase
                     'url' => '/profile',
                 ],
             ])
-            ->withSubMenuTemplate('<ul>\n{items}\n</ul>')
+            ->subMenuTemplate('<ul>\n{items}\n</ul>')
             ->render();
         $expected = <<<'HTML'
         <aside class="menu">
@@ -879,7 +879,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withItems([
+            ->items([
                 ['label' => 'Users',
                     'items' => [
                         ['label' => 'Manager', 'url' => 'user/index'],

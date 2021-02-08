@@ -38,7 +38,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withFooterOptions(['class' => 'bg-transparent'])->begin();
+        $html = ModalCard::widget()->footerOptions(['class' => 'bg-transparent'])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -62,7 +62,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withContentOptions(['class' => 'bg-white'])->begin();
+        $html = ModalCard::widget()->contentOptions(['class' => 'bg-white'])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -86,7 +86,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withToggleButtonLabel('Launch modal')->begin();
+        $html = ModalCard::widget()->toggleButtonLabel('Launch modal')->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Launch modal</button>
@@ -110,7 +110,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withToggleButtonOptions(['disabled' => true])->begin();
+        $html = ModalCard::widget()->toggleButtonOptions(['disabled' => true])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" disabled data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -134,7 +134,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withToggleButtonSize(ModalCard::SIZE_LARGE)->begin();
+        $html = ModalCard::widget()->toggleButtonSize(ModalCard::SIZE_LARGE)->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button is-large" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -158,7 +158,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withToggleButtonColor(ModalCard::COLOR_PRIMARY)->begin();
+        $html = ModalCard::widget()->toggleButtonColor(ModalCard::COLOR_PRIMARY)->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button is-primary" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -206,7 +206,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withCloseButtonSize(ModalCard::SIZE_LARGE)->begin();
+        $html = ModalCard::widget()->closeButtonSize(ModalCard::SIZE_LARGE)->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -230,7 +230,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withCloseButtonOptions(['disabled' => true])->begin();
+        $html = ModalCard::widget()->closeButtonOptions(['disabled' => true])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -278,7 +278,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withHeaderOptions(['class' => 'bg-info'])->begin();
+        $html = ModalCard::widget()->headerOptions(['class' => 'bg-info'])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -302,7 +302,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withFooter('Some text')->begin();
+        $html = ModalCard::widget()->footer('Some text')->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -326,7 +326,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withTitle('Some title')->begin();
+        $html = ModalCard::widget()->title('Some title')->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -350,7 +350,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withBodyOptions(['class' => 'bg-white'])->begin();
+        $html = ModalCard::widget()->bodyOptions(['class' => 'bg-white'])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -374,7 +374,7 @@ final class ModalCardTest extends TestCase
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withTitleOptions(['class' => 'text-info'])->begin();
+        $html = ModalCard::widget()->titleOptions(['class' => 'text-info'])->begin();
         $html .= ModalCard::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -397,26 +397,26 @@ final class ModalCardTest extends TestCase
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        ModalCard::widget()->withToggleButtonSize('is-non-existent')->begin();
+        ModalCard::widget()->toggleButtonSize('is-non-existent')->begin();
     }
 
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        ModalCard::widget()->withToggleButtonColor('is-non-existent')->begin();
+        ModalCard::widget()->toggleButtonColor('is-non-existent')->begin();
     }
 
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        ModalCard::widget()->withCloseButtonSize('is-non-existent')->begin();
+        ModalCard::widget()->closeButtonSize('is-non-existent')->begin();
     }
 
     public function testModalCardOptions(): void
     {
         ModalCard::counter(0);
 
-        $html = ModalCard::widget()->withOptions(['class' => 'testMe'])->begin();
+        $html = ModalCard::widget()->options(['class' => 'testMe'])->begin();
         $html .= 'Say hello...';
         $html .= ModalCard::end();
         $expected = <<<'HTML'

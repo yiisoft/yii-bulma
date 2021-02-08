@@ -87,7 +87,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function withHomeItem(array $value): self
+    public function homeItem(array $value): self
     {
         $new = clone $this;
         $new->homeItem = $value;
@@ -102,7 +102,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function withItemTemplate(string $value): self
+    public function itemTemplate(string $value): self
     {
         $new = clone $this;
         $new->itemTemplate = $value;
@@ -117,7 +117,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function withActiveItemTemplate(string $value): self
+    public function activeItemTemplate(string $value): self
     {
         $new = clone $this;
         $new->activeItemTemplate = $value;
@@ -140,7 +140,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function withItems(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -156,7 +156,7 @@ class Breadcrumbs extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -172,7 +172,7 @@ class Breadcrumbs extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withItemsOptions(array $value): self
+    public function itemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;

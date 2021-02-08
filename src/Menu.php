@@ -90,7 +90,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withActiveCssClass(string $value): self
+    public function activeCssClass(string $value): self
     {
         $new = clone $this;
         $new->activeCssClass = $value;
@@ -104,7 +104,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withBrand(string $value): self
+    public function brand(string $value): self
     {
         $new = clone $this;
         $new->brand = $value;
@@ -118,7 +118,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withCurrentPath(string $value): self
+    public function currentPath(string $value): self
     {
         $new = clone $this;
         $new->currentPath = $value;
@@ -145,7 +145,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withFirstItemCssClass(string $value): self
+    public function firstItemCssClass(string $value): self
     {
         $new = clone $this;
         $new->firstItemCssClass = $value;
@@ -200,7 +200,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withItems(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -222,7 +222,7 @@ final class Menu extends Widget
      *
      * {@see Html::renderTagAttributes() for details on how attributes are being rendered}
      */
-    public function withItemOptions(array $value): self
+    public function itemOptions(array $value): self
     {
         $new = clone $this;
         $new->itemOptions = $value;
@@ -240,7 +240,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withLabelTemplate(string $value): self
+    public function labelTemplate(string $value): self
     {
         $new = clone $this;
         $new->labelTemplate = $value;
@@ -255,7 +255,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withLastItemCssClass(string $value): self
+    public function lastItemCssClass(string $value): self
     {
         $new = clone $this;
         $new->lastItemCssClass = $value;
@@ -272,7 +272,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withLinkTemplate(string $value): self
+    public function linkTemplate(string $value): self
     {
         $new = clone $this;
         $new->linkTemplate = $value;
@@ -291,7 +291,7 @@ final class Menu extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -307,7 +307,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withSubMenuTemplate(string $value): self
+    public function subMenuTemplate(string $value): self
     {
         $new = clone $this;
         $new->subMenuTemplate = $value;

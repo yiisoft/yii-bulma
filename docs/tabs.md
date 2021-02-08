@@ -27,10 +27,10 @@ $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 
 echo Tabs::widget()
-    ->withAlignment(Tabs::ALIGNMENT_CENTERED)
-    ->withSize(Tabs::SIZE_LARGE)
-    ->withStyle(Tabs::STYLE_BOX)
-    ->withItems([
+    ->alignment(Tabs::ALIGNMENT_CENTERED)
+    ->size(Tabs::SIZE_LARGE)
+    ->style(Tabs::STYLE_BOX)
+    ->items([
         [
             'label' => 'Pictures',
             'icon' => 'fas fa-image',
@@ -98,13 +98,13 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-`withOptions(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
-`withItems(array $value)` | List of tab items. | `[]`
-`withCurrentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
+`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
+`items(array $value)` | List of tab items. | `[]`
+`currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
 `withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
 `withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |
-`withSize(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
-`withAlignment(string $value)` | Alignment of the tabs list. | `''`
-`withStyle(string $value)` | Style of the tabs list. | `''`
-`withTabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
+`size(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
+`alignment(string $value)` | Alignment of the tabs list. | `''`
+`style(string $value)` | Style of the tabs list. | `''`
+`tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
 `withEncodeTags()` | Allows you to enable the encoding tags html. | `true`

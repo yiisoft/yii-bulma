@@ -13,7 +13,7 @@ final class BreadcrumbsTest extends TestCase
     {
         Breadcrumbs::counter(0);
 
-        $html = Breadcrumbs::widget()->withItems([['label' => 'About', 'url' => '/about']])->render();
+        $html = Breadcrumbs::widget()->items([['label' => 'About', 'url' => '/about']])->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -30,7 +30,7 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withItems(
+            ->items(
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
@@ -50,7 +50,7 @@ final class BreadcrumbsTest extends TestCase
 
         $html = Breadcrumbs::widget()
             ->withoutEncodeLabels()
-            ->withItems(
+            ->items(
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
@@ -74,8 +74,8 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index', 'url' => '/index'])
-            ->withItems([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -88,8 +88,8 @@ final class BreadcrumbsTest extends TestCase
         $this->assertEqualsWithoutLE($expected, $html);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index'])
-            ->withItems([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index'])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
         $expected = <<<'HTML'
         <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -107,9 +107,9 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index', 'url' => '/index'])
-            ->withItemTemplate("<div>{link}</div>\n")
-            ->withItems([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->itemTemplate("<div>{link}</div>\n")
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -127,9 +127,9 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index', 'url' => '/index'])
-            ->withActiveItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
-            ->withItems([['label' => 'About', 'url' => '/about']])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
+            ->items([['label' => 'About', 'url' => '/about']])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -144,7 +144,7 @@ final class BreadcrumbsTest extends TestCase
 
     public function testBreadcrumbsLinksEmpty(): void
     {
-        $html = Breadcrumbs::widget()->withItems([])->render();
+        $html = Breadcrumbs::widget()->items([])->render();
         $this->assertempty($html);
     }
 
@@ -152,7 +152,7 @@ final class BreadcrumbsTest extends TestCase
     {
         Breadcrumbs::counter(0);
 
-        $html = Breadcrumbs::widget()->withItems(['label' => 'about'])->render();
+        $html = Breadcrumbs::widget()->items(['label' => 'about'])->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -169,7 +169,7 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withItems([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
+            ->items([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -187,7 +187,7 @@ final class BreadcrumbsTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
         $html = Breadcrumbs::widget()
-            ->withItems([['url' => '/about', 'template' => '<div>{link}</div>']])
+            ->items([['url' => '/about', 'template' => '<div>{link}</div>']])
             ->render();
     }
 
@@ -196,9 +196,9 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index', 'url' => '/index'])
-            ->withItems([['label' => 'About', 'url' => '/about']])
-            ->withOptions(['class' => 'is-centered'])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
+            ->options(['class' => 'is-centered'])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
@@ -216,9 +216,9 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(['label' => 'Index', 'url' => '/index'])
-            ->withItems([['label' => 'About', 'url' => '/about']])
-            ->withItemsOptions(['class' => 'testMe'])
+            ->homeItem(['label' => 'Index', 'url' => '/index'])
+            ->items([['label' => 'About', 'url' => '/about']])
+            ->itemsOptions(['class' => 'testMe'])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -236,7 +236,7 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withHomeItem(
+            ->homeItem(
                 [
                     'label' => 'Index',
                     'url' => '/index',
@@ -244,7 +244,7 @@ final class BreadcrumbsTest extends TestCase
                     'iconOptions' => ['class' => 'icon'],
                 ]
             )
-            ->withItems(
+            ->items(
                 [
                     [
                         'label' => 'About',
@@ -254,7 +254,7 @@ final class BreadcrumbsTest extends TestCase
                     ],
                 ]
             )
-            ->withOptions(['class' => 'is-centered'])
+            ->options(['class' => 'is-centered'])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
@@ -272,7 +272,7 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::counter(0);
 
         $html = Breadcrumbs::widget()
-            ->withItems([['label' => 'About', 'url' => '/about']])
+            ->items([['label' => 'About', 'url' => '/about']])
             ->withoutHomeItem()
             ->render();
         $expected = <<<'HTML'
@@ -292,7 +292,7 @@ final class BreadcrumbsTest extends TestCase
         $html = Breadcrumbs::widget()
             ->withoutEncodeLabels()
             ->withEncodeTags()
-            ->withItems(
+            ->items(
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',

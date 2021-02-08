@@ -13,8 +13,8 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
@@ -36,8 +36,8 @@ final class MessageTest extends TestCase
 
         $html = Message::widget()
             ->autoIdPrefix('yii')
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->render();
         $expected = <<<'HTML'
         <div id="yii1-message" class="message is-dark">
@@ -58,9 +58,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withHeaderColor('is-success')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerColor('is-success')
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-success">
@@ -81,9 +81,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withOptions(['class' => 'has-text-justified'])
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->options(['class' => 'has-text-justified'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message has-text-justified is-dark">
@@ -104,9 +104,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withBodyOptions(['class' => 'has-text-justified'])
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->bodyOptions(['class' => 'has-text-justified'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
@@ -127,9 +127,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->WithCloseButtonOptions(['class' => 'btn'])
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->closeButtonOptions(['class' => 'btn'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
@@ -150,9 +150,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withHeaderOptions(['class' => 'has-text-justified'])
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerOptions(['class' => 'has-text-justified'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
@@ -173,9 +173,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withId('testMe')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->id('testMe')
             ->render();
         $expected = <<<'HTML'
         <div id="testMe-message" class="message is-dark">
@@ -196,9 +196,9 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withSize('is-large')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->size('is-large')
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark is-large">
@@ -218,8 +218,8 @@ final class MessageTest extends TestCase
     {
         Message::counter(0);
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->withCloseButton()
             ->render();
         $expected = <<<'HTML'
@@ -240,8 +240,8 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->withoutHeader()
             ->render();
         $expected = <<<'HTML'
@@ -259,8 +259,8 @@ final class MessageTest extends TestCase
         Message::counter(0);
 
         $html = Message::widget()
-            ->withHeaderMessage('Very important')
-            ->withBody('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+            ->headerMessage('Very important')
+            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->withEncodeTags()
             ->render();
         $expected = <<<'HTML'

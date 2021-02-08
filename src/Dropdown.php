@@ -52,7 +52,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withButtonLabel(string $value): self
+    public function buttonLabel(string $value): self
     {
         $new = clone $this;
         $new->buttonLabel = $value;
@@ -68,7 +68,7 @@ final class Dropdown extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withButtonLabelOptions(array $value): self
+    public function buttonLabelOptions(array $value): self
     {
         $new = clone $this;
         $new->buttonLabelOptions = $value;
@@ -82,7 +82,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withDividerClass(string $value): self
+    public function dividerClass(string $value): self
     {
         $new = clone $this;
         $new->dividerClass = $value;
@@ -96,7 +96,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withItemClass(string $value): self
+    public function itemClass(string $value): self
     {
         $new = clone $this;
         $new->itemClass = $value;
@@ -110,7 +110,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withItemsClass(string $value): self
+    public function itemsClass(string $value): self
     {
         $new = clone $this;
         $new->itemsClass = $value;
@@ -160,7 +160,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withItems(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -176,7 +176,7 @@ final class Dropdown extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -192,7 +192,7 @@ final class Dropdown extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withButtonOptions(array $value): self
+    public function buttonOptions(array $value): self
     {
         $new = clone $this;
         $new->buttonOptions = $value;
@@ -208,7 +208,7 @@ final class Dropdown extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withItemsOptions(array $value): self
+    public function itemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;
@@ -224,7 +224,7 @@ final class Dropdown extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withTriggerOptions(array $value): self
+    public function triggerOptions(array $value): self
     {
         $new = clone $this;
         $new->triggerOptions = $value;
@@ -362,10 +362,10 @@ final class Dropdown extends Widget
                 $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions));
 
                 $dropdownWidget = self::widget()
-                    ->withDividerClass($this->dividerClass)
-                    ->withItemClass($this->itemClass)
-                    ->withItemsClass($this->itemsClass)
-                    ->withItems($item['items']);
+                    ->dividerClass($this->dividerClass)
+                    ->itemClass($this->itemClass)
+                    ->itemsClass($this->itemsClass)
+                    ->items($item['items']);
 
                 if ($this->encloseByContainer === false) {
                     $dropdownWidget = $dropdownWidget->withoutEncloseByContainer();

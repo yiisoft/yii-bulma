@@ -95,7 +95,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -110,7 +110,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withToggleButtonLabel(string $value): self
+    public function toggleButtonLabel(string $value): self
     {
         $new = clone $this;
         $new->toggleButtonLabel = $value;
@@ -127,7 +127,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withToggleButtonOptions(array $value): self
+    public function toggleButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->toggleButtonOptions = $value;
@@ -142,7 +142,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withToggleButtonSize(string $value): self
+    public function toggleButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('", "', self::SIZE_ALL);
@@ -162,7 +162,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withToggleButtonColor(string $value): self
+    public function toggleButtonColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL)) {
             $values = implode('", "', self::COLOR_ALL);
@@ -195,7 +195,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withCloseButtonSize(string $value): self
+    public function closeButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('"', self::SIZE_ALL);
@@ -217,7 +217,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withCloseButtonOptions(array $value): self
+    public function closeButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->closeButtonOptions = $value;
@@ -249,7 +249,7 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function withContentOptions(array $value): self
+    public function contentOptions(array $value): self
     {
         $new = clone $this;
         $new->contentOptions = $value;

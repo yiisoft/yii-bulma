@@ -26,7 +26,7 @@ final class ProgressBarTest extends TestCase
     {
         ProgressBar::counter(0);
 
-        $html = ProgressBar::widget()->withOptions(['class' => 'has-background-black'])->render();
+        $html = ProgressBar::widget()->options(['class' => 'has-background-black'])->render();
         $expected = <<<'HTML'
         <progress id="w1-progressbar" class="progress has-background-black" max="100"></progress>
         HTML;
@@ -38,7 +38,7 @@ final class ProgressBarTest extends TestCase
     {
         ProgressBar::counter(0);
 
-        $html = ProgressBar::widget()->withSize(ProgressBar::SIZE_LARGE)->render();
+        $html = ProgressBar::widget()->size(ProgressBar::SIZE_LARGE)->render();
         $expected = <<<'HTML'
         <progress id="w1-progressbar" class="progress is-large" max="100"></progress>
         HTML;
@@ -49,7 +49,7 @@ final class ProgressBarTest extends TestCase
     {
         ProgressBar::counter(0);
 
-        $html = ProgressBar::widget()->withColor(ProgressBar::COLOR_PRIMARY)->render();
+        $html = ProgressBar::widget()->color(ProgressBar::COLOR_PRIMARY)->render();
         $expected = <<<'HTML'
         <progress id="w1-progressbar" class="progress is-primary" max="100"></progress>
         HTML;
@@ -60,7 +60,7 @@ final class ProgressBarTest extends TestCase
     {
         ProgressBar::counter(0);
 
-        $html = ProgressBar::widget()->withMaxValue(50)->render();
+        $html = ProgressBar::widget()->maxValue(50)->render();
         $expected = <<<'HTML'
         <progress id="w1-progressbar" class="progress" max="50"></progress>
         HTML;
@@ -71,7 +71,7 @@ final class ProgressBarTest extends TestCase
     {
         ProgressBar::counter(0);
 
-        $html = ProgressBar::widget()->withValue(75)->render();
+        $html = ProgressBar::widget()->value(75)->render();
         $expected = <<<'HTML'
         <progress id="w1-progressbar" class="progress" value="75" max="100">75%</progress>
         HTML;
@@ -81,12 +81,12 @@ final class ProgressBarTest extends TestCase
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        ProgressBar::widget()->withSize('is-non-existent')->render();
+        ProgressBar::widget()->size('is-non-existent')->render();
     }
 
     public function testExceptionColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        ProgressBar::widget()->withColor('is-non-existent')->render();
+        ProgressBar::widget()->color('is-non-existent')->render();
     }
 }

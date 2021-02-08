@@ -36,8 +36,8 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= Dropdown::widget()
-    ->withButtonLabel('Russian cities')
-    ->withItems([
+    ->buttonLabel('Russian cities')
+    ->items([
         ['label' => 'San petesburgo', 'url' => '#'],
         ['label' => 'Moscu', 'url' => '#'],
         ['label' => 'Novosibirsk', 'url' => '#'],
@@ -72,17 +72,17 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-`withId(string $value)` | Widget ID. | `''`
-`withButtonLabel(string $value)` | Set label button dropdown. | `''`
-`withButtonLabelOptions(array $value)`| The HTML attributes for the button dropdown. | `[]`
-`withButtonOptions(array $value)` | The HTML attributes for the widget button tag. | `[]`
-`withDividerClass(string $value)` | Divider CSS class. | `withDropdown-divider` 
-`withItemClass(string $value)` | Item CSS class. | `dropdown-item`
-`withItemsClass(string $value)` | Item container CSS class. | `dropdown-menu`
-`withItemsOptions(array $value)` | HTML attributes for the widget items. | `[]`
+`id(string $value)` | Widget ID. | `''`
+`buttonLabel(string $value)` | Set label button dropdown. | `''`
+`buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown. | `[]`
+`buttonOptions(array $value)` | The HTML attributes for the widget button tag. | `[]`
+`dividerClass(string $value)` | Divider CSS class. | `withDropdown-divider` 
+`itemClass(string $value)` | Item CSS class. | `dropdown-item`
+`itemsClass(string $value)` | Item container CSS class. | `dropdown-menu`
+`itemsOptions(array $value)` | HTML attributes for the widget items. | `[]`
 `withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
 `withoutEncloseByContainer()` | Disable enclosed by container tag dropdown. | `false`
-`withItems(array $value)` | List of menu items in the dropdown. | `[]`
-`withOptions(array $value)` | HTML attributes for the widget container tag. | `[]`
-`withTriggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
+`items(array $value)` | List of menu items in the dropdown. | `[]`
+`options(array $value)` | HTML attributes for the widget container tag. | `[]`
+`triggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
 `withEncodeTags()` | Allows you to enable the encoding tags html. | `true`

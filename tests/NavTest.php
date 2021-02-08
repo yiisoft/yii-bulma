@@ -15,7 +15,7 @@ final class NavTest extends TestCase
     {
         NavBar::counter(0);
 
-        $html = Nav::widget()->withItems([['label' => 'Page1', 'url' => '#']])->render();
+        $html = Nav::widget()->items([['label' => 'Page1', 'url' => '#']])->render();
         $expected = <<<'HTML'
         <a class="navbar-item" href="#">Page1</a>
         HTML;
@@ -26,7 +26,7 @@ final class NavTest extends TestCase
     {
         NavBar::counter(0);
 
-        $html = Nav::widget()->withItems([['label' => 'Page1']])->render();
+        $html = Nav::widget()->items([['label' => 'Page1']])->render();
         $expected = <<<'HTML'
         <a class="navbar-item" href="#">Page1</a>
         HTML;
@@ -38,7 +38,7 @@ final class NavTest extends TestCase
         NavBar::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Dropdown1',
                     'items' => [
@@ -69,7 +69,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Page1',
                     'url' => '#',
@@ -111,7 +111,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Page1',
                     'items' => null,
@@ -140,7 +140,7 @@ final class NavTest extends TestCase
 
         $html = Nav::widget()
             ->withoutActivateItems()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Item1',
                     'active' => true,
@@ -163,8 +163,8 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withCurrentPath('/site/index')
-            ->withItems([
+            ->currentPath('/site/index')
+            ->items([
                 [
                     'label' => 'Item1',
                     'active' => true,
@@ -188,8 +188,8 @@ final class NavTest extends TestCase
 
         $html = Nav::widget()
             ->withoutActivateItems()
-            ->withCurrentPath('/site/index')
-            ->withItems([
+            ->currentPath('/site/index')
+            ->items([
                 [
                     'label' => 'Item1',
                 ],
@@ -220,7 +220,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Item1',
                 ],
@@ -252,7 +252,7 @@ final class NavTest extends TestCase
 
         $html = Nav::widget()
             ->withActivateParents()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Dropdown',
                     'items' => [
@@ -285,7 +285,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-        ->withItems([
+        ->items([
             [
                 'label' => 'a &amp; b',
                 'encode' => false,
@@ -299,7 +299,7 @@ final class NavTest extends TestCase
 
         $html = Nav::widget()
             ->withoutEncodeLabels()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'a &amp; b',
                 ],
@@ -316,7 +316,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'index',
                     'url' => '#',
@@ -350,7 +350,7 @@ final class NavTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" option is required.');
         Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'items' => [
                         ['url' => '#'],
@@ -367,7 +367,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Dropdown',
                     'items' => [
@@ -396,7 +396,7 @@ final class NavTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" option is required.');
         Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Dropdown',
                     'items' => [
@@ -414,7 +414,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Link disable',
                     'url' => '#',
@@ -433,7 +433,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withitems([
+            ->items([
                 [
                     'label' => 'Link disable',
                     'url' => '#',
@@ -462,15 +462,15 @@ final class NavTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withOptions(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->withItemsOptions(['class' => 'navbar-end'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
+            ->itemsOptions(['class' => 'navbar-end'])
             ->begin();
 
         $html .= Nav::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Setting Account',
                     'url' => '/setting/account',
@@ -519,7 +519,7 @@ final class NavTest extends TestCase
 
         $html = Nav::widget()
             ->withEncodeTags()
-            ->withItems(
+            ->items(
                 [
                     [
                         'label' => 'Setting Account',

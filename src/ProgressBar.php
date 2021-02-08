@@ -65,7 +65,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -80,7 +80,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function withValue(float $value): self
+    public function value(float $value): self
     {
         $new = clone $this;
         $new->value = $value;
@@ -95,7 +95,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function withMaxValue(int $value): self
+    public function maxValue(int $value): self
     {
         $new = clone $this;
         $new->maxValue = $value;
@@ -110,7 +110,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function withSize(string $value): self
+    public function size(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('"', self::SIZE_ALL);
@@ -130,7 +130,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      */
-    public function withColor(string $value): self
+    public function color(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL)) {
             $values = implode('"', self::COLOR_ALL);

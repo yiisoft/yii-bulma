@@ -13,8 +13,8 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
@@ -49,9 +49,9 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withButtonLabelOptions(['class' => 'is-italic'])
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->buttonLabelOptions(['class' => 'is-italic'])
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
@@ -86,15 +86,15 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
                 '-',
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
-            ->withOptions(['class' => 'is-active'])
+            ->options(['class' => 'is-active'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-dropdown" class="dropdown is-active">
@@ -123,9 +123,9 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withButtonOptions(['class' => 'is-primary'])
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->buttonOptions(['class' => 'is-primary'])
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
@@ -160,15 +160,15 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#'],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
                 '-',
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
-            ->withTriggerOptions(['class' => 'testeMe'])
+            ->triggerOptions(['class' => 'testeMe'])
             ->render();
         $expected = <<<'HTML'
         <div id="w1-dropdown" class="dropdown">
@@ -197,8 +197,8 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->items([
                 ['label' => 'San petesburgo', 'url' => '#', 'icon' => 'testIcon', 'iconOptions' => ['class' => 'icon']],
                 ['label' => 'Moscu', 'url' => '#'],
                 ['label' => 'Novosibirsk', 'url' => '#'],
@@ -233,8 +233,8 @@ final class DropdownTest extends TestCase
         Dropdown::counter(0);
 
         $html = Dropdown::widget()
-            ->withButtonLabel('Russian cities')
-            ->withItems([
+            ->buttonLabel('Russian cities')
+            ->items([
                 ['label' => '<span><i class=fas fas-home></i>San petesburgo</span>', 'url' => '#'],
                 '-',
                 ['label' => 'Ekaterinburgo', 'url' => '#'],

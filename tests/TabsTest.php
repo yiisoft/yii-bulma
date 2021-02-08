@@ -29,8 +29,8 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withCurrentPath('site/index')
-            ->withItems([
+            ->currentPath('site/index')
+            ->items([
                 ['label' => 'Tab 1', 'url' => 'site/index'],
                 ['label' => 'Tab 2', 'url' => 'site/contact'],
             ])
@@ -51,7 +51,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Tab 1',
                     'url' => 'site/contact',
@@ -89,7 +89,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withOptions(['class' => 'some-class'])
+            ->options(['class' => 'some-class'])
             ->render();
 
         $expected = <<<'HTML'
@@ -106,9 +106,9 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withCurrentPath('site/index')
+            ->currentPath('site/index')
             ->withoutActivateItems()
-            ->withItems([
+            ->items([
                 ['label' => 'Tab 1', 'url' => 'site/index'],
                 ['label' => 'Tab 2', 'url' => 'site/contact'],
             ])
@@ -130,7 +130,7 @@ final class TabsTest extends TestCase
 
         $html = Tabs::widget()
             ->withoutEncodeLabels()
-            ->withItems([
+            ->items([
                 ['label' => Html::tag('span', 'Tab 1')],
                 ['label' => Html::tag('span', 'Tab 2')],
             ])
@@ -151,7 +151,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withSize(Tabs::SIZE_LARGE)
+            ->size(Tabs::SIZE_LARGE)
             ->render();
         $expected = <<<'HTML'
         <div id="w1-tabs" class="tabs is-large">
@@ -167,7 +167,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withAlignment(Tabs::ALIGNMENT_CENTERED)
+            ->alignment(Tabs::ALIGNMENT_CENTERED)
             ->render();
         $expected = <<<'HTML'
         <div id="w1-tabs" class="tabs is-centered">
@@ -183,7 +183,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withStyle(Tabs::STYLE_TOGGLE_ROUNDED)
+            ->style(Tabs::STYLE_TOGGLE_ROUNDED)
             ->render();
         $expected = <<<'HTML'
         <div id="w1-tabs" class="tabs is-toggle is-toggle-rounded">
@@ -199,7 +199,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withItems([
+            ->items([
                 ['label' => 'Pictures', 'icon' => 'fas fa-image'],
                 ['label' => 'Music', 'icon' => 'fas fa-music'],
                 ['label' => 'Videos', 'icon' => 'fas fa-film'],
@@ -222,7 +222,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Pictures',
                     'icon' => 'fas fa-image',
@@ -250,19 +250,19 @@ final class TabsTest extends TestCase
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->withSize('is-non-existent')->render();
+        Tabs::widget()->size('is-non-existent')->render();
     }
 
     public function testExceptionAlignment(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->withAlignment('is-non-existent')->render();
+        Tabs::widget()->alignment('is-non-existent')->render();
     }
 
     public function testExceptionStyle(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->withStyle('is-non-existent')->render();
+        Tabs::widget()->style('is-non-existent')->render();
     }
 
     public function testTabsContent(): void
@@ -270,7 +270,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withItems([
+            ->items([
                 [
                     'label' => 'Pictures',
                     'active' => true,
@@ -306,7 +306,7 @@ final class TabsTest extends TestCase
     public function testMissingLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->withItems([['content' => 'Some text about music']])->render();
+        Tabs::widget()->items([['content' => 'Some text about music']])->render();
     }
 
     public function testTabsContentOptions(): void
@@ -314,8 +314,8 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withTabsContentOptions(['class' => 'text-center'])
-            ->withItems([
+            ->tabsContentOptions(['class' => 'text-center'])
+            ->items([
                 ['label' => 'Music', 'content' => 'Some text about music'],
             ])
             ->render();
@@ -338,7 +338,7 @@ final class TabsTest extends TestCase
 
         $html = Tabs::widget()
             ->withEncodeTags()
-            ->withItems([
+            ->items([
                 ['label' => 'Music', 'content' => 'Some text about music'],
             ])
             ->render();

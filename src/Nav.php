@@ -68,7 +68,7 @@ final class Nav extends Widget
      *
      * @return self
      */
-    public function withCurrentPath(string $value): self
+    public function currentPath(string $value): self
     {
         $new = clone $this;
         $new->currentPath = $value;
@@ -109,7 +109,7 @@ final class Nav extends Widget
      *
      * @return self
      */
-    public function withItems(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -145,12 +145,12 @@ final class Nav extends Widget
     private function renderDropdown(array $items, array $parentItem): string
     {
         $dropdown = Dropdown::widget()
-            ->withDividerClass('navbar-divider')
-            ->withItemClass('navbar-item')
-            ->withItemsClass('navbar-dropdown')
+            ->dividerClass('navbar-divider')
+            ->itemClass('navbar-item')
+            ->itemsClass('navbar-dropdown')
             ->withoutEncloseByContainer()
-            ->withItems($items)
-            ->withItemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []));
+            ->items($items)
+            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []));
 
         if ($this->encodeLabels === false) {
             $dropdown = $dropdown->withoutEncodeLabels();

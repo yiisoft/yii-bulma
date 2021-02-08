@@ -24,7 +24,7 @@ final class PanelTest extends TestCase
     {
         Panel::counter(0);
 
-        $html = Panel::widget()->withOptions(['class' => 'my-class'])->render();
+        $html = Panel::widget()->options(['class' => 'my-class'])->render();
         $expected = <<<'HTML'
         <nav id="w1-panel" class="my-class panel"></nav>
         HTML;
@@ -35,7 +35,7 @@ final class PanelTest extends TestCase
     {
         Panel::counter(0);
 
-        $html = Panel::widget()->withHeading('Repositories')->render();
+        $html = Panel::widget()->heading('Repositories')->render();
         $expected = <<<'HTML'
         <nav id="w1-panel" class="panel">
         <p class="panel-heading">Repositories</p>
@@ -48,7 +48,7 @@ final class PanelTest extends TestCase
     {
         Panel::counter(0);
 
-        $html = Panel::widget()->withHeading('Repositories')->withHeadingOptions(['class' => 'my-class'])->render();
+        $html = Panel::widget()->heading('Repositories')->headingOptions(['class' => 'my-class'])->render();
         $expected = <<<'HTML'
         <nav id="w1-panel" class="panel">
         <p class="my-class panel-heading">Repositories</p>
@@ -61,7 +61,7 @@ final class PanelTest extends TestCase
     {
         Panel::counter(0);
 
-        $html = Panel::widget()->withHeading('Repositories')->withColor(Panel::COLOR_PRIMARY)->render();
+        $html = Panel::widget()->heading('Repositories')->color(Panel::COLOR_PRIMARY)->render();
         $expected = <<<'HTML'
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Repositories</p>
@@ -73,7 +73,7 @@ final class PanelTest extends TestCase
     public function testExceptionPanelColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Panel::widget()->withColor('is-non-existent')->render();
+        Panel::widget()->color('is-non-existent')->render();
     }
 
     public function testPanelTabs(): void
@@ -81,7 +81,7 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withTabs([
+            ->tabs([
                 ['label' => 'All'],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
@@ -108,14 +108,14 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withTabs([
+            ->tabs([
                 ['label' => 'All'],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
                 ['label' => 'Sources'],
                 ['label' => 'Forks'],
             ])
-            ->withTabsOptions(['class' => 'my-class'])
+            ->tabsOptions(['class' => 'my-class'])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-panel" class="panel">
@@ -136,7 +136,7 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withTabs([
+            ->tabs([
                 ['label' => 'All', 'active' => true],
                 ['label' => 'Public'],
                 ['label' => 'Private'],
@@ -163,7 +163,7 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withTabs([
+            ->tabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -217,7 +217,7 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withTabs([
+            ->tabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -321,8 +321,8 @@ final class PanelTest extends TestCase
         {panelEnd}
         HTML;
         $html = Panel::widget()
-            ->withTemplate($template)
-            ->withTabs([
+            ->template($template)
+            ->tabs([
                 [
                     'label' => 'All',
                     'active' => true,
@@ -390,13 +390,13 @@ final class PanelTest extends TestCase
     public function testTabMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Panel::widget()->withTabs([[]])->render();
+        Panel::widget()->tabs([[]])->render();
     }
 
     public function testItemMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Panel::widget()->withTabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])->render();
+        Panel::widget()->tabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])->render();
     }
 
     public function testEncodeTags(): void
@@ -405,7 +405,7 @@ final class PanelTest extends TestCase
 
         $html = Panel::widget()
             ->withEncodeTags()
-            ->withTabs([
+            ->tabs([
                 [
                     'label' => 'All',
                     'active' => true,

@@ -78,7 +78,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function withBrand(string $value): self
+    public function brand(string $value): self
     {
         $new = clone $this;
         $new->brand = $value;
@@ -92,7 +92,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function withBrandLabel(string $value): self
+    public function brandLabel(string $value): self
     {
         $new = clone $this;
         $new->brandLabel = $value;
@@ -106,7 +106,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function withBrandImage(string $value): self
+    public function brandImage(string $value): self
     {
         $new = clone $this;
         $new->brandImage = $value;
@@ -121,7 +121,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function withBrandUrl(string $value): self
+    public function brandUrl(string $value): self
     {
         $new = clone $this;
         $new->brandUrl = $value;
@@ -135,7 +135,7 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function withToggleIcon(string $value): self
+    public function toggleIcon(string $value): self
     {
         $new = clone $this;
         $new->toggleIcon = $value;
@@ -151,7 +151,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -167,7 +167,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withBrandOptions(array $value): self
+    public function brandOptions(array $value): self
     {
         $new = clone $this;
         $new->brandOptions = $value;
@@ -183,7 +183,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withBrandLabelOptions(array $value): self
+    public function brandLabelOptions(array $value): self
     {
         $new = clone $this;
         $new->brandLabelOptions = $value;
@@ -199,7 +199,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withBrandImageOptions(array $value): self
+    public function brandImageOptions(array $value): self
     {
         $new = clone $this;
         $new->brandImageOptions = $value;
@@ -215,7 +215,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withItemsOptions(array $value): self
+    public function itemsOptions(array $value): self
     {
         $new = clone $this;
         $new->itemsOptions = $value;
@@ -231,7 +231,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withMenuOptions(array $value): self
+    public function menuOptions(array $value): self
     {
         $new = clone $this;
         $new->menuOptions = $value;
@@ -247,7 +247,7 @@ final class NavBar extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withToggleOptions(array $value): self
+    public function toggleOptions(array $value): self
     {
         $new = clone $this;
         $new->toggleOptions = $value;

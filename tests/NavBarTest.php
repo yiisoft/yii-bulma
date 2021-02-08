@@ -30,7 +30,7 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
+            ->brandLabel('My Project')
             ->begin();
         $html .= NavBar::end();
 
@@ -49,7 +49,7 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandImage('yii-logo.jpg')
+            ->brandImage('yii-logo.jpg')
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -64,8 +64,8 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -83,9 +83,9 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -103,10 +103,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withOptions(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -121,10 +121,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withOptions(['class' => 'navbar is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => 'navbar is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -142,10 +142,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withBrandOptions(['class' => 'is-black'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->brandOptions(['class' => 'is-black'])
             ->begin();
         $html .= NavBar::end();
 
@@ -164,10 +164,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withBrandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->brandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -185,10 +185,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withBrandLabelOptions(['class' => 'is-italic'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->brandLabelOptions(['class' => 'is-italic'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -206,10 +206,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withItemsOptions(['class' => 'navbar-end'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->itemsOptions(['class' => 'navbar-end'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -224,10 +224,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withItemsOptions(['class' => 'is-primary'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->itemsOptions(['class' => 'is-primary'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -242,10 +242,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withItemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->itemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -263,10 +263,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withMenuOptions(['class' => 'is-black'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->menuOptions(['class' => 'is-black'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -284,10 +284,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withToggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->toggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -305,10 +305,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrand('<div>testMe</div>')
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
+            ->brand('<div>testMe</div>')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -326,10 +326,10 @@ final class NavBarTest extends TestCase
         NavBar::counter(0);
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withToggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->toggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -346,14 +346,14 @@ final class NavBarTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Tag should be either string, bool or null.');
-        NavBar::widget()->withOptions(['tag' => ['testMe']])->begin();
+        NavBar::widget()->options(['tag' => ['testMe']])->begin();
     }
 
     public function testNavBarRunExceptionTag(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Tag should be either string, bool or null.');
-        NavBar::widget()->withOptions(['tag' => ['testMe']])->render();
+        NavBar::widget()->options(['tag' => ['testMe']])->render();
     }
 
     public function testNavBarOptionsClassArray(): void
@@ -364,10 +364,10 @@ final class NavBarTest extends TestCase
         $class[] = 'dark';
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withOptions(['class' => $class])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->options(['class' => $class])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -388,10 +388,10 @@ final class NavBarTest extends TestCase
         $class[] = 'dark';
 
         $html = NavBar::widget()
-            ->withBrandLabel('My Project')
-            ->withBrandImage('yii-logo.jpg')
-            ->withBrandUrl('/')
-            ->withItemsOptions(['class' => $class])
+            ->brandLabel('My Project')
+            ->brandImage('yii-logo.jpg')
+            ->brandUrl('/')
+            ->itemsOptions(['class' => $class])
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
@@ -408,7 +408,7 @@ final class NavBarTest extends TestCase
     {
         NavBar::counter(0);
 
-        $html = NavBar::widget()->withBrandImage('yii-logo.jpg')->withEncodeTags()->begin();
+        $html = NavBar::widget()->brandImage('yii-logo.jpg')->withEncodeTags()->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">

@@ -64,7 +64,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withTemplate(string $value): self
+    public function template(string $value): self
     {
         $new = clone $this;
         $new->template = $value;
@@ -77,7 +77,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -90,7 +90,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withHeading(string $value): self
+    public function heading(string $value): self
     {
         $new = clone $this;
         $new->heading = $value;
@@ -103,7 +103,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withHeadingOptions(array $value): self
+    public function headingOptions(array $value): self
     {
         $new = clone $this;
         $new->headingOptions = $value;
@@ -118,7 +118,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withColor(string $value): self
+    public function color(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL, true)) {
             $values = implode('", "', self::COLOR_ALL);
@@ -136,7 +136,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withTabs(array $value): self
+    public function tabs(array $value): self
     {
         $new = clone $this;
         $new->tabs = $value;
@@ -149,7 +149,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withTabsOptions(array $value): self
+    public function tabsOptions(array $value): self
     {
         $new = clone $this;
         $new->tabsOptions = $value;

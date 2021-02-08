@@ -13,7 +13,7 @@ use Yiisoft\Html\Html;
  * For example,
  *
  * ```php
- * <?= Message::widget()->withHeaderColor('success')->withHeader('System info')->withBody('Say hello...') ?>
+ * <?= Message::widget()->headerColor('success')->header('System info')->body('Say hello...') ?>
  * ```
  *
  * @link https://bulma.io/documentation/components/message/
@@ -53,7 +53,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withBody(string $value): self
+    public function body(string $value): self
     {
         $new = clone $this;
         $new->body = $value;
@@ -68,7 +68,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withHeaderColor(string $value): self
+    public function headerColor(string $value): self
     {
         $new = clone $this;
         $new->headerColor = $value;
@@ -83,7 +83,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withHeaderMessage(string $value): self
+    public function headerMessage(string $value): self
     {
         $new = clone $this;
         $new->headerMessage = $value;
@@ -99,7 +99,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -115,7 +115,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withBodyOptions(array $value): self
+    public function bodyOptions(array $value): self
     {
         $new = clone $this;
         $new->bodyOptions = $value;
@@ -132,7 +132,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withCloseButtonOptions(array $value): self
+    public function closeButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->closeButtonOptions = $value;
@@ -148,7 +148,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withHeaderOptions(array $value): self
+    public function headerOptions(array $value): self
     {
         $new = clone $this;
         $new->headerOptions = $value;
@@ -162,7 +162,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withSize(string $value): self
+    public function size(string $value): self
     {
         $new = clone $this;
         $new->size = $value;

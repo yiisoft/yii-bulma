@@ -16,8 +16,8 @@ use Yiisoft\Html\Html;
  *
  * ```php
  * echo ModalCard::widget()
- *     ->withTitle('Modal title')
- *     ->withFooter(
+ *     ->title('Modal title')
+ *     ->footer(
  *         Html::button('Cancel', ['class' => 'button'])
  *     )
  *     ->begin();
@@ -109,7 +109,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -126,7 +126,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withContentOptions(array $value): self
+    public function contentOptions(array $value): self
     {
         $new = clone $this;
         $new->contentOptions = $value;
@@ -141,7 +141,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withToggleButtonLabel(string $value): self
+    public function toggleButtonLabel(string $value): self
     {
         $new = clone $this;
         $new->toggleButtonLabel = $value;
@@ -158,7 +158,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withToggleButtonOptions(array $value): self
+    public function toggleButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->toggleButtonOptions = $value;
@@ -173,7 +173,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withToggleButtonSize(string $value): self
+    public function toggleButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('", "', self::SIZE_ALL);
@@ -193,7 +193,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withToggleButtonColor(string $value): self
+    public function toggleButtonColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL)) {
             $values = implode('", "', self::COLOR_ALL);
@@ -228,7 +228,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withCloseButtonSize(string $value): self
+    public function closeButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL)) {
             $values = implode('"', self::SIZE_ALL);
@@ -250,7 +250,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withCloseButtonOptions(array $value): self
+    public function closeButtonOptions(array $value): self
     {
         $new = clone $this;
         $new->closeButtonOptions = $value;
@@ -282,7 +282,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withHeaderOptions(array $value): self
+    public function headerOptions(array $value): self
     {
         $new = clone $this;
         $new->headerOptions = $value;
@@ -299,7 +299,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withBodyOptions(array $value): self
+    public function bodyOptions(array $value): self
     {
         $new = clone $this;
         $new->bodyOptions = $value;
@@ -316,7 +316,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withFooterOptions(array $value): self
+    public function footerOptions(array $value): self
     {
         $new = clone $this;
         $new->footerOptions = $value;
@@ -331,7 +331,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withFooter(string $value): self
+    public function footer(string $value): self
     {
         $new = clone $this;
         $new->footer = $value;
@@ -348,7 +348,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withTitleOptions(array $value): self
+    public function titleOptions(array $value): self
     {
         $new = clone $this;
         $new->titleOptions = $value;
@@ -363,7 +363,7 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function withTitle(string $value): self
+    public function title(string $value): self
     {
         $new = clone $this;
         $new->title = $value;

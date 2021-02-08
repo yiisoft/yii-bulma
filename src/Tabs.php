@@ -97,7 +97,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withOptions(array $value): self
+    public function options(array $value): self
     {
         $new = clone $this;
         $new->options = $value;
@@ -127,7 +127,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withItems(array $value): self
+    public function items(array $value): self
     {
         $new = clone $this;
         $new->items = $value;
@@ -166,7 +166,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withCurrentPath(string $value): self
+    public function currentPath(string $value): self
     {
         $new = clone $this;
         $new->currentPath = $value;
@@ -183,7 +183,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withSize(string $value): self
+    public function size(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('", "', self::SIZE_ALL);
@@ -203,7 +203,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withAlignment(string $value): self
+    public function alignment(string $value): self
     {
         if (!in_array($value, self::ALIGNMENT_ALL, true)) {
             $values = implode('", "', self::ALIGNMENT_ALL);
@@ -223,7 +223,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withStyle(string $value): self
+    public function style(string $value): self
     {
         if (!in_array($value, self::STYLE_ALL, true)) {
             $values = implode('", "', self::STYLE_ALL);
@@ -245,7 +245,7 @@ final class Tabs extends Widget
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function withTabsContentOptions(array $value): self
+    public function tabsContentOptions(array $value): self
     {
         $new = clone $this;
         $new->tabsContentOptions = $value;

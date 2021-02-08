@@ -35,7 +35,7 @@ final class ModalTest extends TestCase
         $html = Modal::widget()
             ->withoutToggleButton()
             ->withoutCloseButton()
-            ->withOptions(['class' => 'widescreen'])
+            ->options(['class' => 'widescreen'])
             ->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
@@ -73,7 +73,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withToggleButtonLabel('Click to open.')->begin();
+        $html = Modal::widget()->toggleButtonLabel('Click to open.')->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Click to open.</button>
@@ -91,7 +91,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withToggleButtonColor(Modal::COLOR_INFO)->begin();
+        $html = Modal::widget()->toggleButtonColor(Modal::COLOR_INFO)->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button is-info" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -109,7 +109,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withToggleButtonSize(Modal::SIZE_LARGE)->begin();
+        $html = Modal::widget()->toggleButtonSize(Modal::SIZE_LARGE)->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button is-large" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -145,7 +145,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withCloseButtonSize(Modal::SIZE_LARGE)->begin();
+        $html = Modal::widget()->closeButtonSize(Modal::SIZE_LARGE)->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -163,7 +163,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withCloseButtonOptions(['class' => 'some-class'])->begin();
+        $html = Modal::widget()->closeButtonOptions(['class' => 'some-class'])->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -181,7 +181,7 @@ final class ModalTest extends TestCase
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withContentOptions(['class' => 'some-class'])->begin();
+        $html = Modal::widget()->contentOptions(['class' => 'some-class'])->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
@@ -198,26 +198,26 @@ final class ModalTest extends TestCase
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Modal::widget()->withToggleButtonSize('is-non-existent');
+        Modal::widget()->toggleButtonSize('is-non-existent');
     }
 
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Modal::widget()->withToggleButtonColor('is-non-existent');
+        Modal::widget()->toggleButtonColor('is-non-existent');
     }
 
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Modal::widget()->withCloseButtonSize('is-non-existent');
+        Modal::widget()->closeButtonSize('is-non-existent');
     }
 
     public function testToggleButtonOptions(): void
     {
         Modal::counter(0);
 
-        $html = Modal::widget()->withoutCloseButton()->withToggleButtonOptions(['class' => 'testMe'])->begin();
+        $html = Modal::widget()->withoutCloseButton()->toggleButtonOptions(['class' => 'testMe'])->begin();
         $html .= Modal::end();
         $expected = <<<'HTML'
         <button type="button" class="button testMe" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
