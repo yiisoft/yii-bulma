@@ -321,9 +321,9 @@ final class Tabs extends Widget
      * @param int $index
      * @param array $item
      *
-     * @return string
      *@throws InvalidArgumentException|JsonException
      *
+     * @return string
      */
     private function renderItem(int $index, array $item): string
     {
