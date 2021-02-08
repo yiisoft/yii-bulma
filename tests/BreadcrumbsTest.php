@@ -34,7 +34,7 @@ final class BreadcrumbsTest extends TestCase
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
-                        'url' => '/about'
+                        'url' => '/about',
                     ],
                 ],
             )->render();
@@ -54,7 +54,7 @@ final class BreadcrumbsTest extends TestCase
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
-                        'url' => '/about'
+                        'url' => '/about',
                     ],
                 ],
             )->render();
@@ -296,7 +296,7 @@ final class BreadcrumbsTest extends TestCase
                 [
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
-                        'url' => '/about'
+                        'url' => '/about',
                     ],
                 ],
             )->render();
