@@ -85,4 +85,4 @@ Method | Description | Default
 `items(array $value)` | List of menu items in the dropdown. | `[]`
 `options(array $value)` | HTML attributes for the widget container tag. | `[]`
 `triggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

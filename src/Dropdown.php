@@ -236,7 +236,7 @@ final class Dropdown extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;
@@ -351,7 +351,7 @@ final class Dropdown extends Widget
 
             /** @psalm-suppress ConflictingReferenceConstraint */
             if ($active) {
-                Html::addCssClass($linkOptions, 'is-active');
+                Html::addCssClass($linkOptions, ['active' => 'is-active']);
             }
 
             $url = $item['url'] ?? null;

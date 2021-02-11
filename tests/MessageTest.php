@@ -220,7 +220,7 @@ final class MessageTest extends TestCase
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withCloseButton()
+            ->closeButton()
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
@@ -261,7 +261,7 @@ final class MessageTest extends TestCase
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withEncodeTags()
+            ->encodeTags()
             ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">

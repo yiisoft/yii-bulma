@@ -54,7 +54,7 @@ final class Nav extends Widget
      *
      * @return $this
      */
-    public function withActivateParents(): self
+    public function activateParents(): self
     {
         $new = clone $this;
         $new->activateParents = true;
@@ -121,7 +121,7 @@ final class Nav extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;
@@ -185,7 +185,7 @@ final class Nav extends Widget
 
                 if ($activeParent) {
                     $items[$i]['options'] ??= ['class' => ''];
-                    Html::addCssClass($items[$i]['options'], 'active');
+                    Html::addCssClass($items[$i]['options'], ['active' => 'is-active']);
                     $active = $activeParent;
                 }
             }
@@ -292,7 +292,7 @@ final class Nav extends Widget
 
         /** @psalm-suppress ConflictingReferenceConstraint */
         if ($this->activateItems && $active) {
-            Html::addCssClass($linkOptions, 'is-active');
+            Html::addCssClass($linkOptions, ['active' => 'is-active']);
         }
 
         if ($dropdown) {

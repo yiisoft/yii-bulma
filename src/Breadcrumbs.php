@@ -184,7 +184,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;

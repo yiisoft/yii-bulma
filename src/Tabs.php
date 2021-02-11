@@ -17,10 +17,10 @@ use function in_array;
  *
  * ```php
  * echo Tabs::widget()
- *     ->withAlignment(Tabs::ALIGNMENT_CENTERED)
- *     ->withSize(Tabs::SIZE_LARGE)
- *     ->withStyle(Tabs::STYLE_BOX)
- *     ->withItems([
+ *     ->alignment(Tabs::ALIGNMENT_CENTERED)
+ *     ->size(Tabs::SIZE_LARGE)
+ *     ->style(Tabs::STYLE_BOX)
+ *     ->items([
  *         [
  *             'label' => 'Pictures',
  *             'icon' => 'fas fa-image',
@@ -258,7 +258,7 @@ final class Tabs extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;
@@ -364,7 +364,7 @@ final class Tabs extends Widget
         }
 
         if ($active) {
-            Html::addCssClass($options, 'is-active');
+            Html::addCssClass($options, ['active' => 'is-active']);
         }
 
         if ($content !== null) {

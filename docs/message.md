@@ -42,7 +42,7 @@ $this->setJsFiles($assetManager->getJsFiles());
     ->headerMessage('Very important')
     ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
     ->size('is-large')
-    ->withOptions(['class' => 'has-text-justified']) ?>
+    ->options(['class' => 'has-text-justified']) ?>
 ```
 
 The code above generates the following HTML:
@@ -72,6 +72,6 @@ Method | Description | Default
 `optionsCloseButton(array $value)`| Options for rendering the close button tag. | `[]`
 `optionsHeader(array $value)` | HTML attributes for the widget header tag. | `[]`
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
-`withCloseButton()` | Allows you to enable close button. | `true`
+`closeButton()` | Allows you to enable close button. | `true`
 `withoutHeader()` | Allows you to disable header. | `false`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

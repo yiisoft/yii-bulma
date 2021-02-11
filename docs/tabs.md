@@ -107,4 +107,4 @@ Method | Description | Default
 `alignment(string $value)` | Alignment of the tabs list. | `''`
 `style(string $value)` | Style of the tabs list. | `''`
 `tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

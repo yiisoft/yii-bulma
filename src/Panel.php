@@ -162,7 +162,7 @@ final class Panel extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;
@@ -252,7 +252,7 @@ final class Panel extends Widget
         }
 
         if ($this->isActive($item)) {
-            Html::addCssClass($linkOptions, 'is-active');
+            Html::addCssClass($linkOptions, ['active' => 'is-active']);
         }
 
         if (is_array($tabItems) && !empty($tabItems)) {
@@ -291,7 +291,7 @@ final class Panel extends Widget
         Html::addCssClass($options, 'panel-block');
 
         if ($this->isActive($item)) {
-            Html::addCssClass($options, 'is-active');
+            Html::addCssClass($options, ['active' => 'is-active']);
         }
 
         $labelOptions = ['class' => 'panel-icon'];

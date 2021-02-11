@@ -127,4 +127,4 @@ Method | Description | Default
  `tabsOptions(array $value)` | HTML attributes for the tabs container tag. | `[]`
  `withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
  `template(string $value)` | String the template for rendering panel. | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

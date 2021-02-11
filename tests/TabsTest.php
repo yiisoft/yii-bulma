@@ -337,7 +337,7 @@ final class TabsTest extends TestCase
         Tabs::counter(0);
 
         $html = Tabs::widget()
-            ->withEncodeTags()
+            ->encodeTags()
             ->items([
                 ['label' => 'Music', 'content' => 'Some text about music'],
             ])

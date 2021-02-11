@@ -404,7 +404,7 @@ final class PanelTest extends TestCase
         Panel::counter(0);
 
         $html = Panel::widget()
-            ->withEncodeTags()
+            ->encodeTags()
             ->tabs([
                 [
                     'label' => 'All',

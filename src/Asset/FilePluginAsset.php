@@ -12,10 +12,12 @@ final class FilePluginAsset extends AssetBundle
     public ?string $baseUrl = '@assetsUrl';
     public ?string $sourcePath = '@npm/vizuaalog--bulmajs';
 
+    /** @psalm-suppress NonInvariantDocblockPropertyType */
     public array $js = [
         'dist/file.js',
     ];
 
+    /** @psalm-suppress NonInvariantDocblockPropertyType */
     public array $publishOptions = [
         'only' => [
             'dist/file.js',

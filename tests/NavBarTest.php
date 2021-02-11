@@ -408,7 +408,7 @@ final class NavBarTest extends TestCase
     {
         NavBar::counter(0);
 
-        $html = NavBar::widget()->brandImage('yii-logo.jpg')->withEncodeTags()->begin();
+        $html = NavBar::widget()->brandImage('yii-logo.jpg')->encodeTags()->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">

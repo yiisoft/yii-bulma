@@ -76,7 +76,7 @@ final class Menu extends Widget
      *
      * @return $this
      */
-    public function withActivateParents(): self
+    public function activateParents(): self
     {
         $new = clone $this;
         $new->activateParents = true;
@@ -319,7 +319,7 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;

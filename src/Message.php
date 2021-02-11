@@ -174,7 +174,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withCloseButton(): self
+    public function closeButton(): self
     {
         $new = clone $this;
         $new->withoutCloseButton = true;
@@ -198,7 +198,7 @@ final class Message extends Widget
      *
      * @return self
      */
-    public function withEncodeTags(): self
+    public function encodeTags(): self
     {
         $new = clone $this;
         $new->encodeTags = true;
@@ -277,7 +277,7 @@ final class Message extends Widget
         }
 
         if ($this->size !== '') {
-            Html::addCssClass($this->closeButtonOptions, [$this->size]);
+            Html::addCssClass($this->closeButtonOptions, $this->size);
         }
 
         return Html::tag($tag, $label, $this->closeButtonOptions);

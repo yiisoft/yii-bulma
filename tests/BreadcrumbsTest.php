@@ -291,7 +291,7 @@ final class BreadcrumbsTest extends TestCase
 
         $html = Breadcrumbs::widget()
             ->withoutEncodeLabels()
-            ->withEncodeTags()
+            ->encodeTags()
             ->items(
                 [
                     [

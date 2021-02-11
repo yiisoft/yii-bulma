@@ -673,7 +673,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withActivateParents()
+            ->activateParents()
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -895,7 +895,7 @@ final class MenuTest extends TestCase
                     'url' => '/profile',
                 ],
             ])
-            ->withEncodeTags()
+            ->encodeTags()
             ->render();
         $expected = <<<'HTML'
         <aside class="menu">

@@ -101,7 +101,7 @@ Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
 `withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
-`withActivateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
+`activateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
 `activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`
 `brand(string $value)` | Custom brand content. | `''`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | `''`
@@ -115,4 +115,4 @@ Method | Description | Default
 `linkTemplate(string $value)` | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
 `options(array $value)` | The HTML attributes for the menu's container tag. | `[]`
 `subMenuTemplate(string $value)` | The template used to render a list of sub-menus. | `<ul class = menu-list>\n{items}\n</ul>`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

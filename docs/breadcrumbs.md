@@ -69,4 +69,4 @@ Method | Description | Default
 `itemsOptions(array $value)` | HTML attributes for the items widget. | `[]`
 `links(array $value)` | List of links to appear in the breadcrumbs. | `[]`
 `options(array $value)` | HTML attributes for the widget container nav tag. | `[]`
-`withEncodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeTags()` | Allows you to enable the encoding tags html. | `true`

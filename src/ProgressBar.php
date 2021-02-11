@@ -12,7 +12,7 @@ use Yiisoft\Html\Html;
  * Native HTML progress bar.
  *
  * ```php
- * echo ProgressBar::widget()->withValue(75);
+ * echo ProgressBar::widget()->value(75);
  * ```
  *
  * @link https://bulma.io/documentation/elements/progress/
