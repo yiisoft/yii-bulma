@@ -105,7 +105,7 @@ Method | Description | Default
 `activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`
 `brand(string $value)` | Custom brand content. | `''`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | `''`
-`withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
+`withoutEncodeLabels()` | Disable encoding for labels. | `false`
 `firstItemCssClass(string $value)` | The CSS class for the first item in the main menu or each submenu. | `''`
 `withoutHideEmptyItems()` | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `false`
 `items(array $value)` | List of menu items. | `[]`

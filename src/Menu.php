@@ -34,7 +34,7 @@ final class Menu extends Widget
     private string $linkTemplate = '<a href={url}>{icon}{label}</a>';
     private string $labelTemplate = '{label}';
     private bool $encodeLabels = true;
-    private bool $encodeTags = false;
+    private bool $encodeLinks = false;
     private bool $hideEmptyItems = true;
     private array $options = [];
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
@@ -319,10 +319,10 @@ final class Menu extends Widget
      *
      * @return self
      */
-    public function encodeTags(): self
+    public function encodeLinks(): self
     {
         $new = clone $this;
-        $new->encodeTags = true;
+        $new->encodeLinks = true;
 
         return $new;
     }
@@ -468,7 +468,7 @@ final class Menu extends Widget
         $this->options = $this->addOptions($this->options, 'menu');
         $this->itemsOptions = $this->addOptions($this->itemsOptions, 'menu-list');
 
-        if ($this->encodeTags === false) {
+        if ($this->encodeLinks === false) {
             $this->itemOptions['encode'] = false;
         }
     }

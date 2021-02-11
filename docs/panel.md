@@ -125,6 +125,6 @@ Method | Description | Default
  `color(string $value)` | Color panel. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
  `tabs(array $value)` | List of panel tabs items. | `[]`
  `tabsOptions(array $value)` | HTML attributes for the tabs container tag. | `[]`
- `withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
+ `withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
  `template(string $value)` | String the template for rendering panel. | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}`
-`encodeTags()` | Allows you to enable the encoding tags html. | `true`
+ `encodeTags()` | Allows you to enable the encoding tags html. | `true`

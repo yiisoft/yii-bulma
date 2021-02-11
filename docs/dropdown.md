@@ -76,13 +76,13 @@ Method | Description | Default
 `buttonLabel(string $value)` | Set label button dropdown. | `''`
 `buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown. | `[]`
 `buttonOptions(array $value)` | The HTML attributes for the widget button tag. | `[]`
-`dividerClass(string $value)` | Divider CSS class. | `withDropdown-divider` 
+`dividerClass(string $value)` | Divider CSS class. | `dropdown-divider` 
 `itemClass(string $value)` | Item CSS class. | `dropdown-item`
 `itemsClass(string $value)` | Item container CSS class. | `dropdown-menu`
 `itemsOptions(array $value)` | HTML attributes for the widget items. | `[]`
-`withouEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
+`withoutEncodeLabels()` | Disable encoding for labels. | `false`
 `withoutEncloseByContainer()` | Disable enclosed by container tag dropdown. | `false`
 `items(array $value)` | List of menu items in the dropdown. | `[]`
 `options(array $value)` | HTML attributes for the widget container tag. | `[]`
 `triggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
-`encodeTags()` | Allows you to enable the encoding tags html. | `true`
+`encodeLinks()` | Enable encoding for links. | `true`

@@ -895,7 +895,7 @@ final class MenuTest extends TestCase
                     'url' => '/profile',
                 ],
             ])
-            ->encodeTags()
+            ->encodeLinks()
             ->render();
         $expected = <<<'HTML'
         <aside class="menu">

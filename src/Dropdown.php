@@ -29,7 +29,7 @@ final class Dropdown extends Widget
     private string $itemsClass = 'dropdown-menu';
     private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
-    private bool $encodeTags = false;
+    private bool $encodeLinks = false;
     private bool $encloseByContainer = true;
     private array $items = [];
     private array $itemsOptions = [];
@@ -118,7 +118,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * When tags Labels HTML should not be encoded.
+     * Disable encoding for labels.
      *
      * @return $this
      */
@@ -232,14 +232,14 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Allows you to enable the encoding tags html.
+     * Enable encoding for links.
      *
      * @return self
      */
-    public function encodeTags(): self
+    public function encodeLinks(): self
     {
         $new = clone $this;
-        $new->encodeTags = true;
+        $new->encodeLinks = true;
 
         return $new;
     }
@@ -339,7 +339,7 @@ final class Dropdown extends Widget
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
 
-            if ($this->encodeTags === false) {
+            if ($this->encodeLinks === false) {
                 $linkOptions['encode'] = false;
             }
 
