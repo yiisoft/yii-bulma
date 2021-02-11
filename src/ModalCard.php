@@ -59,12 +59,12 @@ final class ModalCard extends Widget
     private array $contentOptions = [];
     private array $closeButtonOptions = [];
     private string $closeButtonSize = '';
-    private bool $closeButtonEnabled = true;
+    private bool $withoutCloseButton = true;
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
     private string $toggleButtonColor = '';
     private array $toggleButtonOptions = [];
-    private bool $toggleButtonEnabled = true;
+    private bool $withoutToggleButton = true;
     private string $title = '';
     private string $footer = '';
     private array $titleOptions = [];
@@ -100,41 +100,10 @@ final class ModalCard extends Widget
         return $html;
     }
 
-    private function buildOptions(): void
-    {
-        $this->options['id'] ??= "{$this->getId()}-modal";
-        $this->options = $this->addOptions($this->options, 'modal');
-
-        $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
-        $this->closeButtonOptions['aria-label'] = 'close';
-
-        if ($this->closeButtonSize !== '') {
-            Html::addCssClass($this->closeButtonOptions, $this->closeButtonSize);
-        }
-
-        $this->toggleButtonOptions = $this->addOptions($this->toggleButtonOptions, 'button');
-        $this->toggleButtonOptions['data-target'] = '#' . $this->options['id'];
-        $this->toggleButtonOptions['aria-haspopup'] = 'true';
-
-        if ($this->toggleButtonSize !== '') {
-            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonSize);
-        }
-
-        if ($this->toggleButtonColor !== '') {
-            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
-        }
-
-        $this->contentOptions = $this->addOptions($this->contentOptions, 'modal-card');
-        $this->headerOptions = $this->addOptions($this->headerOptions, 'modal-card-head');
-        $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
-        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
-        $this->footerOptions = $this->addOptions($this->footerOptions, 'modal-card-foot');
-    }
-
     /**
      * Main container options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -151,7 +120,7 @@ final class ModalCard extends Widget
     /**
      * Main content container options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -183,7 +152,7 @@ final class ModalCard extends Widget
     /**
      * Toggle button options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -238,34 +207,18 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Enable/Disable toggle button.
+     * Disable toggle button.
      *
      * @param bool $value
      *
      * @return self
      */
-    public function toggleButtonEnabled(bool $value): self
+    public function withoutToggleButton(): self
     {
         $new = clone $this;
-        $new->toggleButtonEnabled = $value;
+        $new->withoutToggleButton = false;
 
         return $new;
-    }
-
-    /**
-     * Renders the toggle button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderToggleButton(): string
-    {
-        if ($this->toggleButtonEnabled) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
-        }
-
-        return '';
     }
 
     /**
@@ -291,7 +244,7 @@ final class ModalCard extends Widget
     /**
      * Close button options
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -306,40 +259,24 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Enable/Disable close button.
+     * Disable close button.
      *
      * @param bool $value
      *
      * @return self
      */
-    public function closeButtonEnabled(bool $value): self
+    public function withoutCloseButton(): self
     {
         $new = clone $this;
-        $new->closeButtonEnabled = $value;
+        $new->withoutCloseButton = false;
 
         return $new;
     }
 
     /**
-     * Renders the close button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderCloseButton(): string
-    {
-        if ($this->closeButtonEnabled) {
-            return Html::button('', $this->closeButtonOptions);
-        }
-
-        return '';
-    }
-
-    /**
      * Header options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -354,27 +291,9 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Renders header.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderHeader(): string
-    {
-        $html = '';
-        $html .= Html::beginTag('header', $this->headerOptions) . "\n";
-        $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
-        $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::endTag('header') . "\n";
-
-        return $html;
-    }
-
-    /**
      * Body options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -389,33 +308,9 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Renders begin body tag.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderBodyBegin(): string
-    {
-        return Html::beginTag('section', $this->bodyOptions);
-    }
-
-    /**
-     * Renders end body tag.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderBodyEnd(): string
-    {
-        return Html::endTag('section');
-    }
-
-    /**
      * Footer options
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -447,7 +342,7 @@ final class ModalCard extends Widget
     /**
      * Title options.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @param array $value
      *
@@ -477,6 +372,80 @@ final class ModalCard extends Widget
     }
 
     /**
+     * Renders the toggle button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderToggleButton(): string
+    {
+        if ($this->withoutToggleButton) {
+            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
+        }
+
+        return '';
+    }
+
+    /**
+     * Renders the close button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderCloseButton(): string
+    {
+        if ($this->withoutCloseButton) {
+            return Html::button('', $this->closeButtonOptions);
+        }
+
+        return '';
+    }
+
+    /**
+     * Renders header.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderHeader(): string
+    {
+        $html = '';
+        $html .= Html::beginTag('header', $this->headerOptions) . "\n";
+        $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
+        $html .= $this->renderCloseButton() . "\n";
+        $html .= Html::endTag('header') . "\n";
+
+        return $html;
+    }
+
+    /**
+     * Renders begin body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBodyBegin(): string
+    {
+        return Html::beginTag('section', $this->bodyOptions);
+    }
+
+    /**
+     * Renders end body tag.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderBodyEnd(): string
+    {
+        return Html::endTag('section');
+    }
+
+    /**
      * Renders the footer.
      *
      * @throws JsonException
@@ -498,5 +467,36 @@ final class ModalCard extends Widget
     private function renderBackgroundTransparentOverlay(): string
     {
         return Html::tag('div', '', ['class' => 'modal-background']);
+    }
+
+    private function buildOptions(): void
+    {
+        $this->options['id'] ??= "{$this->getId()}-modal";
+        $this->options = $this->addOptions($this->options, 'modal');
+
+        $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
+        $this->closeButtonOptions['aria-label'] = 'close';
+
+        if ($this->closeButtonSize !== '') {
+            Html::addCssClass($this->closeButtonOptions, $this->closeButtonSize);
+        }
+
+        $this->toggleButtonOptions = $this->addOptions($this->toggleButtonOptions, 'button');
+        $this->toggleButtonOptions['data-target'] = '#' . $this->options['id'];
+        $this->toggleButtonOptions['aria-haspopup'] = 'true';
+
+        if ($this->toggleButtonSize !== '') {
+            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonSize);
+        }
+
+        if ($this->toggleButtonColor !== '') {
+            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
+        }
+
+        $this->contentOptions = $this->addOptions($this->contentOptions, 'modal-card');
+        $this->headerOptions = $this->addOptions($this->headerOptions, 'modal-card-head');
+        $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
+        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
+        $this->footerOptions = $this->addOptions($this->footerOptions, 'modal-card-foot');
     }
 }

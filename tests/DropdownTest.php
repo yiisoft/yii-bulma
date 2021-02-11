@@ -22,27 +22,25 @@ final class DropdownTest extends TestCase
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
             ->render();
-
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown">
-<div class="dropdown-trigger">
-<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-<span>Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#">San petesburgo</a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Ekaterinburgo</a>
-</div>
-</div>
-HTML;
-
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">San petesburgo</a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -61,27 +59,25 @@ HTML;
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
             ->render();
-
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown">
-<div class="dropdown-trigger">
-<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-<span class="is-italic">Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#">San petesburgo</a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Ekaterinburgo</a>
-</div>
-</div>
-HTML;
-
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span class="is-italic">Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">San petesburgo</a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -100,27 +96,25 @@ HTML;
             ])
             ->options(['class' => 'is-active'])
             ->render();
-
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown is-active">
-<div class="dropdown-trigger">
-<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-<span>Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#">San petesburgo</a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Ekaterinburgo</a>
-</div>
-</div>
-HTML;
-
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown is-active">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">San petesburgo</a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -139,27 +133,25 @@ HTML;
                 ['label' => 'Ekaterinburgo', 'url' => '#'],
             ])
             ->render();
-
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown">
-<div class="dropdown-trigger">
-<button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
-<span>Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#">San petesburgo</a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Ekaterinburgo</a>
-</div>
-</div>
-HTML;
-
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">San petesburgo</a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -178,27 +170,25 @@ HTML;
             ])
             ->triggerOptions(['class' => 'testeMe'])
             ->render();
-
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown">
-<div class="dropdown-trigger testeMe">
-<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-<span>Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#">San petesburgo</a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#">Ekaterinburgo</a>
-</div>
-</div>
-HTML;
-
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger testeMe">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">San petesburgo</a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -216,27 +206,57 @@ HTML;
                 ['label' => 'Ekaterinburgo', 'url' => '#', 'icon' => 'testIcon', 'iconOptions' => ['class' => 'icon']],
             ])
             ->render();
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>San petesburgo</span></a>
+        <a class="dropdown-item" href="#">Moscu</a>
+        <a class="dropdown-item" href="#">Novosibirsk</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>Ekaterinburgo</span></a>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
 
-        $expected = <<<HTML
-<div id="w1-dropdown" class="dropdown">
-<div class="dropdown-trigger">
-<button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-<span>Russian cities</span>
-<span class="icon is-small">
-<i class="fas fa-angle-down" aria-hidden="true"></i>
-</span>
-</button>
-</div>
-<div class="dropdown-menu">
-<a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>San petesburgo</span></a>
-<a class="dropdown-item" href="#">Moscu</a>
-<a class="dropdown-item" href="#">Novosibirsk</a>
-<div class="dropdown-divider"></div>
-<a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>Ekaterinburgo</span></a>
-</div>
-</div>
-HTML;
+    public function testEncodeLabels(): void
+    {
+        Dropdown::counter(0);
 
+        $html = Dropdown::widget()
+            ->buttonLabel('Russian cities')
+            ->items([
+                ['label' => '<span><i class=fas fas-home></i>San petesburgo</span>', 'url' => '#'],
+                '-',
+                ['label' => 'Ekaterinburgo', 'url' => '#'],
+            ])
+            ->render();
+        $expected = <<<'HTML'
+        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>Russian cities</span>
+        <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+        </button>
+        </div>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">&lt;span&gt;&lt;i class=fas fas-home&gt;&lt;/i&gt;San petesburgo&lt;/span&gt;</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
+        </div>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 }

@@ -19,6 +19,7 @@ final class Nav extends Widget
     private bool $activateParents = false;
     private string $currentPath = '';
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private array $items = [];
 
     protected function run(): string
@@ -35,32 +36,28 @@ final class Nav extends Widget
     }
 
     /**
-     * Whether to automatically activate items according to whether their currentPath matches the currently requested.
+     * Disable activate items according to whether their currentPath.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      *
      * {@see isItemActive}
      */
-    public function activateItems(bool $value): self
+    public function withoutActivateItems(): self
     {
         $new = clone $this;
-        $new->activateItems = $value;
+        $new->activateItems = false;
         return $new;
     }
 
     /**
      * Whether to activate parent menu items when one of the corresponding child menu items is active.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function activateParents(bool $value): self
+    public function activateParents(): self
     {
         $new = clone $this;
-        $new->activateParents = $value;
+        $new->activateParents = true;
         return $new;
     }
 
@@ -79,16 +76,14 @@ final class Nav extends Widget
     }
 
     /**
-     * Whether the nav items labels should be HTML-encoded.
+     * When tags Labels HTML should not be encoded.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
         return $new;
     }
 
@@ -136,15 +131,19 @@ final class Nav extends Widget
      */
     private function renderDropdown(array $items, array $parentItem): string
     {
-        return Dropdown::widget()
-                ->dividerClass('navbar-divider')
-                ->itemClass('navbar-item')
-                ->itemsClass('navbar-dropdown')
-                ->encloseByContainer(false)
-                ->encodeLabels($this->encodeLabels)
-                ->items($items)
-                ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []))
-                ->render() . "\n";
+        $dropdown = Dropdown::widget()
+            ->dividerClass('navbar-divider')
+            ->itemClass('navbar-item')
+            ->itemsClass('navbar-dropdown')
+            ->withoutEncloseByContainer()
+            ->items($items)
+            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []));
+
+        if ($this->encodeLabels === false) {
+            $dropdown = $dropdown->withoutEncodeLabels();
+        }
+
+        return $dropdown->render() . "\n";
     }
 
     /**
@@ -173,7 +172,7 @@ final class Nav extends Widget
 
                 if ($activeParent) {
                     $items[$i]['options'] ??= ['class' => ''];
-                    Html::addCssClass($items[$i]['options'], 'active');
+                    Html::addCssClass($items[$i]['options'], ['active' => 'is-active']);
                     $active = $activeParent;
                 }
             }
@@ -233,6 +232,7 @@ final class Nav extends Widget
         if (!isset($item['label'])) {
             throw new InvalidArgumentException('The "label" option is required.');
         }
+
         $dropdown = false;
         $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
 
@@ -279,15 +279,21 @@ final class Nav extends Widget
 
         /** @psalm-suppress ConflictingReferenceConstraint */
         if ($this->activateItems && $active) {
-            Html::addCssClass($linkOptions, 'is-active');
+            Html::addCssClass($linkOptions, ['active' => 'is-active']);
         }
 
         if ($dropdown) {
+            $dropdownOptions = ['class' => 'navbar-link', 'encode' => false];
+
             return
                 Html::beginTag('div', $options) . "\n" .
-                Html::a($label, $url, ['class' => 'navbar-link']) . "\n" .
+                Html::a($label, $url, $dropdownOptions) . "\n" .
                 $items .
                 Html::endTag('div');
+        }
+
+        if ($this->encodeTags === false) {
+            $linkOptions['encode'] = false;
         }
 
         return Html::a($label, $url, $linkOptions);

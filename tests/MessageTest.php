@@ -16,20 +16,18 @@ final class MessageTest extends TestCase
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageAutoIdPrefix(): void
@@ -41,19 +39,18 @@ HTML;
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="yii1-message" class="message is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="yii1-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageHeaderColor(): void
@@ -65,20 +62,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->headerColor('is-success')
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-success">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-success">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageOptions(): void
@@ -90,20 +85,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->options(['class' => 'has-text-justified'])
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message has-text-justified is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message has-text-justified is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageOptionsBody(): void
@@ -115,20 +108,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->bodyOptions(['class' => 'has-text-justified'])
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body has-text-justified">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body has-text-justified">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageOptionsCloseButton(): void
@@ -140,20 +131,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->closeButtonOptions(['class' => 'btn'])
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete btn"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete btn"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageOptionsHeader(): void
@@ -165,20 +154,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->headerOptions(['class' => 'has-text-justified'])
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header has-text-justified">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header has-text-justified">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageId(): void
@@ -190,20 +177,18 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->id('testMe')
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="testMe-message" class="message is-dark">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="testMe-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageSize(): void
@@ -215,44 +200,39 @@ HTML;
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
             ->size('is-large')
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark is-large">
-<div class="message-header">
-<p>Very important</p>
-<button type="button" class="delete is-large"><span aria-hidden="true">&times;</span></button>
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark is-large">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete is-large"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageWithoutCloseButton(): void
     {
         Message::counter(0);
-
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withoutCloseButton(true)
+            ->closeButton()
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-header">
-Very important
-</div>
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header">
+        Very important
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 
     public function testMessageWithoutHeader(): void
@@ -262,17 +242,15 @@ HTML;
         $html = Message::widget()
             ->headerMessage('Very important')
             ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withoutHeader(false)
+            ->withoutHeader()
             ->render();
-
-        $expectedHtml = <<<HTML
-<div id="w1-message" class="message is-dark">
-<div class="message-body">
-<strong>Holy guacamole!</strong> You should check in on some of those fields below.
-</div>
-</div>
-HTML;
-
-        $this->assertEqualsWithoutLE($expectedHtml, $html);
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
     }
 }

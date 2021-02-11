@@ -117,13 +117,13 @@ HTML produced is like the following:
 
 ## Reference
 
-| Method                         | Description                                               | Default                                                       |
-| ------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------- |
-| `options(array $value)`        | HTML attributes for the widget container tag.             | [`class` => `panel`]                                          |
-| `headingOptions(array $value)` | HTML attributes of the heading.                           | [`class` => `panel-heading`]                                  |
-| `heading(?string $value)`      | Text of the brand heading.                                | `''`                                                          |
-| `color(string $value)`         | Color panel.                                              | `''`                                                          |
-| `tabs(array $value)`           | List of panel tabs items.                                 | `[]`                                                          |
-| `tabsOptions(array $value)`    | HTML attributes for the tabs container tag.               | `[]`                                                          |
-| `encodeLabels(bool $value)`    | Whether the labels for tabs items should be HTML-encoded. | `true`                                                        |
-| `template(string $value)`      | String the template for rendering panel.                  | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}` |
+Method | Description | Default
+-------|-------------|---------
+ `options(array $value)` | HTML attributes for the widget container tag. | [`class` => `panel`]
+ `headingOptions(array $value)` | HTML attributes of the heading. | [`class` => `panel-heading`]
+ `heading(string $value)` | Text of the brand heading. | `''`
+ `color(string $value)` | Color panel. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
+ `tabs(array $value)` | List of panel tabs items. | `[]`
+ `tabsOptions(array $value)` | HTML attributes for the tabs container tag. | `[]`
+ `withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`
+ `template(string $value)` | String the template for rendering panel. | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}`

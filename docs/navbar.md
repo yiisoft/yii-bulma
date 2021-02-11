@@ -128,17 +128,17 @@ HTML produced is like the following:
 ## Reference
 
 
-Method                       | Description                                  | Default
------------------------------|----------------------------------------------|------
-`brand(string $value)`       | Custom brand HTML. Overrides `brandLabel` and `brandImage`. | ''
-`brandLabel(string $value)`  | Text of the brand label                      | ''
-`brandImage(string $value)`  | Image of the brand.                          | ''
-`brandUrl(string $value)`    | "href" of the brand's link.                  | `/`
-`toggleIcon(string $value)`  | Toggle icon.                                 | `<span aria-hidden='true'></span>`
-`options`                    | HTML attributes for the nav.                 | [`class` => `navbar`]
-`optionsBrand(array $value)` | HTML attributes of the brand.                | [`class` => `navbar-brand`]
-`optionsBrandLabel`          | HTML attributes of the brand label.          | [`class` => `navbar-item`]
-`optionsBrandImage`          | HTML attributes of the brand link.           | [`class` => `navbar-item`]
-`optionsItems(array $value)` | HTML attributes of the nav items.            | [`class` => `navbar-start`] or [`class` => `navbar-end`]
-`optionsMenu(array $value)`  | HTML attributes of the nav menu.             | [`class` => `navbar-menu`]
-`optionsToggle(array $value)`| HTML attributes of the navbar toggle button. | [`aria-expanded` => `false`, `aria-label` => `menu`, `class` => `navbar-burger`, `role` => `button`]
+Method | Description | Default
+-------|-------------|---------
+`brand(string $value)` | Custom brand HTML. Overrides `brandLabel` and `brandImage`. | ''
+`brandLabel(string $value)` | Text of the brand label. | ''
+`brandImage(string $value)` | Image of the brand. | ''
+`brandUrl(string $value)` | "href" of the brand's link. | `/`
+`toggleIcon(string $value)` | Toggle icon. | `<span aria-hidden='true'></span>`
+`options(array $value)` | HTML attributes for the nav tag. | [`class` => `navbar`]
+`optionsBrand(array $value)` | HTML attributes of the brand tag. | [`class` => `navbar-brand`]
+`optionsBrandLabel` | HTML attributes of the brand label tag. | [`class` => `navbar-item`]
+`optionsBrandImage` | HTML attributes of the brand link tag.           | [`class` => `navbar-item`]
+`optionsItems(array $value)` | HTML attributes of the nav items tag. | [`class` => `navbar-start`] or [`class` => `navbar-end`]
+`optionsMenu(array $value)` | HTML attributes of the nav menu tag. | [`class` => `navbar-menu`]
+`optionsToggle(array $value)`| HTML attributes of the navbar toggle button tag. | [`aria-expanded` => `false`, `aria-label` => `menu`, `class` => `navbar-burger`, `role` => `button`]

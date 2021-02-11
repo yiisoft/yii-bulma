@@ -44,8 +44,8 @@ final class ProgressBar extends Widget
     ];
 
     private array $options = [];
-    private ?float $value = null;
-    private ?int $maxValue = 100;
+    private float $value = 0;
+    private int $maxValue = 100;
     private string $size = '';
     private string $color = '';
 
@@ -53,36 +53,9 @@ final class ProgressBar extends Widget
     {
         $this->buildOptions();
 
-        $content = $this->value !== null
-            ? $this->value . '%'
-            : '';
+        $content = $this->value > 0 ? $this->value . '%' : '';
 
         return Html::tag('progress', $content, $this->options);
-    }
-
-    private function buildOptions(): void
-    {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-progressbar";
-        }
-
-        $this->options = $this->addOptions($this->options, 'progress');
-
-        if ($this->maxValue !== null) {
-            $this->options['max'] = $this->maxValue;
-        }
-
-        if ($this->value !== null) {
-            $this->options['value'] = $this->value;
-        }
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
-        }
-
-        if ($this->color !== '') {
-            Html::addCssClass($this->options, $this->color);
-        }
     }
 
     /**
@@ -103,11 +76,11 @@ final class ProgressBar extends Widget
     /**
      * Set the value of the progress.
      *
-     * @var float|null $value The value of the progress. Set `null` to display loading animation.
+     * @var float $value The value of the progress. Set `0` to display loading animation.
      *
      * @return self
      */
-    public function value(?float $value): self
+    public function value(float $value): self
     {
         $new = clone $this;
         $new->value = $value;
@@ -118,11 +91,11 @@ final class ProgressBar extends Widget
     /**
      * Set maximum progress value.
      *
-     * @var int|null $value Maximum progress value. Set `null` for no maximum.
+     * @var int $value Maximum progress value. Set `0` for no maximum.
      *
      * @return self
      */
-    public function maxValue(?int $value): self
+    public function maxValue(int $value): self
     {
         $new = clone $this;
         $new->maxValue = $value;
@@ -168,5 +141,30 @@ final class ProgressBar extends Widget
         $new->color = $value;
 
         return $new;
+    }
+
+    private function buildOptions(): void
+    {
+        if (!isset($this->options['id'])) {
+            $this->options['id'] = "{$this->getId()}-progressbar";
+        }
+
+        $this->options = $this->addOptions($this->options, 'progress');
+
+        if ($this->maxValue !== 0) {
+            $this->options['max'] = $this->maxValue;
+        }
+
+        if ($this->value > 0) {
+            $this->options['value'] = $this->value;
+        }
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        if ($this->color !== '') {
+            Html::addCssClass($this->options, $this->color);
+        }
     }
 }

@@ -96,14 +96,14 @@ HTML produced is like the following:
 
 ## Reference
 
-| Method                             | Description                                                                  | Default             |
-| ---------------------------------- | ---------------------------------------------------------------------------- | ------------------- |
-| `options(array $value)`            | HTML attributes for the widget container tag.                                | [`class` => `tabs`] |
-| `items(array $value)`              | List of tab items.                                                           | `[]`                |
-| `currentPath(?string $value)`      | Allows you to assign the current path of the URL from request controller.    | `null`              |
-| `activateItems(bool $value)`       | Whether to activate item if its route matches the currently requested route. | `true`              |
-| `encodeLabels(bool $value)`        | Whether the labels for menu items should be HTML-encoded.                    | `true`              |
-| `size(string $value)`              | Size of the tabs list.                                                       | `''`                |
-| `alignment(string $value)`         | Alignment of the tabs list.                                                  | `''`                |
-| `style(string $value)`             | Style of the tabs list.                                                      | `''`                |
-| `tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container.                    | `[]`                |
+Method | Description | Default
+-------|-------------|---------
+`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
+`items(array $value)` | List of tab items. | `[]`
+`currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
+`withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
+`withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |
+`size(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
+`alignment(string $value)` | Alignment of the tabs list. | `''`
+`style(string $value)` | Style of the tabs list. | `''`
+`tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`

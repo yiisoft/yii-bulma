@@ -12,10 +12,12 @@ final class BulmaAsset extends AssetBundle
     public ?string $baseUrl = '@assetsUrl';
     public ?string $sourcePath = '@npm/bulma/';
 
+    /** @psalm-suppress NonInvariantDocblockPropertyType */
     public array $css = [
         'css/bulma.css',
     ];
 
+    /** @psalm-suppress NonInvariantDocblockPropertyType */
     public array $publishOptions = [
         'only' => [
             'css/bulma.css',

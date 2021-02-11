@@ -97,22 +97,21 @@ HTML produced is like the following:
 </aside>
 ```
 
-Method                            | Description                                  | Default
-----------------------------------|----------------------------------------------|---------
-`id(string $value)`               | Widget ID.                                   | `''`
-`activateItems(bool $value)`      | Whether to automatically activate item its route matches the currently requested route. | `true`
-`activateParents(bool $value)`    | Whether to activate parent menu items if any child menu item is active. | `false`
-`activeCssClass(string $value)`   | The CSS class to be appended to the active menu item. | `is-active`
-`brand(string $value)`            | Custom brand content. | `''`
-`currentPath(string $value)`      | Allows you to assign the current path of the URL from request controller. | `''`
-`encodeLabels(bool $value)`       | Whether the labels for menu items should be HTML-encoded. | `true`
-`firstItemCssClass(string $value)`| The CSS class for the first item in the main menu or each submenu. | `''`
-`hideEmptyItems(bool $value)`     | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `true`
-`items(array $value)`             | List of menu items. | `[]`
-`itemOptions(array $value)`       | List of HTML attributes shared by all menu. | `[]`
-`labelTemplate(string $value)`    | The template used to render the body of a menu which is NOT a link. | `''`
+Method | Description | Default
+-------|-------------|---------
+`id(string $value)` | Widget ID. | `''`
+`withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
+`activateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
+`activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`
+`brand(string $value)` | Custom brand content. | `''`
+`currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | `''`
+`withoutEncodeLabels()` | Disable encoding for labels. | `false`
+`firstItemCssClass(string $value)` | The CSS class for the first item in the main menu or each submenu. | `''`
+`showEmptyItems()` | Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `false`
+`items(array $value)` | List of menu items. | `[]`
+`itemOptions(array $value)` | List of HTML attributes shared by all menu. | `[]`
+`labelTemplate(string $value)`| The template used to render the body of a menu which is NOT a link. | `''`
 `lastItemCssClass(string $value)` | The CSS class that will be assigned to the last item in the main menu or each submenu. | `''`
-`linkTemplate(string $value)`     | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
-`options(array $value)`           | The HTML attributes for the menu's container tag. | `[]`
-`subMenuTemplate(string $value)`  | The template used to render a list of sub-menus. | `<ul class = menu-list>\n{items}\n</ul>`
-
+`linkTemplate(string $value)` | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
+`options(array $value)` | The HTML attributes for the menu's container tag. | `[]`
+`subMenuTemplate(string $value)` | The template used to render a list of sub-menus. | `<ul class = menu-list>\n{items}\n</ul>`

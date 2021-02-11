@@ -12,23 +12,14 @@ final class MenuTest extends TestCase
     {
         Menu::counter(0);
 
-        $html = Menu::widget()
-            ->items([
-                [
-                    'label' => 'Login',
-                    'url' => 'auth/login',
-                ],
-            ])
-            ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="auth/login">Login</a></li>
-</ul>
-</aside>
-HTML;
-
+        $html = Menu::widget()->items([['label' => 'Login', 'url' => 'auth/login']])->render();
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="auth/login">Login</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -64,24 +55,22 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">General</p>
-<ul class = menu-list>
-<li><a href="site/index" class="testMe"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
-<li><a href="site/logout" class="testMe"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
-</ul>
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">General</p>
+        <ul class = menu-list>
+        <li><a href="site/index" class="testMe"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
+        <li><a href="site/logout" class="testMe"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
+        </ul>
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -89,34 +78,22 @@ HTML;
     {
         Menu::counter(0);
 
-        $html = Menu::widget()
-            ->items([])
-            ->render();
-
-        $expected = <<<HTML
-HTML;
-
-        $this->assertEqualsWithoutLE($expected, $html);
+        $html = Menu::widget()->items([])->render();
+        $this->assertEmpty($html);
     }
 
     public function testMenuItemEmptyLabel(): void
     {
         Menu::counter(0);
 
-        $html = Menu::widget()
-            ->items([
-                ['url' => '#'],
-            ])
-            ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="#"></a></li>
-</ul>
-</aside>
-HTML;
-
+        $html = Menu::widget()->items([['url' => '#']])->render();
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="#"></a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -149,23 +126,21 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">General</p>
-<ul class = menu-list>
-<li><a href="site/index"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
-</ul>
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">General</p>
+        <ul class = menu-list>
+        <li><a href="site/index"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
+        </ul>
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -174,7 +149,7 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(false)
+            ->withoutEncodeLabels()
             ->items([
                 [
                     'label' => 'Authors & Publications',
@@ -183,21 +158,18 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="#">Authors &amp; Publications</a></li>
-</ul>
-</aside>
-HTML;
-
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="#">Authors &amp; Publications</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(true)
             ->items([
                 [
                     'label' => 'Authors & Publications',
@@ -205,21 +177,19 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="#">Authors &amp; Publications</a></li>
-</ul>
-</aside>
-HTML;
-
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="#">Authors &amp; Publications</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(false)
+            ->withoutEncodeLabels()
             ->items([
                 [
                     'label' => 'Authors & Publications',
@@ -227,15 +197,13 @@ HTML;
                 ],
             ])
             ->render();
-
-        $expected = <<<HTML
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="#">Authors & Publications</a></li>
-</ul>
-</aside>
-HTML;
-
+        $expected = <<<'HTML'
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="#">Authors & Publications</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -244,7 +212,6 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(true)
             ->options([
                 'tag' => false,
             ])
@@ -261,22 +228,19 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
+        <aside class="menu">
 
-<div><a href="#">item1</a></div>
-<a href="#">item2</a>
+        <div><a href="#">item1</a></div>
+        <a href="#">item2</a>
 
-</aside>
-HTML;
-
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(true)
             ->options([
                 'tag' => false,
             ])
@@ -292,16 +256,14 @@ HTML;
             ])
             ->itemOptions(['tag' => false])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
+        <aside class="menu">
 
-<a href="#">item1</a>
-<a href="#">item2</a>
+        <a href="#">item1</a>
+        <a href="#">item2</a>
 
-</aside>
-HTML;
-
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -327,18 +289,16 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<li>label: item1; url: "#"</li>
-label: <p class="menu-label">item2</p>
+        <aside class="menu">
+        <ul class="menu-list">
+        <li>label: item1; url: "#"</li>
+        label: <p class="menu-label">item2</p>
 
-item3 (no template)
-</ul>
-</aside>
-HTML;
-
+        item3 (no template)
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -365,17 +325,15 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<li>label: item1; url: "#" class="is-active"</li>
-label: <p class="menu-label">item2</p>
+        <aside class="menu">
+        <ul class="menu-list">
+        <li>label: item1; url: "#" class="is-active"</li>
+        label: <p class="menu-label">item2</p>
 
-</ul>
-</aside>
-HTML;
-
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -384,7 +342,6 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(true)
             ->activeCssClass('item-active')
             ->items([
                 [
@@ -424,18 +381,16 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<li class="someclass"><a href="#" class="item-active">item1</a></li>
-<li class="another-class other--class two classes"><a href="#">item2</a></li>
-<li><a href="#">item3</a></li>
-<li class="some-other-class foo_bar_baz_class"><a href="#">item4</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <li class="someclass"><a href="#" class="item-active">item1</a></li>
+        <li class="another-class other--class two classes"><a href="#">item2</a></li>
+        <li><a href="#">item3</a></li>
+        <li class="some-other-class foo_bar_baz_class"><a href="#">item4</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -444,7 +399,6 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->encodeLabels(true)
             ->activeCssClass('item-active')
             ->items([
                 [
@@ -475,18 +429,16 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<li class="someclass"><a href="#">item1</a></li>
-<li><a href="#">item2</a></li>
-<li class="some classes"><a href="#">item3</a></li>
-<li class="another-class other--class two classes"><a href="#" class="item-active">item4</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <li class="someclass"><a href="#">item1</a></li>
+        <li><a href="#">item2</a></li>
+        <li class="some classes"><a href="#">item3</a></li>
+        <li class="another-class other--class two classes"><a href="#" class="item-active">item4</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -507,16 +459,14 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<li><a href="/setting" class="is-active">Setting</a></li>
-<li><a href="/profile">Profile</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -544,21 +494,19 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li class="testMe"><a href="user/index">Manager</a></li>
-<li><a href="user/export">Export</a></li>
-</ul>
-<li><a href="/setting" class="is-active">Setting</a></li>
-<li><a href="/profile">Profile</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li class="testMe"><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -586,21 +534,19 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-<li><a href="/setting" class="is-active">Setting</a></li>
-<li class="testMe"><a href="/profile">Profile</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li class="testMe"><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -609,7 +555,7 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->activateItems(false)
+            ->withoutActivateItems()
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -629,28 +575,25 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a><ul class = menu-list>
-<li><a href="user/update">Update</a></li>
-<li class="testMe"><a href="user/block">Block</a></li>
-</ul></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a><ul class = menu-list>
+        <li><a href="user/update">Update</a></li>
+        <li class="testMe"><a href="user/block">Block</a></li>
+        </ul></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->activateItems(true)
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -670,22 +613,20 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a><ul class = menu-list>
-<li><a href="user/update">Update</a></li>
-<li class="testMe"><a href="user/block" class="is-active">Block</a></li>
-</ul></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a><ul class = menu-list>
+        <li><a href="user/update">Update</a></li>
+        <li class="testMe"><a href="user/block" class="is-active">Block</a></li>
+        </ul></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -694,7 +635,6 @@ HTML;
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->activateParents(false)
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -714,28 +654,26 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a><ul class = menu-list>
-<li><a href="user/update">Update</a></li>
-<li class="testMe"><a href="user/block" class="is-active">Block</a></li>
-</ul></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a><ul class = menu-list>
+        <li><a href="user/update">Update</a></li>
+        <li class="testMe"><a href="user/block" class="is-active">Block</a></li>
+        </ul></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->activateParents(true)
+            ->activateParents()
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -755,22 +693,20 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index" class="is-active">Manager</a><ul class = menu-list>
-<li><a href="user/update">Update</a></li>
-<li class="testMe"><a href="user/block" class="is-active">Block</a></li>
-</ul></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index" class="is-active">Manager</a><ul class = menu-list>
+        <li><a href="user/update">Update</a></li>
+        <li class="testMe"><a href="user/block" class="is-active">Block</a></li>
+        </ul></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -802,26 +738,24 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<div class=aside-tools>
-<div class=aside-tools-label>
-<span><b>Brand</b> Example</span>
-</div>
-</div>
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-<li><a href="/setting" class="is-active">Setting</a></li>
-<li class="testMe"><a href="/profile">Profile</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <div class=aside-tools>
+        <div class=aside-tools-label>
+        <span><b>Brand</b> Example</span>
+        </div>
+        </div>
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li class="testMe"><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -831,7 +765,7 @@ HTML;
 
         $html = Menu::widget()
             ->currentPath('/setting')
-            ->hideEmptyItems(false)
+            ->showEmptyItems()
             ->lastItemCssClass('testMe')
             ->items([
                 ['label' => 'Users',
@@ -850,29 +784,26 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-<li><a href="/setting" class="is-active">Setting</a></li>
-<p class="menu-label">Profile</p>
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <p class="menu-label">Profile</p>
 
-</ul>
-</aside>
-HTML;
-
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
 
         Menu::counter(0);
 
         $html = Menu::widget()
             ->currentPath('/setting')
-            ->hideEmptyItems(true)
             ->lastItemCssClass('testMe')
             ->items([
                 ['label' => 'Users',
@@ -891,20 +822,18 @@ HTML;
                 ],
             ])
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul class = menu-list>
-<li><a href="user/index">Manager</a></li>
-<li class="testMe"><a href="user/export">Export</a></li>
-</ul>
-<li class="testMe"><a href="/setting" class="is-active">Setting</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        <li class="testMe"><a href="/setting" class="is-active">Setting</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
@@ -931,19 +860,17 @@ HTML;
             ])
             ->subMenuTemplate('<ul>\n{items}\n</ul>')
             ->render();
-
         $expected = <<<'HTML'
-<aside class="menu">
-<ul class="menu-list">
-<p class="menu-label">Users</p>
-<ul>\n<li><a href="user/index">Manager</a></li>
-<li><a href="user/export">Export</a></li>\n</ul>
-<li><a href="/setting">Setting</a></li>
-<li><a href="/profile">Profile</a></li>
-</ul>
-</aside>
-HTML;
-
+        <aside class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul>\n<li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>\n</ul>
+        <li><a href="/setting">Setting</a></li>
+        <li><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 }

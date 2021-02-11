@@ -35,6 +35,7 @@ final class NavBar extends Widget
         'class' => 'navbar-burger',
         'role' => 'button',
     ];
+    private bool $encodeTags = false;
 
     public function begin(): ?string
     {
@@ -45,6 +46,7 @@ final class NavBar extends Widget
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
+
         if (!is_string($navTag) && !is_bool($navTag) && $navTag !== null) {
             throw new InvalidArgumentException('Tag should be either string, bool or null.');
         }
@@ -147,7 +149,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
@@ -163,7 +165,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandOptions(array $value): self
     {
@@ -179,7 +181,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandLabelOptions(array $value): self
     {
@@ -195,7 +197,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function brandImageOptions(array $value): self
     {
@@ -211,7 +213,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
@@ -227,7 +229,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function menuOptions(array $value): self
     {
@@ -243,7 +245,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function toggleOptions(array $value): self
     {
@@ -266,6 +268,10 @@ final class NavBar extends Widget
         $this->brandLabelOptions = $this->addOptions($this->brandLabelOptions, 'navbar-item');
         $this->brandImageOptions = $this->addOptions($this->brandImageOptions, 'navbar-item');
         $this->menuOptions = $this->addOptions($this->menuOptions, 'navbar-menu');
+
+        if ($this->encodeTags === false) {
+            $this->brandImageOptions['encode'] = false;
+        }
 
         $this->menuOptions['id'] = "{$id}-navbar-Menu";
 

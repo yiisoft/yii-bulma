@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
@@ -71,34 +72,15 @@ final class Tabs extends Widget
     private ?string $currentPath = null;
     private bool $activateItems = true;
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private string $size = '';
     private string $alignment = '';
     private string $style = '';
     private array $tabsContent = [];
     private array $tabsContentOptions = [];
 
-    private function buildOptions(): void
-    {
-        Html::addCssClass($this->options, 'tabs');
-        Html::addCssClass($this->tabsContentOptions, 'tabs-content');
-
-        $this->options['id'] ??= $this->getId();
-
-        if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
-        }
-
-        if ($this->alignment !== '') {
-            Html::addCssClass($this->options, $this->alignment);
-        }
-
-        if ($this->style !== '') {
-            Html::addCssClass($this->options, $this->style);
-        }
-    }
-
     /**
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -154,133 +136,42 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param bool $value Whether to automatically activate item its route matches the currently requested route.
+     * Disable activate items according to whether their currentPath.
      *
      * @return self
      */
-    public function activateItems(bool $value): self
+    public function withoutActivateItems(): self
     {
         $new = clone $this;
-        $new->activateItems = $value;
+        $new->activateItems = false;
 
         return $new;
     }
 
     /**
-     * @param bool $value Whether the labels for menu items should be HTML-encoded.
+     * When tags Labels HTML should not be encoded.
      *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
 
         return $new;
     }
 
     /**
-     * @param string|null $value Allows you to assign the current path of the URL from request controller.
+     * @param string $value Allows you to assign the current path of the URL from request controller.
      *
      * @return self
      */
-    public function currentPath(?string $value): self
+    public function currentPath(string $value): self
     {
         $new = clone $this;
         $new->currentPath = $value;
 
         return $new;
-    }
-
-    /**
-     * @throws \JsonException
-     *
-     * @return string
-     */
-    private function renderItems(): string
-    {
-        $items = '';
-        foreach ($this->items as $index => $item) {
-            if (isset($item['visible']) && $item['visible'] === false) {
-                continue;
-            }
-            $items .= "\n" . $this->renderItem($index, $item);
-        }
-
-        return Html::tag('ul', $items . "\n");
-    }
-
-    /**
-     * @param int $index
-     * @param array $item
-     *
-     * @throws InvalidArgumentException|\JsonException
-     *
-     * @return string
-     */
-    private function renderItem(int $index, array $item): string
-    {
-        $id = $this->getId() . '-c' . $index;
-        $url = ArrayHelper::getValue($item, 'url', '');
-        $icon = ArrayHelper::getValue($item, 'icon', '');
-        $label = ArrayHelper::getValue($item, 'label', '');
-        $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
-        $options = ArrayHelper::getValue($item, 'options', []);
-        $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
-        $iconOptions = ArrayHelper::getValue($item, 'iconOptions', []);
-        $content = ArrayHelper::getValue($item, 'content');
-        $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
-        $active = $this->isItemActive($item);
-
-        if ($label === '') {
-            throw new InvalidArgumentException("The 'label' option is required.");
-        }
-
-        if ($encode === true) {
-            $label = Html::encode($label);
-        }
-
-        if ($icon !== '') {
-            Html::addCssClass($iconOptions, 'icon is-small');
-            $label = $this->renderIcon($label, $icon, $iconOptions);
-        }
-
-        if ($url !== '') {
-            $linkOptions['href'] = $url;
-        }
-
-        if ($active) {
-            Html::addCssClass($options, 'is-active');
-        }
-
-        if ($content !== null) {
-            if ($url === '') {
-                $linkOptions['href'] = '#' . $id;
-            }
-
-            $contentOptions['id'] = ArrayHelper::getValue($contentOptions, 'id', $id);
-
-            $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
-        }
-
-        return Html::tag('li', Html::tag('a', $label, $linkOptions), $options);
-    }
-
-    /**
-     * @param array $item
-     *
-     * @return bool
-     */
-    private function isItemActive(array $item): bool
-    {
-        if (isset($item['active'])) {
-            return (bool)ArrayHelper::getValue($item, 'active');
-        }
-
-        return
-            $this->activateItems
-            && isset($item['url'])
-            && $item['url'] === $this->currentPath;
     }
 
     /**
@@ -346,11 +237,142 @@ final class Tabs extends Widget
     }
 
     /**
+     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     *
+     * @param array $value
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function tabsContentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->tabsContentOptions = $value;
+
+        return $new;
+    }
+
+    private function buildOptions(): void
+    {
+        Html::addCssClass($this->options, 'tabs');
+        Html::addCssClass($this->tabsContentOptions, 'tabs-content');
+
+        $this->options['id'] ??= $this->getId() . '-tabs';
+
+        if ($this->size !== '') {
+            Html::addCssClass($this->options, $this->size);
+        }
+
+        if ($this->alignment !== '') {
+            Html::addCssClass($this->options, $this->alignment);
+        }
+
+        if ($this->style !== '') {
+            Html::addCssClass($this->options, $this->style);
+        }
+
+        if ($this->encodeTags === false) {
+            $this->options['encode'] = false;
+            $this->tabsContentOptions['encode'] = false;
+        }
+    }
+
+    /**
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderItems(): string
+    {
+        $items = '';
+
+        foreach ($this->items as $index => $item) {
+            if (isset($item['visible']) && $item['visible'] === false) {
+                continue;
+            }
+
+            $items .= "\n" . $this->renderItem($index, $item);
+        }
+
+        $itemOptions = [];
+
+        if ($this->encodeTags === false) {
+            $itemOptions['encode'] = false;
+        }
+
+        return Html::tag('ul', $items . "\n", $itemOptions);
+    }
+
+    /**
+     * @param int $index
+     * @param array $item
+     *
+     *@throws InvalidArgumentException|JsonException
+     *
+     * @return string
+     */
+    private function renderItem(int $index, array $item): string
+    {
+        $id = $this->getId() . '-tabs-c' . $index;
+        $url = ArrayHelper::getValue($item, 'url', '');
+        $icon = ArrayHelper::getValue($item, 'icon', '');
+        $label = ArrayHelper::getValue($item, 'label', '');
+        $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
+        $options = ArrayHelper::getValue($item, 'options', []);
+        $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
+        $iconOptions = ArrayHelper::getValue($item, 'iconOptions', []);
+        $content = ArrayHelper::getValue($item, 'content');
+        $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
+        $active = $this->isItemActive($item);
+
+        if ($this->encodeTags === false) {
+            $contentOptions['encode'] = false;
+            $iconOptions['encode'] = false;
+            $linkOptions['encode'] = false;
+            $options['encode'] = false;
+        }
+
+        if ($label === '') {
+            throw new InvalidArgumentException("The 'label' option is required.");
+        }
+
+        if ($encode === true) {
+            $label = Html::encode($label);
+        }
+
+        if ($icon !== '') {
+            Html::addCssClass($iconOptions, 'icon is-small');
+            $label = $this->renderIcon($label, $icon, $iconOptions);
+        }
+
+        if ($url !== '') {
+            $linkOptions['href'] = $url;
+        }
+
+        if ($active) {
+            Html::addCssClass($options, ['active' => 'is-active']);
+        }
+
+        if ($content !== null) {
+            if ($url === '') {
+                $linkOptions['href'] = '#' . $id;
+            }
+
+            $contentOptions['id'] = ArrayHelper::getValue($contentOptions, 'id', $id);
+
+            $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
+        }
+
+        return Html::tag('li', Html::tag('a', $label, $linkOptions), $options);
+    }
+
+    /**
      * @param string $label
      * @param string $icon
      * @param array $iconOptions
      *
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -372,17 +394,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * Returns the Id of the widget.
-     *
-     * @return string|null Id of the widget.
-     */
-    protected function getId(): ?string
-    {
-        return parent::getId() . '-tabs';
-    }
-
-    /**
      * Renders tabs content.
+     *
+     * @throws JsonException
      *
      * @return string
      */
@@ -398,19 +412,19 @@ final class Tabs extends Widget
     }
 
     /**
-     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     * @param array $item
      *
-     * @param array $value
-     *
-     * @return self
-     *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @return bool
      */
-    public function tabsContentOptions(array $value): self
+    private function isItemActive(array $item): bool
     {
-        $new = clone $this;
-        $new->tabsContentOptions = $value;
+        if (isset($item['active'])) {
+            return (bool)ArrayHelper::getValue($item, 'active');
+        }
 
-        return $new;
+        return
+            $this->activateItems
+            && isset($item['url'])
+            && $item['url'] === $this->currentPath;
     }
 }

@@ -32,6 +32,7 @@ final class Panel extends Widget
     private array $tabs = [];
     private array $tabsOptions = [];
     private bool $encodeLabels = true;
+    private bool $encodeTags = false;
     private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
     private array $tabItems = [];
 
@@ -48,17 +49,6 @@ final class Panel extends Widget
             '{panelItems}' => implode("\n", $this->tabItems),
             '{panelEnd}' => Html::endTag($tag),
         ]);
-    }
-
-    private function buildOptions(): void
-    {
-        Html::addCssClass($this->options, 'panel');
-
-        $this->options['id'] ??= $this->getId();
-
-        if ($this->color !== '') {
-            Html::addCssClass($this->options, $this->color);
-        }
     }
 
     /**
@@ -203,6 +193,21 @@ final class Panel extends Widget
         return '';
     }
 
+    private function buildOptions(): void
+    {
+        Html::addCssClass($this->options, 'panel');
+
+        $this->options['id'] ??= $this->getId() . '-panel';
+
+        if ($this->encodeTags === false) {
+            $this->tabsOptions = array_merge($this->tabsOptions, ['encode' => false]);
+        }
+
+        if ($this->color !== '') {
+            Html::addCssClass($this->options, $this->color);
+        }
+    }
+
     /**
      * @param int $index
      * @param array $item
@@ -213,7 +218,7 @@ final class Panel extends Widget
      */
     private function renderTab(int $index, array $item): string
     {
-        $id = $this->getId() . '-c' . $index;
+        $id = $this->getId() . '-panel-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $label = ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
@@ -234,7 +239,7 @@ final class Panel extends Widget
         }
 
         if ($this->isActive($item)) {
-            Html::addCssClass($linkOptions, 'is-active');
+            Html::addCssClass($linkOptions, ['active' => 'is-active']);
         }
 
         if (is_array($tabItems) && !empty($tabItems)) {
@@ -242,9 +247,11 @@ final class Panel extends Widget
             $tabItemsContainerOptions['id'] ??= $id;
 
             $tabItemsContainer = Html::beginTag('div', $tabItemsContainerOptions) . "\n";
+
             foreach ($tabItems as $tabItem) {
                 $tabItemsContainer .= $this->renderItem($tabItem) . "\n";
             }
+
             $tabItemsContainer .= Html::endTag('div');
 
             $this->tabItems[$index] = $tabItemsContainer;
@@ -271,12 +278,19 @@ final class Panel extends Widget
         Html::addCssClass($options, 'panel-block');
 
         if ($this->isActive($item)) {
-            Html::addCssClass($options, 'is-active');
+            Html::addCssClass($options, ['active' => 'is-active']);
+        }
+
+        $labelOptions = ['class' => 'panel-icon'];
+
+        if ($this->encodeTags === false) {
+            $labelOptions['encode'] = false;
+            $options['encode'] = false;
         }
 
         if ($icon !== '') {
             $icon = "\n" . Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
-            $label = "\n" . Html::tag('span', $icon, ['class' => 'panel-icon']) . "\n" . $label . "\n";
+            $label = "\n" . Html::tag('span', $icon, $labelOptions) . "\n" . $label . "\n";
         }
 
         return Html::tag('a', $label, $options);
@@ -291,16 +305,6 @@ final class Panel extends Widget
      */
     private function isActive(array $item): bool
     {
-        return (bool)ArrayHelper::getValue($item, 'active', false);
-    }
-
-    /**
-     * Returns the Id of the widget.
-     *
-     * @return string|null Id of the widget.
-     */
-    protected function getId(): ?string
-    {
-        return parent::getId() . '-panel';
+        return (bool) ArrayHelper::getValue($item, 'active', false);
     }
 }

@@ -29,6 +29,7 @@ use function strtr;
 class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
+    private bool $encodeLinks = false;
     private array $homeItem = [];
     private bool $withoutHomeItem = false;
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
@@ -54,16 +55,14 @@ class Breadcrumbs extends Widget
     }
 
     /**
-     * Whether to HTML-encode the link labels.
+     * Disable encoding for labels.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
         return $new;
     }
 
@@ -155,7 +154,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
@@ -171,7 +170,7 @@ class Breadcrumbs extends Widget
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function itemsOptions(array $value): self
     {
@@ -244,6 +243,10 @@ class Breadcrumbs extends Widget
 
         if (isset($link['template'])) {
             $template = $link['template'];
+        }
+
+        if ($this->encodeLinks === false) {
+            $link['encode'] = false;
         }
 
         if (isset($link['url'])) {

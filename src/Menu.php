@@ -34,6 +34,7 @@ final class Menu extends Widget
     private string $linkTemplate = '<a href={url}>{icon}{label}</a>';
     private string $labelTemplate = '{label}';
     private bool $encodeLabels = true;
+    private bool $encodeLinks = false;
     private bool $hideEmptyItems = true;
     private array $options = [];
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
@@ -57,34 +58,28 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether to automatically activate items according to whether their route setting matches the currently requested
-     * route.
+     * Disable activate items according to whether their currentPath.
      *
-     * @var bool
+     * @return $this
      *
-     * @return self
-     *
-     * {@see isItemActive()}
+     * {@see isItemActive}
      */
-    public function activateItems(bool $value): self
+    public function withoutActivateItems(): self
     {
         $new = clone $this;
-        $new->activateItems = $value;
+        $new->activateItems = false;
         return $new;
     }
 
     /**
-     * Whether to activate parent menu items when one of the corresponding child menu items is active. The activated
-     * parent menu items will also have its CSS classes appended with {@see activeCssClass}.
+     * Whether to activate parent menu items when one of the corresponding child menu items is active.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function activateParents(bool $value): self
+    public function activateParents(): self
     {
         $new = clone $this;
-        $new->activateParents = $value;
+        $new->activateParents = true;
         return $new;
     }
 
@@ -131,16 +126,14 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether the labels for menu items should be HTML-encoded.
+     * When tags Labels HTML should not be encoded.
      *
-     * @param bool $value
-     *
-     * @return self
+     * @return $this
      */
-    public function encodeLabels(bool $value): self
+    public function withoutEncodeLabels(): self
     {
         $new = clone $this;
-        $new->encodeLabels = $value;
+        $new->encodeLabels = false;
         return $new;
     }
 
@@ -160,17 +153,17 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no
+     * Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no
      * visible child menu items.
      *
      * @var bool
      *
      * @return self
      */
-    public function hideEmptyItems(bool $value): self
+    public function showEmptyItems(): self
     {
         $new = clone $this;
-        $new->hideEmptyItems = $value;
+        $new->hideEmptyItems = false;
         return $new;
     }
 
@@ -221,13 +214,13 @@ final class Menu extends Widget
      * generate the HTML attributes for the menu item tag. The following special options are recognized:
      *
      * - tag: string, defaults to "li", the tag name of the item container tags. Set to false to disable container tag.
-     *   See also {@see \Yiisoft\Html\Html::tag()}
+     *   See also {@see Html::tag()}
      *
      * @param array $value
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes() for details on how attributes are being rendered}
+     * {@see Html::renderTagAttributes() for details on how attributes are being rendered}
      */
     public function itemOptions(array $value): self
     {
@@ -290,13 +283,13 @@ final class Menu extends Widget
      * The HTML attributes for the menu's container tag. The following special options are recognized:
      *
      * - tag: string, defaults to "ul", the tag name of the item container tags. Set to false to disable container tag.
-     *   See also {@see \Yiisoft\Html\Html::tag()}.
+     *   See also {@see Html::tag()}.
      *
      * @param array $value
      *
      * @return self
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function options(array $value): self
     {
@@ -461,6 +454,10 @@ final class Menu extends Widget
     {
         $this->options = $this->addOptions($this->options, 'menu');
         $this->itemsOptions = $this->addOptions($this->itemsOptions, 'menu-list');
+
+        if ($this->encodeLinks === false) {
+            $this->itemOptions['encode'] = false;
+        }
     }
 
     private function buildMenu(): string

@@ -48,10 +48,10 @@ The code above generates the following HTML:
 
 ## Reference
 
-Method                              | Description                                                                                       | Default
-------------------------------------|---------------------------------------------------------------------------------------------------|-----
-`progressValue(float\|null $value)` | The progress value. Set to `null` to display a loading animation.                                 | `null`
-`progressMax(int\|null $value)`     | Maximum progress value. `null` means no maximum.                                                  | `100`
-`options(array $value)`             | HTML attributes for the widget container tag.                                                     | `['class' => 'progress']`
-`size(string $value)`               | Bar size. Options available [are here](https://bulma.io/documentation/elements/progress/#colors). | `''`
-`color(string $value)`              | Bar color. Options available [are here](https://bulma.io/documentation/elements/progress/#sizes). | `''`
+Method | Description | Default
+-------|-------------|---------
+`progressValue(float $value)` | The progress value. Set to `0` to display a loading animation. | `0`
+`progressMax(int $value)` | Maximum progress value. `0` means no maximum. | `100`
+`options(array $value)` | HTML attributes for the widget container tag. | `['class' => 'progress']`
+`size(string $value)` | Bar size. | `is-small`, `is-medium`, `is-large`
+`color(string $value)` | Bar color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`

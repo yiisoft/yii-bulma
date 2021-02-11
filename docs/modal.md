@@ -58,13 +58,14 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`]
-contentOptions(array $value) | | `[]`
-closeButtonOptions(array $value) | | [`class` => `modal-close`, `aria-label` => `close`]
-closeButtonSize(string $value) | | `''`
-toggleButtonLabel(string $value) | | `Toggle button`
-toggleButtonSize(string $value) | | `''`
-toggleButtonColor(string $value) | | `''`
-toggleButtonOptions(array $value) | | [`class` => `button`, `aria-haspopup` => `true`]
-closeButtonEnabled(bool $value) | | `true`
-toggleButtonEnabled(bool $value) | | `true`
+`id(string $value)` | Widget ID. | `''`
+`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
+`contentOptions(array $value)`| HTML attributes for the widget content tag. | `[]`
+`closeButtonOptions(array $value)` | HTML attributes for the widget button tag. | [`class` => `modal-close`, `aria-label` => `close`]
+`closeButtonSize(string $value)` | Size close button. | `is-small`, `is-medium`, `is-large`
+`toggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
+`toggleButtonSize(string $value)` | Size toggle button. | `is-small`, `is-medium`, `is-large`
+`toggleButtonColor(string $value)` | Toggle button color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
+`toggleButtonOptions(array $value)` |  HTML attributes for the widget toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
+`withoutCloseButton()` | Disable close button. | `false`
+`withoutToggleButton()` | Disable toggle button. | `false`

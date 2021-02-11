@@ -69,19 +69,19 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-options(array $value) | HTML attributes for the widget container tag. | [`class` => `modal`]
-contentOptions(array $value) | | [`class` => `modal-card`]
-headerOptions(array $value) | | [`class` => `modal-card-head`]
-title(string $value) | | `''`
-titleOptions(array $value) | | [`class` => `modal-card-title`]
-bodyOptions(bool $value) | | [`class` => `modal-card-body`]
-footer(string $value) | | `''`
-footerOptions(bool $value) | | [`class` => `modal-card-foot`]
-closeButtonOptions(array $value) | | [`class` => `delete`, `aria-label` => `close`]
-closeButtonSize(string $value) | | `''`
-toggleButtonLabel(string $value) | | `Toggle button`
-toggleButtonSize(string $value) | | `''`
-toggleButtonColor(string $value) | | `''`
-toggleButtonOptions(array $value) | | [`class` => `button`, `aria-haspopup` => `true`]
-closeButtonEnabled(bool $value) | | `true`
-toggleButtonEnabled(bool $value) | | `true`
+`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
+`contentOptions(array $value)` | HTML attributes for the widget content tag. | [`class` => `modal-card`]
+`headerOptions(array $value)` | HTML attributes for the widget header tag. | [`class` => `modal-card-head`]
+`title(string $value)` | The title content in the modal window. | `''`
+`titleOptions(array $value)` | HTML attributes for the widget title tag. | [`class` => `modal-card-title`]
+`bodyOptions(array $value)` | HTML attributes for the widget body tag.| [`class` => `modal-card-body`]
+`footer(string $value)` | The footer content in the modal window. | `''`
+`footerOptions(array $value)` | HTML attributes for the widget footer tag. | [`class` => `modal-card-foot`]
+`closeButtonOptions(array $value)` | HTML attributes for the widget close button tag. | [`class` => `delete`, `aria-label` => `close`]
+`closeButtonSize(string $value)` | Size close button. | `is-small`, `is-medium`, `is-large`
+`toggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
+`toggleButtonSize(string $value)` | Size toggle button. | `is-small`, `is-medium`, `is-large`
+`toggleButtonColor(string $value)` | Toggle button color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
+`toggleButtonOptions(array $value)` |  HTML attributes for the widget toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
+`withoutCloseButton()` | Disable close button. | `false`
+`withoutToggleButton()` | Disable toggle button. | `false`
