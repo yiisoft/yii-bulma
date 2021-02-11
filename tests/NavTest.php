@@ -254,21 +254,26 @@ final class NavTest extends TestCase
             ->activateParents()
             ->items([
                 [
-                    'label' => 'Dropdown',
+                    'label' => '<span>Dropdown</span>',
                     'items' => [
                         [
                             'label' => 'Sub-dropdown',
                             'items' => [
-                                ['label' => 'Page', 'url' => '#', 'active' => true],
+                                [
+                                    'label' => 'Page',
+                                    'url' => '#',
+                                    'active' => true,
+                                ],
                             ],
                         ],
                     ],
+                    'encode' => false,
                 ],
             ])
             ->render();
         $expected = <<<'HTML'
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Dropdown</a>
+        <a class="navbar-link" href="#"><span>Dropdown</span></a>
         <div id="w1-dropdown" class="navbar-dropdown">
         <a class="navbar-item" aria-haspopup="true" aria-expanded="false">Sub-dropdown</a>
         <div id="w2-dropdown" class="navbar-dropdown">
@@ -509,52 +514,6 @@ final class NavTest extends TestCase
         </div></div>
         </div>
         </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testEncodeTags(): void
-    {
-        NavBar::counter(0);
-
-        $html = Nav::widget()
-            ->encodeTags()
-            ->items(
-                [
-                    [
-                        'label' => 'Setting Account',
-                        'url' => '/setting/account',
-                        'icon' => 'fas fa-user-cog',
-                        'iconOptions' => ['class' => 'icon'],
-                    ],
-                    [
-                        'label' => 'Profile',
-                        'url' => '/profile',
-                        'icon' => 'fas fa-users',
-                        'iconOptions' => ['class' => 'icon'],
-                    ],
-                    [
-                        'label' => 'Admin' . Html::img(
-                            '../../docs/images/icon-avatar.png',
-                            ['class' => 'img-rounded', 'aria-expanded' => 'false']
-                        ),
-                        'items' => [
-                            ['label' => 'Logout', 'url' => '/auth/logout'],
-                        ],
-                        'encode' => false,
-                    ],
-                ],
-            )
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="/setting/account">&lt;span class="icon"&gt;&lt;i class="fas fa-user-cog"&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;Setting Account&lt;/span&gt;</a>
-        <a class="navbar-item" href="/profile">&lt;span class="icon"&gt;&lt;i class="fas fa-users"&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;Profile&lt;/span&gt;</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt="" aria-expanded="false"></a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="/auth/logout">Logout</a>
-        </div>
-        </div>
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }

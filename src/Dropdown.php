@@ -231,19 +231,6 @@ final class Dropdown extends Widget
         return $new;
     }
 
-    /**
-     * Enable encoding for links.
-     *
-     * @return self
-     */
-    public function encodeLinks(): self
-    {
-        $new = clone $this;
-        $new->encodeLinks = true;
-
-        return $new;
-    }
-
     private function buildDropdown(): string
     {
         if ($this->encloseByContainer) {

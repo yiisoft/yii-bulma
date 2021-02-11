@@ -765,7 +765,7 @@ final class MenuTest extends TestCase
 
         $html = Menu::widget()
             ->currentPath('/setting')
-            ->withoutHideEmptyItems()
+            ->showEmptyItems()
             ->lastItemCssClass('testMe')
             ->items([
                 ['label' => 'Users',
@@ -868,45 +868,6 @@ final class MenuTest extends TestCase
         <li><a href="user/export">Export</a></li>\n</ul>
         <li><a href="/setting">Setting</a></li>
         <li><a href="/profile">Profile</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testEncodeTags(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->encodeLinks()
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li>&lt;a href="user/index"&gt;Manager&lt;/a&gt;</li>
-        <li>&lt;a href="user/export"&gt;Export&lt;/a&gt;</li>
-        </ul>
-        <li>&lt;a href="/setting"&gt;Setting&lt;/a&gt;</li>
-        <li>&lt;a href="/profile"&gt;Profile&lt;/a&gt;</li>
         </ul>
         </aside>
         HTML;

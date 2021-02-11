@@ -253,27 +253,4 @@ final class MessageTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
-
-    public function testEncodeTags(): void
-    {
-        Message::counter(0);
-
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->encodeTags()
-            ->render();
-        $expected = <<<'HTML'
-        <div id="w1-message" class="message is-dark">
-        <div class="message-header">
-        <p>Very important</p>
-        <button type="button" class="delete">&lt;span aria-hidden="true"&gt;&amp;times;&lt;/span&gt;</button>
-        </div>
-        <div class="message-body">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
 }

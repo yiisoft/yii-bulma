@@ -403,20 +403,4 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
-
-    public function testEncodeTags(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()->brandImage('yii-logo.jpg')->encodeTags()->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><a class="navbar-item" href="/">&lt;img src="yii-logo.jpg" alt=""&gt;</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
 }

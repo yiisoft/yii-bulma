@@ -107,7 +107,7 @@ Method | Description | Default
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | `''`
 `withoutEncodeLabels()` | Disable encoding for labels. | `false`
 `firstItemCssClass(string $value)` | The CSS class for the first item in the main menu or each submenu. | `''`
-`withoutHideEmptyItems()` | Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `false`
+`showEmptyItems()` | Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `false`
 `items(array $value)` | List of menu items. | `[]`
 `itemOptions(array $value)` | List of HTML attributes shared by all menu. | `[]`
 `labelTemplate(string $value)`| The template used to render the body of a menu which is NOT a link. | `''`
@@ -115,4 +115,3 @@ Method | Description | Default
 `linkTemplate(string $value)` | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
 `options(array $value)` | The HTML attributes for the menu's container tag. | `[]`
 `subMenuTemplate(string $value)` | The template used to render a list of sub-menus. | `<ul class = menu-list>\n{items}\n</ul>`
-`encodeTags()` | Allows you to enable the encoding tags html. | `true`

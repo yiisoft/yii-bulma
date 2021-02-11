@@ -179,19 +179,6 @@ class Breadcrumbs extends Widget
         return $new;
     }
 
-    /**
-     * Enable encoding for links.
-     *
-     * @return self
-     */
-    public function encodeLinks(): self
-    {
-        $new = clone $this;
-        $new->encodeLinks = true;
-
-        return $new;
-    }
-
     private function buildOptions(): void
     {
         if (!isset($this->options['id'])) {

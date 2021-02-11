@@ -331,27 +331,4 @@ final class TabsTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
-
-    public function testEncodeTags(): void
-    {
-        Tabs::counter(0);
-
-        $html = Tabs::widget()
-            ->encodeTags()
-            ->items([
-                ['label' => 'Music', 'content' => 'Some text about music'],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <div id="w1-tabs" class="tabs">
-        &lt;ul&gt;
-        &amp;lt;li&amp;gt;&amp;amp;lt;a href="#w1-tabs-c0"&amp;amp;gt;Music&amp;amp;lt;/a&amp;amp;gt;&amp;lt;/li&amp;gt;
-        &lt;/ul&gt;
-        </div>
-        <div class="tabs-content">
-        &lt;div id="w1-tabs-c0"&gt;Some text about music&lt;/div&gt;
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
 }

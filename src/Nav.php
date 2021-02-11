@@ -117,19 +117,6 @@ final class Nav extends Widget
     }
 
     /**
-     * Allows you to enable the encoding tags html.
-     *
-     * @return self
-     */
-    public function encodeTags(): self
-    {
-        $new = clone $this;
-        $new->encodeTags = true;
-
-        return $new;
-    }
-
-    /**
      * Renders the given items as a dropdown.
      *
      * This method is called to create sub-menus.

@@ -153,14 +153,14 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether to hide empty menu items. An empty menu item is one whose `url` option is not set and which has no
+     * Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no
      * visible child menu items.
      *
      * @var bool
      *
      * @return self
      */
-    public function withoutHideEmptyItems(): self
+    public function showEmptyItems(): self
     {
         $new = clone $this;
         $new->hideEmptyItems = false;
@@ -311,19 +311,6 @@ final class Menu extends Widget
     {
         $new = clone $this;
         $new->subMenuTemplate = $value;
-        return $new;
-    }
-
-    /**
-     * Allows you to enable the encoding tags html.
-     *
-     * @return self
-     */
-    public function encodeLinks(): self
-    {
-        $new = clone $this;
-        $new->encodeLinks = true;
-
         return $new;
     }
 

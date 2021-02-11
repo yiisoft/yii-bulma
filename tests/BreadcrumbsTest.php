@@ -284,30 +284,4 @@ final class BreadcrumbsTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
-
-    public function testEncodeTags(): void
-    {
-        Breadcrumbs::counter(0);
-
-        $html = Breadcrumbs::widget()
-            ->withoutEncodeLabels()
-            ->encodeLinks()
-            ->items(
-                [
-                    [
-                        'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
-                        'url' => '/about',
-                    ],
-                ],
-            )->render();
-        $expected = <<<'HTML'
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">&lt;span&gt;&lt;i class =fas fas-profile&gt;&lt;/i&gt;Setting Profile&lt;/span&gt;</a></li>
-        </ul>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
 }

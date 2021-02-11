@@ -74,4 +74,3 @@ Method | Description | Default
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
 `closeButton()` | Allows you to enable close button. | `true`
 `withoutHeader()` | Allows you to disable header. | `false`
-`encodeTags()` | Allows you to enable the encoding tags html. | `true`

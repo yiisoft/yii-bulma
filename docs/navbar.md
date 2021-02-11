@@ -142,4 +142,3 @@ Method | Description | Default
 `optionsItems(array $value)` | HTML attributes of the nav items tag. | [`class` => `navbar-start`] or [`class` => `navbar-end`]
 `optionsMenu(array $value)` | HTML attributes of the nav menu tag. | [`class` => `navbar-menu`]
 `optionsToggle(array $value)`| HTML attributes of the navbar toggle button tag. | [`aria-expanded` => `false`, `aria-label` => `menu`, `class` => `navbar-burger`, `role` => `button`]
-`encodeTags()` | Allows you to enable the encoding tags html. | `true`
