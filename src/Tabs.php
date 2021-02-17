@@ -400,10 +400,10 @@ final class Tabs extends Widget
 
         if (!empty($this->tabsContent)) {
             $html .= "\n" . Html::tag(
-                    'div',
-                    "\n" . implode("\n", $this->tabsContent) . "\n",
-                    $this->tabsContentOptions
-                )->encode($this->encodeTags);
+                'div',
+                "\n" . implode("\n", $this->tabsContent) . "\n",
+                $this->tabsContentOptions
+            )->encode($this->encodeTags);
         }
 
         return $html;
