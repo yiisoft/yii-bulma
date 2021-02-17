@@ -55,7 +55,7 @@ final class ProgressBar extends Widget
 
         $content = $this->value > 0 ? $this->value . '%' : '';
 
-        return Html::tag('progress', $content, $this->options);
+        return Html::tag('progress', $content, $this->options)->render();
     }
 
     /**

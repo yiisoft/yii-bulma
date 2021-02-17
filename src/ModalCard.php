@@ -80,9 +80,9 @@ final class ModalCard extends Widget
 
         $html = '';
         $html .= $this->renderToggleButton() . "\n";
-        $html .= Html::beginTag('div', $this->options) . "\n"; // .modal
+        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
         $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
-        $html .= Html::beginTag('div', $this->contentOptions) . "\n"; // .modal-card
+        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-card
         $html .= $this->renderHeader();
         $html .= $this->renderBodyBegin() . "\n";
 
@@ -94,8 +94,8 @@ final class ModalCard extends Widget
         $html = '';
         $html .= $this->renderBodyEnd() . "\n";
         $html .= $this->renderFooter() . "\n";
-        $html .= Html::endTag('div') . "\n"; // .modal-card
-        $html .= Html::endTag('div'); // .modal
+        $html .= Html::closeTag('div') . "\n"; // .modal-card
+        $html .= Html::closeTag('div'); // .modal
 
         return $html;
     }
@@ -381,7 +381,7 @@ final class ModalCard extends Widget
     private function renderToggleButton(): string
     {
         if ($this->withoutToggleButton) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
+            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions)->render();
         }
 
         return '';
@@ -397,7 +397,7 @@ final class ModalCard extends Widget
     private function renderCloseButton(): string
     {
         if ($this->withoutCloseButton) {
-            return Html::button('', $this->closeButtonOptions);
+            return Html::button('', $this->closeButtonOptions)->render();
         }
 
         return '';
@@ -413,10 +413,10 @@ final class ModalCard extends Widget
     private function renderHeader(): string
     {
         $html = '';
-        $html .= Html::beginTag('header', $this->headerOptions) . "\n";
+        $html .= Html::openTag('header', $this->headerOptions) . "\n";
         $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
         $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::endTag('header') . "\n";
+        $html .= Html::closeTag('header') . "\n";
 
         return $html;
     }
@@ -430,7 +430,7 @@ final class ModalCard extends Widget
      */
     private function renderBodyBegin(): string
     {
-        return Html::beginTag('section', $this->bodyOptions);
+        return Html::openTag('section', $this->bodyOptions);
     }
 
     /**
@@ -442,7 +442,7 @@ final class ModalCard extends Widget
      */
     private function renderBodyEnd(): string
     {
-        return Html::endTag('section');
+        return Html::closeTag('section');
     }
 
     /**
@@ -454,7 +454,7 @@ final class ModalCard extends Widget
      */
     private function renderFooter(): string
     {
-        return Html::tag('footer', $this->footer, $this->footerOptions);
+        return Html::tag('footer', $this->footer, $this->footerOptions)->render();
     }
 
     /**
@@ -466,7 +466,7 @@ final class ModalCard extends Widget
      */
     private function renderBackgroundTransparentOverlay(): string
     {
-        return Html::tag('div', '', ['class' => 'modal-background']);
+        return Html::tag('div', '', ['class' => 'modal-background'])->render();
     }
 
     private function buildOptions(): void

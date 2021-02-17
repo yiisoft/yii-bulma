@@ -356,7 +356,9 @@ final class Menu extends Widget
                     $lines[] = $item['label'];
                 }
             } else {
-                $lines[] = Html::tag($tag, $menu, $options);
+                $lines[] = $tag === false
+                    ? $menu
+                    : Html::tag($tag, $menu, $options)->encode($this->encodeLinks)->render();
             }
         }
 
@@ -442,9 +444,9 @@ final class Menu extends Widget
         $html = '';
 
         if ($icon !== '') {
-            $html = Html::beginTag('span', $iconOptions) .
+            $html = Html::openTag('span', $iconOptions) .
                 Html::tag('i', '', ['class' => $icon]) .
-                Html::endTag('span');
+                Html::closeTag('span');
         }
 
         return $html;
@@ -454,25 +456,25 @@ final class Menu extends Widget
     {
         $this->options = $this->addOptions($this->options, 'menu');
         $this->itemsOptions = $this->addOptions($this->itemsOptions, 'menu-list');
-
-        if ($this->encodeLinks === false) {
-            $this->itemOptions['encode'] = false;
-        }
     }
 
     private function buildMenu(): string
     {
         $tag = ArrayHelper::remove($this->options, 'tag', 'ul');
-        $html = Html::beginTag('aside', $this->options) . "\n";
+        $html = Html::openTag('aside', $this->options) . "\n";
 
         if ($this->brand !== '') {
             $html .= $this->brand . "\n";
         }
 
-        $html .= Html::beginTag($tag, $this->itemsOptions) . "\n";
-        $html .=  $this->renderItems($this->items) . "\n";
-        $html .= Html::endTag($tag) . "\n";
-        $html .= Html::endTag('aside');
+        if ($tag) {
+            $html .= Html::openTag($tag, $this->itemsOptions);
+        }
+        $html .= "\n" . $this->renderItems($this->items) . "\n";
+        if ($tag) {
+            $html .= Html::closeTag($tag);
+        }
+        $html .= "\n" . Html::closeTag('aside');
 
         return $html;
     }

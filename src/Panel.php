@@ -43,11 +43,11 @@ final class Panel extends Widget
         $tag = ArrayHelper::getValue($this->options, 'tag', 'nav');
 
         return strtr($this->template, [
-            '{panelBegin}' => Html::beginTag($tag, $this->options),
+            '{panelBegin}' => Html::openTag($tag, $this->options),
             '{panelHeading}' => $this->renderHeading(),
             '{panelTabs}' => $this->renderTabs(),
             '{panelItems}' => implode("\n", $this->tabItems),
-            '{panelEnd}' => Html::endTag($tag),
+            '{panelEnd}' => Html::closeTag($tag),
         ]);
     }
 
@@ -187,7 +187,7 @@ final class Panel extends Widget
 
             Html::addCssClass($this->tabsOptions, 'panel-tabs');
 
-            return "\n" . Html::tag('p', "\n" . $tabs, $this->tabsOptions) . "\n";
+            return "\n" . Html::tag('p', "\n" . $tabs, $this->tabsOptions)->encode($this->encodeTags) . "\n";
         }
 
         return '';
@@ -198,10 +198,6 @@ final class Panel extends Widget
         Html::addCssClass($this->options, 'panel');
 
         $this->options['id'] ??= $this->getId() . '-panel';
-
-        if ($this->encodeTags === false) {
-            $this->tabsOptions = array_merge($this->tabsOptions, ['encode' => false]);
-        }
 
         if ($this->color !== '') {
             Html::addCssClass($this->options, $this->color);
@@ -246,18 +242,18 @@ final class Panel extends Widget
             $linkOptions['href'] ??= '#' . $id;
             $tabItemsContainerOptions['id'] ??= $id;
 
-            $tabItemsContainer = Html::beginTag('div', $tabItemsContainerOptions) . "\n";
+            $tabItemsContainer = Html::openTag('div', $tabItemsContainerOptions) . "\n";
 
             foreach ($tabItems as $tabItem) {
                 $tabItemsContainer .= $this->renderItem($tabItem) . "\n";
             }
 
-            $tabItemsContainer .= Html::endTag('div');
+            $tabItemsContainer .= Html::closeTag('div');
 
             $this->tabItems[$index] = $tabItemsContainer;
         }
 
-        return Html::tag('a', $label, $linkOptions);
+        return Html::tag('a', $label, $linkOptions)->render();
     }
 
     private function renderItem(array $item): string
@@ -283,17 +279,14 @@ final class Panel extends Widget
 
         $labelOptions = ['class' => 'panel-icon'];
 
-        if ($this->encodeTags === false) {
-            $labelOptions['encode'] = false;
-            $options['encode'] = false;
-        }
-
         if ($icon !== '') {
             $icon = "\n" . Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
-            $label = "\n" . Html::tag('span', $icon, $labelOptions) . "\n" . $label . "\n";
+            $label = "\n" . Html::tag('span', $icon, $labelOptions)->encode($this->encodeTags) . "\n" . $label . "\n";
         }
 
-        return Html::tag('a', $label, $options);
+        return Html::tag('a', $label, $options)
+            ->encode($this->encodeTags)
+            ->render();
     }
 
     /**
@@ -305,6 +298,6 @@ final class Panel extends Widget
      */
     private function isActive(array $item): bool
     {
-        return (bool) ArrayHelper::getValue($item, 'active', false);
+        return (bool)ArrayHelper::getValue($item, 'active', false);
     }
 }

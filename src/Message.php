@@ -37,12 +37,12 @@ final class Message extends Widget
         $this->buildOptions();
 
         return
-            Html::beginTag('div', $this->options) . "\n" .
-                $this->renderHeader() .
-                Html::beginTag('div', $this->bodyOptions) . "\n" .
-                    $this->renderBodyEnd() . "\n" .
-                Html::endTag('div') . "\n" .
-            Html::endTag('div');
+            Html::openTag('div', $this->options) . "\n" .
+            $this->renderHeader() .
+            Html::openTag('div', $this->bodyOptions) . "\n" .
+            $this->renderBodyEnd() . "\n" .
+            Html::closeTag('div') . "\n" .
+            Html::closeTag('div');
     }
 
     /**
@@ -210,11 +210,6 @@ final class Message extends Widget
         $this->bodyOptions = $this->addOptions($this->bodyOptions, 'message-body');
         $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
         $this->headerOptions = $this->addOptions($this->headerOptions, 'message-header');
-
-        if ($this->encodeTags === false) {
-            $this->closeButtonOptions['encode'] = false;
-            $this->options['encode'] = false;
-        }
     }
 
     private function renderHeader(): string
@@ -222,8 +217,8 @@ final class Message extends Widget
         $html = '';
 
         if ($this->withoutHeader) {
-            $html = Html::beginTag('div', $this->headerOptions) . "\n" . $this->renderHeaderMessage() . "\n" .
-                Html::endTag('div') . "\n";
+            $html = Html::openTag('div', $this->headerOptions) . "\n" . $this->renderHeaderMessage() . "\n" .
+                Html::closeTag('div') . "\n";
         }
 
         return $html;
@@ -251,12 +246,12 @@ final class Message extends Widget
             return null;
         }
 
-        $spanOptions = ['aria-hidden' => 'true', 'encode' => false];
+        $spanOptions = ['aria-hidden' => 'true'];
         $tag = ArrayHelper::remove($this->closeButtonOptions, 'tag', 'button');
         $label = ArrayHelper::remove(
             $this->closeButtonOptions,
             'label',
-            Html::tag('span', '&times;', $spanOptions)
+            Html::tag('span', '&times;', $spanOptions)->encode(false)->render()
         );
 
         if ($tag === 'button') {
@@ -267,6 +262,8 @@ final class Message extends Widget
             Html::addCssClass($this->closeButtonOptions, $this->size);
         }
 
-        return Html::tag($tag, $label, $this->closeButtonOptions);
+        return Html::tag($tag, $label ?? '', $this->closeButtonOptions)
+            ->encode($this->encodeTags)
+            ->render();
     }
 }

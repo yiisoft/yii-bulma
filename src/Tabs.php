@@ -88,7 +88,7 @@ final class Tabs extends Widget
     {
         $this->buildOptions();
 
-        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)
+        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)->encode($this->encodeTags)
             . $this->renderTabsContent();
     }
 
@@ -271,11 +271,6 @@ final class Tabs extends Widget
         if ($this->style !== '') {
             Html::addCssClass($this->options, $this->style);
         }
-
-        if ($this->encodeTags === false) {
-            $this->options['encode'] = false;
-            $this->tabsContentOptions['encode'] = false;
-        }
     }
 
     /**
@@ -297,18 +292,16 @@ final class Tabs extends Widget
 
         $itemOptions = [];
 
-        if ($this->encodeTags === false) {
-            $itemOptions['encode'] = false;
-        }
-
-        return Html::tag('ul', $items . "\n", $itemOptions);
+        return Html::tag('ul', $items . "\n", $itemOptions)
+            ->encode($this->encodeTags)
+            ->render();
     }
 
     /**
      * @param int $index
      * @param array $item
      *
-     *@throws InvalidArgumentException|JsonException
+     * @throws InvalidArgumentException|JsonException
      *
      * @return string
      */
@@ -317,7 +310,7 @@ final class Tabs extends Widget
         $id = $this->getId() . '-tabs-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $icon = ArrayHelper::getValue($item, 'icon', '');
-        $label = ArrayHelper::getValue($item, 'label', '');
+        $label = (string)ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
         $options = ArrayHelper::getValue($item, 'options', []);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
@@ -325,13 +318,6 @@ final class Tabs extends Widget
         $content = ArrayHelper::getValue($item, 'content');
         $contentOptions = ArrayHelper::getValue($item, 'contentOptions', []);
         $active = $this->isItemActive($item);
-
-        if ($this->encodeTags === false) {
-            $contentOptions['encode'] = false;
-            $iconOptions['encode'] = false;
-            $linkOptions['encode'] = false;
-            $options['encode'] = false;
-        }
 
         if ($label === '') {
             throw new InvalidArgumentException("The 'label' option is required.");
@@ -361,10 +347,14 @@ final class Tabs extends Widget
 
             $contentOptions['id'] = ArrayHelper::getValue($contentOptions, 'id', $id);
 
-            $this->tabsContent[] = Html::tag('div', $content, $contentOptions);
+            $this->tabsContent[] = Html::tag('div', $content, $contentOptions)->encode($this->encodeTags);
         }
 
-        return Html::tag('li', Html::tag('a', $label, $linkOptions), $options);
+        return Html::tag(
+            'li',
+            Html::tag('a', $label, $linkOptions)->encode($this->encodeTags)->render(),
+            $options
+        )->encode($this->encodeTags)->render();
     }
 
     /**
@@ -382,8 +372,12 @@ final class Tabs extends Widget
         unset($iconOptions['rightSide']);
 
         $elements = [
-            Html::tag('span', Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']), $iconOptions),
-            Html::tag('span', $label),
+            Html::tag(
+                'span',
+                Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true'])->render(),
+                $iconOptions
+            )->encode($this->encodeTags)->render(),
+            Html::tag('span', $label)->render(),
         ];
 
         if ($rightSide === true) {
@@ -405,7 +399,11 @@ final class Tabs extends Widget
         $html = '';
 
         if (!empty($this->tabsContent)) {
-            $html .= "\n" . Html::tag('div', "\n" . implode("\n", $this->tabsContent) . "\n", $this->tabsContentOptions);
+            $html .= "\n" . Html::tag(
+                    'div',
+                    "\n" . implode("\n", $this->tabsContent) . "\n",
+                    $this->tabsContentOptions
+                )->encode($this->encodeTags);
         }
 
         return $html;

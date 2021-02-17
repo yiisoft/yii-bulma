@@ -47,11 +47,11 @@ class Breadcrumbs extends Widget
         $this->buildOptions();
 
         return
-            Html::beginTag('nav', $this->options) . "\n" .
-                Html::beginTag('ul', $this->itemsOptions) . "\n" .
+            Html::openTag('nav', $this->options) . "\n" .
+                Html::openTag('ul', $this->itemsOptions) . "\n" .
                     implode('', $this->renderItems()) .
-                Html::endTag('ul') . "\n" .
-            Html::endTag('nav');
+                Html::closeTag('ul') . "\n" .
+            Html::closeTag('nav');
     }
 
     /**
@@ -199,9 +199,9 @@ class Breadcrumbs extends Widget
         $html = '';
 
         if ($icon !== '') {
-            $html = Html::beginTag('span', $iconOptions) .
+            $html = Html::openTag('span', $iconOptions) .
                 Html::tag('i', '', ['class' => $icon]) .
-                Html::endTag('span');
+                Html::closeTag('span');
         }
 
         return $html;
@@ -245,14 +245,10 @@ class Breadcrumbs extends Widget
             $template = $link['template'];
         }
 
-        if ($this->encodeLinks === false) {
-            $link['encode'] = false;
-        }
-
         if (isset($link['url'])) {
             $options = $link;
             unset($options['template'], $options['label'], $options['url'], $options['icon']);
-            $linkHtml = Html::a($label, $link['url'], $options);
+            $linkHtml = Html::a($label, $link['url'], $options)->encode($this->encodeLinks)->render();
         } else {
             $linkHtml = $label;
         }

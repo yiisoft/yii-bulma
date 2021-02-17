@@ -345,14 +345,14 @@ final class NavBarTest extends TestCase
     public function testNavBarBeginExceptionTag(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
         NavBar::widget()->options(['tag' => ['testMe']])->begin();
     }
 
     public function testNavBarRunExceptionTag(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either string, bool or null.');
+        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
         NavBar::widget()->options(['tag' => ['testMe']])->render();
     }
 

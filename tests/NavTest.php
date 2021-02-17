@@ -490,9 +490,8 @@ final class NavTest extends TestCase
                 ],
                 [
                     'label' => 'Admin' . Html::img(
-                        '../../docs/images/icon-avatar.png',
-                        ['class' => 'img-rounded', 'aria-expanded' => 'false']
-                    ),
+                        '../../docs/images/icon-avatar.png'
+                    )->attributes(['class' => 'img-rounded', 'aria-expanded' => 'false']),
                     'items' => [
                         ['label' => 'Logout', 'url' => '/auth/logout'],
                     ],

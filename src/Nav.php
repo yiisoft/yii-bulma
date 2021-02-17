@@ -209,9 +209,9 @@ final class Nav extends Widget
     private function renderIcon(string $label, string $icon, array $iconOptions): string
     {
         if ($icon !== '') {
-            $label = Html::beginTag('span', $iconOptions) .
+            $label = Html::openTag('span', $iconOptions) .
                 Html::tag('i', '', ['class' => $icon]) .
-                Html::endTag('span') .
+                Html::closeTag('span') .
                 Html::tag('span', $label);
         }
 
@@ -283,19 +283,17 @@ final class Nav extends Widget
         }
 
         if ($dropdown) {
-            $dropdownOptions = ['class' => 'navbar-link', 'encode' => false];
+            $dropdownOptions = ['class' => 'navbar-link'];
 
             return
-                Html::beginTag('div', $options) . "\n" .
-                Html::a($label, $url, $dropdownOptions) . "\n" .
+                Html::openTag('div', $options) . "\n" .
+                Html::a($label, $url, $dropdownOptions)->encode(false) . "\n" .
                 $items .
-                Html::endTag('div');
+                Html::closeTag('div');
         }
 
-        if ($this->encodeTags === false) {
-            $linkOptions['encode'] = false;
-        }
-
-        return Html::a($label, $url, $linkOptions);
+        return Html::a($label, $url, $linkOptions)
+            ->encode($this->encodeTags)
+            ->render();
     }
 }
