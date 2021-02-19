@@ -46,15 +46,7 @@ final class NavBar extends Widget
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
-
-        if (
-            !is_string($navTag) &&
-            $navTag !== '' &&
-            !is_bool($navTag) &&
-            $navTag !== null
-        ) {
-            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
-        }
+        $this->checkNavTag($navTag);
 
         return
             (is_string($navTag) ? Html::openTag($navTag, $navOptions) : '') . "\n" .
@@ -66,19 +58,26 @@ final class NavBar extends Widget
     protected function run(): string
     {
         $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
-        if (
-            !is_string($tag) &&
-            $tag !== '' &&
-            !is_bool($tag) &&
-            $tag !== null
-        ) {
-            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
-        }
+        $this->checkNavTag($tag);
 
         return
             Html::closeTag('div') . "\n" .
             Html::closeTag('div') . "\n" .
             (is_string($tag) ? Html::closeTag($tag) : '');
+    }
+
+    /**
+     * @param mixed $navTag
+     */
+    private function checkNavTag($navTag): void
+    {
+        if (
+            (!is_string($navTag) || $navTag === '') &&
+            !is_bool($navTag) &&
+            $navTag !== null
+        ) {
+            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
+        }
     }
 
     /**
