@@ -234,10 +234,10 @@ final class Dropdown extends Widget
     private function buildDropdown(): string
     {
         if ($this->encloseByContainer) {
-            $html = Html::beginTag('div', $this->options) . "\n";
+            $html = Html::openTag('div', $this->options) . "\n";
             $html .= $this->buildDropdownTrigger();
             $html .= $this->renderItems($this->items, $this->itemsOptions) . "\n";
-            $html .= Html::endTag('div');
+            $html .= Html::closeTag('div');
         } else {
             $html = $this->renderItems($this->items, $this->itemsOptions);
         }
@@ -248,14 +248,14 @@ final class Dropdown extends Widget
     private function buildDropdownTrigger(): string
     {
         return
-            Html::beginTag('div', $this->triggerOptions) . "\n" .
-                Html::beginTag('button', $this->buttonOptions) . "\n" .
+            Html::openTag('div', $this->triggerOptions) . "\n" .
+                Html::openTag('button', $this->buttonOptions) . "\n" .
                     Html::tag('span', $this->buttonLabel, $this->buttonLabelOptions) . "\n" .
-                    Html::beginTag('span', $this->buttonIconOptions) . "\n" .
+                    Html::openTag('span', $this->buttonIconOptions) . "\n" .
                         Html::tag('i', '', $this->buttonIcon) . "\n" .
-                    Html::endTag('span') . "\n" .
-                Html::endTag('button') . "\n" .
-            Html::endTag('div') . "\n";
+                    Html::closeTag('span') . "\n" .
+                Html::closeTag('button') . "\n" .
+            Html::closeTag('div') . "\n";
     }
 
     private function buildOptions(): void
@@ -326,10 +326,6 @@ final class Dropdown extends Widget
             $active = ArrayHelper::getValue($item, 'active', false);
             $disabled = ArrayHelper::getValue($item, 'disabled', false);
 
-            if ($this->encodeLinks === false) {
-                $linkOptions['encode'] = false;
-            }
-
             Html::addCssClass($linkOptions, $this->itemClass);
 
             if ($disabled) {
@@ -344,9 +340,13 @@ final class Dropdown extends Widget
             $url = $item['url'] ?? null;
 
             if (empty($item['items'])) {
-                $lines[] = Html::a($label, $url, $linkOptions);
+                $lines[] = Html::a($label, $url, $linkOptions)
+                    ->encode($this->encodeLinks)
+                    ->render();
             } else {
-                $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions));
+                $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions))
+                    ->encode($this->encodeLinks)
+                    ->render();
 
                 $dropdownWidget = self::widget()
                     ->dividerClass($this->dividerClass)
@@ -367,18 +367,18 @@ final class Dropdown extends Widget
         }
 
         return
-            Html::beginTag('div', $itemsOptions) . "\n" .
+            Html::openTag('div', $itemsOptions) . "\n" .
                 implode("\n", $lines) . "\n" .
-            Html::endTag('div');
+            Html::closeTag('div');
     }
 
     private function renderIcon(string $label, string $icon, array $iconOptions): string
     {
         if ($icon !== '') {
-            $label = Html::beginTag('span', $iconOptions) .
-                Html::tag('i', '', ['class' => $icon, 'encode' => false]) .
-                Html::endTag('span') .
-                Html::tag('span', $label, ['encode' => false]);
+            $label = Html::openTag('span', $iconOptions) .
+                Html::tag('i', '', ['class' => $icon])->encode(false) .
+                Html::closeTag('span') .
+                Html::span($label)->encode(false);
         }
 
         return $label;

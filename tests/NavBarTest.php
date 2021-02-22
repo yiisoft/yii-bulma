@@ -342,18 +342,33 @@ final class NavBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testNavBarBeginExceptionTag(): void
+    public function dataExceptionTag(): array
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either string, bool or null.');
-        NavBar::widget()->options(['tag' => ['testMe']])->begin();
+        return [
+            [['test']],
+            [''],
+            [42],
+        ];
     }
 
-    public function testNavBarRunExceptionTag(): void
+    /**
+     * @dataProvider dataExceptionTag
+     */
+    public function testNavBarBeginExceptionTag($tag): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either string, bool or null.');
-        NavBar::widget()->options(['tag' => ['testMe']])->render();
+        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
+        NavBar::widget()->options(['tag' => $tag])->begin();
+    }
+
+    /**
+     * @dataProvider dataExceptionTag
+     */
+    public function testNavBarRunExceptionTag($tag): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
+        NavBar::widget()->options(['tag' => $tag])->render();
     }
 
     public function testNavBarOptionsClassArray(): void

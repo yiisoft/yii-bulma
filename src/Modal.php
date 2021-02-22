@@ -69,10 +69,10 @@ final class Modal extends Widget
 
         $html = '';
         $html .= $this->renderToggleButton() . "\n";
-        $html .= Html::beginTag('div', $this->options) . "\n"; // .modal
+        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
         $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
         $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::beginTag('div', $this->contentOptions) . "\n"; // .modal-content
+        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-content
 
         return $html;
     }
@@ -80,8 +80,8 @@ final class Modal extends Widget
     protected function run(): string
     {
         $html = '';
-        $html .= Html::endTag('div') . "\n"; // .modal-content
-        $html .= Html::endTag('div'); // .modal
+        $html .= Html::closeTag('div') . "\n"; // .modal-content
+        $html .= Html::closeTag('div'); // .modal
 
         return $html;
     }
@@ -267,7 +267,7 @@ final class Modal extends Widget
     private function renderToggleButton(): string
     {
         if ($this->withoutToggleButton) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions);
+            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions)->render();
         }
 
         return '';
@@ -283,7 +283,7 @@ final class Modal extends Widget
     private function renderCloseButton(): string
     {
         if ($this->withoutCloseButton) {
-            return Html::button('', $this->closeButtonOptions);
+            return Html::button('', $this->closeButtonOptions)->render();
         }
 
         return '';

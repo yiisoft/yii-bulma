@@ -46,29 +46,38 @@ final class NavBar extends Widget
 
         $navOptions = $this->options;
         $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
-
-        if (!is_string($navTag) && !is_bool($navTag) && $navTag !== null) {
-            throw new InvalidArgumentException('Tag should be either string, bool or null.');
-        }
+        $this->checkNavTag($navTag);
 
         return
-            Html::beginTag($navTag, $navOptions) . "\n" .
+            (is_string($navTag) ? Html::openTag($navTag, $navOptions) : '') . "\n" .
             $this->brand . "\n" .
-            Html::beginTag('div', $this->menuOptions) .
-            Html::beginTag('div', $this->itemsOptions);
+            Html::openTag('div', $this->menuOptions) .
+            Html::openTag('div', $this->itemsOptions);
     }
 
     protected function run(): string
     {
         $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
-        if (!is_string($tag) && !is_bool($tag) && $tag !== null) {
-            throw new InvalidArgumentException('Tag should be either string, bool or null.');
-        }
+        $this->checkNavTag($tag);
 
         return
-            Html::endTag('div') . "\n" .
-            Html::endTag('div') . "\n" .
-            Html::endTag($tag);
+            Html::closeTag('div') . "\n" .
+            Html::closeTag('div') . "\n" .
+            (is_string($tag) ? Html::closeTag($tag) : '');
+    }
+
+    /**
+     * @param mixed $navTag
+     */
+    private function checkNavTag($navTag): void
+    {
+        if (
+            (!is_string($navTag) || $navTag === '') &&
+            !is_bool($navTag) &&
+            $navTag !== null
+        ) {
+            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
+        }
     }
 
     /**
@@ -131,7 +140,7 @@ final class NavBar extends Widget
     /**
      * Set toggle icon.
      *
-     * @param string $value.
+     * @param string $value .
      *
      * @return self
      */
@@ -269,10 +278,6 @@ final class NavBar extends Widget
         $this->brandImageOptions = $this->addOptions($this->brandImageOptions, 'navbar-item');
         $this->menuOptions = $this->addOptions($this->menuOptions, 'navbar-menu');
 
-        if ($this->encodeTags === false) {
-            $this->brandImageOptions['encode'] = false;
-        }
-
         $this->menuOptions['id'] = "{$id}-navbar-Menu";
 
         $this->initItemsOptions();
@@ -304,14 +309,22 @@ final class NavBar extends Widget
     private function renderBrand(): void
     {
         if ($this->brand === '') {
-            $this->brand = Html::beginTag('div', $this->brandOptions);
+            $this->brand = Html::openTag('div', $this->brandOptions);
 
             if ($this->brandImage !== '' && $this->brandLabel !== '') {
-                $this->brand .= Html::tag('span', Html::img($this->brandImage), $this->brandImageOptions);
+                $this->brand .= Html::tag(
+                    'span',
+                    Html::img($this->brandImage)->render(),
+                    $this->brandImageOptions
+                )->encode($this->encodeTags);
             }
 
             if ($this->brandImage !== '' && $this->brandLabel === '') {
-                $this->brand .= Html::a(Html::img($this->brandImage), $this->brandUrl, $this->brandImageOptions);
+                $this->brand .= Html::a(
+                    Html::img($this->brandImage)->render(),
+                    $this->brandUrl,
+                    $this->brandImageOptions
+                )->encode($this->encodeTags);
             }
 
             if ($this->brandLabel !== '') {
@@ -319,7 +332,7 @@ final class NavBar extends Widget
             }
 
             $this->brand .= $this->renderToggleButton();
-            $this->brand .= Html::endTag('div');
+            $this->brand .= Html::closeTag('div');
         }
     }
 
@@ -333,10 +346,10 @@ final class NavBar extends Widget
     private function renderToggleButton(): string
     {
         return
-            Html::beginTag('a', $this->toggleOptions) .
-                $this->renderToggleIcon() .
+            Html::openTag('a', $this->toggleOptions) .
+            $this->renderToggleIcon() .
 
-            Html::endTag('a');
+            Html::closeTag('a');
     }
 
     /**
