@@ -33,7 +33,7 @@ class Breadcrumbs extends Widget
     private array $homeItem = [];
     private bool $withoutHomeItem = false;
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
-    private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n";
+    private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</a></li>\n";
     private array $items = [];
     private array $options = [];
     private array $itemsOptions = [];
