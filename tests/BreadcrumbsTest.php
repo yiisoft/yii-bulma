@@ -128,7 +128,7 @@ final class BreadcrumbsTest extends TestCase
 
         $html = Breadcrumbs::widget()
             ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</li>\n")
+            ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</a></li>\n")
             ->items([['label' => 'About', 'url' => '/about']])
             ->render();
         $expected = <<<'HTML'
@@ -157,7 +157,7 @@ final class BreadcrumbsTest extends TestCase
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/">Home</a></li>
-        <li class="is-active"><a aria-current="page">about</li>
+        <li class="is-active"><a aria-current="page">about</a></li>
         </ul>
         </nav>
         HTML;
