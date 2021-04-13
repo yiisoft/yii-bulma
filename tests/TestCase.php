@@ -16,7 +16,7 @@ use Yiisoft\Assets\AssetManager;
 use Yiisoft\Assets\AssetPublisher;
 use Yiisoft\Assets\AssetPublisherInterface;
 use Yiisoft\Di\Container;
-use Yiisoft\Factory\Definitions\Reference;
+use Yiisoft\Factory\Definition\Reference;
 use Yiisoft\Files\FileHelper;
 use Yiisoft\Widget\WidgetFactory;
 
@@ -95,13 +95,13 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             Aliases::class => [
-                '__class' => Aliases::class,
+                'class' => Aliases::class,
             ],
 
             LoggerInterface::class => NullLogger::class,
 
             AssetConverterInterface::class => [
-                '__class' => AssetConverter::class,
+                'class' => AssetConverter::class,
                 '__construct()' => [
                     Reference::to(Aliases::class),
                     Reference::to(LoggerInterface::class),
@@ -109,7 +109,7 @@ abstract class TestCase extends BaseTestCase
             ],
 
             AssetPublisherInterface::class => [
-                '__class' => AssetPublisher::class,
+                'class' => AssetPublisher::class,
                 '__construct()' => [
                     Reference::to(Aliases::class),
                 ],
