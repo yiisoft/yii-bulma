@@ -6,6 +6,6 @@ use Yiisoft\Form\Widget\Field;
 
 if ($params['yiisoft/form']['bulma']['enabled'] === true) {
     return [
-        Field::class => fn () => Field::Widget($params['yiisoft/form']['bulma']['fieldConfig']),
+        Field::class => static fn () => Field::widget($params['yiisoft/form']['bulma']['fieldConfig']),
     ];
 }
