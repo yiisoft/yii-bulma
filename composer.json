@@ -25,7 +25,7 @@
         "npm-asset/vizuaalog--bulmajs": "^0.11.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "yiisoft/arrays": "@dev",
-        "yiisoft/assets": "@dev",
+        "yiisoft/assets": "^1.0",
         "yiisoft/html": "^1.0",
         "yiisoft/widget": "@dev"
     },
