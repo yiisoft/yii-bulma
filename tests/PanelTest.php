@@ -398,4 +398,19 @@ final class PanelTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         Panel::widget()->tabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])->render();
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Panel::widget();
+
+        $this->assertNotSame($widget, $widget->template(''));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->heading(''));
+        $this->assertNotSame($widget, $widget->headingOptions([]));
+        $this->assertNotSame($widget, $widget->color('is-primary'));
+        $this->assertNotSame($widget, $widget->tabs([]));
+        $this->assertNotSame($widget, $widget->tabsOptions([]));
+        $this->assertNotSame($widget, $widget->id(Panel::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Panel::class));
+    }
 }

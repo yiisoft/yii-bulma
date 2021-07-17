@@ -873,4 +873,27 @@ final class MenuTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Menu::widget();
+
+        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->activateParents());
+        $this->assertNotSame($widget, $widget->activeCssClass(''));
+        $this->assertNotSame($widget, $widget->brand(''));
+        $this->assertNotSame($widget, $widget->currentPath(''));
+        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
+        $this->assertNotSame($widget, $widget->firstItemCssClass(''));
+        $this->assertNotSame($widget, $widget->showEmptyItems());
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->itemOptions([]));
+        $this->assertNotSame($widget, $widget->labelTemplate(''));
+        $this->assertNotSame($widget, $widget->lastItemCssClass(''));
+        $this->assertNotSame($widget, $widget->linkTemplate(''));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->subMenuTemplate(''));
+        $this->assertNotSame($widget, $widget->id(Menu::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Menu::class));
+    }
 }

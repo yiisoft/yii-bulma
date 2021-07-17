@@ -253,4 +253,22 @@ final class MessageTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Message::widget();
+
+        $this->assertNotSame($widget, $widget->body(''));
+        $this->assertNotSame($widget, $widget->headerColor(''));
+        $this->assertNotSame($widget, $widget->headerMessage(''));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->bodyOptions([]));
+        $this->assertNotSame($widget, $widget->closeButtonOptions([]));
+        $this->assertNotSame($widget, $widget->headerOptions([]));
+        $this->assertNotSame($widget, $widget->size(''));
+        $this->assertNotSame($widget, $widget->closeButton());
+        $this->assertNotSame($widget, $widget->withoutHeader());
+        $this->assertNotSame($widget, $widget->id(Message::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Message::class));
+    }
 }

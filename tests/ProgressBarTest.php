@@ -78,6 +78,17 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
+    public function testProgressBarWithZeroValues(): void
+    {
+        ProgressBar::counter(0);
+
+        $html = ProgressBar::widget()->value(0)->maxValue(0)->render();
+        $expected = <<<'HTML'
+        <progress id="w1-progressbar" class="progress"></progress>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -88,5 +99,18 @@ final class ProgressBarTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         ProgressBar::widget()->color('is-non-existent')->render();
+    }
+
+    public function testImmutability(): void
+    {
+        $widget = ProgressBar::widget();
+
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->value(1.0));
+        $this->assertNotSame($widget, $widget->maxValue(100));
+        $this->assertNotSame($widget, $widget->size('is-small'));
+        $this->assertNotSame($widget, $widget->color('is-primary'));
+        $this->assertNotSame($widget, $widget->id(ProgressBar::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(ProgressBar::class));
     }
 }

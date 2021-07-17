@@ -284,4 +284,19 @@ final class BreadcrumbsTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Breadcrumbs::widget();
+
+        $this->assertNotSame($widget, $widget->homeItem([]));
+        $this->assertNotSame($widget, $widget->withoutHomeItem());
+        $this->assertNotSame($widget, $widget->itemTemplate(''));
+        $this->assertNotSame($widget, $widget->activeItemTemplate(''));
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->itemsOptions([]));
+        $this->assertNotSame($widget, $widget->id(Breadcrumbs::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Breadcrumbs::class));
+    }
 }

@@ -209,8 +209,6 @@ final class ModalCard extends Widget
     /**
      * Disable toggle button.
      *
-     * @param bool $value
-     *
      * @return self
      */
     public function withoutToggleButton(): self
@@ -260,8 +258,6 @@ final class ModalCard extends Widget
 
     /**
      * Disable close button.
-     *
-     * @param bool $value
      *
      * @return self
      */

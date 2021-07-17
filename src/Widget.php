@@ -83,6 +83,7 @@ abstract class Widget extends BaseWidget
         $class = '';
 
         if (isset($options['class'])) {
+            /** @var string|string[] $class */
             $class = $options['class'];
             unset($options['class']);
 
@@ -91,7 +92,6 @@ abstract class Widget extends BaseWidget
             }
         }
 
-        /** @psalm-var string $class */
         if (strpos($class, $defaultClass) === false) {
             Html::addCssClass($options, $defaultClass);
         }
