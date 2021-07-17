@@ -10,6 +10,7 @@ use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
 use function array_reverse;
+use function implode;
 use function in_array;
 
 /**
@@ -72,7 +73,6 @@ final class Tabs extends Widget
     private ?string $currentPath = null;
     private bool $activateItems = true;
     private bool $encodeLabels = true;
-    private bool $encodeTags = false;
     private string $size = '';
     private string $alignment = '';
     private string $style = '';
@@ -88,7 +88,7 @@ final class Tabs extends Widget
     {
         $this->buildOptions();
 
-        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)->encode($this->encodeTags)
+        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)->encode(false)
             . $this->renderTabsContent();
     }
 
@@ -151,7 +151,7 @@ final class Tabs extends Widget
     /**
      * When tags Labels HTML should not be encoded.
      *
-     * @return $this
+     * @return self
      */
     public function withoutEncodeLabels(): self
     {
@@ -292,9 +292,7 @@ final class Tabs extends Widget
 
         $itemOptions = [];
 
-        return Html::tag('ul', $items . "\n", $itemOptions)
-            ->encode($this->encodeTags)
-            ->render();
+        return Html::tag('ul', $items . "\n", $itemOptions)->encode(false)->render();
     }
 
     /**
@@ -310,7 +308,7 @@ final class Tabs extends Widget
         $id = $this->getId() . '-tabs-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $icon = ArrayHelper::getValue($item, 'icon', '');
-        $label = (string)ArrayHelper::getValue($item, 'label', '');
+        $label = (string) ArrayHelper::getValue($item, 'label', '');
         $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
         $options = ArrayHelper::getValue($item, 'options', []);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
@@ -347,14 +345,14 @@ final class Tabs extends Widget
 
             $contentOptions['id'] = ArrayHelper::getValue($contentOptions, 'id', $id);
 
-            $this->tabsContent[] = Html::tag('div', $content, $contentOptions)->encode($this->encodeTags);
+            $this->tabsContent[] = Html::tag('div', $content, $contentOptions)->encode(false);
         }
 
         return Html::tag(
             'li',
-            Html::tag('a', $label, $linkOptions)->encode($this->encodeTags)->render(),
+            Html::tag('a', $label, $linkOptions)->encode(false)->render(),
             $options
-        )->encode($this->encodeTags)->render();
+        )->encode(false)->render();
     }
 
     /**
@@ -376,7 +374,7 @@ final class Tabs extends Widget
                 'span',
                 Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true'])->render(),
                 $iconOptions
-            )->encode($this->encodeTags)->render(),
+            )->encode(false)->render(),
             Html::tag('span', $label)->render(),
         ];
 
@@ -403,7 +401,7 @@ final class Tabs extends Widget
                 'div',
                 "\n" . implode("\n", $this->tabsContent) . "\n",
                 $this->tabsContentOptions
-            )->encode($this->encodeTags);
+            )->encode(false);
         }
 
         return $html;
@@ -417,7 +415,7 @@ final class Tabs extends Widget
     private function isItemActive(array $item): bool
     {
         if (isset($item['active'])) {
-            return (bool)ArrayHelper::getValue($item, 'active');
+            return (bool) ArrayHelper::getValue($item, 'active');
         }
 
         return

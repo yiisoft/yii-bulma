@@ -8,11 +8,14 @@ use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Html\Html;
 
+use function implode;
+use function in_array;
+
 /**
  * ModalCard renders a modal window that can be toggled by clicking on a button.
  *
- * The following example will show the content enclosed between the {@see begin()} and {@see end()} calls within the
- * modal window:
+ * The following example will show the content enclosed between the {@see Widget::begin()} and {@see Widget::end()}
+ * calls within the modal window:
  *
  * ```php
  * echo ModalCard::widget()
@@ -78,8 +81,7 @@ final class ModalCard extends Widget
 
         $this->buildOptions();
 
-        $html = '';
-        $html .= $this->renderToggleButton() . "\n";
+        $html = $this->renderToggleButton() . "\n";
         $html .= Html::openTag('div', $this->options) . "\n"; // .modal
         $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
         $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-card
@@ -91,8 +93,7 @@ final class ModalCard extends Widget
 
     protected function run(): string
     {
-        $html = '';
-        $html .= $this->renderBodyEnd() . "\n";
+        $html = $this->renderBodyEnd() . "\n";
         $html .= $this->renderFooter() . "\n";
         $html .= Html::closeTag('div') . "\n"; // .modal-card
         $html .= Html::closeTag('div'); // .modal
@@ -175,7 +176,7 @@ final class ModalCard extends Widget
      */
     public function toggleButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -195,7 +196,7 @@ final class ModalCard extends Widget
      */
     public function toggleButtonColor(string $value): self
     {
-        if (!in_array($value, self::COLOR_ALL)) {
+        if (!in_array($value, self::COLOR_ALL, true)) {
             $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
@@ -228,7 +229,7 @@ final class ModalCard extends Widget
      */
     public function closeButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('"', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -408,8 +409,7 @@ final class ModalCard extends Widget
      */
     private function renderHeader(): string
     {
-        $html = '';
-        $html .= Html::openTag('header', $this->headerOptions) . "\n";
+        $html = Html::openTag('header', $this->headerOptions) . "\n";
         $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
         $html .= $this->renderCloseButton() . "\n";
         $html .= Html::closeTag('header') . "\n";

@@ -9,6 +9,8 @@ use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 
+use function is_bool;
+use function is_string;
 use function strpos;
 
 /**
@@ -35,7 +37,6 @@ final class NavBar extends Widget
         'class' => 'navbar-burger',
         'role' => 'button',
     ];
-    private bool $encodeTags = false;
 
     public function begin(): ?string
     {
@@ -170,7 +171,7 @@ final class NavBar extends Widget
     /**
      * Options HTML attributes of the tag div brand.
      *
-     * @param array $value default value `navbar-item`.
+     * @param array $value Default value `navbar-item`.
      *
      * @return self
      *
@@ -186,7 +187,7 @@ final class NavBar extends Widget
     /**
      * Options HTML attributes of the tag div brand label.
      *
-     * @param array $value default value `navbar-item`.
+     * @param array $value Default value `navbar-item`.
      *
      * @return self
      *
@@ -202,7 +203,7 @@ final class NavBar extends Widget
     /**
      * Options HTML attributes of the tag div brand link.
      *
-     * @param array $value default value `navbar-item`.
+     * @param array $value Default value `navbar-item`.
      *
      * @return self
      *
@@ -218,7 +219,7 @@ final class NavBar extends Widget
     /**
      * Options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
      *
-     * @param array $value default value `navbar-start`.
+     * @param array $value Default value `navbar-start`.
      *
      * @return self
      *
@@ -234,7 +235,7 @@ final class NavBar extends Widget
     /**
      * Options HTML attributes of the tag div nav menu.
      *
-     * @param array $value default value `navbar-menu`.
+     * @param array $value Default value `navbar-menu`.
      *
      * @return self
      *
@@ -316,7 +317,7 @@ final class NavBar extends Widget
                     'span',
                     Html::img($this->brandImage)->render(),
                     $this->brandImageOptions
-                )->encode($this->encodeTags);
+                )->encode(false);
             }
 
             if ($this->brandImage !== '' && $this->brandLabel === '') {
@@ -324,7 +325,7 @@ final class NavBar extends Widget
                     Html::img($this->brandImage)->render(),
                     $this->brandUrl,
                     $this->brandImageOptions
-                )->encode($this->encodeTags);
+                )->encode(false);
             }
 
             if ($this->brandLabel !== '') {
@@ -341,7 +342,7 @@ final class NavBar extends Widget
      *
      * @throws JsonException
      *
-     * @return string the rendering toggle button.
+     * @return string The rendering toggle button.
      */
     private function renderToggleButton(): string
     {

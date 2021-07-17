@@ -7,6 +7,9 @@ namespace Yiisoft\Yii\Bulma;
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
 
+use function implode;
+use function in_array;
+
 /**
  * Progress Bar widget.
  * Native HTML progress bar.
@@ -74,7 +77,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Set the value of the progress.
+     * Sets the value of the progress.
      *
      * @param float $value The value of the progress. Set `0` to display loading animation.
      *
@@ -89,7 +92,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Set maximum progress value.
+     * Sets maximum progress value.
      *
      * @param int $value Maximum progress value. Set `0` for no maximum.
      *
@@ -104,7 +107,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Set progress bar size.
+     * Sets progress bar size.
      *
      * @param string $value Size class.
      *
@@ -112,7 +115,7 @@ final class ProgressBar extends Widget
      */
     public function size(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('"', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -124,7 +127,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Set progress bar color.
+     * Sets progress bar color.
      *
      * @param string $value Color class.
      *
@@ -132,7 +135,7 @@ final class ProgressBar extends Widget
      */
     public function color(string $value): self
     {
-        if (!in_array($value, self::COLOR_ALL)) {
+        if (!in_array($value, self::COLOR_ALL, true)) {
             $values = implode('"', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }

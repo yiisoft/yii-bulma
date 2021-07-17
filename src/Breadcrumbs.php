@@ -11,6 +11,7 @@ use Yiisoft\Html\Html;
 
 use function array_key_exists;
 use function array_merge;
+use function implode;
 use function is_array;
 use function strtr;
 
@@ -54,9 +55,9 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Disable encoding for labels.
+     * Disables encoding for labels.
      *
-     * @return $this
+     * @return self
      */
     public function withoutEncodeLabels(): self
     {
@@ -209,13 +210,13 @@ final class Breadcrumbs extends Widget
     /**
      * Renders a single breadcrumb item.
      *
-     * @param array $link the link to be rendered. It must contain the "label" element. The "url" element is optional.
-     * @param string $template the template to be used to rendered the link. The token "{link}" will be replaced by the
+     * @param array $link The link to be rendered. It must contain the "label" element. The "url" element is optional.
+     * @param string $template The template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws InvalidArgumentException|JsonException if `$link` does not have "label" element.
+     * @throws InvalidArgumentException|JsonException If `$link` does not have "label" element.
      *
-     * @return string the rendering result
+     * @return string The rendering result
      */
     private function renderItem(array $link, string $template): string
     {

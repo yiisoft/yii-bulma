@@ -8,11 +8,14 @@ use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Html\Html;
 
+use function implode;
+use function in_array;
+
 /**
  * Modal renders a modal window that can be toggled by clicking on a button.
  *
- * The following example will show the content enclosed between the {@see begin()} and {@see end()} calls within the
- * modal window:
+ * The following example will show the content enclosed between the {@see Widget::begin()} and {@see Widget::end()}
+ * calls within the modal window:
  *
  * ```php
  * echo Modal::widget()->begin();
@@ -67,8 +70,7 @@ final class Modal extends Widget
 
         $this->buildOptions();
 
-        $html = '';
-        $html .= $this->renderToggleButton() . "\n";
+        $html = $this->renderToggleButton() . "\n";
         $html .= Html::openTag('div', $this->options) . "\n"; // .modal
         $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
         $html .= $this->renderCloseButton() . "\n";
@@ -79,8 +81,7 @@ final class Modal extends Widget
 
     protected function run(): string
     {
-        $html = '';
-        $html .= Html::closeTag('div') . "\n"; // .modal-content
+        $html = Html::closeTag('div') . "\n"; // .modal-content
         $html .= Html::closeTag('div'); // .modal
 
         return $html;
@@ -144,7 +145,7 @@ final class Modal extends Widget
      */
     public function toggleButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -164,7 +165,7 @@ final class Modal extends Widget
      */
     public function toggleButtonColor(string $value): self
     {
-        if (!in_array($value, self::COLOR_ALL)) {
+        if (!in_array($value, self::COLOR_ALL, true)) {
             $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
@@ -197,7 +198,7 @@ final class Modal extends Widget
      */
     public function closeButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZE_ALL)) {
+        if (!in_array($value, self::SIZE_ALL, true)) {
             $values = implode('"', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
@@ -227,8 +228,6 @@ final class Modal extends Widget
 
     /**
      * Disable close button.
-     *
-     * @param bool $value
      *
      * @return self
      */
