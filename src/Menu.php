@@ -34,7 +34,6 @@ final class Menu extends Widget
     private string $linkTemplate = '<a href={url}>{icon}{label}</a>';
     private string $labelTemplate = '{label}';
     private bool $encodeLabels = true;
-    private bool $encodeLinks = false;
     private bool $hideEmptyItems = true;
     private array $options = [];
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
@@ -356,7 +355,7 @@ final class Menu extends Widget
             } else {
                 $lines[] = $tag === false
                     ? $menu
-                    : Html::tag($tag, $menu, $options)->encode($this->encodeLinks)->render();
+                    : Html::tag($tag, $menu, $options)->encode(false)->render();
             }
         }
 

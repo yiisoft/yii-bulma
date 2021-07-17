@@ -29,7 +29,6 @@ final class Dropdown extends Widget
     private string $itemsClass = 'dropdown-menu';
     private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
-    private bool $encodeLinks = false;
     private bool $encloseByContainer = true;
     private array $items = [];
     private array $itemsOptions = [];
@@ -341,11 +340,11 @@ final class Dropdown extends Widget
 
             if (empty($item['items'])) {
                 $lines[] = Html::a($label, $url, $linkOptions)
-                    ->encode($this->encodeLinks)
+                    ->encode(false)
                     ->render();
             } else {
                 $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions))
-                    ->encode($this->encodeLinks)
+                    ->encode(false)
                     ->render();
 
                 $dropdownWidget = self::widget()

@@ -29,7 +29,6 @@ use function strtr;
 final class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
-    private bool $encodeLinks = false;
     private array $homeItem = [];
     private bool $withoutHomeItem = false;
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
@@ -248,7 +247,7 @@ final class Breadcrumbs extends Widget
         if (isset($link['url'])) {
             $options = $link;
             unset($options['template'], $options['label'], $options['url'], $options['icon']);
-            $linkHtml = Html::a($label, $link['url'], $options)->encode($this->encodeLinks)->render();
+            $linkHtml = Html::a($label, $link['url'], $options)->encode(false)->render();
         } else {
             $linkHtml = $label;
         }
