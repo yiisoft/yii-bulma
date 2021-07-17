@@ -26,7 +26,7 @@ use function strtr;
  *
  * @link https://bulma.io/documentation/components/breadcrumb/
  */
-class Breadcrumbs extends Widget
+final class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
     private bool $encodeLinks = false;
