@@ -83,7 +83,7 @@ abstract class Widget extends BaseWidget
         $class = '';
 
         if (isset($options['class'])) {
-            /** @var array|string $class */
+            /** @var string|string[] $class */
             $class = $options['class'];
             unset($options['class']);
 
