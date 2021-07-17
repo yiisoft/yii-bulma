@@ -6,7 +6,7 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
-use Yiisoft\Di\Container;
+use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Widget\WidgetFactory;
 
 abstract class TestCase extends BaseTestCase
@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->container = new Container();
+        $this->container = new SimpleContainer();
         WidgetFactory::initialize($this->container, []);
     }
 
