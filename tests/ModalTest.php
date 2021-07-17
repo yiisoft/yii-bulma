@@ -230,4 +230,22 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Modal::widget();
+
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->toggleButtonLabel(''));
+        $this->assertNotSame($widget, $widget->toggleButtonOptions([]));
+        $this->assertNotSame($widget, $widget->toggleButtonSize('is-small'));
+        $this->assertNotSame($widget, $widget->toggleButtonColor('is-primary'));
+        $this->assertNotSame($widget, $widget->withoutToggleButton());
+        $this->assertNotSame($widget, $widget->closeButtonSize('is-small'));
+        $this->assertNotSame($widget, $widget->closeButtonOptions([]));
+        $this->assertNotSame($widget, $widget->withoutCloseButton());
+        $this->assertNotSame($widget, $widget->contentOptions([]));
+        $this->assertNotSame($widget, $widget->id(Modal::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Modal::class));
+    }
 }

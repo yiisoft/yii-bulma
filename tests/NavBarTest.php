@@ -418,4 +418,24 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = NavBar::widget();
+
+        $this->assertNotSame($widget, $widget->brand(''));
+        $this->assertNotSame($widget, $widget->brandLabel(''));
+        $this->assertNotSame($widget, $widget->brandImage(''));
+        $this->assertNotSame($widget, $widget->brandUrl(''));
+        $this->assertNotSame($widget, $widget->toggleIcon(''));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->brandOptions([]));
+        $this->assertNotSame($widget, $widget->brandLabelOptions([]));
+        $this->assertNotSame($widget, $widget->brandImageOptions([]));
+        $this->assertNotSame($widget, $widget->itemsOptions([]));
+        $this->assertNotSame($widget, $widget->menuOptions([]));
+        $this->assertNotSame($widget, $widget->toggleOptions([]));
+        $this->assertNotSame($widget, $widget->id(NavBar::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(NavBar::class));
+    }
 }

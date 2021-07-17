@@ -516,4 +516,17 @@ final class NavTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Nav::widget();
+
+        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->activateParents());
+        $this->assertNotSame($widget, $widget->currentPath(''));
+        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->id(Nav::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Nav::class));
+    }
 }

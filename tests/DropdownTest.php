@@ -259,4 +259,24 @@ final class DropdownTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Dropdown::widget();
+
+        $this->assertNotSame($widget, $widget->buttonLabel(''));
+        $this->assertNotSame($widget, $widget->buttonLabelOptions([]));
+        $this->assertNotSame($widget, $widget->dividerClass(''));
+        $this->assertNotSame($widget, $widget->itemClass(''));
+        $this->assertNotSame($widget, $widget->itemsClass(''));
+        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
+        $this->assertNotSame($widget, $widget->withoutEncloseByContainer());
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->buttonOptions([]));
+        $this->assertNotSame($widget, $widget->itemsOptions([]));
+        $this->assertNotSame($widget, $widget->triggerOptions([]));
+        $this->assertNotSame($widget, $widget->id(Dropdown::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Dropdown::class));
+    }
 }

@@ -331,4 +331,21 @@ final class TabsTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
+
+    public function testImmutability(): void
+    {
+        $widget = Tabs::widget();
+
+        $this->assertNotSame($widget, $widget->options([]));
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
+        $this->assertNotSame($widget, $widget->currentPath(''));
+        $this->assertNotSame($widget, $widget->size('is-small'));
+        $this->assertNotSame($widget, $widget->alignment('is-centered'));
+        $this->assertNotSame($widget, $widget->style('is-boxed'));
+        $this->assertNotSame($widget, $widget->tabsContentOptions([]));
+        $this->assertNotSame($widget, $widget->id(Tabs::class));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Tabs::class));
+    }
 }

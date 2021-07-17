@@ -151,7 +151,7 @@ final class ProgressBar extends Widget
 
         $this->options = $this->addOptions($this->options, 'progress');
 
-        if ($this->maxValue !== 0) {
+        if ($this->maxValue > 0) {
             $this->options['max'] = $this->maxValue;
         }
 
