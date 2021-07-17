@@ -76,7 +76,7 @@ final class ProgressBar extends Widget
     /**
      * Set the value of the progress.
      *
-     * @var float $value The value of the progress. Set `0` to display loading animation.
+     * @param float $value The value of the progress. Set `0` to display loading animation.
      *
      * @return self
      */
@@ -91,7 +91,7 @@ final class ProgressBar extends Widget
     /**
      * Set maximum progress value.
      *
-     * @var int $value Maximum progress value. Set `0` for no maximum.
+     * @param int $value Maximum progress value. Set `0` for no maximum.
      *
      * @return self
      */
@@ -126,7 +126,7 @@ final class ProgressBar extends Widget
     /**
      * Set progress bar color.
      *
-     * @var string $value Color class.
+     * @param string $value Color class.
      *
      * @return self
      */

@@ -114,7 +114,7 @@ final class Panel extends Widget
     /**
      * Set progress bar color.
      *
-     * @var string $value Color class.
+     * @param string $value Color class.
      *
      * @return self
      */

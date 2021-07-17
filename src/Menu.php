@@ -86,7 +86,7 @@ final class Menu extends Widget
     /**
      * The CSS class to be appended to the active menu item.
      *
-     * @var string
+     * @param string $value
      *
      * @return self
      */
@@ -141,7 +141,7 @@ final class Menu extends Widget
      * The CSS class that will be assigned to the first item in the main menu or each submenu. Defaults to null,
      * meaning no such CSS class will be assigned.
      *
-     * @var string
+     * @param string $value
      *
      * @return self
      */
@@ -155,8 +155,6 @@ final class Menu extends Widget
     /**
      * Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no
      * visible child menu items.
-     *
-     * @var bool
      *
      * @return self
      */
