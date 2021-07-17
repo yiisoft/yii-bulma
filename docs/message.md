@@ -64,13 +64,14 @@ The code above generates the following HTML:
 Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `body(string $value)` | Message body. | `''`
 `headerColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
 `headerMessage(string $value)` | Message header. | `''`
 `options(array $value)` | HTML attributes for the widget container tag. | `[]`
-`optionsBody(array $value)` | HTML attributes for the widget body tag. | `[]`
-`optionsCloseButton(array $value)`| Options for rendering the close button tag. | `[]`
-`optionsHeader(array $value)` | HTML attributes for the widget header tag. | `[]`
+`bodyOptions(array $value)` | HTML attributes for the widget body tag. | `[]`
+`closeButtonOptions(array $value)`| Options for rendering the close button tag. | `[]`
+`headerOptions(array $value)` | HTML attributes for the widget header tag. | `[]`
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
 `closeButton()` | Allows you to enable close button. | `true`
 `withoutHeader()` | Allows you to disable header. | `false`

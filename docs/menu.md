@@ -100,6 +100,7 @@ HTML produced is like the following:
 Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
 `activateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
 `activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`

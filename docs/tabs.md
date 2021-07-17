@@ -98,6 +98,8 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
+`id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
 `items(array $value)` | List of tab items. | `[]`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
