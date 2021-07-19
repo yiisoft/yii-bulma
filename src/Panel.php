@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
+use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
+
+use function implode;
+use function in_array;
 
 final class Panel extends Widget
 {
@@ -31,8 +35,6 @@ final class Panel extends Widget
     private string $color = '';
     private array $tabs = [];
     private array $tabsOptions = [];
-    private bool $encodeLabels = true;
-    private bool $encodeTags = false;
     private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
     private array $tabItems = [];
 
@@ -158,7 +160,7 @@ final class Panel extends Widget
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -173,7 +175,7 @@ final class Panel extends Widget
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -187,7 +189,7 @@ final class Panel extends Widget
 
             Html::addCssClass($this->tabsOptions, 'panel-tabs');
 
-            return "\n" . Html::tag('p', "\n" . $tabs, $this->tabsOptions)->encode($this->encodeTags) . "\n";
+            return "\n" . Html::tag('p', "\n" . $tabs, $this->tabsOptions)->encode(false) . "\n";
         }
 
         return '';
@@ -208,7 +210,7 @@ final class Panel extends Widget
      * @param int $index
      * @param array $item
      *
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return string
      */
@@ -217,7 +219,7 @@ final class Panel extends Widget
         $id = $this->getId() . '-panel-c' . $index;
         $url = ArrayHelper::getValue($item, 'url', '');
         $label = ArrayHelper::getValue($item, 'label', '');
-        $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
+        $encode = ArrayHelper::getValue($item, 'encode', true);
         $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
         $tabItems = ArrayHelper::getValue($item, 'items', []);
         $tabItemsContainerOptions = ArrayHelper::getValue($item, 'itemsContainerOptions', []);
@@ -261,7 +263,7 @@ final class Panel extends Widget
         $options = ArrayHelper::getValue($item, 'options', []);
         $label = ArrayHelper::getValue($item, 'label', '');
         $icon = ArrayHelper::getValue($item, 'icon', '');
-        $encode = ArrayHelper::getValue($item, 'encode', $this->encodeLabels);
+        $encode = ArrayHelper::getValue($item, 'encode', true);
 
         if ($label === '') {
             throw new InvalidArgumentException('The "label" option is required.');
@@ -281,12 +283,10 @@ final class Panel extends Widget
 
         if ($icon !== '') {
             $icon = "\n" . Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
-            $label = "\n" . Html::tag('span', $icon, $labelOptions)->encode($this->encodeTags) . "\n" . $label . "\n";
+            $label = "\n" . Html::tag('span', $icon, $labelOptions)->encode(false) . "\n" . $label . "\n";
         }
 
-        return Html::tag('a', $label, $options)
-            ->encode($this->encodeTags)
-            ->render();
+        return Html::tag('a', $label, $options)->encode(false)->render();
     }
 
     /**
@@ -298,6 +298,6 @@ final class Panel extends Widget
      */
     private function isActive(array $item): bool
     {
-        return (bool)ArrayHelper::getValue($item, 'active', false);
+        return (bool) ArrayHelper::getValue($item, 'active', false);
     }
 }

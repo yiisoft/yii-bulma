@@ -50,8 +50,10 @@ The code above generates the following HTML:
 
 Method | Description | Default
 -------|-------------|---------
-`progressValue(float $value)` | The progress value. Set to `0` to display a loading animation. | `0`
-`progressMax(int $value)` | Maximum progress value. `0` means no maximum. | `100`
+`id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
+`value(float $value)` | The progress value. Set to `0` to display a loading animation. | `0`
+`maxValue(int $value)` | Maximum progress value. `0` means no maximum. | `100`
 `options(array $value)` | HTML attributes for the widget container tag. | `['class' => 'progress']`
 `size(string $value)` | Bar size. | `is-small`, `is-medium`, `is-large`
 `color(string $value)` | Bar color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`

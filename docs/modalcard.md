@@ -69,6 +69,8 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
+`id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `options(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
 `contentOptions(array $value)` | HTML attributes for the widget content tag. | [`class` => `modal-card`]
 `headerOptions(array $value)` | HTML attributes for the widget header tag. | [`class` => `modal-card-head`]

@@ -1,15 +1,16 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="80px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
     </a>
     <a href="https://bulma.io/" target="_blank" rel="external">
-        <img src="docs/images/bulma-logo.png" height="80px">
+        <img src="docs/images/bulma-logo.png" height="100px">
     </a>
     <h1 align="center">Yii Framework Bulma Integration</h1>
     <br>
 </p>
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-bulma/v/stable.png)](https://packagist.org/packages/yiisoft/yii-bulma)
+[![Total Downloads](https://poser.pugx.org/yiisoft/yii-bulma/downloads.png)](https://packagist.org/packages/yiisoft/yii-bulma)
 [![Build status](https://github.com/yiisoft/yii-bulma/workflows/build/badge.svg)](https://github.com/yiisoft/yii-bulma/actions?query=workflow%3Abuild)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/yii-bulma/?branch=master)
@@ -17,28 +18,36 @@
 [![static analysis](https://github.com/yiisoft/yii-bulma/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-bulma/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-bulma/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-bulma)
 
-This Yii Framework package encapsulates Bulma components and plugins in terms of Yii widgets, and thus makes using Bulma components/plugins in Yii applications convenient.
+This [Yii Framework](https://www.yiiframework.com/) package encapsulates [Bulma](https://bulma.io) components
+and plugins in terms of Yii widgets, and thus makes using Bulma components/plugins in Yii applications convenient.
 
 ## Installation
 
 ```shell
-composer require yiisoft/yii-bulma
+composer require yiisoft/yii-bulma --prefer-dist
 ```
+
 ## Using assets
 
-Bulma is a CSS framework that provides all the CSS and SASS files to customize your application, the widgets by default do not register any Asset so you must register them in your application to be used, since you can simply use the Default CSS file layout, or build your own custom CCS.
+Bulma is a CSS framework that provides all the CSS and SASS files to customize your application, the widgets by default
+do not register any Asset so you must register them in your application to be used, since you can simply use the
+default CSS file layout, or build your own custom CCS.
 
 Three Assets are provided:
 
-- [BulmaAsset:](https://bulma.io/) CSS, SASS file bulma css framework without JS code.
-- [BulmaHelperAsset:](https://github.com/jmaczan/bulma-helpers) CSS, SASS, MIXINS it is an auxiliary library provide file helpers for Bulma CSS framework.
-- [BulmaJsAsset:](https://github.com/jgthms/bulma) Vizuaalog/BulmaJs it is an auxiliary library that has all the JS used by the Bulma CSS framework, you can decide to use this library, or alternatively write your own JS code.
+- [BulmaAsset](https://bulma.io/): CSS, SASS file bulma css framework without JS code.
+- [BulmaHelperAsset](https://github.com/jmaczan/bulma-helpers): CSS, SASS, MIXINS it is an auxiliary library provide
+  file helpers for Bulma CSS framework.
+- [BulmaJsAsset](https://github.com/jgthms/bulma): Vizuaalog/BulmaJs it is an auxiliary library that has all the JS
+  used by the Bulma CSS framework, you can decide to use this library, or alternatively write your own JS code.
 
 To use widgets only, register `BulmaAsset::class`, which we can do in several ways explained below.
 
 ### Register asset in view layout or individual view
 
-By registering the Asset in the `resources/layout/main.php` it will be available for all views. If you need it registered for individual view (such as `resources/views/site/contact.php`) only, register it in that view.
+By registering the Asset in the `resources/layout/main.php` it will be available for all views.
+If you need it registered for individual view (such as `resources/views/site/contact.php`) only,
+register it in that view.
 
 
 ```php
@@ -59,7 +68,8 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 ### Register asset in application params
 
-You can register asset in the application parameters, `config/params.php`. Asset will be available for all views of this application.
+You can register asset in the assets parameters, (by default, this is `config/packages/yiisoft/assets/params.php`).
+Asset will be available for all views of this application.
 
 ```php
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
@@ -67,13 +77,13 @@ use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 'yiisoft/asset' => [
     'assetManager' => [
         'register' => [
-            BulmaAsset::class
+            BulmaAsset::class,
         ],
     ],
 ],
 ```
 
-Then in `main.php`:
+Then in `resources/layout/main.php`:
 
 ```php
 /* @var Yiisoft\View\WebView $this */
@@ -84,7 +94,8 @@ $this->setJsFiles($assetManager->getJsFiles());
 
 ## Widgets usage
 
-We will quickly and easily describe how to use widgets, and be able to use all the power of the Bulma CSS framework with php.
+We will quickly and easily describe how to use widgets, and be able to use all the power of
+the Bulma CSS framework with PHP:
 
 - [Breadcrumbs](docs/breadcrumbs.md)
 - [Dropdown](docs/dropdown.md)
@@ -97,6 +108,8 @@ We will quickly and easily describe how to use widgets, and be able to use all t
 - [Tabs](docs/tabs.md)
 - [Panel](docs/panel.md)
 
+## Testing
+
 ### Unit testing
 
 The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
@@ -107,10 +120,11 @@ The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
 
 ### Mutation testing
 
-The package tests are checked with [Infection](https://infection.github.io/) mutation framework. To run it:
+The package tests are checked with [Infection](https://infection.github.io/) mutation framework with
+[Infection Static Analysis Plugin](https://github.com/Roave/infection-static-analysis-plugin). To run it:
 
 ```shell
-./vendor/bin/infection
+./vendor/bin/roave-infection-static-analysis-plugin
 ```
 
 ### Static analysis
@@ -120,6 +134,13 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 ```shell
 ./vendor/bin/psalm
 ```
+
+## License
+
+The Yii Framework Bulma Integration is free software. It is released under the terms of the BSD License.
+Please see [`LICENSE`](./LICENSE.md) for more information.
+
+Maintained by [Yii Software](https://www.yiiframework.com/).
 
 ### Support the project
 
@@ -132,10 +153,3 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 [![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
 [![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
 [![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)
-
-## License
-
-The Yii Framework Bulma Integration is free software. It is released under the terms of the BSD License.
-Please see [`LICENSE`](./LICENSE.md) for more information.
-
-Maintained by [Yii Software](https://www.yiiframework.com/).

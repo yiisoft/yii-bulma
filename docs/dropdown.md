@@ -73,6 +73,7 @@ HTML produced is like the following:
 Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `buttonLabel(string $value)` | Set label button dropdown. | `''`
 `buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown. | `[]`
 `buttonOptions(array $value)` | The HTML attributes for the widget button tag. | `[]`
@@ -85,4 +86,3 @@ Method | Description | Default
 `items(array $value)` | List of menu items in the dropdown. | `[]`
 `options(array $value)` | HTML attributes for the widget container tag. | `[]`
 `triggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
-`encodeLinks()` | Enable encoding for links. | `true`

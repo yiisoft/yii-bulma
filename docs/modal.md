@@ -59,6 +59,7 @@ HTML produced is like the following:
 Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `options(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
 `contentOptions(array $value)`| HTML attributes for the widget content tag. | `[]`
 `closeButtonOptions(array $value)` | HTML attributes for the widget button tag. | [`class` => `modal-close`, `aria-label` => `close`]

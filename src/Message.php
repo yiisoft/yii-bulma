@@ -30,7 +30,6 @@ final class Message extends Widget
     private string $size = '';
     private bool $withoutCloseButton = false;
     private bool $withoutHeader = true;
-    private bool $encodeTags = false;
 
     protected function run(): string
     {
@@ -61,7 +60,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set color header message.
+     * Sets color header message.
      *
      * @param string $value setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
      * 'is-danger'.
@@ -156,7 +155,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set size message widget.
+     * Sets size message widget.
      *
      * @param string $value default setting empty normal, 'is-small', 'is-medium', 'is-large'.
      *
@@ -262,8 +261,6 @@ final class Message extends Widget
             Html::addCssClass($this->closeButtonOptions, $this->size);
         }
 
-        return Html::tag($tag, $label ?? '', $this->closeButtonOptions)
-            ->encode($this->encodeTags)
-            ->render();
+        return Html::tag($tag, $label ?? '', $this->closeButtonOptions)->encode(false)->render();
     }
 }

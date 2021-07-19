@@ -12,6 +12,7 @@ use function array_values;
 use function call_user_func;
 use function count;
 use function implode;
+use function is_callable;
 use function strtr;
 
 /**
@@ -34,7 +35,6 @@ final class Menu extends Widget
     private string $linkTemplate = '<a href={url}>{icon}{label}</a>';
     private string $labelTemplate = '{label}';
     private bool $encodeLabels = true;
-    private bool $encodeLinks = false;
     private bool $hideEmptyItems = true;
     private array $options = [];
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
@@ -58,9 +58,9 @@ final class Menu extends Widget
     }
 
     /**
-     * Disable activate items according to whether their currentPath.
+     * Disables activate items according to whether their currentPath.
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive}
      */
@@ -74,7 +74,7 @@ final class Menu extends Widget
     /**
      * Whether to activate parent menu items when one of the corresponding child menu items is active.
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(): self
     {
@@ -98,7 +98,7 @@ final class Menu extends Widget
     }
 
     /**
-     * Set render brand custom.
+     * Sets render brand custom.
      *
      * @param string $value
      *
@@ -128,7 +128,7 @@ final class Menu extends Widget
     /**
      * When tags Labels HTML should not be encoded.
      *
-     * @return $this
+     * @return self
      */
     public function withoutEncodeLabels(): self
     {
@@ -356,7 +356,7 @@ final class Menu extends Widget
             } else {
                 $lines[] = $tag === false
                     ? $menu
-                    : Html::tag($tag, $menu, $options)->encode($this->encodeLinks)->render();
+                    : Html::tag($tag, $menu, $options)->encode(false)->render();
             }
         }
 

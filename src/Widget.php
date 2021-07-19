@@ -7,6 +7,8 @@ namespace Yiisoft\Yii\Bulma;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Widget as BaseWidget;
 
+use function implode;
+use function is_array;
 use function strpos;
 
 abstract class Widget extends BaseWidget
@@ -17,7 +19,7 @@ abstract class Widget extends BaseWidget
     private static int $counter = 0;
 
     /**
-     * Set the Id of the widget.
+     * Sets the Id of the widget.
      *
      * @param string $value
      *
@@ -71,7 +73,7 @@ abstract class Widget extends BaseWidget
     }
 
     /**
-     * Validate CSS class default options.
+     * Validates CSS class default options.
      *
      * @param array $options
      * @param string $defaultClass

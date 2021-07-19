@@ -19,7 +19,6 @@ final class Nav extends Widget
     private bool $activateParents = false;
     private string $currentPath = '';
     private bool $encodeLabels = true;
-    private bool $encodeTags = false;
     private array $items = [];
 
     protected function run(): string
@@ -36,9 +35,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Disable activate items according to whether their currentPath.
+     * Disables activate items according to whether their {@see currentPath}.
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive}
      */
@@ -52,7 +51,7 @@ final class Nav extends Widget
     /**
      * Whether to activate parent menu items when one of the corresponding child menu items is active.
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(): self
     {
@@ -78,7 +77,7 @@ final class Nav extends Widget
     /**
      * When tags Labels HTML should not be encoded.
      *
-     * @return $this
+     * @return self
      */
     public function withoutEncodeLabels(): self
     {
@@ -127,7 +126,7 @@ final class Nav extends Widget
      *
      * @throws InvalidArgumentException
      *
-     * @return string the rendering result.
+     * @return string The rendering result.
      */
     private function renderDropdown(array $items, array $parentItem): string
     {
@@ -147,7 +146,7 @@ final class Nav extends Widget
     }
 
     /**
-     * Check to see if a child item is active optionally activating the parent.
+     * Checks to see if a child item is active optionally activating the parent.
      *
      * @param array $items
      * @param bool $active should the parent be active too
@@ -191,7 +190,7 @@ final class Nav extends Widget
      *
      * @param array|object|string $item the menu item to be checked
      *
-     * @return bool whether the menu item is active
+     * @return bool Whether the menu item is active
      */
     private function isItemActive($item): bool
     {
@@ -225,7 +224,7 @@ final class Nav extends Widget
      *
      * @throws InvalidArgumentException|JsonException
      *
-     * @return string the rendering result.
+     * @return string The rendering result.
      */
     private function renderItem(array $item): string
     {
@@ -277,7 +276,6 @@ final class Nav extends Widget
             Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
         }
 
-        /** @psalm-suppress ConflictingReferenceConstraint */
         if ($this->activateItems && $active) {
             Html::addCssClass($linkOptions, ['active' => 'is-active']);
         }
@@ -292,8 +290,6 @@ final class Nav extends Widget
                 Html::closeTag('div');
         }
 
-        return Html::a($label, $url, $linkOptions)
-            ->encode($this->encodeTags)
-            ->render();
+        return Html::a($label, $url, $linkOptions)->encode(false)->render();
     }
 }

@@ -29,7 +29,6 @@ final class Dropdown extends Widget
     private string $itemsClass = 'dropdown-menu';
     private string $itemClass = 'dropdown-item';
     private bool $encodeLabels = true;
-    private bool $encodeLinks = false;
     private bool $encloseByContainer = true;
     private array $items = [];
     private array $itemsOptions = [];
@@ -46,7 +45,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set label for the dropdown button.
+     * Sets label for the dropdown button.
      *
      * @param string $value
      *
@@ -76,9 +75,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown divider.
+     * Sets CSS class for dropdown divider.
      *
-     * @param $value
+     * @param string $value
      *
      * @return self
      */
@@ -90,9 +89,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown item.
+     * Sets CSS class for dropdown item.
      *
-     * @param $value
+     * @param string $value
      *
      * @return self
      */
@@ -104,7 +103,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown items container.
+     * Sets CSS class for dropdown items container.
      *
      * @param string $value
      *
@@ -118,9 +117,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Disable encoding for labels.
+     * Disables encoding for labels.
      *
-     * @return $this
+     * @return self
      */
     public function withoutEncodeLabels(): self
     {
@@ -130,7 +129,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Disable enclosed by container dropdown.
+     * Disables enclosed by container dropdown.
      *
      * @return self
      */
@@ -283,12 +282,12 @@ final class Dropdown extends Widget
     /**
      * Renders menu items.
      *
-     * @param array $items the menu items to be rendered
-     * @param array $itemsOptions the container HTML attributes
+     * @param array $items The menu items to be rendered
+     * @param array $itemsOptions The container HTML attributes
      *
-     * @throws InvalidArgumentException|JsonException if the label option is not specified in one of the items.
+     * @throws InvalidArgumentException|JsonException If the label option is not specified in one of the items.
      *
-     * @return string the rendering result.
+     * @return string The rendering result.
      */
     private function renderItems(array $items, array $itemsOptions = []): string
     {
@@ -332,7 +331,6 @@ final class Dropdown extends Widget
                 Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
             }
 
-            /** @psalm-suppress ConflictingReferenceConstraint */
             if ($active) {
                 Html::addCssClass($linkOptions, ['active' => 'is-active']);
             }
@@ -341,11 +339,11 @@ final class Dropdown extends Widget
 
             if (empty($item['items'])) {
                 $lines[] = Html::a($label, $url, $linkOptions)
-                    ->encode($this->encodeLinks)
+                    ->encode(false)
                     ->render();
             } else {
                 $lines[] = Html::a($label, $url, array_merge($this->linkOptions, $linkOptions))
-                    ->encode($this->encodeLinks)
+                    ->encode(false)
                     ->render();
 
                 $dropdownWidget = self::widget()

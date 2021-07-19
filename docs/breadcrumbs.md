@@ -62,11 +62,12 @@ The code above generates the following HTML:
 Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `withoutEncodeLabels()` | Disable encoding for labels. | `false`
-`homeLink(array $value)` | First hyperlink in the breadcrumbs (called home link). | `''`
+`withoutHomeItem()` | Do not render home item. | `true`
+`homeItem(array $value)` | The first item in the breadcrumbs (called home link). | `[]`
 `itemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
 `activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs. | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
+`items(array $value)` | List of items to appear in the breadcrumbs. | `[]`
 `itemsOptions(array $value)` | HTML attributes for the items widget. | `[]`
-`links(array $value)` | List of links to appear in the breadcrumbs. | `[]`
 `options(array $value)` | HTML attributes for the widget container nav tag. | `[]`
-`encodeLinks()` | Enable encoding for links. | `false`
