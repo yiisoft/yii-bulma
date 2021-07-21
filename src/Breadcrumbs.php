@@ -30,8 +30,7 @@ use function strtr;
 final class Breadcrumbs extends Widget
 {
     private bool $encodeLabels = true;
-    private array $homeItem = [];
-    private bool $withoutHomeItem = false;
+    private array $homeItem = ['label' => 'Home', 'url' => '/'];
     private string $itemTemplate = "<li>{icon}{link}</li>\n";
     private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</a></li>\n";
     private array $items = [];
@@ -67,19 +66,9 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Do not render home item.
-     *
-     * @return self
-     */
-    public function withoutHomeItem(): self
-    {
-        $new = clone $this;
-        $new->withoutHomeItem = true;
-        return $new;
-    }
-
-    /**
      * The first item in the breadcrumbs (called home link).
+     *
+     * If an empty array is specified, the home item will not be rendered.
      *
      * Please refer to {@see $items} on the format.
      *
@@ -210,80 +199,71 @@ final class Breadcrumbs extends Widget
     /**
      * Renders a single breadcrumb item.
      *
-     * @param array $link The link to be rendered. It must contain the "label" element. The "url" element is optional.
+     * @param array $item The item to be rendered. It must contain the "label" element. The "url" element is optional.
      * @param string $template The template to be used to rendered the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws InvalidArgumentException|JsonException If `$link` does not have "label" element.
+     * @throws InvalidArgumentException|JsonException If `$item` does not have "label" element.
      *
-     * @return string The rendering result
+     * @return string The rendering result.
      */
-    private function renderItem(array $link, string $template): string
+    private function renderItem(array $item, string $template): string
     {
-        $encodeLabel = ArrayHelper::remove($link, 'encode', $this->encodeLabels);
+        $encodeLabel = ArrayHelper::remove($item, 'encode', $this->encodeLabels);
 
         $icon = '';
         $iconOptions = [];
 
-        if (isset($link['icon'])) {
-            $icon = $link['icon'];
+        if (isset($item['icon'])) {
+            $icon = $item['icon'];
         }
 
-        if (isset($link['iconOptions']) && is_array($link['iconOptions'])) {
+        if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
             $iconOptions = $this->addOptions($iconOptions, 'icon');
         }
 
-        unset($link['icon'], $link['iconOptions']);
+        unset($item['icon'], $item['iconOptions']);
 
-        if (array_key_exists('label', $link)) {
-            $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
+        if (array_key_exists('label', $item)) {
+            $label = $encodeLabel ? Html::encode($item['label']) : $item['label'];
         } else {
             throw new InvalidArgumentException('The "label" element is required for each link.');
         }
 
-        if (isset($link['template'])) {
-            $template = $link['template'];
+        if (isset($item['template'])) {
+            $template = $item['template'];
         }
 
-        if (isset($link['url'])) {
-            $options = $link;
+        if (isset($item['url'])) {
+            $options = $item;
             unset($options['template'], $options['label'], $options['url'], $options['icon']);
-            $linkHtml = Html::a($label, $link['url'], $options)->encode(false)->render();
+            $link = Html::a($label, $item['url'], $options)->encode(false)->render();
         } else {
-            $linkHtml = $label;
+            $link = $label;
         }
 
         return strtr(
             $template,
-            ['{label}' => $label, '{link}' => $linkHtml, '{icon}' => $this->renderIcon($icon, $iconOptions)]
+            ['{label}' => $label, '{link}' => $link, '{icon}' => $this->renderIcon($icon, $iconOptions)],
         );
     }
 
     private function renderItems(): array
     {
-        $links = [];
+        $items = [];
 
-        if ($this->withoutHomeItem === false) {
-            $links[] = $this->renderHomeLink();
+        if (!empty($this->homeItem)) {
+            $items[] = $this->renderItem($this->homeItem, $this->itemTemplate);
         }
 
-        foreach ($this->items as $link) {
-            if (!is_array($link)) {
-                $link = ['label' => $link];
+        foreach ($this->items as $item) {
+            if (!is_array($item)) {
+                $item = ['label' => $item];
             }
 
-            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->activeItemTemplate);
+            $items[] = $this->renderItem($item, isset($item['url']) ? $this->itemTemplate : $this->activeItemTemplate);
         }
 
-        return $links;
-    }
-
-    private function renderHomeLink(): string
-    {
-        if ($this->homeItem === []) {
-            $this->homeItem = ['label' => 'Home', 'url' => '/'];
-        }
-
-        return $this->renderItem($this->homeItem, $this->itemTemplate);
+        return $items;
     }
 }

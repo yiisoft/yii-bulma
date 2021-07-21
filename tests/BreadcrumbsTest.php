@@ -273,7 +273,7 @@ final class BreadcrumbsTest extends TestCase
 
         $html = Breadcrumbs::widget()
             ->items([['label' => 'About', 'url' => '/about']])
-            ->withoutHomeItem()
+            ->homeItem([])
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -290,7 +290,6 @@ final class BreadcrumbsTest extends TestCase
         $widget = Breadcrumbs::widget();
 
         $this->assertNotSame($widget, $widget->homeItem([]));
-        $this->assertNotSame($widget, $widget->withoutHomeItem());
         $this->assertNotSame($widget, $widget->itemTemplate(''));
         $this->assertNotSame($widget, $widget->activeItemTemplate(''));
         $this->assertNotSame($widget, $widget->items([]));
