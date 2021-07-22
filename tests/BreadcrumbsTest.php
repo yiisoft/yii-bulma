@@ -186,7 +186,7 @@ final class BreadcrumbsTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
-        $html = Breadcrumbs::widget()
+        Breadcrumbs::widget()
             ->items([['url' => '/about', 'template' => '<div>{link}</div>']])
             ->render();
     }
@@ -273,7 +273,7 @@ final class BreadcrumbsTest extends TestCase
 
         $html = Breadcrumbs::widget()
             ->items([['label' => 'About', 'url' => '/about']])
-            ->withoutHomeItem()
+            ->homeItem(null)
             ->render();
         $expected = <<<'HTML'
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
@@ -285,12 +285,20 @@ final class BreadcrumbsTest extends TestCase
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
+    public function testHomeItemThrowExceptionForEmptyArray(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'The home item cannot be an empty array. To disable rendering of the home item, specify null.',
+        );
+        Breadcrumbs::widget()->homeItem([]);
+    }
+
     public function testImmutability(): void
     {
         $widget = Breadcrumbs::widget();
 
-        $this->assertNotSame($widget, $widget->homeItem([]));
-        $this->assertNotSame($widget, $widget->withoutHomeItem());
+        $this->assertNotSame($widget, $widget->homeItem(null));
         $this->assertNotSame($widget, $widget->itemTemplate(''));
         $this->assertNotSame($widget, $widget->activeItemTemplate(''));
         $this->assertNotSame($widget, $widget->items([]));
