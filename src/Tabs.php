@@ -136,11 +136,11 @@ final class Tabs extends Widget
     }
 
     /**
-     * Disable activate items according to whether their currentPath.
+     * Disables activate items according to whether their current path and returns a new instance.
      *
      * @return self
      */
-    public function withoutActivateItems(): self
+    public function deactivateItems(): self
     {
         $new = clone $this;
         $new->activateItems = false;

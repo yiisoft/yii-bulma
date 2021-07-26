@@ -35,13 +35,13 @@ final class Nav extends Widget
     }
 
     /**
-     * Disables activate items according to whether their {@see currentPath}.
+     * Disables activate items according to whether their current path and returns a new instance.
      *
      * @return self
      *
      * {@see isItemActive}
      */
-    public function withoutActivateItems(): self
+    public function deactivateItems(): self
     {
         $new = clone $this;
         $new->activateItems = false;

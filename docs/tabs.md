@@ -103,7 +103,7 @@ Method | Description | Default
 `options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
 `items(array $value)` | List of tab items. | `[]`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
-`withoutActivateItems()` | Disable activate items according to whether their currentPath. | `false`
+`deactivateItems()` | Disable activate items according to whether their current path. | `false`
 `withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |
 `size(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
 `alignment(string $value)` | Alignment of the tabs list. | `''`

@@ -555,7 +555,7 @@ final class MenuTest extends TestCase
         Menu::counter(0);
 
         $html = Menu::widget()
-            ->withoutActivateItems()
+            ->deactivateItems()
             ->currentPath('user/block')
             ->lastItemCssClass('testMe')
             ->items([
@@ -878,7 +878,7 @@ final class MenuTest extends TestCase
     {
         $widget = Menu::widget();
 
-        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->deactivateItems());
         $this->assertNotSame($widget, $widget->activateParents());
         $this->assertNotSame($widget, $widget->activeCssClass(''));
         $this->assertNotSame($widget, $widget->brand(''));
