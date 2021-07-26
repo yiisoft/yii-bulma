@@ -45,10 +45,10 @@ final class Message extends Widget
     }
 
     /**
-     * The body content in the message component. Message widget will also be treated as the body content, and will be
-     * rendered before this.
+     * Returns a new instance with the specified message body.
      *
-     * @param string $value
+     * @param string $value The body content in the message component.
+     * Message widget will also be treated as the body content, and will be rendered before this.
      *
      * @return self
      */
@@ -60,9 +60,9 @@ final class Message extends Widget
     }
 
     /**
-     * Sets color header message.
+     * Returns a new instance with the specified color header message.
      *
-     * @param string $value setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
+     * @param string $value Setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
      * 'is-danger'.
      *
      * @return self
@@ -75,10 +75,10 @@ final class Message extends Widget
     }
 
     /**
-     * The header message in the message component. Message widget will also be treated as the header content, and will
-     * be rendered before body.
+     * Returns a new instance with the specified header message.
      *
-     * @param string $value
+     * @param string $value The header message in the message component.
+     * Message widget will also be treated as the header content, and will be rendered before body.
      *
      * @return self
      */
@@ -90,11 +90,11 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container tag.
+     * Returns a new instance with the specified HTML attributes for the widget container tag.
+     *
+     * @param array $value The HTML attributes for the widget container tag.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -106,11 +106,11 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget body tag.
+     * Returns a new instance with the specified HTML attributes for the widget body tag.
+     *
+     * @param array $value The HTML attributes for the widget body tag.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -122,12 +122,10 @@ final class Message extends Widget
     }
 
     /**
-     * The options for rendering the close button tag.
+     * Returns a new instance with the specified options for rendering the close button tag.
      *
-     * The close button is displayed in the header of the modal window. Clicking on the button will hide the modal
-     * window. If {@see withoutCloseButton} is false, no close button will be rendered.
-     *
-     * @param array $value
+     * @param array $value The close button is displayed in the header of the modal window. Clicking on the button
+     * will hide the modal window. If {@see withoutCloseButton} is false, no close button will be rendered.
      *
      * @return self
      */
@@ -139,11 +137,11 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget header tag.
+     * Returns a new instance with the specified HTML attributes for the widget header tag.
+     *
+     * @param array $value The HTML attributes for the widget header tag.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -155,9 +153,9 @@ final class Message extends Widget
     }
 
     /**
-     * Sets size message widget.
+     * Returns a new instance with the specified size message widget.
      *
-     * @param string $value default setting empty normal, 'is-small', 'is-medium', 'is-large'.
+     * @param string $value The size message widget. Default setting empty normal, 'is-small', 'is-medium', 'is-large'.
      *
      * @return self
      */
@@ -169,7 +167,7 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to enable close button message widget.
+     * Returns a new instance with the disabled close button message widget.
      *
      * @return self
      */
@@ -181,7 +179,7 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to disable header widget.
+     * Returns a new instance with the disabled header message.
      *
      * @return self
      */

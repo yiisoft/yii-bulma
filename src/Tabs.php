@@ -93,7 +93,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param array $value
+     * Returns a new instance with the specified options.
+     *
+     * @param array $value The HTML attributes for the tab's container tag.
      *
      * @return self
      */
@@ -106,9 +108,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * List of tabs items.
+     * Returns a new instance with the specified items.
      *
-     * Each tab item should be an array of the following structure:
+     * @param array $value List of tabs items. Each tab item should be an array of the following structure:
      *
      * - `label`: string, required, the nav item label.
      * - `url`: string, optional, the item's URL.
@@ -122,8 +124,6 @@ final class Tabs extends Widget
      *     - `rightSide`: bool, position the icon to the right.
      * - `content`: string, required if `items` is not set. The content (HTML) of the tab.
      * - `contentOptions`: array, array, the HTML attributes of the tab content container.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -149,7 +149,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * When tags Labels HTML should not be encoded.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -162,7 +162,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value Allows you to assign the current path of the URL from request controller.
+     * Returns a new instance with the specified current path.
+     *
+     * @param string $value The current path.
      *
      * @return self
      */
@@ -175,6 +177,8 @@ final class Tabs extends Widget
     }
 
     /**
+     * Returns a new instance with the specified size of the tabs list.
+     *
      * @param string $value Size of the tabs list.
      *
      * @see self::SIZE_ALL
@@ -197,7 +201,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value Alignment the tabs list.
+     * Returns a new instance with the specified alignment the tabs list.
+     *
+     * @param string $value The alignment the tabs list.
      *
      * @throws InvalidArgumentException
      *
@@ -217,7 +223,9 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param string $value Style of the tabs list.
+     * Returns a new instance with the specified style of the tabs list.
+     *
+     * @param string $value The style of the tabs list.
      *
      * @throws InvalidArgumentException
      *
@@ -237,13 +245,14 @@ final class Tabs extends Widget
     }
 
     /**
-     * List of HTML attributes for the `tabs-content` container. This will always contain the CSS class `tabs-content`.
+     * Returns a new instance with the specified options of the tabs content.
      *
-     * @param array $value
-     *
-     * @return self
+     * @param array $value List of HTML attributes for the `tabs-content` container.
+     * This will always contain the CSS class `tabs-content`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function tabsContentOptions(array $value): self
     {

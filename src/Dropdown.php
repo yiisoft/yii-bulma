@@ -45,9 +45,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Sets label for the dropdown button.
+     * Returns a new instance with the specified label for the dropdown button.
      *
-     * @param string $value
+     * @param string $value The label for the dropdown button.
      *
      * @return self
      */
@@ -59,9 +59,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button.
+     * Returns a new instance with the specified HTML attributes for the dropdown button.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the dropdown button.
      *
      * @return self
      *
@@ -75,9 +75,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Sets CSS class for dropdown divider.
+     * Returns a new instance with the specified CSS class for dropdown divider.
      *
-     * @param string $value
+     * @param string $value The CSS class for dropdown divider.
      *
      * @return self
      */
@@ -89,9 +89,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Sets CSS class for dropdown item.
+     * Returns a new instance with the specified CSS class for dropdown item.
      *
-     * @param string $value
+     * @param string $value The CSS class for dropdown item.
      *
      * @return self
      */
@@ -103,9 +103,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Sets CSS class for dropdown items container.
+     * Returns a new instance with the specified CSS class for dropdown items container.
      *
-     * @param string $value
+     * @param string $value The CSS class for dropdown items container.
      *
      * @return self
      */
@@ -117,7 +117,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Disables encoding for labels.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -129,7 +129,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Disables enclosed by container dropdown.
+     * Disables enclosed by container dropdown and returns a new instance.
      *
      * @return self
      */
@@ -141,8 +141,10 @@ final class Dropdown extends Widget
     }
 
     /**
-     * List of menu items in the dropdown. Each array element can be either an HTML string, or an array representing a
-     * single menu with the following structure:
+     * Returns a new instance with the specified list of items.
+     *
+     * @param array $value List of menu items in the dropdown. Each array element can be either an HTML string,
+     * or an array representing a single menu with the following structure:
      *
      * - label: string, required, the label of the item link.
      * - encode: bool, optional, whether to HTML-encode item label.
@@ -155,8 +157,6 @@ final class Dropdown extends Widget
      *
      * To insert divider use `-`.
      *
-     * @param array $value
-     *
      * @return self
      */
     public function items(array $value): self
@@ -167,9 +167,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container tag.
+     * Returns a new instance with the specified HTML attributes for the widget container tag.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the widget container tag.
      *
      * @return self
      *
@@ -183,9 +183,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget button tag.
+     * Returns a new instance with the specified HTML attributes for the widget button tag.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the widget button tag.
      *
      * @return self
      *
@@ -199,9 +199,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget items.
+     * Returns a new instance with the specified HTML attributes for the widget items.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the widget items.
      *
      * @return self
      *
@@ -215,9 +215,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container trigger.
+     * Returns a new instance with the specified HTML attributes for the widget container trigger.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the widget container trigger.
      *
      * @return self
      *

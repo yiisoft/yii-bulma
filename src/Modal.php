@@ -88,11 +88,11 @@ final class Modal extends Widget
     }
 
     /**
-     * Main container options.
+     * Returns a new instance with the specified main container options.
+     *
+     * @param array $value The main container options.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -105,9 +105,9 @@ final class Modal extends Widget
     }
 
     /**
-     * Toggle button label.
+     * Returns a new instance with the specified toggle button label.
      *
-     * @param string $value
+     * @param string $value The toggle button label.
      *
      * @return self
      */
@@ -120,11 +120,11 @@ final class Modal extends Widget
     }
 
     /**
-     * Toggle button options.
+     * Returns a new instance with the specified toggle button options.
+     *
+     * @param array $value The toggle button options.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -137,9 +137,9 @@ final class Modal extends Widget
     }
 
     /**
-     * Toggle button size.
+     * Returns a new instance with the specified toggle button size.
      *
-     * @param string $value
+     * @param string $value The toggle button size.
      *
      * @return self
      */
@@ -157,9 +157,9 @@ final class Modal extends Widget
     }
 
     /**
-     * Toggle button color.
+     * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value
+     * @param string $value The toggle button color.
      *
      * @return self
      */
@@ -177,7 +177,7 @@ final class Modal extends Widget
     }
 
     /**
-     * Disable toggle button.
+     * Returns a new instance with the disabled toggle button.
      *
      * @return self
      */
@@ -190,9 +190,9 @@ final class Modal extends Widget
     }
 
     /**
-     * Close button size.
+     * Returns a new instance with the specified close button size.
      *
-     * @param string $value
+     * @param string $value The close button size.
      *
      * @return self
      */
@@ -210,11 +210,11 @@ final class Modal extends Widget
     }
 
     /**
-     * Close button options
+     * Returns a new instance with the specified close button options.
+     *
+     * @param array $value The close button options.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -227,7 +227,7 @@ final class Modal extends Widget
     }
 
     /**
-     * Disable close button.
+     * Returns a new instance with the specified options for rendering the close button tag.
      *
      * @return self
      */
@@ -240,11 +240,11 @@ final class Modal extends Widget
     }
 
     /**
-     * Content options.
+     * Returns a new instance with the specified content options.
+     *
+     * @param array $value The content options.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
      *
      * @return self
      */

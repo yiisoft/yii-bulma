@@ -19,9 +19,9 @@ abstract class Widget extends BaseWidget
     private static int $counter = 0;
 
     /**
-     * Sets the Id of the widget.
+     * Returns a new instance with the specified ID of the widget.
      *
-     * @param string $value
+     * @param string $value The the ID of the widget.
      *
      * @return static
      */
@@ -33,7 +33,7 @@ abstract class Widget extends BaseWidget
     }
 
     /**
-     * Counter used to generate {@see id} for widgets.
+     * Counter used to generate {@see id()} for widgets.
      *
      * @param int $value
      */
@@ -43,9 +43,9 @@ abstract class Widget extends BaseWidget
     }
 
     /**
-     * The prefix to the automatically generated widget IDs.
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
-     * @param string $value
+     * @param string $value The prefix to the automatically generated widget IDs.
      *
      * @return static
      *
@@ -59,9 +59,9 @@ abstract class Widget extends BaseWidget
     }
 
     /**
-     * Returns the Id of the widget.
+     * Returns the ID of the widget.
      *
-     * @return string|null Id of the widget.
+     * @return string|null ID of the widget.
      */
     protected function getId(): ?string
     {

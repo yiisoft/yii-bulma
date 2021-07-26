@@ -82,9 +82,9 @@ final class NavBar extends Widget
     }
 
     /**
-     * Set render brand custom, {@see brandLabel} and {@see brandImage} are not generated.
+     * Returns a new instance with the specified HTML code of brand.
      *
-     * @param string $value
+     * @param string $value The HTML code of brand.
      *
      * @return self
      */
@@ -96,9 +96,9 @@ final class NavBar extends Widget
     }
 
     /**
-     * The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
+     * Returns a new instance with the specified brand label.
      *
-     * @param string $value
+     * @param string $value The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
      *
      * @return self
      */
@@ -110,9 +110,9 @@ final class NavBar extends Widget
     }
 
     /**
-     * The image of the brand or empty if it's not used.
+     * Returns a new instance with the specified brand image.
      *
-     * @param string $value
+     * @param string $value The image of the brand or empty if it's not used.
      *
      * @return self
      */
@@ -124,10 +124,10 @@ final class NavBar extends Widget
     }
 
     /**
-     * The URL for the brand's hyperlink tag and will be used for the "href" attribute of the brand link. Default value
-     * is '/' will be used. You may set it to `null` if you want to have no link at all.
+     * Returns a new instance with the specified brand URL.
      *
-     * @param string $value
+     * @param string $value The URL for the brand's hyperlink tag and will be used for the "href" attribute of the
+     * brand link. Default value is '/' will be used. You may set it to `null` if you want to have no link at all.
      *
      * @return self
      */
@@ -139,9 +139,9 @@ final class NavBar extends Widget
     }
 
     /**
-     * Set toggle icon.
+     * Returns a new instance with the specified toggle icon.
      *
-     * @param string $value .
+     * @param string $value The toggle icon.
      *
      * @return self
      */
@@ -153,13 +153,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes for the tag nav.
+     * Returns a new instance with the specified options HTML attributes for the tag nav.
      *
-     * @param array $value
-     *
-     * @return self
+     * @param array $value The options HTML attributes for the tag nav.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function options(array $value): self
     {
@@ -169,13 +169,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes of the tag div brand.
+     * Returns a new instance with the specified options HTML attributes of the tag div brand.
      *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
+     * @param array $value The options HTML attributes of the tag div brand. Default value `navbar-item`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function brandOptions(array $value): self
     {
@@ -185,13 +185,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes of the tag div brand label.
+     * Returns a new instance with the specified options HTML attributes of the tag div brand label.
      *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
+     * @param array $value The options HTML attributes of the tag div brand label. Default value `navbar-item`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function brandLabelOptions(array $value): self
     {
@@ -201,13 +201,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes of the tag div brand link.
+     * Returns a new instance with the specified options HTML attributes of the tag div brand image.
      *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
+     * @param array $value The options HTML attributes of the tag div brand image. Default value `navbar-item`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function brandImageOptions(array $value): self
     {
@@ -217,13 +217,14 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
+     * Returns a new instance with the specified options HTML attributes of the tag div items nav.
      *
-     * @param array $value Default value `navbar-start`.
-     *
-     * @return self
+     * @param array $value The options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
+     * Default value `navbar-start`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function itemsOptions(array $value): self
     {
@@ -233,13 +234,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * Options HTML attributes of the tag div nav menu.
+     * Returns a new instance with the specified options HTML attributes of the tag div nav menu.
      *
-     * @param array $value Default value `navbar-menu`.
-     *
-     * @return self
+     * @param array $value The options HTML attributes of the tag div nav menu. Default value `navbar-menu`.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function menuOptions(array $value): self
     {
@@ -249,13 +250,13 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the navbar toggler button.
+     * Returns a new instance with the specified HTML attributes of the navbar toggler button.
      *
-     * @param array $value
-     *
-     * @return self
+     * @param array $value The HTML attributes of the navbar toggler button.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
      */
     public function toggleOptions(array $value): self
     {

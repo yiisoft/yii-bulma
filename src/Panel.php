@@ -54,15 +54,15 @@ final class Panel extends Widget
     }
 
     /**
-     * String the template for rendering panel.
+     * Returns a new instance with the specified template.
+     *
+     * @param string $value The string the template for rendering panel:
      *
      * - `{panelBegin}`: _string_, which will render the panel container begin.
      * - `{panelHeading}`: _string_, which will render the panel heading.
      * - `{panelTabs}`: _string_, which will render the panel tabs.
      * - `{panelItems}`: _string_, which will render the panel items.
      * - `{panelEnd}`: _string_, which will render the panel container end.
-     *
-     * @param string $value
      *
      * @return self
      */
@@ -75,7 +75,9 @@ final class Panel extends Widget
     }
 
     /**
-     * @param array $value
+     * Returns a new instance with the specified options.
+     *
+     * @param array $value The HTML attributes for the panel's container tag.
      *
      * @return self
      */
@@ -88,7 +90,9 @@ final class Panel extends Widget
     }
 
     /**
-     * @param string $value
+     * Returns a new instance with the specified panel heading.
+     *
+     * @param string $value The panel heading.
      *
      * @return self
      */
@@ -101,7 +105,9 @@ final class Panel extends Widget
     }
 
     /**
-     * @param array $value
+     * Returns a new instance with the specified panel heading options.
+     *
+     * @param array $value The panel heading options.
      *
      * @return self
      */
@@ -114,9 +120,9 @@ final class Panel extends Widget
     }
 
     /**
-     * Set progress bar color.
+     * Returns a new instance with the specified panel color class.
      *
-     * @param string $value Color class.
+     * @param string $value The panel color class.
      *
      * @return self
      */
@@ -134,7 +140,9 @@ final class Panel extends Widget
     }
 
     /**
-     * @param array $value
+     * Returns a new instance with the specified panel tabs.
+     *
+     * @param array $value The panel tabs.
      *
      * @return self
      */
@@ -147,7 +155,9 @@ final class Panel extends Widget
     }
 
     /**
-     * @param array $value
+     * Returns a new instance with the specified panel tabs options.
+     *
+     * @param array $value The panel tabs options.
      *
      * @return self
      */

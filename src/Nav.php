@@ -49,7 +49,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Whether to activate parent menu items when one of the corresponding child menu items is active.
+     * Returns a new instance with the activated parent items.
+     *
+     * Activates parent menu items when one of the corresponding child menu items is active.
      *
      * @return self
      */
@@ -61,9 +63,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Allows you to assign the current path of the url from request controller.
+     * Returns a new instance with the specified current path.
      *
-     * @param string $value
+     * @param string $value The current path.
      *
      * @return self
      */
@@ -75,7 +77,7 @@ final class Nav extends Widget
     }
 
     /**
-     * When tags Labels HTML should not be encoded.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -87,8 +89,10 @@ final class Nav extends Widget
     }
 
     /**
-     * List of items in the nav widget. Each array element represents a single  menu item which can be either a string
-     * or an array with the following structure:
+     * Returns a new instance with the specified items.
+     *
+     * @param array $value List of items in the nav widget. Each array element represents a single menu item
+     * which can be either a string or an array with the following structure:
      *
      * - label: string, required, the nav item label.
      * - url: optional, the item's URL. Defaults to "#".
@@ -103,8 +107,6 @@ final class Nav extends Widget
      *   only this item.
      *
      * If a menu item is a string, it will be rendered directly without HTML encoding.
-     *
-     * @param array $value
      *
      * @return self
      */
