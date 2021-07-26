@@ -37,13 +37,6 @@ final class Dropdown extends Widget
     private array $linkOptions = ['aria-haspopup' => 'true', 'aria-expanded' => 'false'];
     private array $triggerOptions = [];
 
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        return $this->buildDropdown();
-    }
-
     /**
      * Returns a new instance with the specified label for the dropdown button.
      *
@@ -228,6 +221,13 @@ final class Dropdown extends Widget
         $new = clone $this;
         $new->triggerOptions = $value;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        return $this->buildDropdown();
     }
 
     private function buildDropdown(): string

@@ -31,19 +31,6 @@ final class Message extends Widget
     private bool $withoutCloseButton = false;
     private bool $withoutHeader = true;
 
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        return
-            Html::openTag('div', $this->options) . "\n" .
-            $this->renderHeader() .
-            Html::openTag('div', $this->bodyOptions) . "\n" .
-            $this->renderBodyEnd() . "\n" .
-            Html::closeTag('div') . "\n" .
-            Html::closeTag('div');
-    }
-
     /**
      * Returns a new instance with the specified message body.
      *
@@ -188,6 +175,19 @@ final class Message extends Widget
         $new = clone $this;
         $new->withoutHeader = false;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        return
+            Html::openTag('div', $this->options) . "\n" .
+            $this->renderHeader() .
+            Html::openTag('div', $this->bodyOptions) . "\n" .
+            $this->renderBodyEnd() . "\n" .
+            Html::closeTag('div') . "\n" .
+            Html::closeTag('div');
     }
 
     private function buildOptions(): void

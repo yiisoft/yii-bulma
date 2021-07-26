@@ -37,22 +37,6 @@ final class Breadcrumbs extends Widget
     private array $options = [];
     private array $itemsOptions = [];
 
-    protected function run(): string
-    {
-        if (empty($this->items)) {
-            return '';
-        }
-
-        $this->buildOptions();
-
-        return
-            Html::openTag('nav', $this->options) . "\n" .
-                Html::openTag('ul', $this->itemsOptions) . "\n" .
-                    implode('', $this->renderItems()) .
-                Html::closeTag('ul') . "\n" .
-            Html::closeTag('nav');
-    }
-
     /**
      * Disables encoding for labels and returns a new instance.
      *
@@ -172,6 +156,22 @@ final class Breadcrumbs extends Widget
         $new = clone $this;
         $new->itemsOptions = $value;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        if (empty($this->items)) {
+            return '';
+        }
+
+        $this->buildOptions();
+
+        return
+            Html::openTag('nav', $this->options) . "\n" .
+            Html::openTag('ul', $this->itemsOptions) . "\n" .
+            implode('', $this->renderItems()) .
+            Html::closeTag('ul') . "\n" .
+            Html::closeTag('nav');
     }
 
     private function buildOptions(): void

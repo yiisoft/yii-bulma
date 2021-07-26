@@ -80,19 +80,6 @@ final class Tabs extends Widget
     private array $tabsContentOptions = [];
 
     /**
-     * @throws JsonException
-     *
-     * @return string
-     */
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)->encode(false)
-            . $this->renderTabsContent();
-    }
-
-    /**
      * Returns a new instance with the specified options.
      *
      * @param array $value The HTML attributes for the tab's container tag.
@@ -260,6 +247,19 @@ final class Tabs extends Widget
         $new->tabsContentOptions = $value;
 
         return $new;
+    }
+
+    /**
+     * @throws JsonException
+     *
+     * @return string
+     */
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        return Html::tag('div', "\n" . $this->renderItems() . "\n", $this->options)->encode(false)
+            . $this->renderTabsContent();
     }
 
     private function buildOptions(): void

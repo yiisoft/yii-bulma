@@ -64,29 +64,6 @@ final class Modal extends Widget
     private array $toggleButtonOptions = [];
     private bool $withoutToggleButton = true;
 
-    public function begin(): ?string
-    {
-        parent::begin();
-
-        $this->buildOptions();
-
-        $html = $this->renderToggleButton() . "\n";
-        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
-        $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
-        $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-content
-
-        return $html;
-    }
-
-    protected function run(): string
-    {
-        $html = Html::closeTag('div') . "\n"; // .modal-content
-        $html .= Html::closeTag('div'); // .modal
-
-        return $html;
-    }
-
     /**
      * Returns a new instance with the specified main container options.
      *
@@ -254,6 +231,29 @@ final class Modal extends Widget
         $new->contentOptions = $value;
 
         return $new;
+    }
+
+    public function begin(): ?string
+    {
+        parent::begin();
+
+        $this->buildOptions();
+
+        $html = $this->renderToggleButton() . "\n";
+        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
+        $html .= Html::tag('div', '', ['class' => 'modal-background']) . "\n";
+        $html .= $this->renderCloseButton() . "\n";
+        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-content
+
+        return $html;
+    }
+
+    protected function run(): string
+    {
+        $html = Html::closeTag('div') . "\n"; // .modal-content
+        $html .= Html::closeTag('div'); // .modal
+
+        return $html;
     }
 
     /**

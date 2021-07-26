@@ -40,24 +40,6 @@ final class Menu extends Widget
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
 
     /**
-     * Renders the menu.
-     *
-     * @return string the result of Widget execution to be outputted.
-     */
-    protected function run(): string
-    {
-        $this->items = $this->normalizeItems($this->items, $hasActiveChild);
-
-        if (empty($this->items)) {
-            return '';
-        }
-
-        $this->buildOptions();
-
-        return $this->buildMenu();
-    }
-
-    /**
      * Disables activate items according to whether their current path and returns a new instance.
      *
      * @return self
@@ -311,6 +293,24 @@ final class Menu extends Widget
         $new = clone $this;
         $new->subMenuTemplate = $value;
         return $new;
+    }
+
+    /**
+     * Renders the menu.
+     *
+     * @return string the result of Widget execution to be outputted.
+     */
+    protected function run(): string
+    {
+        $this->items = $this->normalizeItems($this->items, $hasActiveChild);
+
+        if (empty($this->items)) {
+            return '';
+        }
+
+        $this->buildOptions();
+
+        return $this->buildMenu();
     }
 
     private function renderItems(array $items): string

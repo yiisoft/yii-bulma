@@ -38,21 +38,6 @@ final class Panel extends Widget
     private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
     private array $tabItems = [];
 
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        $tag = ArrayHelper::getValue($this->options, 'tag', 'nav');
-
-        return strtr($this->template, [
-            '{panelBegin}' => Html::openTag($tag, $this->options),
-            '{panelHeading}' => $this->renderHeading(),
-            '{panelTabs}' => $this->renderTabs(),
-            '{panelItems}' => implode("\n", $this->tabItems),
-            '{panelEnd}' => Html::closeTag($tag),
-        ]);
-    }
-
     /**
      * Returns a new instance with the specified template.
      *
@@ -167,6 +152,21 @@ final class Panel extends Widget
         $new->tabsOptions = $value;
 
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        $tag = ArrayHelper::getValue($this->options, 'tag', 'nav');
+
+        return strtr($this->template, [
+            '{panelBegin}' => Html::openTag($tag, $this->options),
+            '{panelHeading}' => $this->renderHeading(),
+            '{panelTabs}' => $this->renderTabs(),
+            '{panelItems}' => implode("\n", $this->tabItems),
+            '{panelEnd}' => Html::closeTag($tag),
+        ]);
     }
 
     /**

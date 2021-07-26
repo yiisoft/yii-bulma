@@ -38,49 +38,6 @@ final class NavBar extends Widget
         'role' => 'button',
     ];
 
-    public function begin(): ?string
-    {
-        parent::begin();
-
-        $this->buildOptions();
-        $this->renderBrand();
-
-        $navOptions = $this->options;
-        $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
-        $this->checkNavTag($navTag);
-
-        return
-            (is_string($navTag) ? Html::openTag($navTag, $navOptions) : '') . "\n" .
-            $this->brand . "\n" .
-            Html::openTag('div', $this->menuOptions) .
-            Html::openTag('div', $this->itemsOptions);
-    }
-
-    protected function run(): string
-    {
-        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
-        $this->checkNavTag($tag);
-
-        return
-            Html::closeTag('div') . "\n" .
-            Html::closeTag('div') . "\n" .
-            (is_string($tag) ? Html::closeTag($tag) : '');
-    }
-
-    /**
-     * @param mixed $navTag
-     */
-    private function checkNavTag($navTag): void
-    {
-        if (
-            (!is_string($navTag) || $navTag === '') &&
-            !is_bool($navTag) &&
-            $navTag !== null
-        ) {
-            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
-        }
-    }
-
     /**
      * Returns a new instance with the specified HTML code of brand.
      *
@@ -263,6 +220,49 @@ final class NavBar extends Widget
         $new = clone $this;
         $new->toggleOptions = $value;
         return $new;
+    }
+
+    public function begin(): ?string
+    {
+        parent::begin();
+
+        $this->buildOptions();
+        $this->renderBrand();
+
+        $navOptions = $this->options;
+        $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
+        $this->checkNavTag($navTag);
+
+        return
+            (is_string($navTag) ? Html::openTag($navTag, $navOptions) : '') . "\n" .
+            $this->brand . "\n" .
+            Html::openTag('div', $this->menuOptions) .
+            Html::openTag('div', $this->itemsOptions);
+    }
+
+    protected function run(): string
+    {
+        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
+        $this->checkNavTag($tag);
+
+        return
+            Html::closeTag('div') . "\n" .
+            Html::closeTag('div') . "\n" .
+            (is_string($tag) ? Html::closeTag($tag) : '');
+    }
+
+    /**
+     * @param mixed $navTag
+     */
+    private function checkNavTag($navTag): void
+    {
+        if (
+            (!is_string($navTag) || $navTag === '') &&
+            !is_bool($navTag) &&
+            $navTag !== null
+        ) {
+            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
+        }
     }
 
     private function buildOptions(): void

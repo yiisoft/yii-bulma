@@ -52,15 +52,6 @@ final class ProgressBar extends Widget
     private string $size = '';
     private string $color = '';
 
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        $content = $this->value > 0 ? $this->value . '%' : '';
-
-        return Html::tag('progress', $content, $this->options)->render();
-    }
-
     /**
      * Returns a new instance with the specified HTML attributes for the widget container tag.
      *
@@ -144,6 +135,15 @@ final class ProgressBar extends Widget
         $new->color = $value;
 
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        $content = $this->value > 0 ? $this->value . '%' : '';
+
+        return Html::tag('progress', $content, $this->options)->render();
     }
 
     private function buildOptions(): void

@@ -21,19 +21,6 @@ final class Nav extends Widget
     private bool $encodeLabels = true;
     private array $items = [];
 
-    protected function run(): string
-    {
-        $items = [];
-
-        foreach ($this->items as $item) {
-            if (!isset($item['visible']) || $item['visible']) {
-                $items[] = $this->renderItem($item);
-            }
-        }
-
-        return implode("\n", $items);
-    }
-
     /**
      * Disables activate items according to whether their current path and returns a new instance.
      *
@@ -115,6 +102,19 @@ final class Nav extends Widget
         $new = clone $this;
         $new->items = $value;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $items = [];
+
+        foreach ($this->items as $item) {
+            if (!isset($item['visible']) || $item['visible']) {
+                $items[] = $this->renderItem($item);
+            }
+        }
+
+        return implode("\n", $items);
     }
 
     /**

@@ -75,32 +75,6 @@ final class ModalCard extends Widget
     private array $bodyOptions = [];
     private array $footerOptions = [];
 
-    public function begin(): ?string
-    {
-        parent::begin();
-
-        $this->buildOptions();
-
-        $html = $this->renderToggleButton() . "\n";
-        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
-        $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
-        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-card
-        $html .= $this->renderHeader();
-        $html .= $this->renderBodyBegin() . "\n";
-
-        return $html;
-    }
-
-    protected function run(): string
-    {
-        $html = $this->renderBodyEnd() . "\n";
-        $html .= $this->renderFooter() . "\n";
-        $html .= Html::closeTag('div') . "\n"; // .modal-card
-        $html .= Html::closeTag('div'); // .modal
-
-        return $html;
-    }
-
     /**
      * Returns a new instance with the specified main container options.
      *
@@ -366,6 +340,32 @@ final class ModalCard extends Widget
         $new->title = $value;
 
         return $new;
+    }
+
+    public function begin(): ?string
+    {
+        parent::begin();
+
+        $this->buildOptions();
+
+        $html = $this->renderToggleButton() . "\n";
+        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
+        $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
+        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-card
+        $html .= $this->renderHeader();
+        $html .= $this->renderBodyBegin() . "\n";
+
+        return $html;
+    }
+
+    protected function run(): string
+    {
+        $html = $this->renderBodyEnd() . "\n";
+        $html .= $this->renderFooter() . "\n";
+        $html .= Html::closeTag('div') . "\n"; // .modal-card
+        $html .= Html::closeTag('div'); // .modal
+
+        return $html;
     }
 
     /**
