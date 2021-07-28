@@ -22,7 +22,7 @@
         "php": "^7.4|^8.0",
         "npm-asset/bulma": "^0.9.3",
         "npm-asset/bulma-helpers": "^0.4.0",
-        "npm-asset/vizuaalog--bulmajs": "^0.11.0",
+        "npm-asset/vizuaalog--bulmajs": "^0.12.1",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "yiisoft/arrays": "^1.0",
         "yiisoft/assets": "^1.0",
