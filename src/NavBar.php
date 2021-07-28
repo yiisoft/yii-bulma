@@ -38,6 +38,190 @@ final class NavBar extends Widget
         'role' => 'button',
     ];
 
+    /**
+     * Returns a new instance with the specified HTML code of brand.
+     *
+     * @param string $value The HTML code of brand.
+     *
+     * @return self
+     */
+    public function brand(string $value): self
+    {
+        $new = clone $this;
+        $new->brand = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified brand label.
+     *
+     * @param string $value The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
+     *
+     * @return self
+     */
+    public function brandLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->brandLabel = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified brand image.
+     *
+     * @param string $value The image of the brand or empty if it's not used.
+     *
+     * @return self
+     */
+    public function brandImage(string $value): self
+    {
+        $new = clone $this;
+        $new->brandImage = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified brand URL.
+     *
+     * @param string $value The URL for the brand's hyperlink tag and will be used for the "href" attribute of the
+     * brand link. Default value is '/' will be used. You may set it to `null` if you want to have no link at all.
+     *
+     * @return self
+     */
+    public function brandUrl(string $value): self
+    {
+        $new = clone $this;
+        $new->brandUrl = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle icon.
+     *
+     * @param string $value The toggle icon.
+     *
+     * @return self
+     */
+    public function toggleIcon(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleIcon = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes for the tag nav.
+     *
+     * @param array $value The options HTML attributes for the tag nav.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function options(array $value): self
+    {
+        $new = clone $this;
+        $new->options = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes of the tag div brand.
+     *
+     * @param array $value The options HTML attributes of the tag div brand. Default value `navbar-item`.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function brandOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->brandOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes of the tag div brand label.
+     *
+     * @param array $value The options HTML attributes of the tag div brand label. Default value `navbar-item`.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function brandLabelOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->brandLabelOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes of the tag div brand image.
+     *
+     * @param array $value The options HTML attributes of the tag div brand image. Default value `navbar-item`.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function brandImageOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->brandImageOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes of the tag div items nav.
+     *
+     * @param array $value The options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
+     * Default value `navbar-start`.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function itemsOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->itemsOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options HTML attributes of the tag div nav menu.
+     *
+     * @param array $value The options HTML attributes of the tag div nav menu. Default value `navbar-menu`.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function menuOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->menuOptions = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified HTML attributes of the navbar toggler button.
+     *
+     * @param array $value The HTML attributes of the navbar toggler button.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function toggleOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleOptions = $value;
+        return $new;
+    }
+
     public function begin(): ?string
     {
         parent::begin();
@@ -79,189 +263,6 @@ final class NavBar extends Widget
         ) {
             throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
         }
-    }
-
-    /**
-     * Set render brand custom, {@see brandLabel} and {@see brandImage} are not generated.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function brand(string $value): self
-    {
-        $new = clone $this;
-        $new->brand = $value;
-        return $new;
-    }
-
-    /**
-     * The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function brandLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->brandLabel = $value;
-        return $new;
-    }
-
-    /**
-     * The image of the brand or empty if it's not used.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function brandImage(string $value): self
-    {
-        $new = clone $this;
-        $new->brandImage = $value;
-        return $new;
-    }
-
-    /**
-     * The URL for the brand's hyperlink tag and will be used for the "href" attribute of the brand link. Default value
-     * is '/' will be used. You may set it to `null` if you want to have no link at all.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function brandUrl(string $value): self
-    {
-        $new = clone $this;
-        $new->brandUrl = $value;
-        return $new;
-    }
-
-    /**
-     * Set toggle icon.
-     *
-     * @param string $value .
-     *
-     * @return self
-     */
-    public function toggleIcon(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleIcon = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes for the tag nav.
-     *
-     * @param array $value
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes of the tag div brand.
-     *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function brandOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->brandOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes of the tag div brand label.
-     *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function brandLabelOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->brandLabelOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes of the tag div brand link.
-     *
-     * @param array $value Default value `navbar-item`.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function brandImageOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->brandImageOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
-     *
-     * @param array $value Default value `navbar-start`.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function itemsOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->itemsOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Options HTML attributes of the tag div nav menu.
-     *
-     * @param array $value Default value `navbar-menu`.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function menuOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->menuOptions = $value;
-        return $new;
-    }
-
-    /**
-     * The HTML attributes of the navbar toggler button.
-     *
-     * @param array $value
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function toggleOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->toggleOptions = $value;
-        return $new;
     }
 
     private function buildOptions(): void

@@ -40,31 +40,13 @@ final class Menu extends Widget
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
 
     /**
-     * Renders the menu.
-     *
-     * @return string the result of Widget execution to be outputted.
-     */
-    protected function run(): string
-    {
-        $this->items = $this->normalizeItems($this->items, $hasActiveChild);
-
-        if (empty($this->items)) {
-            return '';
-        }
-
-        $this->buildOptions();
-
-        return $this->buildMenu();
-    }
-
-    /**
-     * Disables activate items according to whether their currentPath.
+     * Disables active items according to their current path and returns a new instance.
      *
      * @return self
      *
      * {@see isItemActive}
      */
-    public function withoutActivateItems(): self
+    public function deactivateItems(): self
     {
         $new = clone $this;
         $new->activateItems = false;
@@ -72,7 +54,10 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether to activate parent menu items when one of the corresponding child menu items is active.
+     * Returns a new instance with the activated parent items.
+     *
+     * Activates parent menu items when one of the corresponding child menu items is active.
+     * The activated parent menu items will also have its CSS classes appended with {@see activeCssClass()}.
      *
      * @return self
      */
@@ -84,9 +69,9 @@ final class Menu extends Widget
     }
 
     /**
-     * The CSS class to be appended to the active menu item.
+     * Returns a new instance with the specified active CSS class.
      *
-     * @param string $value
+     * @param string $value The CSS class to be appended to the active menu item.
      *
      * @return self
      */
@@ -98,9 +83,9 @@ final class Menu extends Widget
     }
 
     /**
-     * Sets render brand custom.
+     * Returns a new instance with the specified HTML code of brand.
      *
-     * @param string $value
+     * @param string $value The HTML code of brand.
      *
      * @return self
      */
@@ -112,9 +97,9 @@ final class Menu extends Widget
     }
 
     /**
-     * Allows you to assign the current path of the url from request controller.
+     * Returns a new instance with the specified current path.
      *
-     * @param string $value
+     * @param string $value The current path.
      *
      * @return self
      */
@@ -126,7 +111,7 @@ final class Menu extends Widget
     }
 
     /**
-     * When tags Labels HTML should not be encoded.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -138,10 +123,9 @@ final class Menu extends Widget
     }
 
     /**
-     * The CSS class that will be assigned to the first item in the main menu or each submenu. Defaults to null,
-     * meaning no such CSS class will be assigned.
+     * Returns a new instance with the specified first item CSS class.
      *
-     * @param string $value
+     * @param string $value The CSS class that will be assigned to the first item in the main menu or each submenu.
      *
      * @return self
      */
@@ -153,8 +137,10 @@ final class Menu extends Widget
     }
 
     /**
-     * Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no
-     * visible child menu items.
+     * Returns a new instance with the enable showing empty items.
+     *
+     * Enables showing an empty menu item is one whose `url` option
+     * is not set and which has no visible child menu items.
      *
      * @return self
      */
@@ -166,9 +152,9 @@ final class Menu extends Widget
     }
 
     /**
-     * List of menu items.
+     * Returns a new instance with the specified items.
      *
-     * Each menu item should be an array of the following structure:
+     * @param array $value List of menu items. Each menu item should be an array of the following structure:
      *
      * - label: string, optional, specifies the menu item label. When {@see encodeLabels} is true, the label will be
      *   HTML-encoded. If the label is not specified, an empty string will be used.
@@ -194,8 +180,6 @@ final class Menu extends Widget
      * - icon: string, optional, class icon.
      * - iconOptions: array, optional, the HTML attributes for the container icon.
      *
-     * @param array $value
-     *
      * @return self
      */
     public function items(array $value): self
@@ -206,15 +190,14 @@ final class Menu extends Widget
     }
 
     /**
-     * List of HTML attributes shared by all menu {@see items}.
+     * Returns a new instance with the specified item options.
      *
-     * If any individual menu item specifies its  `options`, it will be merged with this property before being used to
-     * generate the HTML attributes for the menu item tag. The following special options are recognized:
+     * @param array $value List of HTML attributes shared by all menu {@see items}. If any individual menu item
+     * specifies its  `options`, it will be merged with this property before being used to generate the HTML attributes
+     * for the menu item tag. The following special options are recognized:
      *
      * - tag: string, defaults to "li", the tag name of the item container tags. Set to false to disable container tag.
      *   See also {@see Html::tag()}
-     *
-     * @param array $value
      *
      * @return self
      *
@@ -228,13 +211,13 @@ final class Menu extends Widget
     }
 
     /**
-     * The template used to render the body of a menu which is NOT a link.
+     * Returns a new instance with the specified label template.
+     *
+     * @param string $value The template used to render the body of a menu which is NOT a link.
      *
      * In this template, the token `{label}` will be replaced with the label of the menu item.
      *
      * This property will be overridden by the `template` option set in individual menu items via {@see items}.
-     *
-     * @param string $value
      *
      * @return self
      */
@@ -246,10 +229,9 @@ final class Menu extends Widget
     }
 
     /**
-     * The CSS class that will be assigned to the last item in the main menu or each submenu. Defaults to null, meaning
-     * no such CSS class will be assigned.
+     * Returns a new instance with the specified last item CSS class.
      *
-     * @param string $value
+     * @param string $value The CSS class that will be assigned to the last item in the main menu or each submenu.
      *
      * @return self
      */
@@ -261,12 +243,12 @@ final class Menu extends Widget
     }
 
     /**
-     * The template used to render the body of a menu which is a link. In this template, the token `{url}` will be
-     * replaced with the corresponding link URL; while `{label}` will be replaced with the link text.
+     * Returns a new instance with the specified link template.
+     *
+     * @param string $value The template used to render the body of a menu which is a link. In this template, the token
+     * `{url}` will be replaced with the corresponding link URL; while `{label}` will be replaced with the link text.
      *
      * This property will be overridden by the `template` option set in individual menu items via {@see items}.
-     *
-     * @param string $value
      *
      * @return self
      */
@@ -278,12 +260,13 @@ final class Menu extends Widget
     }
 
     /**
-     * The HTML attributes for the menu's container tag. The following special options are recognized:
+     * Returns a new instance with the specified options.
+     *
+     * @param array $value The HTML attributes for the menu's container tag. The following special options are
+     * recognized:
      *
      * - tag: string, defaults to "ul", the tag name of the item container tags. Set to false to disable container tag.
      *   See also {@see Html::tag()}.
-     *
-     * @param array $value
      *
      * @return self
      *
@@ -310,6 +293,24 @@ final class Menu extends Widget
         $new = clone $this;
         $new->subMenuTemplate = $value;
         return $new;
+    }
+
+    /**
+     * Renders the menu.
+     *
+     * @return string the result of Widget execution to be outputted.
+     */
+    protected function run(): string
+    {
+        $this->items = $this->normalizeItems($this->items, $hasActiveChild);
+
+        if (empty($this->items)) {
+            return '';
+        }
+
+        $this->buildOptions();
+
+        return $this->buildMenu();
     }
 
     private function renderItems(array $items): string

@@ -139,7 +139,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withoutActivateItems()
+            ->deactivateItems()
             ->items([
                 [
                     'label' => 'Item1',
@@ -187,7 +187,7 @@ final class NavTest extends TestCase
         Nav::counter(0);
 
         $html = Nav::widget()
-            ->withoutActivateItems()
+            ->deactivateItems()
             ->currentPath('/site/index')
             ->items([
                 [
@@ -521,7 +521,7 @@ final class NavTest extends TestCase
     {
         $widget = Nav::widget();
 
-        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->deactivateItems());
         $this->assertNotSame($widget, $widget->activateParents());
         $this->assertNotSame($widget, $widget->currentPath(''));
         $this->assertNotSame($widget, $widget->withoutEncodeLabels());

@@ -107,7 +107,7 @@ final class TabsTest extends TestCase
 
         $html = Tabs::widget()
             ->currentPath('site/index')
-            ->withoutActivateItems()
+            ->deactivateItems()
             ->items([
                 ['label' => 'Tab 1', 'url' => 'site/index'],
                 ['label' => 'Tab 2', 'url' => 'site/contact'],
@@ -338,7 +338,7 @@ final class TabsTest extends TestCase
 
         $this->assertNotSame($widget, $widget->options([]));
         $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->withoutActivateItems());
+        $this->assertNotSame($widget, $widget->deactivateItems());
         $this->assertNotSame($widget, $widget->withoutEncodeLabels());
         $this->assertNotSame($widget, $widget->currentPath(''));
         $this->assertNotSame($widget, $widget->size('is-small'));

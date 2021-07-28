@@ -75,6 +75,273 @@ final class ModalCard extends Widget
     private array $bodyOptions = [];
     private array $footerOptions = [];
 
+    /**
+     * Returns a new instance with the specified main container options.
+     *
+     * @param array $value The main container options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function options(array $value): self
+    {
+        $new = clone $this;
+        $new->options = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified content options.
+     *
+     * @param array $value The content options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function contentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->contentOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button label.
+     *
+     * @param string $value The toggle button label.
+     *
+     * @return self
+     */
+    public function toggleButtonLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonLabel = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button options.
+     *
+     * @param array $value The toggle button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function toggleButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button size.
+     *
+     * @param string $value The toggle button size.
+     *
+     * @return self
+     */
+    public function toggleButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button color.
+     *
+     * @param string $value The toggle button color.
+     *
+     * @return self
+     */
+    public function toggleButtonColor(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode('", "', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonColor = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the disabled toggle button.
+     *
+     * @return self
+     */
+    public function withoutToggleButton(): self
+    {
+        $new = clone $this;
+        $new->withoutToggleButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified close button size.
+     *
+     * @param string $value The close button size.
+     *
+     * @return self
+     */
+    public function closeButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('"', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->closeButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified close button options.
+     *
+     * @param array $value The close button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function closeButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->closeButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options for rendering the close button tag.
+     *
+     * @return self
+     */
+    public function withoutCloseButton(): self
+    {
+        $new = clone $this;
+        $new->withoutCloseButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified header options.
+     *
+     * @param array $value The header options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function headerOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->headerOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified body options.
+     *
+     * @param array $value The body options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function bodyOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->bodyOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified footer options.
+     *
+     * @param array $value The footer options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function footerOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->footerOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified footer content.
+     *
+     * @param string $value The footer content in the modal window.
+     *
+     * @return self
+     */
+    public function footer(string $value): self
+    {
+        $new = clone $this;
+        $new->footer = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified title options.
+     *
+     * @param array $value The title options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function titleOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->titleOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified title content.
+     *
+     * @param string $value The title content in the modal window.
+     *
+     * @return self
+     */
+    public function title(string $value): self
+    {
+        $new = clone $this;
+        $new->title = $value;
+
+        return $new;
+    }
+
     public function begin(): ?string
     {
         parent::begin();
@@ -99,273 +366,6 @@ final class ModalCard extends Widget
         $html .= Html::closeTag('div'); // .modal
 
         return $html;
-    }
-
-    /**
-     * Main container options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-
-        return $new;
-    }
-
-    /**
-     * Main content container options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function contentOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->contentOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button label.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonLabel = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function toggleButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button color.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonColor(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonColor = $value;
-
-        return $new;
-    }
-
-    /**
-     * Disable toggle button.
-     *
-     * @return self
-     */
-    public function withoutToggleButton(): self
-    {
-        $new = clone $this;
-        $new->withoutToggleButton = false;
-
-        return $new;
-    }
-
-    /**
-     * Close button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function closeButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('"', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->closeButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Close button options
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Disable close button.
-     *
-     * @return self
-     */
-    public function withoutCloseButton(): self
-    {
-        $new = clone $this;
-        $new->withoutCloseButton = false;
-
-        return $new;
-    }
-
-    /**
-     * Header options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function headerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->headerOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Body options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function bodyOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->bodyOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Footer options
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function footerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->footerOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * The footer content in the modal window.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function footer(string $value): self
-    {
-        $new = clone $this;
-        $new->footer = $value;
-
-        return $new;
-    }
-
-    /**
-     * Title options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function titleOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->titleOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * The title content in the modal window.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function title(string $value): self
-    {
-        $new = clone $this;
-        $new->title = $value;
-
-        return $new;
     }
 
     /**

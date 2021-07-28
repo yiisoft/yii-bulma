@@ -21,27 +21,14 @@ final class Nav extends Widget
     private bool $encodeLabels = true;
     private array $items = [];
 
-    protected function run(): string
-    {
-        $items = [];
-
-        foreach ($this->items as $item) {
-            if (!isset($item['visible']) || $item['visible']) {
-                $items[] = $this->renderItem($item);
-            }
-        }
-
-        return implode("\n", $items);
-    }
-
     /**
-     * Disables activate items according to whether their {@see currentPath}.
+     * Disables active items according to their current path and returns a new instance.
      *
      * @return self
      *
      * {@see isItemActive}
      */
-    public function withoutActivateItems(): self
+    public function deactivateItems(): self
     {
         $new = clone $this;
         $new->activateItems = false;
@@ -49,7 +36,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Whether to activate parent menu items when one of the corresponding child menu items is active.
+     * Returns a new instance with the activated parent items.
+     *
+     * Activates parent menu items when one of the corresponding child menu items is active.
      *
      * @return self
      */
@@ -61,9 +50,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Allows you to assign the current path of the url from request controller.
+     * Returns a new instance with the specified current path.
      *
-     * @param string $value
+     * @param string $value The current path.
      *
      * @return self
      */
@@ -75,7 +64,7 @@ final class Nav extends Widget
     }
 
     /**
-     * When tags Labels HTML should not be encoded.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -87,8 +76,10 @@ final class Nav extends Widget
     }
 
     /**
-     * List of items in the nav widget. Each array element represents a single  menu item which can be either a string
-     * or an array with the following structure:
+     * Returns a new instance with the specified items.
+     *
+     * @param array $value List of items in the nav widget. Each array element represents a single menu item
+     * which can be either a string or an array with the following structure:
      *
      * - label: string, required, the nav item label.
      * - url: optional, the item's URL. Defaults to "#".
@@ -104,8 +95,6 @@ final class Nav extends Widget
      *
      * If a menu item is a string, it will be rendered directly without HTML encoding.
      *
-     * @param array $value
-     *
      * @return self
      */
     public function items(array $value): self
@@ -113,6 +102,19 @@ final class Nav extends Widget
         $new = clone $this;
         $new->items = $value;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $items = [];
+
+        foreach ($this->items as $item) {
+            if (!isset($item['visible']) || $item['visible']) {
+                $items[] = $this->renderItem($item);
+            }
+        }
+
+        return implode("\n", $items);
     }
 
     /**

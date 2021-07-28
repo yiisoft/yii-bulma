@@ -64,6 +64,175 @@ final class Modal extends Widget
     private array $toggleButtonOptions = [];
     private bool $withoutToggleButton = true;
 
+    /**
+     * Returns a new instance with the specified main container options.
+     *
+     * @param array $value The main container options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function options(array $value): self
+    {
+        $new = clone $this;
+        $new->options = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button label.
+     *
+     * @param string $value The toggle button label.
+     *
+     * @return self
+     */
+    public function toggleButtonLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonLabel = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button options.
+     *
+     * @param array $value The toggle button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function toggleButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button size.
+     *
+     * @param string $value The toggle button size.
+     *
+     * @return self
+     */
+    public function toggleButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button color.
+     *
+     * @param string $value The toggle button color.
+     *
+     * @return self
+     */
+    public function toggleButtonColor(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode('", "', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonColor = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the disabled toggle button.
+     *
+     * @return self
+     */
+    public function withoutToggleButton(): self
+    {
+        $new = clone $this;
+        $new->withoutToggleButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified close button size.
+     *
+     * @param string $value The close button size.
+     *
+     * @return self
+     */
+    public function closeButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('"', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->closeButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified close button options.
+     *
+     * @param array $value The close button options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function closeButtonOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->closeButtonOptions = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options for rendering the close button tag.
+     *
+     * @return self
+     */
+    public function withoutCloseButton(): self
+    {
+        $new = clone $this;
+        $new->withoutCloseButton = false;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified content options.
+     *
+     * @param array $value The content options.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function contentOptions(array $value): self
+    {
+        $new = clone $this;
+        $new->contentOptions = $value;
+
+        return $new;
+    }
+
     public function begin(): ?string
     {
         parent::begin();
@@ -85,175 +254,6 @@ final class Modal extends Widget
         $html .= Html::closeTag('div'); // .modal
 
         return $html;
-    }
-
-    /**
-     * Main container options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button label.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonLabel = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function toggleButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Toggle button color.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function toggleButtonColor(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonColor = $value;
-
-        return $new;
-    }
-
-    /**
-     * Disable toggle button.
-     *
-     * @return self
-     */
-    public function withoutToggleButton(): self
-    {
-        $new = clone $this;
-        $new->withoutToggleButton = false;
-
-        return $new;
-    }
-
-    /**
-     * Close button size.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function closeButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('"', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->closeButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Close button options
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Disable close button.
-     *
-     * @return self
-     */
-    public function withoutCloseButton(): self
-    {
-        $new = clone $this;
-        $new->withoutCloseButton = false;
-
-        return $new;
-    }
-
-    /**
-     * Content options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
-     *
-     * @return self
-     */
-    public function contentOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->contentOptions = $value;
-
-        return $new;
     }
 
     /**

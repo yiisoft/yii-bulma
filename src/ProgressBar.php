@@ -52,17 +52,8 @@ final class ProgressBar extends Widget
     private string $size = '';
     private string $color = '';
 
-    protected function run(): string
-    {
-        $this->buildOptions();
-
-        $content = $this->value > 0 ? $this->value . '%' : '';
-
-        return Html::tag('progress', $content, $this->options)->render();
-    }
-
     /**
-     * HTML attributes for the widget container tag.
+     * Returns a new instance with the specified HTML attributes for the widget container tag.
      *
      * @param array $value The HTML attributes for the widget container tag.
      *
@@ -77,7 +68,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Sets the value of the progress.
+     * Returns a new instance with the specified value of the progress.
      *
      * @param float $value The value of the progress. Set `0` to display loading animation.
      *
@@ -92,7 +83,7 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Sets maximum progress value.
+     * Returns a new instance with the specified maximum progress value.
      *
      * @param int $value Maximum progress value. Set `0` for no maximum.
      *
@@ -107,9 +98,9 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Sets progress bar size.
+     * Returns a new instance with the specified progress bar size class.
      *
-     * @param string $value Size class.
+     * @param string $value The progress bar size class.
      *
      * @return self
      */
@@ -127,9 +118,9 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Sets progress bar color.
+     * Returns a new instance with the specified progress bar color.
      *
-     * @param string $value Color class.
+     * @param string $value The progress bar color.
      *
      * @return self
      */
@@ -144,6 +135,15 @@ final class ProgressBar extends Widget
         $new->color = $value;
 
         return $new;
+    }
+
+    protected function run(): string
+    {
+        $this->buildOptions();
+
+        $content = $this->value > 0 ? $this->value . '%' : '';
+
+        return Html::tag('progress', $content, $this->options)->render();
     }
 
     private function buildOptions(): void

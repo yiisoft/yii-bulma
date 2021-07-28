@@ -37,24 +37,8 @@ final class Breadcrumbs extends Widget
     private array $options = [];
     private array $itemsOptions = [];
 
-    protected function run(): string
-    {
-        if (empty($this->items)) {
-            return '';
-        }
-
-        $this->buildOptions();
-
-        return
-            Html::openTag('nav', $this->options) . "\n" .
-                Html::openTag('ul', $this->itemsOptions) . "\n" .
-                    implode('', $this->renderItems()) .
-                Html::closeTag('ul') . "\n" .
-            Html::closeTag('nav');
-    }
-
     /**
-     * Disables encoding for labels.
+     * Disables encoding for labels and returns a new instance.
      *
      * @return self
      */
@@ -90,10 +74,10 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * The template used to render each inactive item in the breadcrumbs. The token `{link}` will be replaced with the
-     * actual HTML link for each inactive item.
+     * Returns a new instance with the specified item template.
      *
-     * @param string $value
+     * @param string $value The template used to render each inactive item in the breadcrumbs.
+     * The token `{link}` will be replaced with the actual HTML link for each inactive item.
      *
      * @return self
      */
@@ -105,10 +89,10 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * The template used to render each active item in the breadcrumbs. The token `{link}` will be replaced with the
-     * actual HTML link for each active item.
+     * Returns a new instance with the specified active item template.
      *
-     * @param string $value
+     * @param string $value The template used to render each active item in the breadcrumbs.
+     * The token `{link}` will be replaced with the actual HTML link for each active item.
      *
      * @return self
      */
@@ -120,8 +104,10 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * List of items to appear in the breadcrumb. If this property is empty, the widget will not render anything. Each
-     * array element represents a single link in the breadcrumb with the following structure:
+     * Returns a new instance with the specified list of items.
+     *
+     * @param array $value List of items to appear in the breadcrumbs. If this property is empty, the widget will not
+     * render anything. Each array element represents a single item in the breadcrumbs with the following structure:
      *
      * ```php
      * [
@@ -130,8 +116,6 @@ final class Breadcrumbs extends Widget
      *     'template' => 'own template of the item', // optional, if not set $this->itemTemplate will be used
      * ]
      * ```
-     *
-     * @param array $value
      *
      * @return self
      */
@@ -143,9 +127,9 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * The HTML attributes for the widget container nav tag.
+     * Returns a new instance with the specified options.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the widget container nav tag.
      *
      * @return self
      *
@@ -159,9 +143,9 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * The HTML attributes for the items widget.
+     * Returns a new instance with the specified item template.
      *
-     * @param array $value
+     * @param array $value The HTML attributes for the items widget.
      *
      * @return self
      *
@@ -172,6 +156,22 @@ final class Breadcrumbs extends Widget
         $new = clone $this;
         $new->itemsOptions = $value;
         return $new;
+    }
+
+    protected function run(): string
+    {
+        if (empty($this->items)) {
+            return '';
+        }
+
+        $this->buildOptions();
+
+        return
+            Html::openTag('nav', $this->options) . "\n" .
+            Html::openTag('ul', $this->itemsOptions) . "\n" .
+            implode('', $this->renderItems()) .
+            Html::closeTag('ul') . "\n" .
+            Html::closeTag('nav');
     }
 
     private function buildOptions(): void
