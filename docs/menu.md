@@ -101,7 +101,7 @@ Method | Description | Default
 -------|-------------|---------
 `id(string $value)` | Widget ID. | `''`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`deactivateItems()` | Disable activate items according to whether their current path. | `false`
+`deactivateItems()` | Disable active items according to their current path. | `false`
 `activateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
 `activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`
 `brand(string $value)` | Custom brand content. | `''`

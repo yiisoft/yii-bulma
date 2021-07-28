@@ -123,7 +123,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * Disables activate items according to whether their current path and returns a new instance.
+     * Disables active items according to their current path and returns a new instance.
      *
      * @return self
      */

@@ -22,7 +22,7 @@ final class Nav extends Widget
     private array $items = [];
 
     /**
-     * Disables activate items according to whether their current path and returns a new instance.
+     * Disables active items according to their current path and returns a new instance.
      *
      * @return self
      *
