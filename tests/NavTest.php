@@ -501,12 +501,12 @@ final class NavTest extends TestCase
             ->render();
         $html .= NavBar::end();
         $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"><a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span><span>Setting Account</span></a>
         <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span><span>Profile</span></a>
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt="" aria-expanded="false"></a>
+        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt aria-expanded="false"></a>
         <div id="w2-dropdown" class="navbar-dropdown">
         <a class="navbar-item" href="/auth/logout">Logout</a>
         </div>

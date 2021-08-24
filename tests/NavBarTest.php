@@ -54,7 +54,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><a class="navbar-item" href="/"><img src="yii-logo.jpg" alt=""></a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><a class="navbar-item" href="/"><img src="yii-logo.jpg" alt></a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -70,7 +70,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -90,7 +90,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -110,8 +110,8 @@ final class NavBarTest extends TestCase
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -128,8 +128,8 @@ final class NavBarTest extends TestCase
             ->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -151,7 +151,7 @@ final class NavBarTest extends TestCase
 
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand is-black"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand is-black"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -172,7 +172,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item" alt="yii logo"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item" alt="yii logo"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -193,7 +193,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item is-italic" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item is-italic" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -214,7 +214,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"></div>
         </div>
         </nav>
@@ -232,7 +232,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start is-primary"></div>
         </div>
         </nav>
@@ -250,7 +250,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start" aria-label="true"></div>
         </div>
         </nav>
@@ -271,7 +271,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu is-black"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -292,7 +292,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -334,7 +334,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -387,7 +387,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar nav dark">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
         </div>
         </nav>
@@ -411,7 +411,7 @@ final class NavBarTest extends TestCase
         $html .= NavBar::end();
         $expected = <<<'HTML'
         <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt=""></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
+        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
         <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start nav dark"></div>
         </div>
         </nav>
