@@ -2,16 +2,22 @@
 
 declare(strict_types=1);
 
+/**
+ * @link https://bulma.io/documentation/form/general/#complete-form-example
+ */
 return [
     'yiisoft/form' => [
         'bulma' => [
             'enabled' => true,
             'fieldConfig' => [
-                'inputCssClass()' => ['input field mb-1'],
-                'labelOptions()' => [['label' => '']],
-                'errorOptions()' => [['class' => 'help is-danger has-text-left is-italic mt-0 mb-2']],
-                'errorCssClass()' => ['is-danger'],
-                'successCssClass()' => ['is-success'],
+                'containerClass' => 'field',
+                'errorClass' => 'has-text-danger is-italic',
+                'hintClass' => 'help',
+                'inputClass' => 'input',
+                'invalidClass' => 'has-background-danger',
+                'labelClass' => 'label',
+                'template' => "{label}<div class=\"control\">\n{input}</div>\n{hint}\n{error}",
+                'validClass' => 'has-background-success',
             ],
         ],
     ],
