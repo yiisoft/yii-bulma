@@ -25,7 +25,7 @@ use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
  * @var \Yiisoft\View\WebView $this
  */
 
-$assetManager->register([
+$assetManager->registerMany([
     BulmaAsset::class,
     BulmaJsAsset::class,
 ]);

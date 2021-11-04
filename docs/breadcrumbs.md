@@ -18,9 +18,7 @@ use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 
 /* Register assets in view */
 
-$assetManager->register([
-    BulmaAsset::class
-]);
+$assetManager->register(BulmaAsset::class);
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());

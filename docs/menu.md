@@ -24,9 +24,7 @@ use Yiisoft\Yii\Bulma\Menu;
 
 /* Register assets in view */
 
-$assetManager->register([
-    BulmaAsset::class
-]);
+$assetManager->register(BulmaAsset::class);
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());

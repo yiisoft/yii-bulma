@@ -46,7 +46,7 @@ use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
 
 /* Register assets in view */
 
-$assetManager->register([
+$assetManager->registerMany([
     BulmaAsset::class,
     BulmaJsAsset::class
 ]);
