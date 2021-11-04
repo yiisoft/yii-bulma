@@ -26,7 +26,7 @@ HTML generated consists of:
 
 /* Register assets in view */
 
-$assetManager->register([
+$assetManager->registerMany([
     BulmaAsset::class,
     BulmaJsAsset::class
 ]);

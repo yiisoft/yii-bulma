@@ -58,9 +58,7 @@ use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
  * @var Yiisoft\View\WebView $this
  */
 
-$assetManager->register([
-    BulmaAsset::class,
-]);
+$assetManager->register(BulmaAsset::class);
 
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
