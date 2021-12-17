@@ -6,6 +6,7 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\A;
 use Yiisoft\Html\Tag\CustomTag;
 use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
@@ -288,7 +289,8 @@ final class Breadcrumbs extends Widget
             $label = $icon . Span::tag()->content($label)->render();
         }
 
-        $link = $url !== null ? Html::a($label, $url, $item)->encode($encode)->render() : $label;
+        $link = $url !== null
+            ? A::tag()->attributes($item)->content($label)->url($url)->encode($encode)->render() : $label;
 
         return strtr($template, ['{link}' => $link, '{label}' => $label, '{icon}' => $icon]);
     }
