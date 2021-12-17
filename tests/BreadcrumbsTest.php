@@ -6,39 +6,46 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
 use Yiisoft\Yii\Bulma\Breadcrumbs;
+use Yiisoft\Html\Html;
 
 final class BreadcrumbsTest extends TestCase
 {
-    public function testBreadcrumbs(): void
+    /**
+     * @link https://bulma.io/documentation/components/breadcrumb/
+     */
+    public function testRender(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()->items([['label' => 'About', 'url' => '/about']])->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="/bulma">Bulma</a></li>
+        <li><a href="/documentation">Documentation</a></li>
+        <li><a href="/components">Components</a></li>
+        <li class="is-active"><a aria-current="page">Breadcrumb</a></li>
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Bulma', 'url' => '/bulma'])
+                ->items(
+                    [
+                        ['label' => 'Documentation', 'url' => '/documentation'],
+                        ['label' => 'Components', 'url' => '/components'],
+                        ['label' => 'Breadcrumb'],
+                    ],
+                )->render(),
+        );
     }
 
-    public function testBreadcrumbsEncodeLabels(): void
+    public function testEncodeLabels(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->items(
-                [
-                    [
-                        'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
-                        'url' => '/about',
-                    ],
-                ],
-            )->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/">Home</a></li>
@@ -46,19 +53,19 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        $html = Breadcrumbs::widget()
-            ->withoutEncodeLabels()
-            ->items(
-                [
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->encode(true)
+                ->items([
                     [
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
                         'url' => '/about',
                     ],
-                ],
-            )->render();
-        $expected = <<<'HTML'
+                ])->render(),
+        );
+
+        $expected = <<<HTML
         <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/">Home</a></li>
@@ -66,18 +73,24 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->encode(false)
+                ->items([
+                    [
+                        'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
+                        'url' => '/about',
+                    ],
+                ])->render(),
+        );
     }
 
-    public function testBreadcrumbsHomeLink(): void
+    public function testHomeLink(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/index">Index</a></li>
@@ -85,13 +98,15 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Index', 'url' => '/index'])
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
+        );
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index'])
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li>Index</li>
@@ -99,19 +114,20 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Index'])
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsItemTemplate(): void
+    public function testItemTemplate(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->itemTemplate("<div>{link}</div>\n")
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <div><a href="/index">Index</a></div>
@@ -119,19 +135,21 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Index', 'url' => '/index'])
+                ->itemTemplate("<div>{link}</div>\n")
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsItemTemplateActive(): void
+    public function testItemTemplateActive(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</a></li>\n")
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/index">Index</a></li>
@@ -139,21 +157,27 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Index', 'url' => '/index'])
+                ->activeItemTemplate("<li class=\"active\"><a aria-current=\"page\">{label}</a></li>\n")
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsLinksEmpty(): void
+    public function testLinksEmpty(): void
     {
         $html = Breadcrumbs::widget()->items([])->render();
         $this->assertempty($html);
     }
 
-    public function testBreadcrumbsLinksEmptyUrl(): void
+    public function testLinksEmptyUrl(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()->items(['label' => 'about'])->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/">Home</a></li>
@@ -161,17 +185,14 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE($expected, Breadcrumbs::widget()->items(['label' => 'about'])->render());
     }
 
-    public function testBreadcrumbsLinksTemplate(): void
+    public function testLinksTemplate(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->items([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/">Home</a></li>
@@ -179,10 +200,15 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->items([['label' => 'about', 'url' => '/about', 'template' => "<div>{link}</div>\n"]])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsLinksException(): void
+    public function testLinksException(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" element is required for each link.');
@@ -191,36 +217,33 @@ final class BreadcrumbsTest extends TestCase
             ->render();
     }
 
-    public function testBreadcrumbsOptions(): void
+    public function testAttributes(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->options(['class' => 'is-centered'])
-            ->render();
-        $expected = <<<'HTML'
-        <nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+        $expected = <<<HTML
+        <nav id="w1-breadcrumbs" class="breadcrumb" autofocus aria-label="breadcrumbs">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->attributes(['autofocus' => true])
+                ->homeItem(['label' => 'Index', 'url' => '/index'])
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsOptionsItems(): void
+    public function testItemsAttributes(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(['label' => 'Index', 'url' => '/index'])
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->itemsOptions(['class' => 'testMe'])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul class="testMe">
         <li><a href="/index">Index</a></li>
@@ -228,61 +251,88 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->homeItem(['label' => 'Index', 'url' => '/index'])
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->itemsAttributes(['class' => 'testMe'])
+                ->render(),
+        );
     }
 
-    public function testBreadcrumbsIcons(): void
+    /**
+     * @link https://bulma.io/documentation/components/breadcrumb/#icons
+     */
+    public function testIcons(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->homeItem(
-                [
-                    'label' => 'Index',
-                    'url' => '/index',
-                    'icon' => 'fas fa-home',
-                    'iconOptions' => ['class' => 'icon'],
-                ]
-            )
-            ->items(
-                [
-                    [
-                        'label' => 'About',
-                        'url' => '/about',
-                        'icon' => 'fas fa-thumbs-up',
-                        'iconOptions' => ['class' => 'icon'],
-                    ],
-                ]
-            )
-            ->options(['class' => 'is-centered'])
-            ->render();
-        $expected = <<<'HTML'
-        <nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+        $expected = <<<HTML
+        <nav id="w1-breadcrumbs" class="is-centered breadcrumb" aria-label="breadcrumbs">
         <ul>
-        <li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
-        <li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
+        <li><a href="/"><span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span><span>Bulma</span></a></li>
+        <li><a href="/docs"><span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span><span>Documentation</span></a></li>
+        <li><a href="/components"><span class="icon is-small"><i class="fas fa-puzzle-piece" aria-hidden="true"></i></span><span>Components</span></a></li>
+        <li class="is-active"><a aria-current="page"><span class="icon is-small"><i class="fas fa-thumbs-up" aria-hidden="true"></i></span><span>Breadcrumb</span></a></li>
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->attributes(['class' => 'is-centered'])
+                ->homeItem(
+                    [
+                        'label' => 'Bulma',
+                        'url' => '/',
+                        'icon' => 'fas fa-home',
+                        'iconAttributes' => ['class' => 'icon is-small'],
+                    ]
+                )
+                ->items(
+                    [
+                        [
+                            'label' => 'Documentation',
+                            'url' => '/docs',
+                            'icon' => 'fas fa-book',
+                            'iconAttributes' => ['class' => 'icon is-small'],
+                        ],
+                        [
+                            'label' => 'Components',
+                            'url' => '/components',
+                            'icon' => 'fas fa-puzzle-piece',
+                            'iconAttributes' => ['class' => 'icon is-small'],
+                        ],
+                        [
+                            'label' => 'Breadcrumb',
+                            'icon' => 'fas fa-thumbs-up',
+                            'iconAttributes' => ['class' => 'icon is-small'],
+                        ],
+                    ]
+                )
+                ->render()
+        );
     }
 
-    public function testBreadcrumbsWithoutHomeItem(): void
+    public function testWithoutHomeItem(): void
     {
-        Breadcrumbs::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Breadcrumbs::widget()
-            ->items([['label' => 'About', 'url' => '/about']])
-            ->homeItem(null)
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
         <ul>
         <li><a href="/about">About</a></li>
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Breadcrumbs::widget()
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->homeItem(null)
+                ->render(),
+        );
     }
 
     public function testHomeItemThrowExceptionForEmptyArray(): void
@@ -302,8 +352,8 @@ final class BreadcrumbsTest extends TestCase
         $this->assertNotSame($widget, $widget->itemTemplate(''));
         $this->assertNotSame($widget, $widget->activeItemTemplate(''));
         $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->options([]));
-        $this->assertNotSame($widget, $widget->itemsOptions([]));
+        $this->assertNotSame($widget, $widget->attributes([]));
+        $this->assertNotSame($widget, $widget->itemsAttributes([]));
         $this->assertNotSame($widget, $widget->id(Breadcrumbs::class));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Breadcrumbs::class));
     }

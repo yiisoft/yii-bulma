@@ -28,28 +28,28 @@ $this->setJsFiles($assetManager->getJsFiles());
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <?= Breadcrumbs::widget()
+    ->attributes(['class' => 'is-centered'])
     ->homeItem([
         'label' => 'Index',
         'url' => '/index',
         'icon' => 'fas fa-home',
-        'iconOptions' => ['class' => 'icon']
+        'iconAttributes' => ['class' => 'icon']
     ])
     ->items([
         [
             'label' => 'About',
             'url' => '/about',
             'icon' => 'fas fa-thumbs-up',
-            'iconOptions' => ['class' => 'icon']
+            'iconAttributes' => ['class' => 'icon']
         ]
     ])
-    ->options(['class' => 'is-centered'])
     ->render() ?>
 ```
 
 The code above generates the following HTML:
 
 ```html
-<nav id="w1-breadcrumbs" class="breadcrumb is-centered" aria-label="breadcrumbs">
+<nav id="w71391357285001-breadcrumbs" class="is-centered breadcrumb" aria-label="breadcrumbs">
     <ul>
         <li><span class="icon"><i class="fas fa-home"></i></span><a href="/index">Index</a></li>
         <li><span class="icon"><i class="fas fa-thumbs-up"></i></span><a href="/about">About</a></li>
@@ -59,12 +59,28 @@ The code above generates the following HTML:
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
-`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`withoutEncodeLabels()` | Disable encoding for labels. | `false`
-`homeItem(?array $value)` | The first item in the breadcrumbs (called home link). | `['label' => 'Home', 'url' => '/']`
-`itemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
 `activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs. | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
+`aria-label` | Defines a string value that labels the current element. | `breadcrumbs`
+`attributes(array $value)` | HTML attributes for the widget container nav tag. | `[]`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
+`encode()` | Enable/Disable encoding for labels. | `false`
+`homeItem(?array $value)` | The first item in the breadcrumbs (called home link). | `['label' => 'Home', 'url' => '/']`
+`id(string $value)` | Widget ID. | `''`
 `items(array $value)` | List of items to appear in the breadcrumbs. | `[]`
-`itemsOptions(array $value)` | HTML attributes for the items widget. | `[]`
-`options(array $value)` | HTML attributes for the widget container nav tag. | `[]`
+`itemsAttributes(array $value)` | HTML attributes for the items widget. | `[]`
+`itemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
+
+Items structure is an array of the following structure:
+
+```php
+[
+    [
+        'label' => 'Home',
+        'url' => '/',
+        'template' => '<li><a href="{url}">{icon}{label}</a></li>',
+        'encode' => true,
+        'icon' => 'fas fa-home',
+        'iconAttributes' => ['class' => 'icon']
+    ],
+]
+```

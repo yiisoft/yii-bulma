@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
+use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
-use function array_merge;
 use function implode;
 use function is_array;
 use function strtr;
@@ -29,23 +27,89 @@ use function strtr;
  */
 final class Breadcrumbs extends Widget
 {
-    private bool $encodeLabels = true;
+    private string $autoIdPrefix = 'w';
+    private array $attributes = [];
+    private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{link}</a></li>\n";
+    private bool $encode = false;
     private ?array $homeItem = ['label' => 'Home', 'url' => '/'];
-    private string $itemTemplate = "<li>{icon}{link}</li>\n";
-    private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</a></li>\n";
     private array $items = [];
-    private array $options = [];
-    private array $itemsOptions = [];
+    private array $itemsAttributes = [];
+    private string $itemTemplate = "<li>{link}</li>\n";
 
     /**
-     * Disables encoding for labels and returns a new instance.
+     * Defines a string value that labels the current element.
+     *
+     * @param string $value The value of the aria-label attribute.
+     *
+     * @return static
+     *
+     * @link https://www.w3.org/TR/wai-aria/#aria-label
+     */
+    public function ariaLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->attributes['aria-label'] =  $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified active item template.
+     *
+     * @param string $value The template used to render each active item in the breadcrumbs.
+     * The token `{link}` will be replaced with the actual HTML link for each active item.
      *
      * @return self
      */
-    public function withoutEncodeLabels(): self
+    public function activeItemTemplate(string $value): self
     {
         $new = clone $this;
-        $new->encodeLabels = false;
+        $new->activeItemTemplate = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified attributes.
+     *
+     * @param array $value The HTML attributes for the widget container nav tag.
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function attributes(array $value): self
+    {
+        $new = clone $this;
+        $new->attributes = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
+     *
+     * @param string $value The prefix to the automatically generated widget IDs.
+     *
+     * @return static
+     *
+     * {@see getId()}
+     */
+    public function autoIdPrefix(string $value): self
+    {
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * Set encode to true to encode the output.
+     *
+     * @param bool $value whether to encode the output.
+     *
+     * @return $this
+     */
+    public function encode(bool $value): self
+    {
+        $new = clone $this;
+        $new->encode = $value;
         return $new;
     }
 
@@ -74,32 +138,16 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified item template.
+     * Returns a new instance with the specified ID of the widget.
      *
-     * @param string $value The template used to render each inactive item in the breadcrumbs.
-     * The token `{link}` will be replaced with the actual HTML link for each inactive item.
+     * @param string $value The ID of the widget.
      *
-     * @return self
+     * @return static
      */
-    public function itemTemplate(string $value): self
+    public function id(string $value): self
     {
         $new = clone $this;
-        $new->itemTemplate = $value;
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified active item template.
-     *
-     * @param string $value The template used to render each active item in the breadcrumbs.
-     * The token `{link}` will be replaced with the actual HTML link for each active item.
-     *
-     * @return self
-     */
-    public function activeItemTemplate(string $value): self
-    {
-        $new = clone $this;
-        $new->activeItemTemplate = $value;
+        $new->attributes['id'] = $value;
         return $new;
     }
 
@@ -127,75 +175,63 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified options.
+     * Returns a new instance with the specified item template.
      *
-     * @param array $value The HTML attributes for the widget container nav tag.
+     * @param array $value The HTML attributes for the item's widget.
      *
      * @return self
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function options(array $value): self
+    public function itemsAttributes(array $value): self
     {
         $new = clone $this;
-        $new->options = $value;
+        $new->itemsAttributes = $value;
         return $new;
     }
 
     /**
      * Returns a new instance with the specified item template.
      *
-     * @param array $value The HTML attributes for the items widget.
+     * @param string $value The template used to render each inactive item in the breadcrumbs.
+     * The token `{link}` will be replaced with the actual HTML link for each inactive item.
      *
      * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function itemsOptions(array $value): self
+    public function itemTemplate(string $value): self
     {
         $new = clone $this;
-        $new->itemsOptions = $value;
+        $new->itemTemplate = $value;
         return $new;
     }
 
     protected function run(): string
     {
-        if (empty($this->items)) {
+        $new = clone $this;
+
+        if (empty($new->items)) {
             return '';
         }
 
-        $this->buildOptions();
+        $new = $new->setId();
+        $new = $new->ariaLabel('breadcrumbs');
+        Html::addCssClass($new->attributes, 'breadcrumb');
 
         return
-            Html::openTag('nav', $this->options) . "\n" .
-            Html::openTag('ul', $this->itemsOptions) . "\n" .
-            implode('', $this->renderItems()) .
+            Html::openTag('nav', $new->attributes) . "\n" .
+            Html::openTag('ul', $new->itemsAttributes) . "\n" .
+            implode('', $new->renderItems()) .
             Html::closeTag('ul') . "\n" .
             Html::closeTag('nav');
     }
 
-    private function buildOptions(): void
-    {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-breadcrumbs";
-        }
-
-        $this->options = $this->addOptions(
-            array_merge(
-                $this->options,
-                ['aria-label' => 'breadcrumbs']
-            ),
-            'breadcrumb'
-        );
-    }
-
-    private function renderIcon(string $icon, array $iconOptions): string
+    private function renderIcon(?string $icon, array $iconAttributes): string
     {
         $html = '';
 
-        if ($icon !== '') {
-            $html = Html::openTag('span', $iconOptions) .
-                Html::tag('i', '', ['class' => $icon]) .
+        if ($icon !== null) {
+            $html = Html::openTag('span', $iconAttributes) .
+                Html::tag('i', '', ['class' => $icon, 'aria-hidden' => "true"]) .
                 Html::closeTag('span');
         }
 
@@ -206,54 +242,51 @@ final class Breadcrumbs extends Widget
      * Renders a single breadcrumb item.
      *
      * @param array $item The item to be rendered. It must contain the "label" element. The "url" element is optional.
-     * @param string $template The template to be used to rendered the link. The token "{link}" will be replaced by the
+     * @param string $template The template to be used to render the link. The token "{link}" will be replaced by the
      * link.
      *
-     * @throws InvalidArgumentException|JsonException If `$item` does not have "label" element.
+     * @throws InvalidArgumentException If `$item` does not have "label" element.
      *
      * @return string The rendering result.
      */
     private function renderItem(array $item, string $template): string
     {
-        $encodeLabel = ArrayHelper::remove($item, 'encode', $this->encodeLabels);
-
-        $icon = '';
-        $iconOptions = [];
-
-        if (isset($item['icon'])) {
-            $icon = $item['icon'];
-        }
-
-        if (isset($item['iconOptions']) && is_array($item['iconOptions'])) {
-            $iconOptions = $this->addOptions($iconOptions, 'icon');
-        }
-
-        unset($item['icon'], $item['iconOptions']);
-
-        if (array_key_exists('label', $item)) {
-            $label = $encodeLabel ? Html::encode($item['label']) : $item['label'];
-        } else {
+        if (!array_key_exists('label', $item)) {
             throw new InvalidArgumentException('The "label" element is required for each link.');
         }
 
-        if (isset($item['template'])) {
-            $template = $item['template'];
+        /** @var bool */
+        $encode = $item['encode'] ?? $this->encode;
+        unset($item['encode']);
+        /** @var string|null */
+        $icon = $item['icon'] ?? null;
+        unset($item['icon']);
+        /** @var array */
+        $iconAttributes = $item['iconAttributes'] ?? [];
+        unset($item['iconAttributes']);
+        /** @var string */
+        $template = $item['template'] ?? $template;
+        unset($item['template']);
+        /** @var string|null */
+        $url = $item['url'] ?? null;
+        unset($item['url']);
+        $icon = $this->renderIcon($icon, $iconAttributes);
+        /** @var string */
+        $label = $item['label'];
+        unset($item['label']);
+
+        if ($icon !== '') {
+            $label = $icon . '<span>' . $label . '</span>';
         }
 
-        if (isset($item['url'])) {
-            $options = $item;
-            unset($options['template'], $options['label'], $options['url'], $options['icon']);
-            $link = Html::a($label, $item['url'], $options)->encode(false)->render();
-        } else {
-            $link = $label;
-        }
+        $link = $url !== null ? Html::a($label, $url, $item)->encode($encode)->render() : $label;
 
-        return strtr(
-            $template,
-            ['{label}' => $label, '{link}' => $link, '{icon}' => $this->renderIcon($icon, $iconOptions)],
-        );
+        return strtr($template, ['{link}' => $link, '{label}' => $label, '{icon}' => $icon]);
     }
 
+    /**
+     * @psalm-return string[]
+     */
     private function renderItems(): array
     {
         $items = [];
@@ -262,6 +295,7 @@ final class Breadcrumbs extends Widget
             $items[] = $this->renderItem($this->homeItem, $this->itemTemplate);
         }
 
+        /** @psalm-var string[]|string $item */
         foreach ($this->items as $item) {
             if (!is_array($item)) {
                 $item = ['label' => $item];
@@ -271,5 +305,23 @@ final class Breadcrumbs extends Widget
         }
 
         return $items;
+    }
+
+    /**
+     * Set id of the widget.
+     *
+     * @return static
+     */
+    private function setId(): self
+    {
+        $new = clone $this;
+
+        $id = Html::generateId($new->autoIdPrefix) . "-breadcrumbs";
+
+        if (!array_key_exists('id', $new->attributes)) {
+            $new = $new->id($id);
+        }
+
+        return $new;
     }
 }
