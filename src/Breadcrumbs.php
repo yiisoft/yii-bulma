@@ -7,6 +7,7 @@ namespace Yiisoft\Yii\Bulma;
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\CustomTag;
+use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -283,7 +284,7 @@ final class Breadcrumbs extends Widget
         unset($item['label']);
 
         if ($icon !== '') {
-            $label = $icon . '<span>' . $label . '</span>';
+            $label = $icon . Span::tag()->content($label)->render();
         }
 
         $link = $url !== null ? Html::a($label, $url, $item)->encode($encode)->render() : $label;
