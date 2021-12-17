@@ -222,7 +222,7 @@ final class BreadcrumbsTest extends TestCase
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" autofocus aria-label="breadcrumbs">
+        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" autofocus>
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>

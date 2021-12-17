@@ -6,6 +6,7 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\CustomTag;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -41,7 +42,7 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The value of the aria-label attribute.
      *
-     * @return static
+     * @return self
      *
      * @link https://www.w3.org/TR/wai-aria/#aria-label
      */
@@ -88,7 +89,7 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The prefix to the automatically generated widget IDs.
      *
-     * @return static
+     * @return self
      *
      * {@see getId()}
      */
@@ -104,7 +105,7 @@ final class Breadcrumbs extends Widget
      *
      * @param bool $value whether to encode the output.
      *
-     * @return $this
+     * @return self
      */
     public function encode(bool $value): self
     {
@@ -142,7 +143,7 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The ID of the widget.
      *
-     * @return static
+     * @return self
      */
     public function id(string $value): self
     {
@@ -207,22 +208,28 @@ final class Breadcrumbs extends Widget
 
     protected function run(): string
     {
-        $new = clone $this;
-
-        if (empty($new->items)) {
+        if (empty($this->items)) {
             return '';
         }
 
-        $new = $new->setId();
-        $new = $new->ariaLabel('breadcrumbs');
-        Html::addCssClass($new->attributes, 'breadcrumb');
+        $customTag = CustomTag::name('nav');
+        $attributes = $this->attributes;
 
-        return
-            Html::openTag('nav', $new->attributes) . "\n" .
-            Html::openTag('ul', $new->itemsAttributes) . "\n" .
-            implode('', $new->renderItems()) .
-            Html::closeTag('ul') . "\n" .
-            Html::closeTag('nav');
+        Html::addCssClass($attributes, 'breadcrumb');
+
+        if (!array_key_exists('aria-label', $attributes)) {
+            $customTag = $customTag->attribute('aria-label', 'breadcrumbs');
+        }
+
+        if (!array_key_exists('id', $this->attributes)) {
+            $customTag = $customTag->id(Html::generateId($this->autoIdPrefix) . '-breadcrumbs');
+        }
+
+        $content = "\n" . Html::openTag('ul', $this->itemsAttributes) . "\n" .
+            implode('', $this->renderItems()) .
+            Html::closeTag('ul') . "\n";
+
+        return $customTag->content($content)->attributes($attributes)->encode(false)->render();
     }
 
     private function renderIcon(?string $icon, array $iconAttributes): string
@@ -305,23 +312,5 @@ final class Breadcrumbs extends Widget
         }
 
         return $items;
-    }
-
-    /**
-     * Set id of the widget.
-     *
-     * @return static
-     */
-    private function setId(): self
-    {
-        $new = clone $this;
-
-        $id = Html::generateId($new->autoIdPrefix) . '-breadcrumbs';
-
-        if (!array_key_exists('id', $new->attributes)) {
-            $new = $new->id($id);
-        }
-
-        return $new;
     }
 }
