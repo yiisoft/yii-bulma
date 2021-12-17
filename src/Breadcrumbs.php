@@ -238,9 +238,10 @@ final class Breadcrumbs extends Widget
         $html = '';
 
         if ($icon !== null) {
-            $html = Html::openTag('span', $iconAttributes) .
-                Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) .
-                Html::closeTag('span');
+            $html = Span::tag()
+                ->attributes($iconAttributes)
+                ->content(Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']))
+                ->render();
         }
 
         return $html;
