@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\A;
 use Yiisoft\Html\Tag\CustomTag;
+use Yiisoft\Html\Tag\I;
 use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
@@ -241,7 +242,8 @@ final class Breadcrumbs extends Widget
         if ($icon !== null) {
             $html = Span::tag()
                 ->attributes($iconAttributes)
-                ->content(Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']))
+                ->content(I::tag()->attributes(['class' => $icon, 'aria-hidden' => 'true'])->render())
+                ->encode($this->encode)
                 ->render();
         }
 
