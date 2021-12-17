@@ -48,7 +48,7 @@ final class Breadcrumbs extends Widget
     public function ariaLabel(string $value): self
     {
         $new = clone $this;
-        $new->attributes['aria-label'] =  $value;
+        $new->attributes['aria-label'] = $value;
         return $new;
     }
 
@@ -231,7 +231,7 @@ final class Breadcrumbs extends Widget
 
         if ($icon !== null) {
             $html = Html::openTag('span', $iconAttributes) .
-                Html::tag('i', '', ['class' => $icon, 'aria-hidden' => "true"]) .
+                Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) .
                 Html::closeTag('span');
         }
 
@@ -316,7 +316,7 @@ final class Breadcrumbs extends Widget
     {
         $new = clone $this;
 
-        $id = Html::generateId($new->autoIdPrefix) . "-breadcrumbs";
+        $id = Html::generateId($new->autoIdPrefix) . '-breadcrumbs';
 
         if (!array_key_exists('id', $new->attributes)) {
             $new = $new->id($id);
