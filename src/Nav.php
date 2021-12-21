@@ -108,7 +108,7 @@ final class Nav extends Widget
         return $new;
     }
 
-        /**
+    /**
      * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end

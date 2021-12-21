@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Div;
 use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavBarTest extends TestCase

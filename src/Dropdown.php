@@ -368,7 +368,7 @@ final class Dropdown extends Widget
 
         Html::addCssClass($buttonAttributes, 'button');
 
-        $buttonAttributes['aria-haspopup'] = "true";
+        $buttonAttributes['aria-haspopup'] = 'true';
         $buttonAttributes['aria-controls'] = $id;
 
         return Button::tag()
@@ -547,7 +547,7 @@ final class Dropdown extends Widget
                     $submenuAttributes = $item['submenuAttributes'] ?? [];
                     $submenuAttributes = array_merge($this->submenuAttributes, $submenuAttributes);
 
-                    $dropdown = Dropdown::widget();
+                    $dropdown = self::widget();
 
                     $lines[] = $dropdown
                         ->attributes($this->attributes)
@@ -574,7 +574,7 @@ final class Dropdown extends Widget
         $html = '';
 
         if ($label !== '') {
-            $html =  PHP_EOL . Span::tag()
+            $html = PHP_EOL . Span::tag()
                 ->attributes($labelAttributes)
                 ->content($label)
                 ->encode(false)
