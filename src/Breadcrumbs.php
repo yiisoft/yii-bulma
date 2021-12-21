@@ -224,7 +224,7 @@ final class Breadcrumbs extends Widget
             $customTag = $customTag->attribute('aria-label', 'breadcrumbs');
         }
 
-        if (!array_key_exists('id', $this->attributes)) {
+        if (!array_key_exists('id', $attributes)) {
             $customTag = $customTag->id(Html::generateId($this->autoIdPrefix) . '-breadcrumbs');
         }
 
