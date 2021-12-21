@@ -29,10 +29,10 @@ final class NavBar extends Widget
     private string $brandText = '';
     private array $brandTextAttributes = [];
     private string $brandUrl = '/';
-    private string $buttonLinkAriaExpanded = "false";
+    private string $buttonLinkAriaExpanded = 'false';
     private string $buttonLinkAriaLabelText = 'menu';
     private string $buttonLinkContent = '';
-    private string $buttonLinkRole = "button";
+    private string $buttonLinkRole = 'button';
     private string $navBarAriaLabel = 'main navigation';
     private string $navBarBrandCssClass = 'navbar-brand';
     private array $navBarBurgerAttributes = [];
@@ -418,9 +418,9 @@ final class NavBar extends Widget
         $navBarBurgerAttributes = $this->navBarBurgerAttributes;
         if ($this->buttonLinkContent === '') {
             $this->buttonLinkContent = PHP_EOL .
-                Span::tag()->attributes(['aria-hidden' => "true"])->render() . PHP_EOL .
-                Span::tag()->attributes(['aria-hidden' => "true"])->render() . PHP_EOL .
-                Span::tag()->attributes(['aria-hidden' => "true"])->render() . PHP_EOL;
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL .
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL .
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL;
         }
 
         $navBarBurgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;
