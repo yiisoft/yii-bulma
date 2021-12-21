@@ -6,527 +6,466 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\Img;
 use Yiisoft\Yii\Bulma\Nav;
-use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavTest extends TestCase
 {
-    public function testNav(): void
+    public function testDeepActivateParents(): void
     {
-        NavBar::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Nav::widget()->items([['label' => 'Page1', 'url' => '#']])->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Page1</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavWithoutUrl(): void
-    {
-        NavBar::counter(0);
-
-        $html = Nav::widget()->items([['label' => 'Page1']])->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Page1</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavDropdown(): void
-    {
-        NavBar::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Dropdown1',
-                    'items' => [
-                        ['label' => 'Page1', 'url' => '#'],
-                        ['label' => 'Page2', 'url' => '#'],
-                        '-',
-                        ['label' => 'Page3', 'url' => '#'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
+        <div class="navbar-menu">
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Dropdown1</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="#">Page1</a>
-        <a class="navbar-item" href="#">Page2</a>
-        <div class="navbar-divider"></div>
-        <a class="navbar-item" href="#">Page3</a>
+        <a class="navbar-link" href="#">Dropdown</a>
+        <div class="navbar-dropdown">
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <a class="navbar-item">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </a>
         </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testRenderDropdownWithDropdownOptions(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Page1',
-                    'url' => '#',
-                ],
-                [
-                    'label' => 'Dropdown1',
-                    'dropdownOptions' => ['class' => 'test', 'data-id' => 't1', 'id' => 'test1'],
-                    'items' => [
-                        ['label' => 'Page2', 'url' => '#'],
-                        ['label' => 'Page3', 'url' => '#'],
-                    ],
-                    'visible' => true,
-                ],
-                [
-                    'label' => 'Dropdown2',
-                    'items' => [
-                        ['label' => 'Page4', 'url' => '#'],
-                        ['label' => 'Page5', 'url' => '#'],
-                    ],
-                    'visible' => false,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Page1</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Dropdown1</a>
-        <div id="test1" class="navbar-dropdown test" data-id="t1">
-        <a class="navbar-item" href="#">Page2</a>
-        <a class="navbar-item" href="#">Page3</a>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavEmptyItems(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Page1',
-                    'items' => null,
-                ],
-                [
-                    'label' => 'Page4',
-                    'items' => [],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Page1</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Page4</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavExplicitActive(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->deactivateItems()
-            ->items([
-                [
-                    'label' => 'Item1',
-                    'active' => true,
-                ],
-                [
-                    'label' => 'Item2',
-                    'url' => '/site/index',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Item1</a>
-        <a class="navbar-item" href="/site/index">Item2</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavImplicitActive(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->currentPath('/site/index')
-            ->items([
-                [
-                    'label' => 'Item1',
-                    'active' => true,
-                ],
-                [
-                    'label' => 'Item2',
-                    'url' => '/site/index',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item is-active" href="#">Item1</a>
-        <a class="navbar-item is-active" href="/site/index">Item2</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavExplicitActiveSubitems(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->deactivateItems()
-            ->currentPath('/site/index')
-            ->items([
-                [
-                    'label' => 'Item1',
-                ],
-                [
-                    'label' => 'Item2',
-                    'items' => [
-                        ['label' => 'Page2', 'url' => '#', 'url' => 'site/index'],
-                        ['label' => 'Page3', 'url' => '#', 'active' => true],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Item1</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Item2</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="site/index">Page2</a>
-        <a class="navbar-item is-active" href="#">Page3</a>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavImplicitActiveSubitems(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Item1',
-                ],
-                [
-                    'label' => 'Item2',
-                    'items' => [
-                        ['label' => 'Page2', 'content' => 'Page2', 'url' => '/site/index'],
-                        ['label' => 'Page3', 'content' => 'Page3', 'active' => true],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">Item1</a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Item2</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="/site/index">Page2</a>
-        <a class="navbar-item is-active">Page3</a>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavDeepActivateParents(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->activateParents()
-            ->items([
-                [
-                    'label' => '<span>Dropdown</span>',
-                    'items' => [
-                        [
-                            'label' => 'Sub-dropdown',
-                            'items' => [
-                                [
-                                    'label' => 'Page',
-                                    'url' => '#',
-                                    'active' => true,
-                                ],
-                            ],
-                        ],
-                    ],
-                    'encode' => false,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#"><span>Dropdown</span></a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" aria-haspopup="true" aria-expanded="false">Sub-dropdown</a>
-        <div id="w2-dropdown" class="navbar-dropdown">
+        <div id="w2-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
         <a class="navbar-item is-active" href="#">Page</a>
         </div>
         </div>
         </div>
+        </div>
+        </div>
+        </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->activateParents()
+                ->items([
+                    [
+                        'label' => 'Dropdown',
+                        'items' => [
+                            [
+                                'label' => 'Sub Dropdown',
+                                'items' => [
+                                    ['label' => 'Page', 'url' => '#', 'active' => true],
+                                ],
+                                'submenu' => true,
+                            ],
+                        ],
+                    ],
+                ])
+                ->render(),
+        );
     }
 
-    public function testNavEncodeLabels(): void
+    public function testEnclosedByEndMenu(): void
     {
-        Nav::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Nav::widget()
-        ->items([
-            [
-                'label' => 'a &amp; b',
-                'encode' => false,
-            ],
-        ])
-        ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">Docs</a>
+        <div class="navbar-dropdown">
+        <a class="navbar-item" href="#">Overview</a>
+        <a class="navbar-item" href="#">Elements</a>
+        <hr class="navbar-divider">
+        <a class="navbar-item" href="#">Components</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->enclosedByEndMenu()
+                ->items([
+                    [
+                        'label' => 'Docs',
+                        'items' => [
+                            ['label' => 'Overview', 'url' => '#'],
+                            ['label' => 'Elements', 'url' => '#'],
+                            '-',
+                            ['label' => 'Components', 'url' => '#'],
+                        ],
+                    ],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testEnclosedByStartMenu(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <div class="navbar-start">
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">Docs</a>
+        <div class="navbar-dropdown">
+        <a class="navbar-item" href="#">Overview</a>
+        <a class="navbar-item" href="#">Elements</a>
+        <hr class="navbar-divider">
+        <a class="navbar-item" href="#">Components</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->enclosedByStartMenu()
+                ->items([
+                    [
+                        'label' => 'Docs',
+                        'items' => [
+                            ['label' => 'Overview', 'url' => '#'],
+                            ['label' => 'Elements', 'url' => '#'],
+                            '-',
+                            ['label' => 'Components', 'url' => '#'],
+                        ],
+                    ],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdown(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">Docs</a>
+        <div class="navbar-dropdown">
+        <a class="navbar-item" href="#">Overview</a>
+        <a class="navbar-item" href="#">Elements</a>
+        <hr class="navbar-divider">
+        <a class="navbar-item" href="#">Components</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([
+                    [
+                        'label' => 'Docs',
+                        'items' => [
+                            ['label' => 'Overview', 'url' => '#'],
+                            ['label' => 'Elements', 'url' => '#'],
+                            '-',
+                            ['label' => 'Components', 'url' => '#'],
+                        ],
+                    ],
+                ])->render(),
+        );
+    }
+
+    public function testDropdownWithDropdownAttributes(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Page1</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">Dropdown1</a>
+        <div id="test1" class="is-link navbar-dropdown" data-id="t1">
+        <a class="navbar-item" href="#">Page2</a>
+        <a class="navbar-item" href="#">Page3</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([
+                    [
+                        'label' => 'Page1',
+                        'url' => '#',
+                    ],
+                    [
+                        'label' => 'Dropdown1',
+                        'dropdownAttributes' => ['class' => 'is-link', 'data-id' => 't1', 'id' => 'test1'],
+                        'items' => [
+                            ['label' => 'Page2', 'url' => '#'],
+                            ['label' => 'Page3', 'url' => '#'],
+                        ],
+                        'visible' => true,
+                    ],
+                    [
+                        'label' => 'Dropdown2',
+                        'items' => [
+                            ['label' => 'Page4', 'url' => '#'],
+                            ['label' => 'Page5', 'url' => '#'],
+                        ],
+                        'visible' => false,
+                    ],
+                ])->render(),
+        );
+    }
+
+    public function testEncodeLabels(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
         <a class="navbar-item" href="#">a &amp; b</a>
+        </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        $html = Nav::widget()
-            ->withoutEncodeLabels()
-            ->items([
-                [
-                    'label' => 'a &amp; b',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">a &amp; b</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()->items([['label' => 'a & b', 'encode' => true]])->render(),
+        );
     }
 
-    public function testNavDropdownDivider(): void
+    public function testExplicitActive(): void
     {
-        Nav::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'index',
-                    'url' => '#',
-                ],
-                [
-                    'label' => 'Dropdown',
-                    'items' => [
-                        ['label' => 'Level 1', 'url' => '#'],
-                        '-',
-                        ['label' => 'Level 2', 'url' => '#'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#">index</a>
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Item1</a>
+        <a class="navbar-item" href="/site/index">Item2</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([['label' => 'Item1', 'active' => true], ['label' => 'Item2', 'url' => '/site/index']])
+                ->withoutActivateItems()
+                ->render(),
+        );
+    }
+
+    public function testExplicitActiveSubItems(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Item1</a>
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Dropdown</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="#">Level 1</a>
-        <div class="navbar-divider"></div>
-        <a class="navbar-item" href="#">Level 2</a>
+        <a class="navbar-link" href="#">Item2</a>
+        <div class="navbar-dropdown">
+        <a class="navbar-item" href="site/index">Page2</a>
+        <a class="navbar-item is-active" href="#">Page3</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->currentPath('/site/index')
+                ->items([
+                    [
+                        'label' => 'Item1',
+                    ],
+                    [
+                        'label' => 'Item2',
+                        'items' => [
+                            ['label' => 'Page2', 'url' => '#', 'url' => 'site/index'],
+                            ['label' => 'Page3', 'url' => '#', 'active' => true],
+                        ],
+                    ],
+                ])
+                ->withoutActivateItems()
+                ->render(),
+        );
     }
 
-    public function testNavExceptionLabelItems(): void
+    public function testIcon(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "label" option is required.');
-        Nav::widget()
-            ->items([
-                [
-                    'items' => [
-                        ['url' => '#'],
-                        '-',
-                        ['label' => 'Level 2', 'url' => '#', 'visible' => true],
-                    ],
-                ],
-            ])
-            ->render();
-    }
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-    public function testNavDropdownItemsEncodeLabels(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Dropdown',
-                    'items' => [
-                        ['label' => 'a &amp; b', 'url' => '#', 'encode' => false],
-                        '-',
-                        ['label' => 'Level 2', 'url' => '#', 'visible' => true],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span>Setting Account</a>
+        <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span>Profile</a>
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Dropdown</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="#">a &amp; b</a>
-        <div class="navbar-divider"></div>
-        <a class="navbar-item" href="#">Level 2</a>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavDropdownExceptionLabelItems(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "label" option is required.');
-        Nav::widget()
-            ->items([
-                [
-                    'label' => 'Dropdown',
-                    'items' => [
-                        ['url' => '#'],
-                        '-',
-                        ['label' => 'Level 2', 'url' => '#', 'visible' => true],
-                    ],
-                ],
-            ])
-            ->render();
-    }
-
-    public function testNavLinkDisabled(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Link disable',
-                    'url' => '#',
-                    'disabled' => true,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">Link disable</a>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavDropdownLinkDisabled(): void
-    {
-        Nav::counter(0);
-
-        $html = Nav::widget()
-            ->items([
-                [
-                    'label' => 'Link disable',
-                    'url' => '#',
-                    'items' => [
-                        ['label' => 'Level 1', 'url' => '#', 'disabled' => true],
-                        ['label' => 'Level 2', 'url' => '#'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Link disable</a>
-        <div id="w1-dropdown" class="navbar-dropdown">
-        <a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">Level 1</a>
-        <a class="navbar-item" href="#">Level 2</a>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavIcon(): void
-    {
-        Nav::counter(0);
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->itemsOptions(['class' => 'navbar-end'])
-            ->begin();
-
-        $html .= Nav::widget()
-            ->items([
-                [
-                    'label' => 'Setting Account',
-                    'url' => '/setting/account',
-                    'icon' => 'fas fa-user-cog',
-                    'iconOptions' => ['class' => 'icon'],
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                    'icon' => 'fas fa-users',
-                    'iconOptions' => ['class' => 'icon'],
-                ],
-                [
-                    'label' => 'Admin' . Html::img(
-                        '../../docs/images/icon-avatar.png'
-                    )->attributes(['class' => 'img-rounded', 'aria-expanded' => 'false']),
-                    'items' => [
-                        ['label' => 'Logout', 'url' => '/auth/logout'],
-                    ],
-                    'encode' => false,
-                ],
-            ])
-            ->render();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"><a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span><span>Setting Account</span></a>
-        <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span><span>Profile</span></a>
-        <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt aria-expanded="false"></a>
-        <div id="w2-dropdown" class="navbar-dropdown">
+        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" aria-expanded="false"></a>
+        <div class="navbar-dropdown">
         <a class="navbar-item" href="/auth/logout">Logout</a>
         </div>
-        </div></div>
         </div>
-        </nav>
+        </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([
+                    [
+                        'label' => 'Setting Account',
+                        'url' => '/setting/account',
+                        'iconCssClass' => 'fas fa-user-cog',
+                        'iconAttributes' => ['class' => 'icon'],
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                        'iconCssClass' => 'fas fa-users',
+                        'iconAttributes' => ['class' => 'icon'],
+                    ],
+                    [
+                        'label' => 'Admin' . Img::tag()
+                            ->attributes(['class' => 'img-rounded', 'aria-expanded' => 'false'])
+                            ->url('../../docs/images/icon-avatar.png'),
+                        'items' => [
+                            ['label' => 'Logout', 'url' => '/auth/logout'],
+                        ],
+                        'encode' => false,
+                    ],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testImplicitActive(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="is-active navbar-item" href="#">Item1</a>
+        <a class="is-active navbar-item" href="/site/index">Item2</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->currentPath('/site/index')
+                ->items([['label' => 'Item1', 'active' => true], ['label' => 'Item2', 'url' => '/site/index']])
+                ->render(),
+        );
+    }
+
+    public function testImplicitActiveSubItems(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Item1</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link" href="#">Item2</a>
+        <div class="navbar-dropdown">
+        <a class="navbar-item" href="/site/page2">Page2</a>
+        <a class="navbar-item is-active" href="/site/page3">Page3</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([
+                    [
+                        'label' => 'Item1',
+                    ],
+                    [
+                        'label' => 'Item2',
+                        'items' => [
+                            ['label' => 'Page2', 'content' => 'Page2', 'url' => '/site/page2'],
+                            ['label' => 'Page3', 'content' => 'Page3', 'url' => '/site/page3', 'active' => true],
+                        ],
+                    ],
+                ])->render(),
+        );
+    }
+
+    public function testMissingLabel(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The "label" option is required.');
+        Nav::widget()->items([['content' => 'Page1']])->render();
+    }
+
+    public function testRender(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Page1</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()->items([['label' => 'Page1', 'url' => '#']])->render(),
+        );
+    }
+
+    public function testRenderItemsDisabled(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">a & b</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()->items([['label' => 'a & b', 'disabled' => true]])->render(),
+        );
+    }
+
+    public function testRenderItemsEmpty(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Page1</a>
+        <a class="navbar-item" href="#">Page4</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Nav::widget()
+                ->items([['label' => 'Page1', 'items' => null], ['label' => 'Page4', 'items' => []]])
+                ->render()
+        );
+
+        $this->assertEmpty(Nav::widget()->items([])->render());
+    }
+
+    public function testRenderItemsWithoutUrl(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<HTML
+        <div class="navbar-menu">
+        <a class="navbar-item" href="#">Page1</a>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, Nav::widget()->items([['label' => 'Page1']])->render());
     }
 
     public function testImmutability(): void
     {
         $widget = Nav::widget();
 
-        $this->assertNotSame($widget, $widget->deactivateItems());
+        $this->assertNotSame($widget, $widget->attributes([]));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(''));
         $this->assertNotSame($widget, $widget->activateParents());
         $this->assertNotSame($widget, $widget->currentPath(''));
-        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
+        $this->assertNotSame($widget, $widget->enclosedByEndMenu());
+        $this->assertNotSame($widget, $widget->enclosedByStartMenu());
         $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->id(Nav::class));
-        $this->assertNotSame($widget, $widget->autoIdPrefix(Nav::class));
+        $this->assertNotSame($widget, $widget->withoutActivateItems());
     }
 }

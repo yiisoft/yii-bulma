@@ -4,279 +4,645 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
+use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Dropdown;
 
 final class DropdownTest extends TestCase
 {
-    public function testDropdown(): void
+    public function testButtonAttributes(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#'],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="is-link button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->buttonAttributes(['class' => 'is-link'])
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testDropdownButtonLabelOptions(): void
+    public function testButtonIconCssClass(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->buttonLabelOptions(['class' => 'is-italic'])
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#'],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span class="is-italic">Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->buttonIconCssClass('fas fa-angle-down')
+                ->buttonIconText('')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testDropdownOptions(): void
+    public function testButtonIconTextAndAttributes(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#'],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->options(['class' => 'is-active'])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown is-active">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-link"><i class>&#8593;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->buttonIconAttributes(['class' => 'icon is-link'])
+                ->buttonIconText('&#8593;')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testDropdownButtonOptions(): void
+    public function testButtonLabel(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->buttonOptions(['class' => 'is-primary'])
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#'],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Dropdown Label</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->buttonLabel('Dropdown Label')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testDropdownTriggerOptions(): void
+    public function testButtonLabelAttributes(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#'],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->triggerOptions(['class' => 'testeMe'])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
-        <div class="dropdown-trigger testeMe">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span class="text-danger">Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->buttonLabelAttributes(['class' => 'text-danger'])
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testDropdownWithIcon(): void
+    public function testDividerCssClass(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->items([
-                ['label' => 'San petesburgo', 'url' => '#', 'icon' => 'testIcon', 'iconOptions' => ['class' => 'icon']],
-                ['label' => 'Moscu', 'url' => '#'],
-                ['label' => 'Novosibirsk', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#', 'icon' => 'testIcon', 'iconOptions' => ['class' => 'icon']],
-            ])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>San petesburgo</span></a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"><span class="icon"><i class="testIcon"></i></span><span>Ekaterinburgo</span></a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <hr class="dropdown-divider-test">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dividerCssClass('dropdown-divider-test')
+                ->items([
+                    "-",
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
-    public function testEncodeLabels(): void
+    public function testDropdownContentCssClass(): void
     {
-        Dropdown::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Dropdown::widget()
-            ->buttonLabel('Russian cities')
-            ->items([
-                ['label' => '<span><i class=fas fas-home></i>San petesburgo</span>', 'url' => '#'],
-                '-',
-                ['label' => 'Ekaterinburgo', 'url' => '#'],
-            ])
-            ->render();
         $expected = <<<'HTML'
-        <div id="w1-dropdown" class="dropdown">
+        <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>Russian cities</span>
-        <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">&lt;span&gt;&lt;i class=fas fas-home&gt;&lt;/i&gt;San petesburgo&lt;/span&gt;</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content-test">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownContentCssClass('dropdown-content-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownItemActiveCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item active" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownItemActiveCssClass('active')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#', 'active' => true],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownItemCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item-test" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownItemCssClass('dropdown-item-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownItemDisabledStyleCss(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#" style="opacity:.65;">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownItemDisabledStyleCss('opacity:.65;')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#', 'disable' => true],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownItemHeaderCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <h6 class="dropdown-header is-link">Dropdown header</h6>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownItemHeaderCssClass('dropdown-header is-link')
+                ->items([
+                    ['label' => 'Dropdown header'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownMenuCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu-test">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownMenuCssClass('dropdown-menu-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testDropdownTriggerCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger-test">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->dropdownTriggerCssClass('dropdown-trigger-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testMissingLabel(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The "label" option is required.');
+        Dropdown::widget()->items([['url' => '#test']])->render();
+    }
+
+    /**
+     *  @link https://bulma.io/documentation/components/dropdown/
+     */
+    public function testRender(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        <a class="dropdown-item" href="#">Other dropdown item</a>
+        <a class="dropdown-item is-active" href="#">Active dropdown item</a>
+        Other dropdown item
+        <hr class="dropdown-divider">
+        <a class="dropdown-item" href="#">With a divider</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                    ['label' => 'Other dropdown item', 'url' => '#'],
+                    ['label' => 'Active dropdown item', 'url' => '#', 'active' => true],
+                    ['label' => 'Other dropdown item', 'url' => '#', 'enclose' => false],
+                    ['label' => '-'],
+                    ['label' => 'With a divider', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testRenderItemsEncodeLabels(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Encode &amp; Labels</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->items([
+                    [
+                        'label' => 'Encode & Labels',
+                        'url' => '#',
+                        'encode' => true,
+                    ],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testRenderIconText(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#"><span><i class>&#8962; </i></span>Icon</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->items([
+                    [
+                        'label' => 'Icon',
+                        'url' => "#",
+                        'iconText' => '&#8962; ',
+                        'iconAttribute' => 'icon',
+                    ],
+                ])
+                ->render(),
+        );
+    }
+
+    public function testRenderSubmenu(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#" style="opacity:.65;pointer-events:none;">Disable</a>
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <a class="dropdown-item">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </a>
+        </div>
+        <div id="w2-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="/page2">Option 2</a>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->items([
+                [
+                    'label' => 'Disable',
+                    'url' => '#',
+                    'disable' => true,
+                ],
+                [
+                    'label' => 'Dropdown',
+                    'items' => [
+                        ['label' => 'Option 2', 'url' => "/page2"],
+                    ],
+                    'submenu' => true,
+                ],
+            ])
+            ->render(),
+        );
+    }
+
+    public function testUnClosedByContainer(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $this->assertSame(
+            '<a class="dropdown-item" href="#">Dropdown item</a>',
+            Dropdown::widget()
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->unClosedByContainer()
+                ->render(),
+        );
+    }
+
+    public function testId(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="id-test">
+        <span>Clic Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="id-test" class="dropdown-menu">
+        <div class="dropdown-content">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->id('id-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
     }
 
     public function testImmutability(): void
     {
         $widget = Dropdown::widget();
 
-        $this->assertNotSame($widget, $widget->buttonLabel(''));
-        $this->assertNotSame($widget, $widget->buttonLabelOptions([]));
-        $this->assertNotSame($widget, $widget->dividerClass(''));
-        $this->assertNotSame($widget, $widget->itemClass(''));
-        $this->assertNotSame($widget, $widget->itemsClass(''));
-        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
-        $this->assertNotSame($widget, $widget->withoutEncloseByContainer());
-        $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->options([]));
-        $this->assertNotSame($widget, $widget->buttonOptions([]));
-        $this->assertNotSame($widget, $widget->itemsOptions([]));
-        $this->assertNotSame($widget, $widget->triggerOptions([]));
-        $this->assertNotSame($widget, $widget->id(Dropdown::class));
+        $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Dropdown::class));
+        $this->assertNotSame($widget, $widget->buttonAttributes([]));
+        $this->assertNotSame($widget, $widget->buttonIconAttributes([]));
+        $this->assertNotSame($widget, $widget->buttonIconCssClass(''));
+        $this->assertNotSame($widget, $widget->buttonIconText(''));
+        $this->assertNotSame($widget, $widget->buttonLabel(''));
+        $this->assertNotSame($widget, $widget->buttonLabelAttributes([]));
+        $this->assertNotSame($widget, $widget->dividerCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownContentCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownItemActiveCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownItemCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownItemDisabledStyleCss(''));
+        $this->assertNotSame($widget, $widget->dropdownItemHeaderCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownMenuCssClass(''));
+        $this->assertNotSame($widget, $widget->dropdownTriggerCssClass(''));
+        $this->assertNotSame($widget, $widget->id(Dropdown::class));
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->submenu(false));
+        $this->assertNotSame($widget, $widget->submenuAttributes([]));
+        $this->assertNotSame($widget, $widget->unClosedByContainer(false));
     }
 }
