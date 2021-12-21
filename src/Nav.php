@@ -97,7 +97,7 @@ final class Nav extends Widget
     }
 
     /**
-     * @return static
+     * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
@@ -109,7 +109,7 @@ final class Nav extends Widget
     }
 
         /**
-     * @return static
+     * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */

@@ -84,7 +84,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function brandAttributes(array $value): self
     {
@@ -98,7 +98,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function brandImage(string $value): self
     {
@@ -114,7 +114,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function brandImageAttributes(array $value): self
     {
@@ -128,7 +128,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function brandText(string $value): self
     {
@@ -144,7 +144,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function brandTextAttributes(array $value): self
     {
@@ -159,7 +159,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function brandUrl(string $value): self
     {
@@ -173,7 +173,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function buttonLinkAriaExpanded(string $value): self
     {
@@ -187,7 +187,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function buttonLinkAriaLabelText(string $value): self
     {
@@ -201,7 +201,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function buttonLinkContent(string $value): self
     {
@@ -215,7 +215,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function buttonLinkRole(string $value): self
     {
@@ -243,7 +243,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarAriaLabel(string $value): self
     {
@@ -257,7 +257,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarBrandCssClass(string $value): self
     {
@@ -273,7 +273,7 @@ final class NavBar extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function navBarBurgerAttributes(array $value): self
     {
@@ -287,7 +287,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarBurgerCssClass(string $value): self
     {
@@ -301,7 +301,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarCssClass(string $value): self
     {
@@ -315,7 +315,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarItemCssClass(string $value): self
     {
@@ -329,7 +329,7 @@ final class NavBar extends Widget
      *
      * @param string $value
      *
-     * @return static
+     * @return self
      */
     public function navBarRole(string $value): self
     {

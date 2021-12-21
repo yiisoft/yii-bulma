@@ -81,7 +81,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function buttonAttributes(array $value): self
     {
@@ -95,7 +95,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function buttonIconAttributes(array $value): self
     {
@@ -151,7 +151,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function buttonLabelAttributes(array $value): self
     {
@@ -163,7 +163,7 @@ final class Dropdown extends Widget
     /**
      * A horizontal line to separate dropdown items.
      *
-     * @return static
+     * @return self
      */
     public function dividerCssClass(string $value): self
     {
@@ -182,7 +182,7 @@ final class Dropdown extends Widget
     /**
      * The dropdown box, with a white background and a shadow.
      *
-     * @return static
+     * @return self
      *
      * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
      */
@@ -224,7 +224,7 @@ final class Dropdown extends Widget
     /**
      * The toggable menu, hidden by default.
      *
-     * @return static
+     * @return self
      */
     public function dropdownMenuCssClass(string $value): self
     {
@@ -236,7 +236,7 @@ final class Dropdown extends Widget
     /**
      * The toggable menu, hidden by default.
      *
-     * @return static
+     * @return self
      */
     public function dropdownTriggerCssClass(string $value): self
     {
@@ -279,7 +279,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function items(array $value): self
     {
@@ -293,7 +293,7 @@ final class Dropdown extends Widget
      *
      * @param bool $value
      *
-     * @return static
+     * @return self
      */
     public function submenu(bool $value): self
     {
@@ -307,7 +307,7 @@ final class Dropdown extends Widget
      *
      * @param array $value
      *
-     * @return static
+     * @return self
      */
     public function submenuAttributes(array $value): self
     {
@@ -321,7 +321,7 @@ final class Dropdown extends Widget
      *
      * @param bool $value
      *
-     * @return static
+     * @return self
      */
     public function unClosedByContainer(bool $value = false): self
     {
