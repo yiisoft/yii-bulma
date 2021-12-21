@@ -179,7 +179,7 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified item template.
+     * Returns a new instance with the specified item HTML attributes.
      *
      * @param array $value The HTML attributes for the item's widget.
      *
