@@ -187,7 +187,7 @@ final class DropdownTest extends TestCase
             Dropdown::widget()
                 ->dividerCssClass('dropdown-divider-test')
                 ->items([
-                    "-",
+                    '-',
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
                 ->render(),
@@ -511,7 +511,7 @@ final class DropdownTest extends TestCase
                 ->items([
                     [
                         'label' => 'Icon',
-                        'url' => "#",
+                        'url' => '#',
                         'iconText' => '&#8962; ',
                         'iconAttribute' => 'icon',
                     ],
@@ -556,19 +556,19 @@ final class DropdownTest extends TestCase
             $expected,
             Dropdown::widget()
                 ->items([
-                [
-                    'label' => 'Disable',
-                    'url' => '#',
-                    'disable' => true,
-                ],
-                [
-                    'label' => 'Dropdown',
-                    'items' => [
-                        ['label' => 'Option 2', 'url' => "/page2"],
+                    [
+                        'label' => 'Disable',
+                        'url' => '#',
+                        'disable' => true,
                     ],
-                    'submenu' => true,
-                ],
-            ])
+                    [
+                        'label' => 'Dropdown',
+                        'items' => [
+                            ['label' => 'Option 2', 'url' => '/page2'],
+                        ],
+                        'submenu' => true,
+                    ],
+                ])
             ->render(),
         );
     }
