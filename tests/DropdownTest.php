@@ -18,7 +18,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="is-link button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -48,7 +48,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
         </button>
         </div>
@@ -79,7 +79,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-link"><i class>&#8593;</i></span>
         </button>
         </div>
@@ -140,7 +140,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span class="text-danger">Clic Me</span>
+        <span class="text-danger">Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -170,7 +170,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -202,7 +202,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -232,7 +232,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -262,7 +262,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -292,7 +292,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -322,7 +322,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -352,7 +352,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -382,7 +382,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger-test">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -422,7 +422,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -461,7 +461,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -494,7 +494,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -528,7 +528,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -538,7 +538,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <a class="dropdown-item">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </a>
         </div>
@@ -583,7 +583,7 @@ final class DropdownTest extends TestCase
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
-                ->unClosedByContainer()
+                ->enclosedByContainer()
                 ->render(),
         );
     }
@@ -596,7 +596,7 @@ final class DropdownTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="id-test">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
@@ -643,6 +643,6 @@ final class DropdownTest extends TestCase
         $this->assertNotSame($widget, $widget->items([]));
         $this->assertNotSame($widget, $widget->submenu(false));
         $this->assertNotSame($widget, $widget->submenuAttributes([]));
-        $this->assertNotSame($widget, $widget->unClosedByContainer(false));
+        $this->assertNotSame($widget, $widget->enclosedByContainer(false));
     }
 }

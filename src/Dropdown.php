@@ -30,7 +30,7 @@ final class Dropdown extends Widget
     private array $buttonIconAttributes = ['class' => 'icon is-small'];
     private string $buttonIconCssClass = '';
     private string $buttonIconText = '&#8595;';
-    private string $buttonLabel = 'Clic Me';
+    private string $buttonLabel = 'Click Me';
     private array $buttonLabelAttributes = [];
     private string $dividerCssClass = 'dropdown-divider';
     private string $dropdownCssClass = 'dropdown';
@@ -49,7 +49,7 @@ final class Dropdown extends Widget
     /**
      * Returns a new instance with the specified attributes.
      *
-     * @param array $value The HTML attributes for the widget container nav tag.
+     * @param array $value The HTML attributes for the widget container tag.
      *
      * @return self
      *
@@ -77,7 +77,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button. The following special options are recognized.
+     * The HTML attributes for the dropdown button.
      *
      * @param array $value
      *
@@ -91,7 +91,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown icon button. The following special options are recognized.
+     * The HTML attributes for the dropdown button icon.
      *
      * @param array $value
      *
@@ -105,7 +105,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set icon css class for the dropdown button.
+     * Set icon CSS class for the dropdown button.
      *
      * @param string $value
      *
@@ -147,7 +147,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button label. The following special options are recognized.
+     * The HTML attributes for the dropdown button label.
      *
      * @param array $value
      *
@@ -161,8 +161,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * A horizontal line to separate dropdown items.
+     * A CSS class for horizontal line separating dropdown items.
      *
+     * @param string $value
      * @return self
      */
     public function dividerCssClass(string $value): self
@@ -180,8 +181,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The dropdown box, with a white background and a shadow.
+     * CSS class for dropdown content.
      *
+     * @param string $value
      * @return self
      *
      * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
@@ -222,8 +224,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The toggable menu, hidden by default.
+     * Dropdown menu CSS class.
      *
+     * @param string $value
      * @return self
      */
     public function dropdownMenuCssClass(string $value): self
@@ -234,8 +237,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The toggable menu, hidden by default.
+     * Dropdown trigger CSS class.
      *
+     * @param string $value
      * @return self
      */
     public function dropdownTriggerCssClass(string $value): self
@@ -289,7 +293,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set if it is a submenu or subdropdown,
+     * Set if it is a submenu or sub-dropdown.
      *
      * @param bool $value
      *
@@ -317,13 +321,13 @@ final class Dropdown extends Widget
     }
 
     /**
-     * If the widget should be unclosed by container.
+     * If the widget should be enclosed by container.
      *
      * @param bool $value
      *
      * @return self
      */
-    public function unClosedByContainer(bool $value = false): self
+    public function enclosedByContainer(bool $value = false): self
     {
         $new = clone $this;
         $new->encloseByContainer = $value;
@@ -338,7 +342,7 @@ final class Dropdown extends Widget
         $attributes = $this->attributes;
 
         /** @var string */
-        $id = $attributes['id'] ?? Html::generateId($this->autoIdPrefix) . '-dropdown';
+        $id = $attributes['id'] ?? (Html::generateId($this->autoIdPrefix) . '-dropdown');
         unset($attributes['id']);
 
         if ($this->encloseByContainer) {
@@ -358,7 +362,7 @@ final class Dropdown extends Widget
     /**
      * Render dropdown button.
      *
-     * @return string the rendering toggle button.
+     * @return string The rendering result.
      *
      * @link https://bulma.io/documentation/components/dropdown/#hoverable-or-toggable
      */
@@ -441,7 +445,7 @@ final class Dropdown extends Widget
      */
     private function renderDropdownTrigger(string $id): string
     {
-        if ($this->submenu !== true) {
+        if (!$this->submenu) {
             $button = $this->renderDropdownButton($id);
         } else {
             $button = $this->renderDropdownButtonLink();
@@ -457,7 +461,7 @@ final class Dropdown extends Widget
     /**
      * Renders menu items.
      *
-     * @throws InvalidArgumentException|ReflectionException if the label option is not specified in one of the items.
+     * @throws InvalidArgumentException|ReflectionException If the label option is not specified in one of the items.
      *
      * @return string the rendering result.
      */
@@ -470,7 +474,7 @@ final class Dropdown extends Widget
             if ($item === '-') {
                 $lines[] = CustomTag::name('hr')->class($this->dividerCssClass)->render();
             } else {
-                if (!isset($item['label']) && $item !== '-') {
+                if (!isset($item['label'])) {
                     throw new InvalidArgumentException('The "label" option is required.');
                 }
 
@@ -544,12 +548,9 @@ final class Dropdown extends Widget
                     $lines[] = $content;
                 } else {
                     /** @var array */
-                    $submenuAttributes = $item['submenuAttributes'] ?? [];
-                    $submenuAttributes = array_merge($this->submenuAttributes, $submenuAttributes);
+                    $submenuAttributes = array_merge($this->submenuAttributes, $item['submenuAttributes'] ?? []);
 
-                    $dropdown = self::widget();
-
-                    $lines[] = $dropdown
+                    $lines[] = self::widget()
                         ->attributes($this->attributes)
                         ->dividerCssClass($this->dividerCssClass)
                         ->dropdownItemCssClass($this->dropdownItemCssClass)

@@ -23,7 +23,7 @@ final class NavTest extends TestCase
         <div class="dropdown">
         <div class="dropdown-trigger">
         <a class="navbar-item">
-        <span>Clic Me</span>
+        <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </a>
         </div>

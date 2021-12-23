@@ -191,7 +191,7 @@ final class Nav extends Widget
             ->dropdownCssClass('navbar-dropdown')
             ->dropdownItemCssClass('navbar-item')
             ->items($items)
-            ->unClosedByContainer()
+            ->enclosedByContainer()
             ->render() . PHP_EOL;
     }
 
