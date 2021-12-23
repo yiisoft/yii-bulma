@@ -4,72 +4,99 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use InvalidArgumentException;
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-
-use function is_bool;
-use function is_string;
-use function strpos;
+use Yiisoft\Html\Tag\A;
+use Yiisoft\Html\Tag\Div;
+use Yiisoft\Html\Tag\Img;
+use Yiisoft\Html\Tag\Span;
+use Yiisoft\Widget\Widget;
 
 /**
- * The navbar component is a responsive and versatile horizontal navigation bar.
+ * NavBar renders a navbar HTML component.
+ *
+ * Any content enclosed between the {@see begin()} and {@see end()} calls of NavBar is treated as the content of the
+ * navbar. You may use widgets such as {@see Nav} to build up such content. For example,
  *
  * @link https://bulma.io/documentation/components/navbar/
  */
 final class NavBar extends Widget
 {
-    private string $brand = '';
-    private string $brandLabel = '';
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
+    private array $brandAttributes = [];
     private string $brandImage = '';
+    private array $brandImageAttributes = [];
+    private string $brandText = '';
+    private array $brandTextAttributes = [];
     private string $brandUrl = '/';
-    private string $toggleIcon = '';
-    private array $options = [];
-    private array $brandOptions = [];
-    private array $brandLabelOptions = [];
-    private array $brandImageOptions = [];
-    private array $itemsOptions = [];
-    private array $menuOptions = [];
-    private array $toggleOptions = [
-        'aria-expanded' => 'false',
-        'aria-label' => 'menu',
-        'class' => 'navbar-burger',
-        'role' => 'button',
-    ];
+    private string $buttonLinkAriaExpanded = 'false';
+    private string $buttonLinkAriaLabelText = 'menu';
+    private string $buttonLinkContent = '';
+    private string $buttonLinkRole = 'button';
+    private string $navBarAriaLabel = 'main navigation';
+    private string $navBarBrandCssClass = 'navbar-brand';
+    private array $navBarBurgerAttributes = [];
+    private string $navBarBurgerCssClass = 'navbar-burger';
+    private string $navBarCssClass = 'navbar';
+    private string $navBarItemCssClass = 'navbar-item';
+    private string $navBarRole = 'navigation';
+
+    public function begin(): string
+    {
+        parent::begin();
+        return $this->renderNavBar();
+    }
 
     /**
-     * Returns a new instance with the specified HTML code of brand.
+     * Returns a new instance with the specified attributes.
      *
-     * @param string $value The HTML code of brand.
+     * @param array $value The HTML attributes for the widget container nav tag.
      *
      * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brand(string $value): self
+    public function attributes(array $value): self
     {
         $new = clone $this;
-        $new->brand = $value;
+        $new->attributes = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified brand label.
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
-     * @param string $value The text of the brand label or empty if it's not used. Note that this is not HTML-encoded.
+     * @param string $value The prefix to the automatically generated widget IDs.
      *
      * @return self
      */
-    public function brandLabel(string $value): self
+    public function autoIdPrefix(string $value): self
     {
         $new = clone $this;
-        $new->brandLabel = $value;
+        $new->autoIdPrefix = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified brand image.
+     * The HTML attributes of the brand.
      *
-     * @param string $value The image of the brand or empty if it's not used.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function brandAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->brandAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * Src of the brand image or empty if it's not used. Note that this param will override `$this->brandText` param.
+     *
+     * @param string $value
      *
      * @return self
      */
@@ -81,10 +108,56 @@ final class NavBar extends Widget
     }
 
     /**
-     * Returns a new instance with the specified brand URL.
+     * The HTML attributes of the brand image.
      *
-     * @param string $value The URL for the brand's hyperlink tag and will be used for the "href" attribute of the
-     * brand link. Default value is '/' will be used. You may set it to `null` if you want to have no link at all.
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function brandImageAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->brandImageAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * The text of the brand or empty if it's not used. Note that this is not HTML-encoded.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function brandText(string $value): self
+    {
+        $new = clone $this;
+        $new->brandText = $value;
+        return $new;
+    }
+
+    /**
+     * The HTML attributes of the brand text.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @param array $value
+     *
+     * @return self
+     */
+    public function brandTextAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->brandTextAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * The URL for the brand's hyperlink tag and will be used for the "href" attribute of the brand link. Default value
+     * is "/". You may set it to empty string if you want no link at all.
+     *
+     * @param string $value
      *
      * @return self
      */
@@ -96,279 +169,269 @@ final class NavBar extends Widget
     }
 
     /**
-     * Returns a new instance with the specified toggle icon.
+     * The ARIA expanded attribute of the button link.
      *
-     * @param string $value The toggle icon.
+     * @param string $value
      *
      * @return self
      */
-    public function toggleIcon(string $value): self
+    public function buttonLinkAriaExpanded(string $value): self
     {
         $new = clone $this;
-        $new->toggleIcon = $value;
+        $new->buttonLinkAriaExpanded = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes for the tag nav.
+     * The ARIA label text of the button link.
      *
-     * @param array $value The options HTML attributes for the tag nav.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value
      *
      * @return self
      */
-    public function options(array $value): self
+    public function buttonLinkAriaLabelText(string $value): self
     {
         $new = clone $this;
-        $new->options = $value;
+        $new->buttonLinkAriaLabelText = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes of the tag div brand.
+     * The content of the button link.
      *
-     * @param array $value The options HTML attributes of the tag div brand. Default value `navbar-item`.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value
      *
      * @return self
      */
-    public function brandOptions(array $value): self
+    public function buttonLinkContent(string $value): self
     {
         $new = clone $this;
-        $new->brandOptions = $value;
+        $new->buttonLinkContent = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes of the tag div brand label.
+     * The role of the button link.
      *
-     * @param array $value The options HTML attributes of the tag div brand label. Default value `navbar-item`.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value
      *
      * @return self
      */
-    public function brandLabelOptions(array $value): self
+    public function buttonLinkRole(string $value): self
     {
         $new = clone $this;
-        $new->brandLabelOptions = $value;
+        $new->buttonLinkRole = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes of the tag div brand image.
+     * Returns a new instance with the specified ID of the widget.
      *
-     * @param array $value The options HTML attributes of the tag div brand image. Default value `navbar-item`.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value The ID of the widget.
      *
      * @return self
      */
-    public function brandImageOptions(array $value): self
+    public function id(string $value): self
     {
         $new = clone $this;
-        $new->brandImageOptions = $value;
+        $new->attributes['id'] = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes of the tag div items nav.
+     * The ARIA label of the navbar.
      *
-     * @param array $value The options HTML attributes of the tag div items nav, values `navbar-start`, `navbar-end`.
-     * Default value `navbar-start`.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value
      *
      * @return self
      */
-    public function itemsOptions(array $value): self
+    public function navBarAriaLabel(string $value): self
     {
         $new = clone $this;
-        $new->itemsOptions = $value;
+        $new->navBarAriaLabel = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options HTML attributes of the tag div nav menu.
+     * The CSS class of the brand.
      *
-     * @param array $value The options HTML attributes of the tag div nav menu. Default value `navbar-menu`.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value
      *
      * @return self
      */
-    public function menuOptions(array $value): self
+    public function navBarBrandCssClass(string $value): self
     {
         $new = clone $this;
-        $new->menuOptions = $value;
+        $new->navBarBrandCssClass = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified HTML attributes of the navbar toggler button.
-     *
-     * @param array $value The HTML attributes of the navbar toggler button.
+     * The HTML attributes of the burger.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
+     * @param array $value
+     *
      * @return self
      */
-    public function toggleOptions(array $value): self
+    public function navBarBurgerAttributes(array $value): self
     {
         $new = clone $this;
-        $new->toggleOptions = $value;
+        $new->navBarBurgerAttributes = $value;
         return $new;
     }
 
-    public function begin(): ?string
+    /**
+     * The CSS class of the burger.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function navBarBurgerCssClass(string $value): self
     {
-        parent::begin();
+        $new = clone $this;
+        $new->navBarBurgerCssClass = $value;
+        return $new;
+    }
 
-        $this->buildOptions();
-        $this->renderBrand();
+    /**
+     * The CSS class of the navbar.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function navBarCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->navBarCssClass = $value;
+        return $new;
+    }
 
-        $navOptions = $this->options;
-        $navTag = ArrayHelper::remove($navOptions, 'tag', 'nav');
-        $this->checkNavTag($navTag);
+    /**
+     * The CSS class of the items navbar.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function navBarItemCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->navBarItemCssClass = $value;
+        return $new;
+    }
 
-        return
-            (is_string($navTag) ? Html::openTag($navTag, $navOptions) : '') . "\n" .
-            $this->brand . "\n" .
-            Html::openTag('div', $this->menuOptions) .
-            Html::openTag('div', $this->itemsOptions);
+    /**
+     * The role of the navbar.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function navBarRole(string $value): self
+    {
+        $new = clone $this;
+        $new->navBarRole = $value;
+        return $new;
     }
 
     protected function run(): string
     {
-        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
-        $this->checkNavTag($tag);
-
-        return
-            Html::closeTag('div') . "\n" .
-            Html::closeTag('div') . "\n" .
-            (is_string($tag) ? Html::closeTag($tag) : '');
+        return Html::closeTag('nav');
     }
 
-    /**
-     * @param mixed $navTag
-     */
-    private function checkNavTag($navTag): void
+    private function renderNavBar(): string
     {
-        if (
-            (!is_string($navTag) || $navTag === '') &&
-            !is_bool($navTag) &&
-            $navTag !== null
-        ) {
-            throw new InvalidArgumentException('Tag should be either non empty string, bool or null.');
-        }
-    }
+        $attributes = $this->attributes;
+        Html::addCssClass($attributes, $this->navBarCssClass);
 
-    private function buildOptions(): void
-    {
-        $id = '';
-
-        if (!isset($this->options['id'])) {
-            $id = $this->getId();
-            $this->options['id'] = "{$id}-navbar";
+        if (!isset($attributes['id'])) {
+            $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-navbar';
         }
 
-        $this->options = $this->addOptions($this->options, 'navbar');
-        $this->brandOptions = $this->addOptions($this->brandOptions, 'navbar-brand');
-        $this->brandLabelOptions = $this->addOptions($this->brandLabelOptions, 'navbar-item');
-        $this->brandImageOptions = $this->addOptions($this->brandImageOptions, 'navbar-item');
-        $this->menuOptions = $this->addOptions($this->menuOptions, 'navbar-menu');
+        $attributes['aria-label'] = $this->navBarAriaLabel;
+        $attributes['role'] = $this->navBarRole;
 
-        $this->menuOptions['id'] = "{$id}-navbar-Menu";
-
-        $this->initItemsOptions();
+        return Html::openTag('nav', $attributes) . PHP_EOL . $this->renderNavBarBrand() . PHP_EOL;
     }
 
-    private function initItemsOptions(): void
+    private function renderNavBarBrand(): string
     {
-        $itemsClass = '';
+        $brand = '';
+        $brandImage = '';
 
-        if (isset($this->itemsOptions['class'])) {
-            $itemsClass = $this->itemsOptions['class'];
-            unset($this->itemsOptions['class']);
+        if ($this->brandImage !== '') {
+            $brandImage = Img::tag()->attributes($this->brandImageAttributes)->url($this->brandImage)->render();
+            $brand = PHP_EOL . A::tag()
+                ->class($this->navBarItemCssClass)
+                ->content($brandImage)
+                ->encode(false)
+                ->url($this->brandUrl)
+                ->render();
+        }
 
-            if (is_array($itemsClass)) {
-                $itemsClass = implode(' ', $itemsClass);
+        if ($this->brandText !== '') {
+            $brandText = $this->brandText;
+
+            if ($brandImage !== '') {
+                $brandText = $brandImage . $this->brandText;
+            }
+
+            if (empty($this->brandUrl)) {
+                $brand = PHP_EOL . Span::tag()
+                    ->attributes($this->brandTextAttributes)
+                    ->class($this->navBarItemCssClass)
+                    ->content($brandText)
+                    ->render();
+            } else {
+                $brand = PHP_EOL . A::tag()
+                    ->class($this->navBarItemCssClass)
+                    ->content($brandText)
+                    ->encode(false)
+                    ->url($this->brandUrl)
+                    ->render();
             }
         }
 
-        /** @var string $itemsClass */
-        if (strpos($itemsClass, 'navbar-end') === false) {
-            Html::addCssClass($this->itemsOptions, 'navbar-start');
-        }
+        $brand .= $this->renderNavBarBurger();
 
-        if (!empty($itemsClass)) {
-            Html::addCssClass($this->itemsOptions, $itemsClass);
-        }
-    }
-
-    private function renderBrand(): void
-    {
-        if ($this->brand === '') {
-            $this->brand = Html::openTag('div', $this->brandOptions);
-
-            if ($this->brandImage !== '' && $this->brandLabel !== '') {
-                $this->brand .= Html::tag(
-                    'span',
-                    Html::img($this->brandImage)->render(),
-                    $this->brandImageOptions
-                )->encode(false);
-            }
-
-            if ($this->brandImage !== '' && $this->brandLabel === '') {
-                $this->brand .= Html::a(
-                    Html::img($this->brandImage)->render(),
-                    $this->brandUrl,
-                    $this->brandImageOptions
-                )->encode(false);
-            }
-
-            if ($this->brandLabel !== '') {
-                $this->brand .= Html::a($this->brandLabel, $this->brandUrl, $this->brandLabelOptions);
-            }
-
-            $this->brand .= $this->renderToggleButton();
-            $this->brand .= Html::closeTag('div');
-        }
+        return Div::tag()
+            ->attributes($this->brandAttributes)
+            ->class($this->navBarBrandCssClass)
+            ->content($brand)
+            ->encode(false)
+            ->render();
     }
 
     /**
      * Renders collapsible toggle button.
      *
-     * @throws JsonException
+     * @return string the rendering navbar burger link button.
      *
-     * @return string The rendering toggle button.
+     * @link https://bulma.io/documentation/components/navbar/#navbar-burger
      */
-    private function renderToggleButton(): string
+    private function renderNavBarBurger(): string
     {
-        return
-            Html::openTag('a', $this->toggleOptions) .
-            $this->renderToggleIcon() .
-
-            Html::closeTag('a');
-    }
-
-    /**
-     * Render icon toggle.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderToggleIcon(): string
-    {
-        if ($this->toggleIcon === '') {
-            $this->toggleIcon = Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']) .
-                Html::tag('span', '', ['aria-hidden' => 'true']);
+        $navBarBurgerAttributes = $this->navBarBurgerAttributes;
+        if ($this->buttonLinkContent === '') {
+            $this->buttonLinkContent = PHP_EOL .
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL .
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL .
+                Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL;
         }
 
-        return $this->toggleIcon;
+        $navBarBurgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;
+        $navBarBurgerAttributes['aria-label'] = $this->buttonLinkAriaLabelText;
+        $navBarBurgerAttributes['role'] = $this->buttonLinkRole;
+
+        return PHP_EOL . A::tag()
+            ->attributes($navBarBurgerAttributes)
+            ->class($this->navBarBurgerCssClass)
+            ->content($this->buttonLinkContent)
+            ->encode(false)
+            ->render() . PHP_EOL;
     }
 }

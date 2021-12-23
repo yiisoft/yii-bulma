@@ -4,415 +4,381 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use InvalidArgumentException;
+use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavBarTest extends TestCase
 {
-    public function testNavBar(): void
+    public function testBrandAttributes(): void
     {
-        NavBar::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->brandAttributes(['class' => 'text-danger'])->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="text-danger navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBrandImageAndUrl(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()
+            ->brandImage('https://bulma.io/images/bulma-logo.png')
+            ->brandImageAttributes(['style' => ['width' => '112', 'height' => '28']])
+            ->brandUrl('https://bulma.io')
+            ->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io"><img src="https://bulma.io/images/bulma-logo.png" style="width: 112; height: 28;"></a>
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBrandText(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->brandText('My Project')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-item" href="/">My Project</a>
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBrandImageUrlText(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()
+            ->brandImage('https://bulma.io/images/bulma-logo.png')
+            ->brandImageAttributes(['title' => 'bulma', 'style' => ['width' => '112', 'height' => '28']])
+            ->brandText('My Project')
+            ->brandUrl('https://bulma.io')
+            ->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io"><img src="https://bulma.io/images/bulma-logo.png" title="bulma" style="width: 112; height: 28;">My Project</a>
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testBrandUrlEmptyText(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()
+            ->brandText('My Project')
+            ->brandTextAttributes(['class' => 'has-text-primary'])
+            ->brandUrl('')
+            ->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <span class="has-text-primary navbar-item">My Project</span>
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testButtonLinkAriaExpanded(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->buttonLinkAriaExpanded('true')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="true" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testButtonLinkAriaLabelText(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->buttonLinkAriaLabelText('menu-text')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu-text" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testButtonLinkContent(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()
+            ->buttonLinkContent('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
+            ->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testButtonLinkRole(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->buttonLinkRole('button-text')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button-text">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarAriaLabel(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarAriaLabel('main')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarBrandCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarBrandCssClass('has-text-center navbar-brand')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="has-text-center navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarBurgerAttributes(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarBurgerAttributes(['class' => 'has-text-center'])->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="has-text-center navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarBurgerCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarBurgerCssClass('has-text-center navbar-burguer')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="has-text-center navbar-burguer" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarCssClass('has-text-danger navbar')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="has-text-danger navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarItemCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarItemCssClass('has-text-center navbar-item')->brandText('link-text')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="has-text-center navbar-item" href="/">link-text</a>
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testNavBarRole(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $html = NavBar::widget()->navBarRole('navigation-text')->begin();
+        $html .= NavBar::end();
+        $expected = <<<'HTML'
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation-text">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+        </div>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, $html);
+    }
+
+    public function testRender(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
         $html = NavBar::widget()->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
+        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
         </div>
         </nav>
         HTML;
         $this->assertEqualsWithoutLE($expected, $html);
     }
 
-    public function testNavBarBrandLabel(): void
+    public function testId(): void
     {
-        NavBar::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->begin();
-        $html .= NavBar::end();
-
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarBrandImage(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandImage('yii-logo.jpg')
-            ->begin();
+        $html = NavBar::widget()->id('id-test')->begin();
         $html .= NavBar::end();
         $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><a class="navbar-item" href="/"><img src="yii-logo.jpg" alt></a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarBrandUrl(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptions(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->options(['class' => 'navbar is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar is-black" data-sticky data-sticky-shadow>
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptionsBrand(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->brandOptions(['class' => 'is-black'])
-            ->begin();
-        $html .= NavBar::end();
-
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand is-black"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptionsBrandImage(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->brandImageOptions(['class' => 'navbar-item', 'alt' => 'yii logo'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item" alt="yii logo"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptionsBrandLabel(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->brandLabelOptions(['class' => 'is-italic'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item is-italic" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptionsItems(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->itemsOptions(['class' => 'navbar-end'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-end"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->itemsOptions(['class' => 'is-primary'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start is-primary"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->itemsOptions(['class' => 'navbar-start', 'aria-label' => 'true'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start" aria-label="true"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarOptionsMenu(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->menuOptions(['class' => 'is-black'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu is-black"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarToggleOptions(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->toggleOptions(['class' => 'navbar-burger', 'role' => 'button'])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarBrand(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brand('<div>testMe</div>')
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div>testMe</div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarIconToggle(): void
-    {
-        NavBar::counter(0);
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->toggleIcon('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function dataExceptionTag(): array
-    {
-        return [
-            [['test']],
-            [''],
-            [42],
-        ];
-    }
-
-    /**
-     * @dataProvider dataExceptionTag
-     */
-    public function testNavBarBeginExceptionTag($tag): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
-        NavBar::widget()->options(['tag' => $tag])->begin();
-    }
-
-    /**
-     * @dataProvider dataExceptionTag
-     */
-    public function testNavBarRunExceptionTag($tag): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Tag should be either non empty string, bool or null.');
-        NavBar::widget()->options(['tag' => $tag])->render();
-    }
-
-    public function testNavBarOptionsClassArray(): void
-    {
-        NavBar::counter(0);
-
-        $class = ['nav'];
-        $class[] = 'dark';
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->options(['class' => $class])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar nav dark">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start"></div>
-        </div>
-        </nav>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testNavBarItemsOptionsClassArray(): void
-    {
-        NavBar::counter(0);
-
-        $class = ['nav'];
-        $class[] = 'dark';
-
-        $html = NavBar::widget()
-            ->brandLabel('My Project')
-            ->brandImage('yii-logo.jpg')
-            ->brandUrl('/')
-            ->itemsOptions(['class' => $class])
-            ->begin();
-        $html .= NavBar::end();
-        $expected = <<<'HTML'
-        <nav id="w1-navbar" class="navbar">
-        <div class="navbar-brand"><span class="navbar-item"><img src="yii-logo.jpg" alt></span><a class="navbar-item" href="/">My Project</a><a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></a></div>
-        <div id="w1-navbar-Menu" class="navbar-menu"><div class="navbar-start nav dark"></div>
+        <nav id="id-test" class="navbar" aria-label="main navigation" role="navigation">
+        <div class="navbar-brand">
+        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
         </div>
         </nav>
         HTML;
@@ -423,19 +389,25 @@ final class NavBarTest extends TestCase
     {
         $widget = NavBar::widget();
 
-        $this->assertNotSame($widget, $widget->brand(''));
-        $this->assertNotSame($widget, $widget->brandLabel(''));
-        $this->assertNotSame($widget, $widget->brandImage(''));
-        $this->assertNotSame($widget, $widget->brandUrl(''));
-        $this->assertNotSame($widget, $widget->toggleIcon(''));
-        $this->assertNotSame($widget, $widget->options([]));
-        $this->assertNotSame($widget, $widget->brandOptions([]));
-        $this->assertNotSame($widget, $widget->brandLabelOptions([]));
-        $this->assertNotSame($widget, $widget->brandImageOptions([]));
-        $this->assertNotSame($widget, $widget->itemsOptions([]));
-        $this->assertNotSame($widget, $widget->menuOptions([]));
-        $this->assertNotSame($widget, $widget->toggleOptions([]));
-        $this->assertNotSame($widget, $widget->id(NavBar::class));
+        $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(NavBar::class));
+        $this->assertNotSame($widget, $widget->brandAttributes([]));
+        $this->assertNotSame($widget, $widget->brandImage(''));
+        $this->assertNotSame($widget, $widget->brandImageAttributes([]));
+        $this->assertNotSame($widget, $widget->brandText(''));
+        $this->assertNotSame($widget, $widget->brandTextAttributes([]));
+        $this->assertNotSame($widget, $widget->brandUrl(''));
+        $this->assertNotSame($widget, $widget->buttonLinkAriaExpanded(''));
+        $this->assertNotSame($widget, $widget->buttonLinkAriaLabelText(''));
+        $this->assertNotSame($widget, $widget->buttonLinkContent(''));
+        $this->assertNotSame($widget, $widget->buttonLinkRole(''));
+        $this->assertNotSame($widget, $widget->id(NavBar::class));
+        $this->assertNotSame($widget, $widget->navBarAriaLabel(''));
+        $this->assertNotSame($widget, $widget->navBarBrandCssClass(''));
+        $this->assertNotSame($widget, $widget->navBarBurgerAttributes([]));
+        $this->assertNotSame($widget, $widget->navBarBurgerCssClass(''));
+        $this->assertNotSame($widget, $widget->navBarCssClass(''));
+        $this->assertNotSame($widget, $widget->navBarItemCssClass(''));
+        $this->assertNotSame($widget, $widget->navBarRole(''));
     }
 }

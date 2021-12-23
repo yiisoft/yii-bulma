@@ -5,42 +5,75 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use JsonException;
-use Yiisoft\Arrays\ArrayHelper;
+use ReflectionException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\A;
+use Yiisoft\Html\Tag\CustomTag;
+use Yiisoft\Html\Tag\Div;
+use Yiisoft\Html\Tag\Span;
+use Yiisoft\Widget\Widget;
 
-use function array_key_exists;
 use function implode;
 use function is_array;
 
+/**
+ * Nav renders a nav HTML component.
+ *
+ * @link https://bulma.io/documentation/components/navbar/#basic-navbar
+ */
 final class Nav extends Widget
 {
     private bool $activateItems = true;
     private bool $activateParents = false;
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
     private string $currentPath = '';
-    private bool $encodeLabels = true;
+    private bool $enclosedByStartMenu = false;
+    private bool $enclosedByEndMenu = false;
     private array $items = [];
+    private string $hasDropdownCssClass = 'has-dropdown';
+    private string $isHoverableCssClass = 'is-hoverable';
+    private string $navBarDropdownCssClass = 'navbar-dropdown';
+    private string $navBarEndCssClass = 'navbar-end';
+    private string $navBarItemCssClass = 'navbar-item';
+    private string $navBarLinkCssClass = 'navbar-link';
+    private string $navBarMenuCssClass = 'navbar-menu';
+    private string $navBarStartCssClass = 'navbar-start';
 
     /**
-     * Disables active items according to their current path and returns a new instance.
+     * Returns a new instance with the specified attributes.
+     *
+     * @param array $value The HTML attributes for the widget container nav tag.
      *
      * @return self
      *
-     * {@see isItemActive}
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function deactivateItems(): self
+    public function attributes(array $value): self
     {
         $new = clone $this;
-        $new->activateItems = false;
+        $new->attributes = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the activated parent items.
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
-     * Activates parent menu items when one of the corresponding child menu items is active.
+     * @param string $value The prefix to the automatically generated widget IDs.
      *
      * @return self
+     */
+    public function autoIdPrefix(string $value): self
+    {
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * Whether to activate parent menu items when one of the corresponding child menu items is active.
+     *
+     * @return $this
      */
     public function activateParents(): self
     {
@@ -50,9 +83,9 @@ final class Nav extends Widget
     }
 
     /**
-     * Returns a new instance with the specified current path.
+     * Allows you to assign the current path of the url from request controller.
      *
-     * @param string $value The current path.
+     * @param string $value
      *
      * @return self
      */
@@ -64,22 +97,32 @@ final class Nav extends Widget
     }
 
     /**
-     * Disables encoding for labels and returns a new instance.
-     *
      * @return self
+     *
+     * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
-    public function withoutEncodeLabels(): self
+    public function enclosedByEndMenu(): self
     {
         $new = clone $this;
-        $new->encodeLabels = false;
+        $new->enclosedByEndMenu = true;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified items.
+     * @return self
      *
-     * @param array $value List of items in the nav widget. Each array element represents a single menu item
-     * which can be either a string or an array with the following structure:
+     * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
+     */
+    public function enclosedByStartMenu(): self
+    {
+        $new = clone $this;
+        $new->enclosedByStartMenu = true;
+        return $new;
+    }
+
+    /**
+     * List of items in the nav widget. Each array element represents a single  menu item which can be either a string
+     * or an array with the following structure:
      *
      * - label: string, required, the nav item label.
      * - url: optional, the item's URL. Defaults to "#".
@@ -87,13 +130,15 @@ final class Nav extends Widget
      * - linkOptions: array, optional, the HTML attributes of the item's link.
      * - options: array, optional, the HTML attributes of the item container (LI).
      * - active: bool, optional, whether the item should be on active state or not.
-     * - dropdownOptions: array, optional, the HTML options that will passed to the {@see Dropdown} widget.
+     * - dropdownAttributes: array, optional, the HTML options that will passed to the {@see Dropdown} widget.
      * - items: array|string, optional, the configuration array for creating a {@see Dropdown} widget, or a string
      *   representing the dropdown menu.
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for
      *   only this item.
      *
      * If a menu item is a string, it will be rendered directly without HTML encoding.
+     *
+     * @param array $value
      *
      * @return self
      */
@@ -104,17 +149,26 @@ final class Nav extends Widget
         return $new;
     }
 
+    /**
+     * Disable activate items according to whether their currentPath.
+     *
+     * @return $this
+     *
+     * {@see isItemActive}
+     */
+    public function withoutActivateItems(): self
+    {
+        $new = clone $this;
+        $new->activateItems = false;
+        return $new;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
     protected function run(): string
     {
-        $items = [];
-
-        foreach ($this->items as $item) {
-            if (!isset($item['visible']) || $item['visible']) {
-                $items[] = $this->renderItem($item);
-            }
-        }
-
-        return implode("\n", $items);
+        return $this->renderNav();
     }
 
     /**
@@ -123,32 +177,26 @@ final class Nav extends Widget
      * This method is called to create sub-menus.
      *
      * @param array $items the given items. Please refer to {@see Dropdown::items} for the array structure.
-     * @param array $parentItem the parent item information. Please refer to {@see items} for the structure of this
-     * array.
      *
-     * @throws InvalidArgumentException
+     * @throws ReflectionException
      *
-     * @return string The rendering result.
+     * @return string the rendering result.
+     *
+     * @link https://bulma.io/documentation/components/navbar/#dropdown-menu
      */
-    private function renderDropdown(array $items, array $parentItem): string
+    private function renderDropdown(array $items): string
     {
-        $dropdown = Dropdown::widget()
-            ->dividerClass('navbar-divider')
-            ->itemClass('navbar-item')
-            ->itemsClass('navbar-dropdown')
-            ->withoutEncloseByContainer()
+        return Dropdown::widget()
+            ->dividerCssClass('navbar-divider')
+            ->dropdownCssClass('navbar-dropdown')
+            ->dropdownItemCssClass('navbar-item')
             ->items($items)
-            ->itemsOptions(ArrayHelper::getValue($parentItem, 'dropdownOptions', []));
-
-        if ($this->encodeLabels === false) {
-            $dropdown = $dropdown->withoutEncodeLabels();
-        }
-
-        return $dropdown->render() . "\n";
+            ->enclosedByContainer()
+            ->render() . PHP_EOL;
     }
 
     /**
-     * Checks to see if a child item is active optionally activating the parent.
+     * Check to see if a child item is active optionally activating the parent.
      *
      * @param array $items
      * @param bool $active should the parent be active too
@@ -157,24 +205,33 @@ final class Nav extends Widget
      *
      * {@see items}
      */
-    private function isChildActive(array $items, bool &$active): array
+    private function isChildActive(array $items, bool &$active = false): array
     {
+        /** @var array|string $child */
         foreach ($items as $i => $child) {
-            if ($this->isItemActive($child)) {
-                ArrayHelper::setValue($items[$i], 'active', true);
-                if ($this->activateParents) {
-                    $active = $this->activateParents;
-                }
+            /** @var string */
+            $url = $child['url'] ?? '#';
+
+            /** @var bool */
+            $active = $child['active'] ?? false;
+
+            if ($active === false && is_array($items[$i])) {
+                $items[$i]['active'] = $this->isItemActive($url, $this->currentPath, $this->activateItems);
             }
 
-            if (is_array($child) && ($childItems = ArrayHelper::getValue($child, 'items')) && is_array($childItems)) {
-                $activeParent = false;
-                $items[$i]['items'] = $this->isChildActive($childItems, $activeParent);
+            if ($this->activateParents) {
+                $active = true;
+            }
 
-                if ($activeParent) {
-                    $items[$i]['options'] ??= ['class' => ''];
-                    Html::addCssClass($items[$i]['options'], ['active' => 'is-active']);
-                    $active = $activeParent;
+            /** @var array */
+            $childItems = $child['items'] ?? [];
+
+            if ($childItems !== [] && is_array($items[$i])) {
+                $items[$i]['items'] = $this->isChildActive($childItems);
+
+                if ($active) {
+                    $items[$i]['attributes'] = ['active' => true];
+                    $active = true;
                 }
             }
         }
@@ -190,33 +247,38 @@ final class Nav extends Widget
      * currentPath for the item and the rest of the elements are the associated parameters. Only when its currentPath
      * and parameters match {@see currentPath}, respectively, will a menu item be considered active.
      *
-     * @param array|object|string $item the menu item to be checked
+     * @param string $url
+     * @param string $currentPath
+     * @param bool $activateItems
      *
-     * @return bool Whether the menu item is active
+     * @return bool whether the menu item is active
      */
-    private function isItemActive($item): bool
+    private function isItemActive(string $url, string $currentPath, bool $activateItems): bool
     {
-        if (isset($item['active'])) {
-            return ArrayHelper::getValue($item, 'active');
-        }
-
-        return
-            isset($item['url']) &&
-            $this->currentPath !== '/' &&
-            $item['url'] === $this->currentPath &&
-            $this->activateItems;
+        return ($currentPath !== '/') && ($url === $currentPath) && $activateItems;
     }
 
-    private function renderIcon(string $label, string $icon, array $iconOptions): string
-    {
-        if ($icon !== '') {
-            $label = Html::openTag('span', $iconOptions) .
-                Html::tag('i', '', ['class' => $icon]) .
-                Html::closeTag('span') .
-                Html::tag('span', $label);
+    private function renderLabelItem(
+        string $label,
+        string $iconText,
+        string $iconCssClass,
+        array $iconAttributes = []
+    ): string {
+        $html = '';
+
+        if ($iconText !== '' || $iconCssClass !== '') {
+            $html = Span::tag()
+                ->attributes($iconAttributes)
+                ->content(CustomTag::name('i')->class($iconCssClass)->content($iconText)->encode(false)->render())
+                ->encode(false)
+                ->render();
         }
 
-        return $label;
+        if ($label !== '') {
+            $html .= $label;
+        }
+
+        return $html;
     }
 
     /**
@@ -224,74 +286,124 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @throws InvalidArgumentException|JsonException
+     * @throws ReflectionException
      *
-     * @return string The rendering result.
+     * @return string the rendering result.
      */
     private function renderItem(array $item): string
     {
+        $html = '';
+
         if (!isset($item['label'])) {
             throw new InvalidArgumentException('The "label" option is required.');
         }
 
-        $dropdown = false;
-        $this->encodeLabels = $item['encode'] ?? $this->encodeLabels;
+        /** @var string */
+        $itemLabel = $item['label'] ?? '';
 
-        if ($this->encodeLabels) {
-            $label = Html::encode($item['label']);
-        } else {
-            $label = $item['label'];
+        if (isset($item['encode']) && $item['encode'] === true) {
+            $itemLabel = Html::encode($itemLabel);
         }
 
-        $iconOptions = [];
+        /** @var array */
+        $items = $item['items'] ?? [];
 
-        $icon = $item['icon'] ?? '';
+        /** @var string */
+        $url = $item['url'] ?? '#';
 
-        if (array_key_exists('iconOptions', $item) && is_array($item['iconOptions'])) {
-            $iconOptions = $this->addOptions($iconOptions, 'icon');
-        }
+        /** @var array */
+        $urlAttributes = $item['urlAttributes'] ?? [];
 
-        $label = $this->renderIcon($label, $icon, $iconOptions);
+        /** @var array */
+        $dropdownAttributes = $item['dropdownAttributes'] ?? [];
 
-        $options = ArrayHelper::getValue($item, 'options', []);
-        $items = ArrayHelper::getValue($item, 'items');
-        $url = ArrayHelper::getValue($item, 'url', '#');
-        $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
-        $disabled = ArrayHelper::getValue($item, 'disabled', false);
+        /** @var string */
+        $iconText = $item['iconText'] ?? '';
 
-        $active = $this->isItemActive($item);
+        /** @var string */
+        $iconCssClass = $item['iconCssClass'] ?? '';
 
-        if (isset($items)) {
-            $dropdown = true;
+        /** @var array */
+        $iconAttributes = $item['iconAttributes'] ?? [];
 
-            Html::addCssClass($options, 'navbar-item has-dropdown is-hoverable');
+        /** @var bool */
+        $active = $item['active'] ?? $this->isItemActive($url, $this->currentPath, $this->activateItems);
 
-            if (is_array($items)) {
-                $items = $this->isChildActive($items, $active);
-                $items = $this->renderDropdown($items, $item);
-            }
-        }
+        /** @var bool */
+        $disabled = $item['disabled'] ?? false;
 
-        Html::addCssClass($linkOptions, 'navbar-item');
+        $itemLabel = $this->renderLabelItem($itemLabel, $iconText, $iconCssClass, $iconAttributes);
 
         if ($disabled) {
-            Html::addCssStyle($linkOptions, 'opacity:.65; pointer-events:none;');
+            Html::addCssStyle($urlAttributes, 'opacity:.65; pointer-events:none;');
         }
 
         if ($this->activateItems && $active) {
-            Html::addCssClass($linkOptions, ['active' => 'is-active']);
+            Html::addCssClass($urlAttributes, ['active' => 'is-active']);
         }
 
-        if ($dropdown) {
-            $dropdownOptions = ['class' => 'navbar-link'];
+        if ($items !== []) {
+            $attributes = $this->attributes;
+            Html::addCssClass(
+                $attributes,
+                [$this->navBarItemCssClass, $this->hasDropdownCssClass, $this->isHoverableCssClass]
+            );
+            Html::addCssClass($urlAttributes, $this->navBarLinkCssClass);
+            Html::addCssClass($dropdownAttributes, $this->navBarDropdownCssClass);
 
-            return
-                Html::openTag('div', $options) . "\n" .
-                Html::a($label, $url, $dropdownOptions)->encode(false) . "\n" .
-                $items .
-                Html::closeTag('div');
+            $items = $this->isChildActive($items, $active);
+            $dropdown = PHP_EOL . $this->renderDropdown($items);
+            $a = A::tag()->attributes($urlAttributes)->content($itemLabel)->encode(false)->url($url)->render();
+            $div = Div::tag()->attributes($dropdownAttributes)->content($dropdown)->encode(false)->render();
+            $html = Div::tag()
+                ->attributes($attributes)
+                ->content(PHP_EOL . $a . PHP_EOL . $div . PHP_EOL)
+                ->encode(false)
+                ->render();
         }
 
-        return Html::a($label, $url, $linkOptions)->encode(false)->render();
+        if ($html === '') {
+            Html::addCssClass($urlAttributes, 'navbar-item');
+            $html = A::tag()->attributes($urlAttributes)->content($itemLabel)->url($url)->encode(false)->render();
+        }
+
+        return $html;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function renderNav(): string
+    {
+        $items = [];
+
+        /** @var array|string $item */
+        foreach ($this->items as $item) {
+            $visible = !isset($item['visible']) || $item['visible'];
+
+            if ($visible) {
+                $items[] = is_string($item) ? $item : $this->renderItem($item);
+            }
+        }
+
+        $links = PHP_EOL . implode("\n", $items) . PHP_EOL;
+
+        if ($this->enclosedByStartMenu) {
+            $links = PHP_EOL . Div::tag()->class($this->navBarStartCssClass)->content($links)->encode(false)->render() .
+                PHP_EOL;
+        }
+
+        if ($this->enclosedByEndMenu) {
+            $links = PHP_EOL . Div::tag()->class($this->navBarEndCssClass)->content($links)->encode(false)->render() .
+                PHP_EOL;
+        }
+
+        return $this->items !== []
+             ? Div::tag()
+                ->class($this->navBarMenuCssClass)
+                ->content($links)
+                ->encode(false)
+                ->render()
+             : '';
     }
 }
