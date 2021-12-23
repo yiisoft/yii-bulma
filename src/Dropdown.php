@@ -164,6 +164,7 @@ final class Dropdown extends Widget
      * A CSS class for horizontal line separating dropdown items.
      *
      * @param string $value
+     *
      * @return self
      */
     public function dividerCssClass(string $value): self
@@ -184,6 +185,7 @@ final class Dropdown extends Widget
      * CSS class for dropdown content.
      *
      * @param string $value
+     *
      * @return self
      *
      * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
@@ -227,6 +229,7 @@ final class Dropdown extends Widget
      * Dropdown menu CSS class.
      *
      * @param string $value
+     *
      * @return self
      */
     public function dropdownMenuCssClass(string $value): self
@@ -240,6 +243,7 @@ final class Dropdown extends Widget
      * Dropdown trigger CSS class.
      *
      * @param string $value
+     *
      * @return self
      */
     public function dropdownTriggerCssClass(string $value): self
