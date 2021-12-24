@@ -75,5 +75,5 @@ Method | Description | Default
 `headerAttributes(array $value)` | HTML attributes for the widget header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
-`unclosedButton()` | llows you to disable close button message widget. | `false`
+`unclosedButton()` | Allows you to disable close button message widget. | `false`
 `withoutHeader()` | Allows you to disable header. | `false`
