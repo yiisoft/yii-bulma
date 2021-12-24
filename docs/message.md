@@ -38,11 +38,11 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= Message::widget()
+    ->attributes(['class' => 'has-text-justified'])
+    ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
     ->headerColor('is-success')
     ->headerMessage('Very important')
-    ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-    ->size('is-large')
-    ->options(['class' => 'has-text-justified']) ?>
+    ->size('is-large') ?>
 ```
 
 The code above generates the following HTML:
@@ -59,19 +59,21 @@ The code above generates the following HTML:
 </div>
 ```
 
-## Reference
+## Setters
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Breadcrumbs` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`attributes(array $value)` | HTML attributes for the widget container. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `body(string $value)` | Message body. | `''`
+`bodyAttributes(array $value)` | HTML attributes for the widget body tag. | `[]`
+`closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
 `headerColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
 `headerMessage(string $value)` | Message header. | `''`
-`options(array $value)` | HTML attributes for the widget container tag. | `[]`
-`bodyOptions(array $value)` | HTML attributes for the widget body tag. | `[]`
-`closeButtonOptions(array $value)`| Options for rendering the close button tag. | `[]`
-`headerOptions(array $value)` | HTML attributes for the widget header tag. | `[]`
+`headerAttributes(array $value)` | HTML attributes for the widget header tag. | `[]`
+`id(string $value)` | Widget ID. | `''`
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
-`closeButton()` | Allows you to enable close button. | `true`
+`unclosedButton()` | llows you to disable close button message widget. | `false`
 `withoutHeader()` | Allows you to disable header. | `false`
