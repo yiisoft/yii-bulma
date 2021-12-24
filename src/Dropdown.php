@@ -377,7 +377,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     protected function run(): string
     {
@@ -385,7 +385,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdown(): string
     {
@@ -458,7 +458,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownContent(): string
     {
@@ -470,7 +470,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownMenu(string $id): string
     {
@@ -483,7 +483,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownTrigger(string $id): string
     {
@@ -503,7 +503,7 @@ final class Dropdown extends Widget
     /**
      * Renders menu items.
      *
-     * @throws CircularReferenceException|InvalidConfigException|NotInstantiableException|NotFoundException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      *
      * @return string the rendering result.
      */
