@@ -99,7 +99,6 @@ Method | Description | Default
 `submenuAttributes(array $values)` | The HTML attributes for the dropdown submenu. | `[]`
 `enclosedByContainer(bool $value = false)` | Whether the widget should be enclosed by a container. | `true`
 
-
 ### Items structure is an array of the following structure:
 
 ```php

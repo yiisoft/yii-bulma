@@ -125,9 +125,6 @@ The code above generates the following HTML:
 </nav>
 ```
 
-## Reference
-
-
 ## Setters
 
 All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\NavBar` class with the specified value.
