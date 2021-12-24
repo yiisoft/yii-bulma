@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use ReflectionException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\A;
 use Yiisoft\Html\Tag\Button;
@@ -47,18 +50,18 @@ final class Dropdown extends Widget
     private array $submenuAttributes = [];
 
     /**
-     * Returns a new instance with the specified attributes.
+     * The HTML attributes. The following special options are recognized.
      *
-     * @param array $value The HTML attributes for the widget container tag.
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function attributes(array $value): self
+    public function attributes(array $values): self
     {
         $new = clone $this;
-        $new->attributes = $value;
+        $new->attributes = $values;
         return $new;
     }
 
@@ -79,35 +82,35 @@ final class Dropdown extends Widget
     /**
      * The HTML attributes for the dropdown button.
      *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      */
-    public function buttonAttributes(array $value): self
+    public function buttonAttributes(array $values): self
     {
         $new = clone $this;
-        $new->buttonAttributes = $value;
+        $new->buttonAttributes = $values;
         return $new;
     }
 
     /**
      * The HTML attributes for the dropdown button icon.
      *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      */
-    public function buttonIconAttributes(array $value): self
+    public function buttonIconAttributes(array $values): self
     {
         $new = clone $this;
-        $new->buttonIconAttributes = $value;
+        $new->buttonIconAttributes = $values;
         return $new;
     }
 
     /**
      * Set icon CSS class for the dropdown button.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -121,7 +124,7 @@ final class Dropdown extends Widget
     /**
      * Set icon text for the dropdown button.
      *
-     * @param string $value
+     * @param string $value The text.
      *
      * @return self
      */
@@ -135,7 +138,7 @@ final class Dropdown extends Widget
     /**
      * Set label for the dropdown button.
      *
-     * @param string $value
+     * @param string $value The label.
      *
      * @return self
      */
@@ -149,21 +152,21 @@ final class Dropdown extends Widget
     /**
      * The HTML attributes for the dropdown button label.
      *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      */
-    public function buttonLabelAttributes(array $value): self
+    public function buttonLabelAttributes(array $values): self
     {
         $new = clone $this;
-        $new->buttonLabelAttributes = $value;
+        $new->buttonLabelAttributes = $values;
         return $new;
     }
 
     /**
-     * A CSS class for horizontal line separating dropdown items.
+     * Set CSS class for horizontal line separating dropdown items.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -174,6 +177,13 @@ final class Dropdown extends Widget
         return $new;
     }
 
+    /**
+     * Set CSS class for the dropdown container.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
     public function dropdownCssClass(string $value): self
     {
         $new = clone $this;
@@ -182,9 +192,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * CSS class for dropdown content.
+     * Set CSS class for dropdown content.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      *
@@ -197,6 +207,13 @@ final class Dropdown extends Widget
         return $new;
     }
 
+    /**
+     * Set CSS class for active dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
     public function dropdownItemActiveCssClass(string $value): self
     {
         $new = clone $this;
@@ -204,6 +221,13 @@ final class Dropdown extends Widget
         return $new;
     }
 
+    /**
+     * Set CSS class for dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
     public function dropdownItemCssClass(string $value): self
     {
         $new = clone $this;
@@ -211,6 +235,13 @@ final class Dropdown extends Widget
         return $new;
     }
 
+    /**
+     * Set Style attributes for disabled dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
     public function dropdownItemDisabledStyleCss(string $value): self
     {
         $new = clone $this;
@@ -218,6 +249,13 @@ final class Dropdown extends Widget
         return $new;
     }
 
+    /**
+     * Set CSS class for dropdown item header.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
     public function dropdownItemHeaderCssClass(string $value): self
     {
         $new = clone $this;
@@ -226,9 +264,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Dropdown menu CSS class.
+     * Set Dropdown menu CSS class.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -240,9 +278,9 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Dropdown trigger CSS class.
+     * Set Dropdown trigger CSS class.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -285,7 +323,7 @@ final class Dropdown extends Widget
      *
      * To insert divider use `-`.
      *
-     * @param array $value
+     * @param array $value The menu items.
      *
      * @return self
      */
@@ -299,7 +337,7 @@ final class Dropdown extends Widget
     /**
      * Set if it is a submenu or sub-dropdown.
      *
-     * @param bool $value
+     * @param bool $value Whether it is a submenu or sub-dropdown. Defaults to false.
      *
      * @return self
      */
@@ -311,23 +349,23 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for sub-menu container tags.
+     * The HTML attributes for sub-menu container tag.
      *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      */
-    public function submenuAttributes(array $value): self
+    public function submenuAttributes(array $values): self
     {
         $new = clone $this;
-        $new->submenuAttributes = $value;
+        $new->submenuAttributes = $values;
         return $new;
     }
 
     /**
      * If the widget should be enclosed by container.
      *
-     * @param bool $value
+     * @param bool $value Whether the widget should be enclosed by container. Defaults to true.
      *
      * @return self
      */
@@ -339,7 +377,15 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    protected function run(): string
+    {
+        return $this->renderDropdown();
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdown(): string
     {
@@ -394,7 +440,7 @@ final class Dropdown extends Widget
             ->render() . PHP_EOL;
     }
 
-    public function renderDropdownButtonLink(): string
+    private function renderDropdownButtonLink(): string
     {
         return A::tag()
             ->class($this->dropdownItemCssClass)
@@ -412,15 +458,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws ReflectionException
-     */
-    protected function run(): string
-    {
-        return $this->renderDropdown();
-    }
-
-    /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownContent(): string
     {
@@ -432,7 +470,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownMenu(string $id): string
     {
@@ -445,7 +483,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderDropdownTrigger(string $id): string
     {
@@ -465,7 +503,7 @@ final class Dropdown extends Widget
     /**
      * Renders menu items.
      *
-     * @throws InvalidArgumentException|ReflectionException If the label option is not specified in one of the items.
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      *
      * @return string the rendering result.
      */

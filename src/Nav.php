@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use ReflectionException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\A;
 use Yiisoft\Html\Tag\CustomTag;
@@ -26,7 +29,6 @@ final class Nav extends Widget
     private bool $activateItems = true;
     private bool $activateParents = false;
     private array $attributes = [];
-    private string $autoIdPrefix = 'w';
     private string $currentPath = '';
     private bool $enclosedByStartMenu = false;
     private bool $enclosedByEndMenu = false;
@@ -41,39 +43,25 @@ final class Nav extends Widget
     private string $navBarStartCssClass = 'navbar-start';
 
     /**
-     * Returns a new instance with the specified attributes.
+     * The HTML attributes. The following special options are recognized.
      *
-     * @param array $value The HTML attributes for the widget container nav tag.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function attributes(array $value): self
-    {
-        $new = clone $this;
-        $new->attributes = $value;
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
-     *
-     * @param string $value The prefix to the automatically generated widget IDs.
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
+     *
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function autoIdPrefix(string $value): self
+    public function attributes(array $values): self
     {
         $new = clone $this;
-        $new->autoIdPrefix = $value;
+        $new->attributes = $values;
         return $new;
     }
 
     /**
      * Whether to activate parent menu items when one of the corresponding child menu items is active.
      *
-     * @return $this
+     * @return self
      */
     public function activateParents(): self
     {
@@ -85,7 +73,7 @@ final class Nav extends Widget
     /**
      * Allows you to assign the current path of the url from request controller.
      *
-     * @param string $value
+     * @param string $value The current path.
      *
      * @return self
      */
@@ -97,6 +85,8 @@ final class Nav extends Widget
     }
 
     /**
+     * Align the menu items to the right.
+     *
      * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
@@ -109,6 +99,8 @@ final class Nav extends Widget
     }
 
     /**
+     * Align the menu items to left.
+     *
      * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
@@ -130,7 +122,7 @@ final class Nav extends Widget
      * - linkOptions: array, optional, the HTML attributes of the item's link.
      * - options: array, optional, the HTML attributes of the item container (LI).
      * - active: bool, optional, whether the item should be on active state or not.
-     * - dropdownAttributes: array, optional, the HTML options that will passed to the {@see Dropdown} widget.
+     * - dropdownAttributes: array, optional, the HTML options that will be passed to the {@see Dropdown} widget.
      * - items: array|string, optional, the configuration array for creating a {@see Dropdown} widget, or a string
      *   representing the dropdown menu.
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for
@@ -138,7 +130,7 @@ final class Nav extends Widget
      *
      * If a menu item is a string, it will be rendered directly without HTML encoding.
      *
-     * @param array $value
+     * @param array $value The menu items.
      *
      * @return self
      */
@@ -152,7 +144,7 @@ final class Nav extends Widget
     /**
      * Disable activate items according to whether their currentPath.
      *
-     * @return $this
+     * @return self
      *
      * {@see isItemActive}
      */
@@ -164,7 +156,7 @@ final class Nav extends Widget
     }
 
     /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     protected function run(): string
     {
@@ -178,7 +170,7 @@ final class Nav extends Widget
      *
      * @param array $items the given items. Please refer to {@see Dropdown::items} for the array structure.
      *
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      *
      * @return string the rendering result.
      *
@@ -198,8 +190,8 @@ final class Nav extends Widget
     /**
      * Check to see if a child item is active optionally activating the parent.
      *
-     * @param array $items
-     * @param bool $active should the parent be active too
+     * @param array $items {@see items}
+     * @param bool $active Should the parent be active too.
      *
      * @return array
      *
@@ -215,7 +207,7 @@ final class Nav extends Widget
             /** @var bool */
             $active = $child['active'] ?? false;
 
-            if ($active === false && is_array($items[$i])) {
+            if ($active === false && is_array($child)) {
                 $items[$i]['active'] = $this->isItemActive($url, $this->currentPath, $this->activateItems);
             }
 
@@ -247,9 +239,9 @@ final class Nav extends Widget
      * currentPath for the item and the rest of the elements are the associated parameters. Only when its currentPath
      * and parameters match {@see currentPath}, respectively, will a menu item be considered active.
      *
-     * @param string $url
-     * @param string $currentPath
-     * @param bool $activateItems
+     * @param string $url The menu item's URL.
+     * @param string $currentPath The currentPath.
+     * @param bool $activateItems Whether to activate the parent menu items when the currentPath matches.
      *
      * @return bool whether the menu item is active
      */
@@ -286,7 +278,7 @@ final class Nav extends Widget
      *
      * @param array $item the item to render.
      *
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      *
      * @return string the rendering result.
      */
@@ -371,7 +363,7 @@ final class Nav extends Widget
     }
 
     /**
-     * @throws ReflectionException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     private function renderNav(): string
     {

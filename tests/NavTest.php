@@ -460,7 +460,6 @@ final class NavTest extends TestCase
         $widget = Nav::widget();
 
         $this->assertNotSame($widget, $widget->attributes([]));
-        $this->assertNotSame($widget, $widget->autoIdPrefix(''));
         $this->assertNotSame($widget, $widget->activateParents());
         $this->assertNotSame($widget, $widget->currentPath(''));
         $this->assertNotSame($widget, $widget->enclosedByEndMenu());

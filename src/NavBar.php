@@ -48,18 +48,18 @@ final class NavBar extends Widget
     }
 
     /**
-     * Returns a new instance with the specified attributes.
+     * The HTML attributes. The following special options are recognized.
      *
-     * @param array $value The HTML attributes for the widget container nav tag.
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function attributes(array $value): self
+    public function attributes(array $values): self
     {
         $new = clone $this;
-        $new->attributes = $value;
+        $new->attributes = $values;
         return $new;
     }
 
@@ -78,25 +78,25 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the brand.
+     * The HTML attributes of the navbar brand.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandAttributes(array $value): self
+    public function brandAttributes(array $values): self
     {
         $new = clone $this;
-        $new->brandAttributes = $value;
+        $new->brandAttributes = $values;
         return $new;
     }
 
     /**
      * Src of the brand image or empty if it's not used. Note that this param will override `$this->brandText` param.
      *
-     * @param string $value
+     * @param string $value The src of the brand image.
      *
      * @return self
      */
@@ -110,23 +110,23 @@ final class NavBar extends Widget
     /**
      * The HTML attributes of the brand image.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandImageAttributes(array $value): self
+    public function brandImageAttributes(array $values): self
     {
         $new = clone $this;
-        $new->brandImageAttributes = $value;
+        $new->brandImageAttributes = $values;
         return $new;
     }
 
     /**
      * The text of the brand or empty if it's not used. Note that this is not HTML-encoded.
      *
-     * @param string $value
+     * @param string $value The text of the brand.
      *
      * @return self
      */
@@ -140,16 +140,16 @@ final class NavBar extends Widget
     /**
      * The HTML attributes of the brand text.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function brandTextAttributes(array $value): self
+    public function brandTextAttributes(array $values): self
     {
         $new = clone $this;
-        $new->brandTextAttributes = $value;
+        $new->brandTextAttributes = $values;
         return $new;
     }
 
@@ -255,7 +255,7 @@ final class NavBar extends Widget
     /**
      * The CSS class of the brand.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -269,23 +269,23 @@ final class NavBar extends Widget
     /**
      * The HTML attributes of the burger.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @param array $value
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function navBarBurgerAttributes(array $value): self
+    public function navBarBurgerAttributes(array $values): self
     {
         $new = clone $this;
-        $new->navBarBurgerAttributes = $value;
+        $new->navBarBurgerAttributes = $values;
         return $new;
     }
 
     /**
      * The CSS class of the burger.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -299,7 +299,7 @@ final class NavBar extends Widget
     /**
      * The CSS class of the navbar.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */
@@ -313,7 +313,7 @@ final class NavBar extends Widget
     /**
      * The CSS class of the items navbar.
      *
-     * @param string $value
+     * @param string $value The CSS class.
      *
      * @return self
      */

@@ -59,15 +59,15 @@ $this->setJsFiles($assetManager->getJsFiles());
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
 <?= NavBar::widget()
-    ->brandLabel('My Project')
+    ->attributes(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
     ->brandImage('yii-logo.jpg')
+    ->brandText('My Project')
     ->brandUrl('/')
-    ->options(['class' => 'is-black', 'data-sticky' => '', 'data-sticky-shadow' => ''])
-    ->itemsOptions(['class' => 'navbar-end'])
     ->begin()
 ?>
 
 <?= Nav::widget()
+    ->enclosedByEndMenu()
     ->items([
         [
             'label' => 'Setting Account',
@@ -98,25 +98,25 @@ $this->setJsFiles($assetManager->getJsFiles());
 <?= NavBar::end() ?>
 ```
 
-HTML produced is like the following:
+The code above generates the following HTML:
 
 ```html
-<nav id="w1-navbar" class="navbar is-black" data-sticky="" data-sticky-shadow="">
+<nav id="w1-navbar" class="is-black navbar" data-sticky data-sticky-shadow aria-label="main navigation" role="navigation">
     <div class="navbar-brand">
-        <span class="navbar-item">
-            <img src="yii-logo.jpg" alt="">
-        </span>
-        <a class="navbar-item" href="/">My Project</a>
+        <a class="navbar-item" href="/"><img src="yii-logo.jpg">My Project</a>
         <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
-            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
     </div>
-    <div id="w1-navbar-Menu" class="navbar-menu">
-        <div class="navbar-end"><a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span><span>Setting Account</span></a>
-            <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span><span>Profile</span></a>
-            <div class="navbar-item has-dropdown">
-                <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" alt="" aria-expanded="false"></a>
-                <div id="w2-dropdown" class="navbar-dropdown is-hoverable">
+    <div class="navbar-menu">
+        <div class="navbar-end">
+            <a class="navbar-item" href="/setting/account">Setting Account</a>
+            <a class="navbar-item" href="/profile">Profile</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="#">Admin<img src="../../docs/images/icon-avatar.png" alt></a>
+                <div class="navbar-dropdown">
                     <a class="navbar-item" href="/auth/logout">Logout</a>
                 </div>
             </div>
@@ -125,22 +125,61 @@ HTML produced is like the following:
 </nav>
 ```
 
-## Reference
+## Setters
 
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\NavBar` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`attributes(array $values)` | HTML attributes for the widget container nav. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`brand(string $value)` | Custom brand HTML. Overrides `brandLabel` and `brandImage`. | ''
-`brandLabel(string $value)` | Text of the brand label. | ''
-`brandImage(string $value)` | Image of the brand. | ''
-`brandUrl(string $value)` | "href" of the brand's link. | `/`
-`toggleIcon(string $value)` | Toggle icon. | `<span aria-hidden='true'></span>`
-`options(array $value)` | HTML attributes for the nav tag. | [`class` => `navbar`]
-`brandOptions(array $value)` | HTML attributes of the brand tag. | [`class` => `navbar-brand`]
-`brandLabelOptions` | HTML attributes of the brand label tag. | [`class` => `navbar-item`]
-`brandImageOptions` | HTML attributes of the brand link tag.           | [`class` => `navbar-item`]
-`itemsOptions(array $value)` | HTML attributes of the nav items tag. | [`class` => `navbar-start`] or [`class` => `navbar-end`]
-`menuOptions(array $value)` | HTML attributes of the nav menu tag. | [`class` => `navbar-menu`]
-`toggleOptions(array $value)`| HTML attributes of the navbar toggle button tag. | [`aria-expanded` => `false`, `aria-label` => `menu`, `class` => `navbar-burger`, `role` => `button`]
+`brandAttributes(array $values)` | HTML attributes for the navbar brand. | `[]`
+`brandImage(string $value)` | Image for the navbar brand. | `''`
+`brandText(string $value)` | Text for the navbar brand. | `''`
+`brandTextAttributes(array $values)` | HTML attributes for the navbar brand text. | `[]`
+`brandUrl(string $value)` | URL for the navbar brand. | `''`
+`buttonLinkAriaExpanded(string $value)` | The ARIA expanded attribute of the button link. | `'false'`
+`buttonLinkAriaLabelText(string $value)` | The ARIA label text of the button link. | `'menu'`
+`buttonLinkContent(string $value)` | The content of the button link. | `''`
+`buttonLinkRole(string $value)` | The role of the button link. | `'button'`
+`id(string $value)` | Set the ID of the navbar. | `''`
+`navBarAriaLabel(string $value)` | The ARIA label of the navbar. | `'main navigation'`
+`navBarBrandCssClass(string $value)` | CSS class for the navbar brand. | `'navbar-brand'`
+`navBarBurgerAttributes(array $values)` | HTML attributes for the navbar burger. | `[]`
+`navBarBurgerCssClass(string $value)` | CSS class for the navbar burger. | `'navbar-burger'`
+`navBarCssClass(string $value)` | CSS class for the navbar. | `'navbar'`
+`navBarItemCssClass(string $value)` | CSS class for the navbar item. | `'navbar-item'`
+`navBarRole(string $value)` | The role of the navbar. | `'navigation'`
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Nav` class with the specified value.
+
+Method | Description | Default
+-------|-------------|---------
+`activateParents()` | Activate parent menu items when the current menu item is activated. | `false`
+`attributes(array $values)` | HTML attributes for the widget container | `[]`
+`currentPath(string $value)` | Allows you to assign the current path of the url from request controller. | `''`
+`enclosedByEndMenu()` | Align the menu items to the right. | `false`
+`enclosedByStartMenu()` | Align the menu items to the left. | `false`
+`id(string $value)` | Set the ID of the navbar. | `''`
+`items(array $value)` | The menu items. | `[]`
+`withoutActivateItems()` |  Disable activate items according to whether their currentPath. | `false`
+
+### Items structure is an array of the following structure:
+
+```php
+[
+    [
+        'label' => '',
+        'url' => '',
+        'urlAttributes' => [],
+        'dropdownAttributes' => [],
+        'iconText' => '',
+        'iconCssClass' => '',
+        'iconAttributes' => [],
+        'items' => [],
+        'active' => false,
+        'disable' => false,
+        'visible' => false,
+        'encode' => false,
+    ],
+]
