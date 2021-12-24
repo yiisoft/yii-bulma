@@ -57,10 +57,14 @@ The code above generates the following HTML:
 </nav>
 ```
 
+## Setters
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Breadcrumbs` class with the specified value.
+
 Method | Description | Default
 -------|-------------|---------
-`activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs. | `<li class=\"is-active\"><a aria-current=\"page\">{icon}{label}</li>\n`
-`aria-label` | Defines a string value that labels the current element. | `breadcrumbs`
+`activeItemTemplate(string $value)`| Template used to render each active item in the breadcrumbs. | `<li class=\"is-active\"><a aria-current=\"page\">{link}</a></li>\n`
+`ariaLabel` | Defines a string value that labels the current element. | `breadcrumbs`
 `attributes(array $value)` | HTML attributes for the widget container nav tag. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `encode()` | Enable/Disable encoding for labels. | `false`
@@ -70,7 +74,7 @@ Method | Description | Default
 `itemsAttributes(array $value)` | HTML attributes for the items widget. | `[]`
 `itemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
 
-Items structure is an array of the following structure:
+### Items structure is an array of the following structure:
 
 ```php
 [

@@ -48,41 +48,72 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 ```
 
-HTML produced is like the following:
+The code above generates the following HTML:
 
 ```html
-<div id="w1-dropdown" class="dropdown">
+<div class="dropdown">
     <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
             <span>Russian cities</span>
-            <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
+            <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
     </div>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">San petesburgo</a>
-        <a class="dropdown-item" href="#">Moscu</a>
-        <a class="dropdown-item" href="#">Novosibirsk</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Ekaterinburgo</a>
+    <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content">
+            <a class="dropdown-item" href="#">San petesburgo</a>
+            <a class="dropdown-item" href="#">Moscu</a>
+            <a class="dropdown-item" href="#">Novosibirsk</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="#">Ekaterinburgo</a>
+        </div>
     </div>
 </div>
 ```
 
+## Setters
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Dropdown` class with the specified value.
+
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`attributes(array $value)` | Sets the HTML attributes for the dropdown container. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`buttonLabel(string $value)` | Set label button dropdown. | `''`
-`buttonLabelOptions(array $value)`| The HTML attributes for the button dropdown. | `[]`
-`buttonOptions(array $value)` | The HTML attributes for the widget button tag. | `[]`
-`dividerClass(string $value)` | Divider CSS class. | `dropdown-divider` 
-`itemClass(string $value)` | Item CSS class. | `dropdown-item`
-`itemsClass(string $value)` | Item container CSS class. | `dropdown-menu`
-`itemsOptions(array $value)` | HTML attributes for the widget items. | `[]`
-`withoutEncodeLabels()` | Disable encoding for labels. | `false`
-`withoutEncloseByContainer()` | Disable enclosed by container tag dropdown. | `false`
-`items(array $value)` | List of menu items in the dropdown. | `[]`
-`options(array $value)` | HTML attributes for the widget container tag. | `[]`
-`triggerOptions(array $value)` | HTML attributes for the widget container trigger. | `[]`
+`buttonAttributes(array $values)` | The HTML attributes for the dropdown button. | `[]`
+`buttonIconAttributes(array $values)` | The HTML attributes for the dropdown button icon. | `['class' => 'icon is-small']`
+`buttonIconCssClass(string $value)` | Set icon CSS class for the dropdown button. | `''`
+`buttonIconText(string $value)` | Set icon text for the dropdown button. | `'&#8595;'`
+`buttonLabel(string $value)` | Set label for the dropdown button. | `'Click Me'`
+`buttonLabelAttributes(array $values)` | The HTML attributes for the dropdown button label. | `[]`
+`dividerCssClass(string $value)` | Set CSS class for horizontal line separating dropdown items. | `'dropdown-divider'`
+`dropdownCssClass(string $value)` | Set CSS class for the dropdown container. | `'dropdown'`
+`dropdownContentCssClass(string $value)` | Set CSS class for dropdown content. | `'dropdown-content'`
+`dropdownItemActiveCssClass(string $value)` | Set CSS class for active dropdown item. | `'is-active'`
+`dropdownItemCssClass(string $value)` | Set CSS class for dropdown item. | `'dropdown-item'`
+`dropdownItemDisabledStyleCss(string $value)` | Set Style attributes for disabled dropdown item. | `'opacity:.65;pointer-events:none;'`
+`dropdownItemHeaderCssClass(string $value)` | Set CSS class for dropdown item header. | `'dropdown-header'`
+`dropdownMenuCssClass(string $value)` | Set CSS class for dropdown menu. | `'dropdown-menu'`
+`dropdownTriggerCssClass(string $value)` | Set CSS class for dropdown trigger. | `'dropdown-trigger'`
+`id(string $value)` | Set the ID of the dropdown. | `''`
+`items(array $value)` | Set the dropdown items. | `[]`
+`submenu(bool $value)` | Set whether the dropdown is a submenu. | `false`
+`submenuAttributes(array $values)` | The HTML attributes for the dropdown submenu. | `[]`
+`enclosedByContainer(bool $value = false)` | Whether the widget should be enclosed by a container. | `true`
+
+
+### Items structure is an array of the following structure:
+
+```php
+[
+    [
+        'label' => '',
+        'url' => '',
+        'urlAttributes' => [],
+        'iconText' => '',
+        'iconCssClass' => '',
+        'iconAttributes' => [],
+        'active' => false,
+        'disabled' => false,
+        'enclose' => false,
+        'submenu' => false,
+    ],
+]

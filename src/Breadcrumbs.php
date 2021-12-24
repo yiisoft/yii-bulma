@@ -59,8 +59,8 @@ final class Breadcrumbs extends Widget
     /**
      * Returns a new instance with the specified active item template.
      *
-     * @param string $value The template used to render each active item in the breadcrumbs.
-     * The token `{link}` will be replaced with the actual HTML link for each active item.
+     * @param string $value The template used to render each active item in the breadcrumbs. The token `{link}` will be
+     * replaced with the actual HTML link for each active item.
      *
      * @return self
      */
@@ -72,18 +72,18 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified attributes.
+     * The HTML attributes. The following special options are recognized.
      *
-     * @param array $value The HTML attributes for the widget container nav tag.
+     * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
-    public function attributes(array $value): self
+    public function attributes(array $values): self
     {
         $new = clone $this;
-        $new->attributes = $value;
+        $new->attributes = $values;
         return $new;
     }
 
@@ -197,8 +197,8 @@ final class Breadcrumbs extends Widget
     /**
      * Returns a new instance with the specified item template.
      *
-     * @param string $value The template used to render each inactive item in the breadcrumbs.
-     * The token `{link}` will be replaced with the actual HTML link for each inactive item.
+     * @param string $value The template used to render each inactive item in the breadcrumbs. The token `{link}` will
+     * be replaced with the actual HTML link for each inactive item.
      *
      * @return self
      */
