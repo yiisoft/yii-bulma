@@ -170,7 +170,7 @@ final class Nav extends Widget
      *
      * @param array $items the given items. Please refer to {@see Dropdown::items} for the array structure.
      *
-     * @throws CircularReferenceException|InvalidConfigException|NotInstantiableException|NotFoundException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      *
      * @return string the rendering result.
      *
