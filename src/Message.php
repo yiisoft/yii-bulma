@@ -25,6 +25,8 @@ use Yiisoft\Widget\Widget;
  */
 final class Message extends Widget
 {
+    private const COLORS = ['is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger', 'is-dark'];
+    private const SIZES = ['is-small', 'is-medium', 'is-large'];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
     private string $body = '';
@@ -150,10 +152,8 @@ final class Message extends Widget
      */
     public function headerColor(string $value): self
     {
-        $headerColor = ['is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger', 'is-dark'];
-
-        if (!in_array($value, $headerColor)) {
-            $values = implode(' ', $headerColor);
+        if (!in_array($value, self::COLORS)) {
+            $values = implode(' ', self::COLORS);
             throw new InvalidArgumentException("Invalid color. Valid values are: $values.");
         }
 
@@ -218,8 +218,8 @@ final class Message extends Widget
      */
     public function size(string $value): self
     {
-        if (!in_array($value, ['is-small', 'is-medium', 'is-large'])) {
-            $values = implode(' ', ['is-small', 'is-medium', 'is-large']);
+        if (!in_array($value, self::SIZES)) {
+            $values = implode(' ', self::SIZES);
             throw new InvalidArgumentException("Invalid size. Valid values are: $values.");
         }
 
