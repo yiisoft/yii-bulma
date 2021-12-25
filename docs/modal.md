@@ -107,7 +107,7 @@ The code above generates the following HTML:
 
 ## Setters
 
-All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Breadcrumbs` class with the specified value.
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Modal` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
