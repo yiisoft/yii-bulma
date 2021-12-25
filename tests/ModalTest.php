@@ -222,7 +222,8 @@ final class ModalTest extends TestCase
         </div>
         HTML;
         $this->assertEqualsWithoutLE(
-            $expected, Modal::widget()->toggleButtonAttributes(['class' => 'testMe'])->begin() . Modal::end(),
+            $expected,
+            Modal::widget()->toggleButtonAttributes(['class' => 'testMe'])->begin() . Modal::end(),
         );
     }
 
@@ -301,7 +302,6 @@ final class ModalTest extends TestCase
             Modal::widget()->modalContentClass('test-class')->begin() . Modal::end(),
         );
     }
-
 
     public function testImmutability(): void
     {
