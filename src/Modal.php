@@ -47,11 +47,11 @@ final class Modal extends Widget
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
     private string $toggleButtonColor = '';
-    private bool $withoutCloseButton = true;
-    private bool $withoutToggleButton = true;
+    private bool $withoutCloseButton = false;
+    private bool $withoutToggleButton = false;
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * The HTML attributes.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -228,7 +228,8 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value The toggle button color.
+     * @param string $value The toggle button color. $value Setting default is empty.
+     * Possible values: 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger'.
      *
      * @return self
      */
@@ -263,7 +264,8 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the specified toggle button size.
      *
-     * @param string $value The toggle button size.
+     * @param string $value The toggle button size. Default setting empty normal.
+     * Possible values: 'is-small', 'is-medium', 'is-large'.
      *
      * @return self
      */
@@ -283,12 +285,14 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the specified options for rendering the close button tag.
      *
+     * @param bool $value Whether the close button is disabled.
+     *
      * @return self
      */
-    public function withoutCloseButton(): self
+    public function withoutCloseButton(bool $value): self
     {
         $new = clone $this;
-        $new->withoutCloseButton = false;
+        $new->withoutCloseButton = $value;
 
         return $new;
     }
@@ -296,12 +300,14 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the disabled toggle button.
      *
+     * @param bool $value Whether the toggle button is disabled.
+     *
      * @return self
      */
-    public function withoutToggleButton(): self
+    public function withoutToggleButton(bool $value): self
     {
         $new = clone $this;
-        $new->withoutToggleButton = false;
+        $new->withoutToggleButton = $value;
 
         return $new;
     }
@@ -324,14 +330,14 @@ final class Modal extends Widget
         Html::addCssClass($attributes, $this->modalClass);
         Html::addCssClass($contentAttributes, $this->modalContentClass);
 
-        if ($this->withoutToggleButton) {
+        if ($this->withoutToggleButton == false) {
             $html .= $this->renderToggleButton($id) . "\n";
         }
 
         $html .= Html::openTag('div', $attributes) . "\n"; // .modal
         $html .= Div::tag()->class($this->modalBackgroundClass) . "\n";
 
-        if ($this->withoutCloseButton) {
+        if ($this->withoutCloseButton === false) {
             $html .= $this->renderCloseButton() . "\n";
         }
 

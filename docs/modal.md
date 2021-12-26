@@ -111,18 +111,18 @@ All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Mo
 
 Method | Description | Default
 -------|-------------|---------
-`attributes(array $value)` | HTML attributes for the widget container nav tag. | `[]`
+`attributes(array $value)` | The HTML attributes. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`closeButtonAttributes(array $value)` | HTML attributes for the widget button tag. | [`class` => `modal-close`, `aria-label` => `close`]
+`closeButtonAttributes(array $value)` | HTML attributes for the button tag. | [`class` => `modal-close`, `aria-label` => `close`]
 `closeButtonSize(string $value)` | Size close button. | `is-small`, `is-medium`, `is-large`
-`contentAttributes(array $value)`| HTML attributes for the widget content tag. | `[]`
+`contentAttributes(array $value)`| HTML attributes for the content tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
 `modalBackgroundClass(string $value)` | Class for the modal background. | `modal-background`
 `modalClass(string $value)` | Class for the modal. | `modal`
 `modalContentClass(string $value)` | Class for the modal content. | `modal-content`
-`toggleButtonAttributes(array $value)` |  HTML attributes for the widget toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
+`toggleButtonAttributes(array $value)` |  HTML attributes for the toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
 `toggleButtonColor(string $value)` | Toggle button color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
 `toggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
 `toggleButtonSize(string $value)` | Size toggle button. | `is-small`, `is-medium`, `is-large`
-`withoutCloseButton()` | Disable close button. | `false`
-`withoutToggleButton()` | Disable toggle button. | `false`
+`withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
+`withoutToggleButton(bool $value)` | Whether the toggle button is disabled. | `false`

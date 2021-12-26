@@ -67,7 +67,7 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutToggleButton()->begin() . Modal::end());
+        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutToggleButton(true)->begin() . Modal::end());
     }
 
     public function testToggleButtonLabel(): void
@@ -133,7 +133,7 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutCloseButton()->begin() . Modal::end());
+        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutCloseButton(true)->begin() . Modal::end());
     }
 
     public function testCloseButtonSize(): void
@@ -321,7 +321,7 @@ final class ModalTest extends TestCase
         $this->assertNotSame($widget, $widget->toggleButtonColor('is-primary'));
         $this->assertNotSame($widget, $widget->toggleButtonLabel(''));
         $this->assertNotSame($widget, $widget->toggleButtonSize('is-small'));
-        $this->assertNotSame($widget, $widget->withoutCloseButton());
-        $this->assertNotSame($widget, $widget->withoutToggleButton());
+        $this->assertNotSame($widget, $widget->withoutCloseButton(false));
+        $this->assertNotSame($widget, $widget->withoutToggleButton(false));
     }
 }
