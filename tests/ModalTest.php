@@ -209,7 +209,9 @@ final class ModalTest extends TestCase
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger".');
+        $this->expectExceptionMessage(
+            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
+        );
         Modal::widget()->toggleButtonColor('is-non-existent');
     }
 

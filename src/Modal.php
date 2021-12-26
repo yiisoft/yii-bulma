@@ -46,6 +46,7 @@ final class Modal extends Widget
     public const COLOR_SUCCESS = 'is-success';
     public const COLOR_WARNING = 'is-warning';
     public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
     private const COLOR_ALL = [
         self::COLOR_PRIMARY,
         self::COLOR_LINK,
@@ -53,6 +54,7 @@ final class Modal extends Widget
         self::COLOR_SUCCESS,
         self::COLOR_WARNING,
         self::COLOR_DANGER,
+        self::COLOR_DARK,
     ];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
@@ -250,9 +252,9 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value The toggle button color. $value Setting default is empty.
+     * @param string $value The toggle button color. Default setting is empty without color.
      * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
-     * Modal::COLOR_WARNING, Modal::COLOR_DANGER.
+     * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
      *
      * @return self
      */
