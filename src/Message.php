@@ -44,7 +44,7 @@ final class Message extends Widget
     private string $messageCssClass = 'message';
     private string $messageHeaderMessageCssClass = 'message-header';
     private string $size = '';
-    private bool $withoutHeader = true;
+    private bool $withoutHeader = false;
 
     /**
      * The HTML attributes.
@@ -243,14 +243,16 @@ final class Message extends Widget
     /**
      * Allows you to disable header.
      *
+     * @param bool $value whether to disable header.
+     *
      * @return self
      *
      * @link https://bulma.io/documentation/components/message/#message-body-only
      */
-    public function withoutHeader(): self
+    public function withoutHeader(bool $value): self
     {
         $new = clone $this;
-        $new->withoutHeader = false;
+        $new->withoutHeader = $value;
         return $new;
     }
 
@@ -304,7 +306,7 @@ final class Message extends Widget
             $headerMessage = PHP_EOL . P::tag()->content($headerMessage) . PHP_EOL . $renderCloseButton;
         }
 
-        if ($this->withoutHeader) {
+        if ($this->withoutHeader === false) {
             $html = Div::tag()
                 ->attributes($headerAttributes)
                 ->content($headerMessage)

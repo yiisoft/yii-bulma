@@ -288,7 +288,7 @@ final class MessageTest extends TestCase
             Message::widget()
                 ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
                 ->headerMessage('Very important')
-                ->withoutHeader()
+                ->withoutHeader(true)
                 ->render(),
         );
     }
@@ -308,6 +308,6 @@ final class MessageTest extends TestCase
         $this->assertNotSame($widget, $widget->id(Message::class));
         $this->assertNotSame($widget, $widget->size('is-small'));
         $this->assertNotSame($widget, $widget->withoutCloseButton(true));
-        $this->assertNotSame($widget, $widget->withoutHeader());
+        $this->assertNotSame($widget, $widget->withoutHeader(false));
     }
 }
