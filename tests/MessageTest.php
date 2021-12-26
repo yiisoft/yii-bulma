@@ -267,7 +267,7 @@ final class MessageTest extends TestCase
             Message::widget()
                 ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
                 ->headerMessage('Very important')
-                ->unclosedButton()
+                ->withoutCloseButton(true)
                 ->render(),
         );
     }
@@ -302,12 +302,12 @@ final class MessageTest extends TestCase
         $this->assertNotSame($widget, $widget->body(''));
         $this->assertNotSame($widget, $widget->bodyAttributes([]));
         $this->assertNotSame($widget, $widget->closeButtonAttributes([]));
+        $this->assertNotSame($widget, $widget->headerAttributes([]));
         $this->assertNotSame($widget, $widget->headerColor('is-success'));
         $this->assertNotSame($widget, $widget->headerMessage(''));
-        $this->assertNotSame($widget, $widget->headerAttributes([]));
         $this->assertNotSame($widget, $widget->id(Message::class));
-        $this->assertNotSame($widget, $widget->unclosedButton());
         $this->assertNotSame($widget, $widget->size('is-small'));
+        $this->assertNotSame($widget, $widget->withoutCloseButton(true));
         $this->assertNotSame($widget, $widget->withoutHeader());
     }
 }

@@ -34,6 +34,7 @@ final class Message extends Widget
     private array $buttonSpanAttributes = [];
     private string $buttonSpanAriaHidden = 'true';
     private string $buttonCssClass = 'delete';
+    private bool $closedButton = false;
     private array $closeButtonAttributes = [];
     private bool $encode = false;
     private array $headerAttributes = [];
@@ -43,11 +44,10 @@ final class Message extends Widget
     private string $messageCssClass = 'message';
     private string $messageHeaderMessageCssClass = 'message-header';
     private string $size = '';
-    private bool $unclosedButton = false;
     private bool $withoutHeader = true;
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * The HTML attributes.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -77,10 +77,9 @@ final class Message extends Widget
     }
 
     /**
-     * The body content in the message component. Message widget will also be treated as the body content, and will be
-     * rendered before this.
+     * The body content.
      *
-     * @param string $value The body content in the message component.
+     * @param string $value The body content.
      *
      * @return self
      */
@@ -110,8 +109,8 @@ final class Message extends Widget
     /**
      * The attributes for rendering the close button tag.
      *
-     * The close button is displayed in the header of the modal window. Clicking on the button will hide the modal
-     * window. If {@see unclosedButton} is false, no close button will be rendered.
+     * The close button is displayed in the header of the Message. Clicking on the button will hide the message.
+     * If {@see withoutClosedButton} is false, no close button will be rendered.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -141,7 +140,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set color header message.
+     * Set message header color.
      *
      * @param string $value setting default 'is-dark'. Possible values: 'is-primary', 'is-info', 'is-success',
      * 'is-link', 'is-warning', 'is-danger'.
@@ -163,8 +162,7 @@ final class Message extends Widget
     }
 
     /**
-     * The header message in the message component. Message widget will also be treated as the header content, and will
-     * be rendered before body.
+     * The header message.
      *
      * @param string $value The header message.
      *
@@ -208,7 +206,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set size config widgets.
+     * Set size.
      *
      * @param string $value size class.
      *
@@ -229,19 +227,21 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to disable close button message widget.
+     * Allows you to remove the close button.
+     *
+     * @param bool $value whether to remove the close button.
      *
      * @return self
      */
-    public function unclosedButton(): self
+    public function withoutCloseButton(bool $value): self
     {
         $new = clone $this;
-        $new->unclosedButton = true;
+        $new->closedButton = $value;
         return $new;
     }
 
     /**
-     * Allows you to disable header widget.
+     * Allows you to disable header.
      *
      * @return self
      *
@@ -266,7 +266,7 @@ final class Message extends Widget
         $buttonSpanAttributes = $this->buttonSpanAttributes;
         $closeButtonAttributes = $this->closeButtonAttributes;
 
-        if ($this->unclosedButton === true) {
+        if ($this->closedButton === true) {
             return $html;
         }
 

@@ -65,15 +65,15 @@ All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Br
 
 Method | Description | Default
 -------|-------------|---------
-`attributes(array $value)` | HTML attributes for the widget container. | `[]`
+`attributes(array $value)` | The HTML attributes | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `body(string $value)` | Message body. | `''`
-`bodyAttributes(array $value)` | HTML attributes for the widget body tag. | `[]`
+`bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
 `closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
 `headerColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
 `headerMessage(string $value)` | Message header. | `''`
-`headerAttributes(array $value)` | HTML attributes for the widget header tag. | `[]`
+`headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
 `size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
-`unclosedButton()` | Allows you to disable close button message widget. | `false`
+`withoutCloseButton()` | Allows you to disable close button message widget. | `false`
 `withoutHeader()` | Allows you to disable header. | `false`
