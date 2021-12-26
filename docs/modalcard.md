@@ -2,6 +2,10 @@
 
 A classic [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
 
+<p align="center">
+    <img src="images/modal_card.png">
+</p>
+
 The modal structure:
 - `modal`: the main container
     - `modal-background`: a transparent overlay that can act as a click target to close the modal
@@ -19,9 +23,11 @@ The modal structure:
 declare(strict_types=1);
 
 use Yiisoft\Html\Html;
-use Yiisoft\Yii\Bulma\ModalCard;
+use Yiisoft\Html\Tag\Button;
+use Yiisoft\Html\Tag\P;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
+use Yiisoft\Yii\Bulma\ModalCard;
 
 /**
  * @var \Yiisoft\Assets\AssetManager $assetManager
@@ -36,54 +42,84 @@ $assetManager->registerMany([
 $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 
-$widget = ModalCard::widget()
-    ->title('Modal title')
+// @link https://bulmajs.tomerbe.co.uk/docs/0.12/2-core-components/modal/
+$modalJS = <<<JS
+    document.querySelector('#w2-button').addEventListener('click', function(e) {
+        var modalTwo = Bulma('#w1-modal').modal();
+        modalTwo.open();
+    });
+JS;
+
+$this->registerJs($modalJS);
+?>
+
+<?= ModalCard::widget()
     ->footer(
-        Html::button('Cancel', ['class' => 'button'])
+        Button::tag()->class('button is-success')->content('Save changes') .
+        Button::tag()->class('button is-danger is-outline')->content('Cancel')
     )
-    ->begin();
-echo "Say hello...";
-echo ModalCard::end();
+    ->title('Modal title.')
+    ->begin() ?>
+    <?= P::tag()
+        ->class('image is-4by3')
+        ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) ?>
+<?= ModalCard::end() ?>
 ```
 
-HTML produced is like the following:
+The code above generates the following HTML:
+
 ```html
+<button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
 <div id="w1-modal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Modal title</p>
-            <button class="delete" aria-label="close"></button>
+            <p class="modal-card-title">Modal title.</p>
+            <button class="button delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            Say hello...
+            <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
         </section>
         <footer class="modal-card-foot">
-            <button type="button" class="button">Cancel</button>
+            <button class="button is-success">Save changes</button>
+            <button class="button is-danger is-outline">Cancel</button>
         </footer>
     </div>
 </div>
 ```
 
-## Reference
+## Setters
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\ModalCard` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`attributes(array $value)` | The HTML attributes. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `modal`]
-`contentOptions(array $value)` | HTML attributes for the widget content tag. | [`class` => `modal-card`]
-`headerOptions(array $value)` | HTML attributes for the widget header tag. | [`class` => `modal-card-head`]
-`title(string $value)` | The title content in the modal window. | `''`
-`titleOptions(array $value)` | HTML attributes for the widget title tag. | [`class` => `modal-card-title`]
-`bodyOptions(array $value)` | HTML attributes for the widget body tag.| [`class` => `modal-card-body`]
-`footer(string $value)` | The footer content in the modal window. | `''`
-`footerOptions(array $value)` | HTML attributes for the widget footer tag. | [`class` => `modal-card-foot`]
-`closeButtonOptions(array $value)` | HTML attributes for the widget close button tag. | [`class` => `delete`, `aria-label` => `close`]
-`closeButtonSize(string $value)` | Size close button. | `is-small`, `is-medium`, `is-large`
-`toggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
-`toggleButtonSize(string $value)` | Size toggle button. | `is-small`, `is-medium`, `is-large`
-`toggleButtonColor(string $value)` | Toggle button color. | `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`
-`toggleButtonOptions(array $value)` |  HTML attributes for the widget toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
-`withoutCloseButton()` | Disable close button. | `false`
-`withoutToggleButton()` | Disable toggle button. | `false`
+`bodyAttributes(array $value)` | HTML attributes for the body tag.| []
+`closeButtonAttributes(array $value)` | HTML attributes for the close button. | []
+`closeButtonClass(string $value)` | The class for the close button. | `button delete`
+`closeButtonSize(string $value)` | Size close button. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting empty normal.
+`cardAttributes(array $value)` | HTML attributes for the card. | []
+`footer(string $value)` | The footer content. | `''`
+`footerAttributes(array $value)` | HTML attributes for the footer. | []
+`headerAttributes(array $value)` | HTML attributes for the header. | []
+`id(string $value)` | Widget ID. | `''`
+`modalCardBackgroundClass(string $value)` | The class for the modal background. | `modal-background`
+`modalCardBodyClass(string $value)` | The class for the modal body. | `modal-card-body`
+`modalCardButtonClass(string $value)` | The class for the modal button. | `button modal-button`
+`modalCardClass(string $value)` | The class for the modal card. | `modal-card`
+`modalCardContentClass(string $value)` | The class for the modal card content. | `modal-card-content`
+`modalCardFootClass(string $value)` | The class for the modal card foot. | `modal-card-foot`
+`modalCardHeadClass(string $value)` | The class for the modal card head. | `modal-card-head`
+`modalCardTitleClass(string $value)` | The class for the modal card title. | `modal-card-title`
+`title(string $value)` | The title content. | `''`
+`titleAttributes(array $value)` | HTML attributes for the title. | []
+`toggleButtonAttributes(array $value)` | HTML attributes for the toggle button. | []
+`toggleButtonColor(string $value)` | Color toggle button. Options available are: (`ModalCard::COLOR_PRIMARY`, `ModalCard::COLOR_INFO`, `ModalCard::COLOR_SUCCESS`, `ModalCard::COLOR_WARNING`, `ModalCard::COLOR_DANGER`, `ModalCard::COLOR_DARK`). | `''`
+`toggleButtonId(?string $value)` | Toggle button ID. | `''`
+`toggleButtonLabel(string $value)` | Toggle button label. | `'Toggle button'`
+`toggleButtonSize(string $value)` | Size toggle button. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting empty normal.
+`withoutCloseButton(bool $value)` | Whether the close button is disable. | `false`
+`withoutToggleButton(bool $value)` | Whether the toggle button is disable. | `false`
+

@@ -7,6 +7,11 @@ namespace Yiisoft\Yii\Bulma;
 use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\Button;
+use Yiisoft\Html\Tag\CustomTag;
+use Yiisoft\Html\Tag\Div;
+use Yiisoft\Html\Tag\P;
+use Yiisoft\Widget\Widget;
 
 use function implode;
 use function in_array;
@@ -42,13 +47,13 @@ final class ModalCard extends Widget
         self::SIZE_MEDIUM,
         self::SIZE_LARGE,
     ];
-
     public const COLOR_PRIMARY = 'is-primary';
     public const COLOR_LINK = 'is-link';
     public const COLOR_INFO = 'is-info';
     public const COLOR_SUCCESS = 'is-success';
     public const COLOR_WARNING = 'is-warning';
     public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
     private const COLOR_ALL = [
         self::COLOR_PRIMARY,
         self::COLOR_LINK,
@@ -56,140 +61,110 @@ final class ModalCard extends Widget
         self::COLOR_SUCCESS,
         self::COLOR_WARNING,
         self::COLOR_DANGER,
+        self::COLOR_DARK,
     ];
-
-    private array $options = [];
-    private array $contentOptions = [];
-    private array $closeButtonOptions = [];
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
+    private array $bodyAttributes = [];
+    private array $cardAttributes = [];
+    private array $closeButtonAttributes = [];
+    private string $closeButtonClass = 'button delete';
     private string $closeButtonSize = '';
-    private bool $withoutCloseButton = true;
+    private string $footer = '';
+    private array $headerAttributes = [];
+    private array $footerAttributes = [];
+    private string $modalCardBackgroundClass = 'modal-background';
+    private string $modalCardBodyClass = 'modal-card-body';
+    private string $modalCardButtonClass = 'button modal-button';
+    private string $modalCardClass = 'modal';
+    private string $modalCardContentClass = 'modal-card';
+    private string $modalCardFootClass = 'modal-card-foot';
+    private string $modalCardHeadClass = 'modal-card-head';
+    private string $modalCardTitleClass = 'modal-card-title';
+    private string $title = '';
+    private array $titleAttributes = [];
+    private array $toggleButtonAttributes = [];
+    private string $toggleButtonColor = '';
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
-    private string $toggleButtonColor = '';
-    private array $toggleButtonOptions = [];
-    private bool $withoutToggleButton = true;
-    private string $title = '';
-    private string $footer = '';
-    private array $titleOptions = [];
-    private array $headerOptions = [];
-    private array $bodyOptions = [];
-    private array $footerOptions = [];
+    private bool $withoutCloseButton = false;
+    private bool $withoutToggleButton = false;
 
     /**
-     * Returns a new instance with the specified main container options.
+     * The HTML attributes.
      *
-     * @param array $value The main container options.
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function attributes(array $values): self
+    {
+        $new = clone $this;
+        $new->attributes = $values;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
+     *
+     * @param string $value The prefix to the automatically generated widget IDs.
+     *
+     * @return self
+     */
+    public function autoIdPrefix(string $value): self
+    {
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified body attributes.
+     *
+     * @param array $value The body attributes.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @return self
      */
-    public function options(array $value): self
+    public function bodyAttributes(array $value): self
     {
         $new = clone $this;
-        $new->options = $value;
+        $new->bodyAttributes = $value;
 
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified content options.
+     * Returns a new instance with the specified close button attributes.
      *
-     * @param array $value The content options.
+     * @param array $value The close button attributes.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @return self
      */
-    public function contentOptions(array $value): self
+    public function closeButtonAttributes(array $value): self
     {
         $new = clone $this;
-        $new->contentOptions = $value;
+        $new->closeButtonAttributes = $value;
 
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified toggle button label.
+     * Returns a new instance with the specified close button class.
      *
-     * @param string $value The toggle button label.
-     *
-     * @return self
-     */
-    public function toggleButtonLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->toggleButtonLabel = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified toggle button options.
-     *
-     * @param array $value The toggle button options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value The close button class.
      *
      * @return self
      */
-    public function toggleButtonOptions(array $value): self
+    public function closeButtonClass(string $value): self
     {
         $new = clone $this;
-        $new->toggleButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified toggle button size.
-     *
-     * @param string $value The toggle button size.
-     *
-     * @return self
-     */
-    public function toggleButtonSize(string $value): self
-    {
-        if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('", "', self::SIZE_ALL);
-            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified toggle button color.
-     *
-     * @param string $value The toggle button color.
-     *
-     * @return self
-     */
-    public function toggleButtonColor(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->toggleButtonColor = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the disabled toggle button.
-     *
-     * @return self
-     */
-    public function withoutToggleButton(): self
-    {
-        $new = clone $this;
-        $new->withoutToggleButton = false;
+        $new->closeButtonClass = $value;
 
         return $new;
     }
@@ -197,14 +172,15 @@ final class ModalCard extends Widget
     /**
      * Returns a new instance with the specified close button size.
      *
-     * @param string $value The close button size.
+     * @param string $value The close button size. Default setting empty normal.
+     * Possible values are: ModalCard::SIZE_SMALL, ModalCard::SIZE_MEDIUM, ModalCard::SIZE_LARGE.
      *
      * @return self
      */
     public function closeButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('"', self::SIZE_ALL);
+            $values = implode(' ', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -215,82 +191,18 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Returns a new instance with the specified close button options.
+     * Returns a new instance with the specified card attributes.
      *
-     * @param array $value The close button options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified options for rendering the close button tag.
-     *
-     * @return self
-     */
-    public function withoutCloseButton(): self
-    {
-        $new = clone $this;
-        $new->withoutCloseButton = false;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified header options.
-     *
-     * @param array $value The header options.
+     * @param array $value The content attributes.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @return self
      */
-    public function headerOptions(array $value): self
+    public function cardAttributes(array $value): self
     {
         $new = clone $this;
-        $new->headerOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified body options.
-     *
-     * @param array $value The body options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function bodyOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->bodyOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified footer options.
-     *
-     * @param array $value The footer options.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function footerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->footerOptions = $value;
+        $new->cardAttributes = $value;
 
         return $new;
     }
@@ -311,18 +223,169 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Returns a new instance with the specified title options.
+     * Returns a new instance with the specified footer attributes.
      *
-     * @param array $value The title options.
+     * @param array $value The footer attributes.
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      *
      * @return self
      */
-    public function titleOptions(array $value): self
+    public function footerAttributes(array $value): self
     {
         $new = clone $this;
-        $new->titleOptions = $value;
+        $new->footerAttributes = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified header attributes.
+     *
+     * @param array $value The header attributes.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function headerAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->headerAttributes = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified ID of the widget.
+     *
+     * @param string|null $value The ID of the widget.
+     *
+     * @return self
+     */
+    public function id(?string $value): self
+    {
+        $new = clone $this;
+        $new->attributes['id'] = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card background class.
+     *
+     * @param string $value The modal card background class.
+     *
+     * @return self
+     */
+    public function modalCardBackgroundClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardBackgroundClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card body class.
+     *
+     * @param string $value The modal card body class.
+     *
+     * @return self
+     */
+    public function modalCardBodyClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardBodyClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card button class.
+     *
+     * @param string $value The modal card button class.
+     *
+     * @return self
+     */
+    public function modalCardButtonClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardButtonClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card class.
+     *
+     * @param string $value The modal card class.
+     *
+     * @return self
+     */
+    public function modalCardClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card content class.
+     *
+     * @param string $value The modal card content class.
+     *
+     * @return self
+     */
+    public function modalCardContentClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardContentClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card footer class.
+     *
+     * @param string $value The modal card footer class.
+     *
+     * @return self
+     */
+    public function modalCardFootClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardFootClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card head class.
+     *
+     * @param string $value The modal card head class.
+     *
+     * @return self
+     */
+    public function modalCardHeadClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardHeadClass = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card title class.
+     *
+     * @param string $value The modal card title class.
+     *
+     * @return self
+     */
+    public function modalCardTitleClass(string $value): self
+    {
+        $new = clone $this;
+        $new->modalCardTitleClass = $value;
 
         return $new;
     }
@@ -342,16 +405,166 @@ final class ModalCard extends Widget
         return $new;
     }
 
+    /**
+     * Returns a new instance with the specified title attributes.
+     *
+     * @param array $value The title attributes.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function titleAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->titleAttributes = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button attributes.
+     *
+     * @param array $value The toggle button attributes.
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function toggleButtonAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonAttributes = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button color.
+     *
+     * @param string $value The toggle button color. Default seeting emtpy without any color.
+     * Possible values are: ModalCard::COLOR_PRIMARY, ModalCard::COLOR_INFO, ModalCard::COLOR_SUCCESS,
+     * ModalCard::COLOR_WARNING, ModalCard::COLOR_DANGER, ModalCard::COLOR_DARK
+     *
+     * @return self
+     */
+    public function toggleButtonColor(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode(' ', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonColor = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified ID of the toggle button.
+     *
+     * @param string|null $value The ID of the widget.
+     *
+     * @return self
+     */
+    public function toggleButtonId(?string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonAttributes['id'] = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button label.
+     *
+     * @param string $value The toggle button label.
+     *
+     * @return self
+     */
+    public function toggleButtonLabel(string $value): self
+    {
+        $new = clone $this;
+        $new->toggleButtonLabel = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified toggle button size.
+     *
+     * @param string $value The toggle button size.
+     *
+     * @return self
+     */
+    public function toggleButtonSize(string $value): self
+    {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->toggleButtonSize = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified options for rendering the close button tag.
+     *
+     * @param bool $value Whether the close button is disabled.
+     *
+     * @return self
+     */
+    public function withoutCloseButton(bool $value): self
+    {
+        $new = clone $this;
+        $new->withoutCloseButton = $value;
+
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the disabled toggle button.
+     *
+     * @param bool $value Whether the toggle button is disabled.
+     *
+     * @return self
+     */
+    public function withoutToggleButton(bool $value): self
+    {
+        $new = clone $this;
+        $new->withoutToggleButton = $value;
+
+        return $new;
+    }
+
     public function begin(): ?string
     {
         parent::begin();
 
-        $this->buildOptions();
+        $attributes = $this->attributes;
+        $cardAttributes = $this->cardAttributes;
+        $html = '';
 
-        $html = $this->renderToggleButton() . "\n";
-        $html .= Html::openTag('div', $this->options) . "\n"; // .modal
+        if (!array_key_exists('id', $attributes)) {
+            $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-modal';
+        }
+
+        /** @var string */
+        $id = $attributes['id'];
+
+        if ($this->withoutToggleButton == false) {
+            $html .= $this->renderToggleButton($id) . "\n";
+        }
+
+        Html::addCssClass($attributes, $this->modalCardClass);
+        Html::addCssClass($cardAttributes, $this->modalCardContentClass);
+
+        $html .= Html::openTag('div', $attributes) . "\n"; // .modal
         $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
-        $html .= Html::openTag('div', $this->contentOptions) . "\n"; // .modal-card
+        $html .= Html::openTag('div', $cardAttributes) . "\n"; // .modal-card
         $html .= $this->renderHeader();
         $html .= $this->renderBodyBegin() . "\n";
 
@@ -369,52 +582,15 @@ final class ModalCard extends Widget
     }
 
     /**
-     * Renders the toggle button.
+     * Renders the background transparent overlay.
      *
      * @throws JsonException
      *
      * @return string
      */
-    private function renderToggleButton(): string
+    private function renderBackgroundTransparentOverlay(): string
     {
-        if ($this->withoutToggleButton) {
-            return Html::button($this->toggleButtonLabel, $this->toggleButtonOptions)->render();
-        }
-
-        return '';
-    }
-
-    /**
-     * Renders the close button.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderCloseButton(): string
-    {
-        if ($this->withoutCloseButton) {
-            return Html::button('', $this->closeButtonOptions)->render();
-        }
-
-        return '';
-    }
-
-    /**
-     * Renders header.
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderHeader(): string
-    {
-        $html = Html::openTag('header', $this->headerOptions) . "\n";
-        $html .= Html::tag('p', $this->title, $this->titleOptions) . "\n";
-        $html .= $this->renderCloseButton() . "\n";
-        $html .= Html::closeTag('header') . "\n";
-
-        return $html;
+        return Div::tag()->class($this->modalCardBackgroundClass)->render();
     }
 
     /**
@@ -426,7 +602,11 @@ final class ModalCard extends Widget
      */
     private function renderBodyBegin(): string
     {
-        return Html::openTag('section', $this->bodyOptions);
+        $bodyAttributes = $this->bodyAttributes;
+
+        Html::addCssClass($bodyAttributes, $this->modalCardBodyClass);
+
+        return Html::openTag('section', $bodyAttributes);
     }
 
     /**
@@ -442,6 +622,27 @@ final class ModalCard extends Widget
     }
 
     /**
+     * Renders the close button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderCloseButton(): string
+    {
+        $closeButtonAttributes = $this->closeButtonAttributes;
+        $closeButtonAttributes['aria-label'] = 'close';
+
+        Html::addCssClass($closeButtonAttributes, $this->closeButtonClass);
+
+        if ($this->closeButtonSize !== '') {
+            Html::addCssClass($closeButtonAttributes, $this->closeButtonSize);
+        }
+
+        return Button::tag()->attributes($closeButtonAttributes)->render() . PHP_EOL;
+    }
+
+    /**
      * Renders the footer.
      *
      * @throws JsonException
@@ -450,49 +651,75 @@ final class ModalCard extends Widget
      */
     private function renderFooter(): string
     {
-        return Html::tag('footer', $this->footer, $this->footerOptions)->render();
+        $footer = $this->footer;
+        $footerAttributes = $this->footerAttributes;
+
+        if ($footer !== '') {
+            $footer = PHP_EOL . $footer . PHP_EOL;
+        }
+
+        Html::addCssClass($footerAttributes, $this->modalCardFootClass);
+
+        return CustomTag::name('footer')->attributes($footerAttributes)->content($footer)->encode(false)->render();
     }
 
     /**
-     * Renders the background transparent overlay.
+     * Renders header.
      *
      * @throws JsonException
      *
      * @return string
      */
-    private function renderBackgroundTransparentOverlay(): string
+    private function renderHeader(): string
     {
-        return Html::tag('div', '', ['class' => 'modal-background'])->render();
-    }
+        $content = '';
+        $headerAttributes = $this->headerAttributes;
+        $titleAttributes = $this->titleAttributes;
 
-    private function buildOptions(): void
-    {
-        $this->options['id'] ??= "{$this->getId()}-modal";
-        $this->options = $this->addOptions($this->options, 'modal');
+        Html::addCssClass($headerAttributes, $this->modalCardHeadClass);
+        Html::addCssClass($titleAttributes, $this->modalCardTitleClass);
 
-        $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
-        $this->closeButtonOptions['aria-label'] = 'close';
+        $content .= P::tag()->attributes($titleAttributes)->content($this->title)->render() . PHP_EOL;
 
-        if ($this->closeButtonSize !== '') {
-            Html::addCssClass($this->closeButtonOptions, $this->closeButtonSize);
+        if ($this->withoutCloseButton == false) {
+            $content .= $this->renderCloseButton();
         }
 
-        $this->toggleButtonOptions = $this->addOptions($this->toggleButtonOptions, 'button');
-        $this->toggleButtonOptions['data-target'] = '#' . $this->options['id'];
-        $this->toggleButtonOptions['aria-haspopup'] = 'true';
+        return CustomTag::name('header')
+            ->attributes($headerAttributes)
+            ->content(PHP_EOL . $content)
+            ->encode(false)
+            ->render() . PHP_EOL;
+    }
+
+    /**
+     * Renders the toggle button.
+     *
+     * @throws JsonException
+     *
+     * @return string
+     */
+    private function renderToggleButton(string $id): string
+    {
+        $toggleButtonAttributes = $this->toggleButtonAttributes;
+
+        if (!array_key_exists('id', $toggleButtonAttributes)) {
+            $toggleButtonAttributes['id'] = Html::generateId($this->autoIdPrefix) . '-button';
+        }
+
+        $toggleButtonAttributes['data-target'] = '#' . $id;
+        $toggleButtonAttributes['aria-haspopup'] = 'true';
 
         if ($this->toggleButtonSize !== '') {
-            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonSize);
+            Html::addCssClass($toggleButtonAttributes, $this->toggleButtonSize);
         }
 
         if ($this->toggleButtonColor !== '') {
-            Html::addCssClass($this->toggleButtonOptions, $this->toggleButtonColor);
+            Html::addCssClass($toggleButtonAttributes, $this->toggleButtonColor);
         }
 
-        $this->contentOptions = $this->addOptions($this->contentOptions, 'modal-card');
-        $this->headerOptions = $this->addOptions($this->headerOptions, 'modal-card-head');
-        $this->titleOptions = $this->addOptions($this->titleOptions, 'modal-card-title');
-        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'modal-card-body');
-        $this->footerOptions = $this->addOptions($this->footerOptions, 'modal-card-foot');
+        Html::addCssClass($toggleButtonAttributes, $this->modalCardButtonClass);
+
+        return Button::tag()->attributes($toggleButtonAttributes)->content($this->toggleButtonLabel)->render();
     }
 }
