@@ -25,8 +25,31 @@ use Yiisoft\Widget\Widget;
  */
 final class Message extends Widget
 {
-    private const COLORS = ['is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger', 'is-dark'];
-    private const SIZES = ['is-small', 'is-medium', 'is-large'];
+    public const SIZE_SMALL = 'is-small';
+    public const SIZE_MEDIUM = 'is-medium';
+    public const SIZE_LARGE = 'is-large';
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
+
+    public const COLOR_PRIMARY = 'is-primary';
+    public const COLOR_LINK = 'is-link';
+    public const COLOR_INFO = 'is-info';
+    public const COLOR_SUCCESS = 'is-success';
+    public const COLOR_WARNING = 'is-warning';
+    public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
+    private const COLOR_ALL = [
+        self::COLOR_PRIMARY,
+        self::COLOR_LINK,
+        self::COLOR_INFO,
+        self::COLOR_SUCCESS,
+        self::COLOR_WARNING,
+        self::COLOR_DANGER,
+        self::COLOR_DARK,
+    ];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
     private string $body = '';
@@ -38,7 +61,7 @@ final class Message extends Widget
     private array $closeButtonAttributes = [];
     private bool $encode = false;
     private array $headerAttributes = [];
-    private string $headerColor = 'is-dark';
+    private string $headerColor = self::COLOR_DARK;
     private string $headerMessage = '';
     private string $messageBodyCssClass = 'message-body';
     private string $messageCssClass = 'message';
@@ -142,8 +165,9 @@ final class Message extends Widget
     /**
      * Set message header color.
      *
-     * @param string $value setting default 'is-dark'. Possible values: 'is-primary', 'is-info', 'is-success',
-     * 'is-link', 'is-warning', 'is-danger'.
+     * @param string $value The header color. Default setting Modal::COLOR_DARK.
+     * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
+     * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
      *
      * @return self
      *
@@ -151,9 +175,9 @@ final class Message extends Widget
      */
     public function headerColor(string $value): self
     {
-        if (!in_array($value, self::COLORS)) {
-            $values = implode(' ', self::COLORS);
-            throw new InvalidArgumentException("Invalid color. Valid values are: $values.");
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode(' ', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
         $new = clone $this;
@@ -208,7 +232,8 @@ final class Message extends Widget
     /**
      * Set size.
      *
-     * @param string $value size class.
+     * @param string $value size class. Default setting empty normal.
+     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
      *
@@ -216,9 +241,9 @@ final class Message extends Widget
      */
     public function size(string $value): self
     {
-        if (!in_array($value, self::SIZES)) {
-            $values = implode(' ', self::SIZES);
-            throw new InvalidArgumentException("Invalid size. Valid values are: $values.");
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode(' ', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
         $new = clone $this;

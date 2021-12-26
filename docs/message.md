@@ -70,10 +70,10 @@ Method | Description | Default
 `body(string $value)` | Message body. | `''`
 `bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
 `closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
-`headerColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
+`headerColor(string $value)` | Message color. (`Modal::COLOR_DARK`, `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`). | `Modal::COLOR_DARK`
 `headerMessage(string $value)` | Message header. | `''`
 `headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
-`size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
+`size(string $value)` | Message widget size. Default is normal. Options available are: (`Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.  | `normal`
 `withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
 `withoutHeader(bool $value)` | Whether the header is disabled. | `false`

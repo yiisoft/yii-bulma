@@ -139,7 +139,7 @@ final class MessageTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: is-primary is-link is-info is-success is-warning is-danger is-dark.'
+            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
         );
         Message::widget()->headerColor('is-non-existent')->render();
     }
@@ -246,7 +246,7 @@ final class MessageTest extends TestCase
     public function testSizeException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid size. Valid values are: is-small is-medium is-large.');
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small is-medium is-large".');
         Message::widget()->size('is-non-existent')->render();
     }
 
