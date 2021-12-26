@@ -31,8 +31,29 @@ use function in_array;
  */
 final class Modal extends Widget
 {
-    private const COLORS = ['is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger', 'is-dark'];
-    private const SIZES = ['is-small', 'is-medium', 'is-large'];
+    public const SIZE_SMALL = 'is-small';
+    public const SIZE_MEDIUM = 'is-medium';
+    public const SIZE_LARGE = 'is-large';
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
+
+    public const COLOR_PRIMARY = 'is-primary';
+    public const COLOR_LINK = 'is-link';
+    public const COLOR_INFO = 'is-info';
+    public const COLOR_SUCCESS = 'is-success';
+    public const COLOR_WARNING = 'is-warning';
+    public const COLOR_DANGER = 'is-danger';
+    private const COLOR_ALL = [
+        self::COLOR_PRIMARY,
+        self::COLOR_LINK,
+        self::COLOR_INFO,
+        self::COLOR_SUCCESS,
+        self::COLOR_WARNING,
+        self::COLOR_DANGER,
+    ];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
     private array $closeButtonAttributes = [];
@@ -106,8 +127,8 @@ final class Modal extends Widget
      */
     public function closeButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZES, true)) {
-            $values = implode('"', self::SIZES);
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('"', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -235,9 +256,9 @@ final class Modal extends Widget
      */
     public function toggleButtonColor(string $value): self
     {
-        if (!in_array($value, self::COLORS, true)) {
-            $values = implode(' ', self::COLORS);
-            throw new InvalidArgumentException("Invalid color. Valid values are: $values.");
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode(' ', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
         $new = clone $this;
@@ -271,9 +292,9 @@ final class Modal extends Widget
      */
     public function toggleButtonSize(string $value): self
     {
-        if (!in_array($value, self::SIZES, true)) {
-            $values = implode(' ', self::SIZES);
-            throw new InvalidArgumentException("Invalid size. Valid values are: $values.");
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode(' ', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
         $new = clone $this;

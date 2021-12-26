@@ -102,7 +102,10 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->toggleButtonColor('is-info')->begin() . Modal::end());
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Modal::widget()->toggleButtonColor(Modal::COLOR_INFO)->begin() . Modal::end(),
+        );
     }
 
     public function testToggleButtonSize(): void
@@ -118,7 +121,10 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->toggleButtonSize('is-large')->begin() . Modal::end());
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Modal::widget()->toggleButtonSize(Modal::SIZE_LARGE)->begin() . Modal::end(),
+        );
     }
 
     public function testWithoutCloseButton(): void
@@ -149,7 +155,10 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->closeButtonSize('is-large')->begin() . Modal::end());
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Modal::widget()->closeButtonSize(Modal::SIZE_LARGE)->begin() . Modal::end(),
+        );
     }
 
     public function testCloseButtonAttributes(): void
@@ -193,18 +202,21 @@ final class ModalTest extends TestCase
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small is-medium is-large".');
         Modal::widget()->toggleButtonSize('is-non-existent');
     }
 
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger".');
         Modal::widget()->toggleButtonColor('is-non-existent');
     }
 
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small"is-medium"is-large".');
         Modal::widget()->closeButtonSize('is-non-existent');
     }
 
@@ -318,9 +330,9 @@ final class ModalTest extends TestCase
         $this->assertNotSame($widget, $widget->modalClass(''));
         $this->assertNotSame($widget, $widget->modalContentClass(''));
         $this->assertNotSame($widget, $widget->toggleButtonattributes([]));
-        $this->assertNotSame($widget, $widget->toggleButtonColor('is-primary'));
+        $this->assertNotSame($widget, $widget->toggleButtonColor(Modal::COLOR_PRIMARY));
         $this->assertNotSame($widget, $widget->toggleButtonLabel(''));
-        $this->assertNotSame($widget, $widget->toggleButtonSize('is-small'));
+        $this->assertNotSame($widget, $widget->toggleButtonSize(Modal::SIZE_SMALL));
         $this->assertNotSame($widget, $widget->withoutCloseButton(false));
         $this->assertNotSame($widget, $widget->withoutToggleButton(false));
     }
