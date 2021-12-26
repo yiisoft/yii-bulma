@@ -555,7 +555,7 @@ final class ModalCard extends Widget
         /** @var string */
         $id = $attributes['id'];
 
-        if ($this->withoutToggleButton == false) {
+        if ($this->withoutToggleButton === false) {
             $html .= $this->renderToggleButton($id) . "\n";
         }
 
@@ -681,7 +681,7 @@ final class ModalCard extends Widget
 
         $content .= P::tag()->attributes($titleAttributes)->content($this->title)->render() . PHP_EOL;
 
-        if ($this->withoutCloseButton == false) {
+        if ($this->withoutCloseButton === false) {
             $content .= $this->renderCloseButton();
         }
 
