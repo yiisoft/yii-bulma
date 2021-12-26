@@ -6,6 +6,8 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\CustomTag;
+use Yiisoft\Widget\Widget;
 
 use function implode;
 use function in_array;
@@ -37,6 +39,7 @@ final class ProgressBar extends Widget
     public const COLOR_SUCCESS = 'is-success';
     public const COLOR_WARNING = 'is-warning';
     public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
     private const COLOR_ALL = [
         self::COLOR_PRIMARY,
         self::COLOR_LINK,
@@ -44,55 +47,95 @@ final class ProgressBar extends Widget
         self::COLOR_SUCCESS,
         self::COLOR_WARNING,
         self::COLOR_DANGER,
+        self::COLOR_DARK,
     ];
 
-    private array $options = [];
-    private float $value = 0;
-    private int $maxValue = 100;
-    private string $size = '';
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
     private string $color = '';
+    private string $size = '';
 
     /**
-     * Returns a new instance with the specified HTML attributes for the widget container tag.
+     * The HTML attributes.
      *
-     * @param array $value The HTML attributes for the widget container tag.
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function attributes(array $values): self
+    {
+        $new = clone $this;
+        $new->attributes = $values;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
+     *
+     * @param string $value The prefix to the automatically generated widget IDs.
      *
      * @return self
      */
-    public function options(array $value): self
+    public function autoIdPrefix(string $value): self
     {
         $new = clone $this;
-        $new->options = $value;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified progress bar color.
+     *
+     * @param string $value The progress bar color. Default setting color empty without any color.
+     * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
+     * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
+     *
+     * @return self
+     */
+    public function color(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode(' ', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->color = $value;
 
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified value of the progress.
+     * Returns a new instance with the specified ID of the widget.
      *
-     * @param float $value The value of the progress. Set `0` to display loading animation.
+     * @param string $value The ID of the widget.
      *
      * @return self
      */
-    public function value(float $value): self
+    public function id(string $value): self
     {
         $new = clone $this;
-        $new->value = $value;
-
+        $new->attributes['id'] = $value;
         return $new;
     }
 
     /**
      * Returns a new instance with the specified maximum progress value.
      *
-     * @param int $value Maximum progress value. Set `0` for no maximum.
+     * @param int|null $value Maximum progress value. Set `0` for no maximum.
      *
      * @return self
      */
-    public function maxValue(int $value): self
+    public function maxValue(?int $value): self
     {
+        if ($value < 0 || $value > 100) {
+            throw new InvalidArgumentException('Invalid max value. It must be between 0 and 100.');
+        }
+
         $new = clone $this;
-        $new->maxValue = $value;
+        $new->attributes['max'] = $value;
 
         return $new;
     }
@@ -100,14 +143,15 @@ final class ProgressBar extends Widget
     /**
      * Returns a new instance with the specified progress bar size class.
      *
-     * @param string $value The progress bar size class.
+     * @param string $value The progress bar size class. Default setting empty normal.
+     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
      */
     public function size(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('"', self::SIZE_ALL);
+            $values = implode(' ', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -118,56 +162,55 @@ final class ProgressBar extends Widget
     }
 
     /**
-     * Returns a new instance with the specified progress bar color.
+     * Returns a new instance with the specified value of the progress.
      *
-     * @param string $value The progress bar color.
+     * @param float|null $value The value of the progress. Set `0` to display loading animation.
      *
      * @return self
      */
-    public function color(string $value): self
+    public function value(?float $value): self
     {
-        if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode('"', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        if ($value < 0 || $value > 100) {
+            throw new InvalidArgumentException('Invalid value. It must be between 0 and 100.');
         }
 
         $new = clone $this;
-        $new->color = $value;
+        $new->attributes['value'] = $value;
 
         return $new;
     }
 
     protected function run(): string
     {
-        $this->buildOptions();
+        $attributes = $this->attributes;
+        /** @var string */
+        $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-progressbar');
+        $content = '';
 
-        $content = $this->value > 0 ? $this->value . '%' : '';
-
-        return Html::tag('progress', $content, $this->options)->render();
-    }
-
-    private function buildOptions(): void
-    {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-progressbar";
+        if (array_key_exists('max', $attributes)) {
+            /** @var int|null */
+            $attributes['max'] = $attributes['max'] === 0 ? null : $attributes['max'];
+        } else {
+            /** @var int|null */
+            $attributes['max'] ??= 100;
         }
 
-        $this->options = $this->addOptions($this->options, 'progress');
-
-        if ($this->maxValue > 0) {
-            $this->options['max'] = $this->maxValue;
+        if (array_key_exists('value', $attributes)) {
+            /** @var float|null */
+            $attributes['value'] = $attributes['value'] === 0.0 ? null : $attributes['value'];
+            $content = $attributes['value'] > 0 ? (string)$attributes['value'] . '%' : '';
         }
 
-        if ($this->value > 0) {
-            $this->options['value'] = $this->value;
-        }
+        Html::addCssClass($attributes, 'progress');
 
         if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
+            Html::addCssClass($attributes, $this->size);
         }
 
         if ($this->color !== '') {
-            Html::addCssClass($this->options, $this->color);
+            Html::addCssClass($attributes, $this->color);
         }
+
+        return CustomTag::name('progress')->attributes($attributes)->content($content)->render();
     }
 }
