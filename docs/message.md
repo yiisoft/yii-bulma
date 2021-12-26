@@ -70,7 +70,7 @@ Method | Description | Default
 `body(string $value)` | Message body. | `''`
 `bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
 `closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
-`headerColor(string $value)` | Message color. (`Modal::COLOR_DARK`, `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`). | `Modal::COLOR_DARK`
+`headerColor(string $value)` | Message color. Options available are: (`Modal::COLOR_DARK`, `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`). | `Modal::COLOR_DARK`
 `headerMessage(string $value)` | Message header. | `''`
 `headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`

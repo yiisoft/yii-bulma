@@ -33,7 +33,6 @@ final class Message extends Widget
         self::SIZE_MEDIUM,
         self::SIZE_LARGE,
     ];
-
     public const COLOR_PRIMARY = 'is-primary';
     public const COLOR_LINK = 'is-link';
     public const COLOR_INFO = 'is-info';
