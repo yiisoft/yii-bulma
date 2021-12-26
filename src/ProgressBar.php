@@ -182,10 +182,22 @@ final class ProgressBar extends Widget
 
     protected function run(): string
     {
-        $attributes = $this->attributes;
+        $attributes = $this->build($this->attributes);
+        $content = '';
+
+        if (array_key_exists('value', $attributes)) {
+            /** @var float|null */
+            $attributes['value'] = $attributes['value'] === 0.0 ? null : $attributes['value'];
+            $content = $attributes['value'] > 0 ? (string)$attributes['value'] . '%' : '';
+        }
+
+        return CustomTag::name('progress')->attributes($attributes)->content($content)->render();
+    }
+
+    private function build(array $attributes): array
+    {
         /** @var string */
         $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-progressbar');
-        $content = '';
 
         if (array_key_exists('max', $attributes)) {
             /** @var int|null */
@@ -193,12 +205,6 @@ final class ProgressBar extends Widget
         } else {
             /** @var int|null */
             $attributes['max'] ??= 100;
-        }
-
-        if (array_key_exists('value', $attributes)) {
-            /** @var float|null */
-            $attributes['value'] = $attributes['value'] === 0.0 ? null : $attributes['value'];
-            $content = $attributes['value'] > 0 ? (string)$attributes['value'] . '%' : '';
         }
 
         Html::addCssClass($attributes, 'progress');
@@ -211,6 +217,6 @@ final class ProgressBar extends Widget
             Html::addCssClass($attributes, $this->color);
         }
 
-        return CustomTag::name('progress')->attributes($attributes)->content($content)->render();
+        return $attributes;
     }
 }
