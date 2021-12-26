@@ -114,15 +114,15 @@ Method | Description | Default
 `attributes(array $value)` | The HTML attributes. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `closeButtonAttributes(array $value)` | HTML attributes for the button tag. | [`class` => `modal-close`, `aria-label` => `close`]
-`closeButtonSize(string $value)` | Size close button. | `Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.
+`closeButtonSize(string $value)` | Size close button. | Default setting empty normal. `Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.
 `contentAttributes(array $value)`| HTML attributes for the content tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
 `modalBackgroundClass(string $value)` | Class for the modal background. | `modal-background`
 `modalClass(string $value)` | Class for the modal. | `modal`
 `modalContentClass(string $value)` | Class for the modal content. | `modal-content`
 `toggleButtonAttributes(array $value)` |  HTML attributes for the toogle button tag. | [`class` => `button`, `aria-haspopup` => `true`]
-`toggleButtonColor(string $value)` | Toggle button color. | `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`.
+`toggleButtonColor(string $value)` | Toggle button color. | Default setting empty whitout color. `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`.
 `toggleButtonLabel(string $value)` | Toggle button label, | `Toggle button`
-`toggleButtonSize(string $value)` | Size toggle button. | `Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.
+`toggleButtonSize(string $value)` | Size toggle button. | Default setting empty normal. `Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.
 `withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
 `withoutToggleButton(bool $value)` | Whether the toggle button is disabled. | `false`

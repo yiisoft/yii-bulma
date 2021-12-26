@@ -121,7 +121,8 @@ final class Modal extends Widget
     /**
      * Returns a new instance with the specified close button size.
      *
-     * @param string $value The close button size.
+     * @param string $value The close button size. Default setting empty normal.
+     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
      */
@@ -250,7 +251,8 @@ final class Modal extends Widget
      * Returns a new instance with the specified toggle button color.
      *
      * @param string $value The toggle button color. $value Setting default is empty.
-     * Possible values: 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning', 'is-danger'.
+     * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
+     * Modal::COLOR_WARNING, Modal::COLOR_DANGER.
      *
      * @return self
      */
@@ -286,7 +288,7 @@ final class Modal extends Widget
      * Returns a new instance with the specified toggle button size.
      *
      * @param string $value The toggle button size. Default setting empty normal.
-     * Possible values: 'is-small', 'is-medium', 'is-large'.
+     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
      */
