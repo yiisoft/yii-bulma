@@ -61,7 +61,7 @@ The code above generates the following HTML:
 
 ## Setters
 
-All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Breadcrumbs` class with the specified value.
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Message` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
@@ -70,10 +70,10 @@ Method | Description | Default
 `body(string $value)` | Message body. | `''`
 `bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
 `closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
-`headerColor(string $value)` | Message color. Options available are: (`Modal::COLOR_DARK`, `Modal::COLOR_PRIMARY`, `Modal::COLOR_LINK`, `Modal::COLOR_INFO`, `Modal::COLOR_SUCCESS`, `Modal::COLOR_WARNING`, `Modal::COLOR_DANGER`). | `Modal::COLOR_DARK`
+`headerColor(string $value)` | Message color. Options available are: (`Message::COLOR_DARK`, `Message::COLOR_PRIMARY`, `Message::COLOR_LINK`, `Message::COLOR_INFO`, `Message::COLOR_SUCCESS`, `Message::COLOR_WARNING`, `Message::COLOR_DANGER`). | `Message::COLOR_DARK`
 `headerMessage(string $value)` | Message header. | `''`
 `headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
-`size(string $value)` | Message widget size. Default is normal. Options available are: (`Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`.  | `normal`
+`size(string $value)` | Message widget size. Default is normal. Options available are: (`Message::SIZE_SMALL`, `Message::SIZE_MEDIUM`, `Message::SIZE_LARGE`.  | `normal`
 `withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
 `withoutHeader(bool $value)` | Whether the header is disabled. | `false`
