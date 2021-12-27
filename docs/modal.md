@@ -115,8 +115,8 @@ Method | Description | Default
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `backgroundClass(string $value)` | Class for the modal background. | `modal-background`
 `buttonClass(string $value)` | Class for the modal button. | `button modal-button`
-`closeButtonAttributes(array $value)` | HTML attributes for the button tag. | [`class` => `modal-close`, `aria-label` => `close`]
-`closeButtonSize(string $value)` | Size close button. Options available are: (`Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`). | Default setting empty normal.
+`closeButtonAttributes(array $value)` | HTML attributes for the close button tag. | [`class` => `modal-close`, `aria-label` => `close`]
+`closeButtonSize(string $value)` | Close button size. Options available are: (`Modal::SIZE_SMALL`, `Modal::SIZE_MEDIUM`, `Modal::SIZE_LARGE`). | Default size is normal.
 `contentAttributes(array $value)`| HTML attributes for the content tag. | `[]`
 `contentClass(string $value)` | Class for the modal content. | `modal-content`
 `id(string $value)` | Widget ID. | `''`
