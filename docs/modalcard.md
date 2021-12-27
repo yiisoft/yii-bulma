@@ -96,25 +96,25 @@ Method | Description | Default
 -------|-------------|---------
 `attributes(array $value)` | The HTML attributes. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
+`backgroundClass(string $value)` | The class for the modal background. | `modal-background`
 `bodyAttributes(array $value)` | HTML attributes for the body tag.| []
+`bodyClass(string $value)` | The class for the modal body. | `modal-card-body`
+`buttonClass(string $value)` | The class for the modal button. | `button modal-button`
+`cardAttributes(array $value)` | HTML attributes for the card. | []
 `closeButtonAttributes(array $value)` | HTML attributes for the close button. | []
 `closeButtonClass(string $value)` | The class for the close button. | `button delete`
 `closeButtonSize(string $value)` | Size close button. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting empty normal.
-`cardAttributes(array $value)` | HTML attributes for the card. | []
+`contentClass(string $value)` | The class for the modal card content. | `modal-card-content`
+`footClass(string $value)` | The class for the modal card foot. | `modal-card-foot`
 `footer(string $value)` | The footer content. | `''`
 `footerAttributes(array $value)` | HTML attributes for the footer. | []
+`headClass(string $value)` | The class for the modal card head. | `modal-card-head`
 `headerAttributes(array $value)` | HTML attributes for the header. | []
 `id(string $value)` | Widget ID. | `''`
-`modalCardBackgroundClass(string $value)` | The class for the modal background. | `modal-background`
-`modalCardBodyClass(string $value)` | The class for the modal body. | `modal-card-body`
-`modalCardButtonClass(string $value)` | The class for the modal button. | `button modal-button`
 `modalCardClass(string $value)` | The class for the modal card. | `modal-card`
-`modalCardContentClass(string $value)` | The class for the modal card content. | `modal-card-content`
-`modalCardFootClass(string $value)` | The class for the modal card foot. | `modal-card-foot`
-`modalCardHeadClass(string $value)` | The class for the modal card head. | `modal-card-head`
-`modalCardTitleClass(string $value)` | The class for the modal card title. | `modal-card-title`
 `title(string $value)` | The title content. | `''`
 `titleAttributes(array $value)` | HTML attributes for the title. | []
+`titleClass(string $value)` | The class for the modal card title. | `modal-card-title`
 `toggleButtonAttributes(array $value)` | HTML attributes for the toggle button. | []
 `toggleButtonColor(string $value)` | Color toggle button. Options available are: (`ModalCard::COLOR_PRIMARY`, `ModalCard::COLOR_INFO`, `ModalCard::COLOR_SUCCESS`, `ModalCard::COLOR_WARNING`, `ModalCard::COLOR_DANGER`, `ModalCard::COLOR_DARK`). | `''`
 `toggleButtonId(?string $value)` | Toggle button ID. | `''`

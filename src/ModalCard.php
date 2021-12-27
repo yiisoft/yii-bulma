@@ -65,23 +65,23 @@ final class ModalCard extends Widget
     ];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
+    private string $backgroundClass = 'modal-background';
     private array $bodyAttributes = [];
+    private string $bodyClass = 'modal-card-body';
+    private string $buttonClass = 'button modal-button';
     private array $cardAttributes = [];
     private array $closeButtonAttributes = [];
     private string $closeButtonClass = 'button delete';
     private string $closeButtonSize = '';
+    private string $contentClass = 'modal-card';
     private string $footer = '';
     private array $headerAttributes = [];
     private array $footerAttributes = [];
-    private string $modalCardBackgroundClass = 'modal-background';
-    private string $modalCardBodyClass = 'modal-card-body';
-    private string $modalCardButtonClass = 'button modal-button';
+    private string $footClass = 'modal-card-foot';
+    private string $headClass = 'modal-card-head';
     private string $modalCardClass = 'modal';
-    private string $modalCardContentClass = 'modal-card';
-    private string $modalCardFootClass = 'modal-card-foot';
-    private string $modalCardHeadClass = 'modal-card-head';
-    private string $modalCardTitleClass = 'modal-card-title';
     private string $title = '';
+    private string $titleClass = 'modal-card-title';
     private array $titleAttributes = [];
     private array $toggleButtonAttributes = [];
     private string $toggleButtonColor = '';
@@ -277,10 +277,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardBackgroundClass(string $value): self
+    public function backgroundClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardBackgroundClass = $value;
+        $new->backgroundClass = $value;
 
         return $new;
     }
@@ -292,10 +292,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardBodyClass(string $value): self
+    public function bodyClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardBodyClass = $value;
+        $new->bodyClass = $value;
 
         return $new;
     }
@@ -307,10 +307,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardButtonClass(string $value): self
+    public function buttonClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardButtonClass = $value;
+        $new->buttonClass = $value;
 
         return $new;
     }
@@ -337,10 +337,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardContentClass(string $value): self
+    public function contentClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardContentClass = $value;
+        $new->contentClass = $value;
 
         return $new;
     }
@@ -352,10 +352,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardFootClass(string $value): self
+    public function footClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardFootClass = $value;
+        $new->footClass = $value;
 
         return $new;
     }
@@ -367,10 +367,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardHeadClass(string $value): self
+    public function headClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardHeadClass = $value;
+        $new->headClass = $value;
 
         return $new;
     }
@@ -382,10 +382,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardTitleClass(string $value): self
+    public function titleClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardTitleClass = $value;
+        $new->titleClass = $value;
 
         return $new;
     }
@@ -560,7 +560,7 @@ final class ModalCard extends Widget
         }
 
         Html::addCssClass($attributes, $this->modalCardClass);
-        Html::addCssClass($cardAttributes, $this->modalCardContentClass);
+        Html::addCssClass($cardAttributes, $this->contentClass);
 
         $html .= Html::openTag('div', $attributes) . "\n"; // .modal
         $html .= $this->renderBackgroundTransparentOverlay() . "\n"; // .modal-background
@@ -590,7 +590,7 @@ final class ModalCard extends Widget
      */
     private function renderBackgroundTransparentOverlay(): string
     {
-        return Div::tag()->class($this->modalCardBackgroundClass)->render();
+        return Div::tag()->class($this->backgroundClass)->render();
     }
 
     /**
@@ -604,7 +604,7 @@ final class ModalCard extends Widget
     {
         $bodyAttributes = $this->bodyAttributes;
 
-        Html::addCssClass($bodyAttributes, $this->modalCardBodyClass);
+        Html::addCssClass($bodyAttributes, $this->bodyClass);
 
         return Html::openTag('section', $bodyAttributes);
     }
@@ -658,7 +658,7 @@ final class ModalCard extends Widget
             $footer = PHP_EOL . $footer . PHP_EOL;
         }
 
-        Html::addCssClass($footerAttributes, $this->modalCardFootClass);
+        Html::addCssClass($footerAttributes, $this->footClass);
 
         return CustomTag::name('footer')->attributes($footerAttributes)->content($footer)->encode(false)->render();
     }
@@ -676,8 +676,8 @@ final class ModalCard extends Widget
         $headerAttributes = $this->headerAttributes;
         $titleAttributes = $this->titleAttributes;
 
-        Html::addCssClass($headerAttributes, $this->modalCardHeadClass);
-        Html::addCssClass($titleAttributes, $this->modalCardTitleClass);
+        Html::addCssClass($headerAttributes, $this->headClass);
+        Html::addCssClass($titleAttributes, $this->titleClass);
 
         $content .= P::tag()->attributes($titleAttributes)->content($this->title)->render() . PHP_EOL;
 
@@ -718,7 +718,7 @@ final class ModalCard extends Widget
             Html::addCssClass($toggleButtonAttributes, $this->toggleButtonColor);
         }
 
-        Html::addCssClass($toggleButtonAttributes, $this->modalCardButtonClass);
+        Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
         return Button::tag()->attributes($toggleButtonAttributes)->content($this->toggleButtonLabel)->render();
     }
