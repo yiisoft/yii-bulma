@@ -58,14 +58,14 @@ final class Modal extends Widget
     ];
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
+    private string $backgroundClass = 'modal-background';
+    private string $buttonClass = 'button modal-button';
     private array $closeButtonAttributes = [];
     private string $closeButtonClass = 'modal-close';
     private string $closeButtonSize = '';
     private array $contentAttributes = [];
-    private string $modalBackgroundClass = 'modal-background';
-    private string $modalButtonClass = 'button modal-button';
+    private string $contentClass = 'modal-content';
     private string $modalClass = 'modal';
-    private string $modalContentClass = 'modal-content';
     private array $toggleButtonAttributes = [];
     private string $toggleButtonLabel = 'Toggle button';
     private string $toggleButtonSize = '';
@@ -179,10 +179,10 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function modalBackgroundClass(string $value): self
+    public function backgroundClass(string $value): self
     {
         $new = clone $this;
-        $new->modalBackgroundClass = $value;
+        $new->backgroundClass = $value;
 
         return $new;
     }
@@ -194,10 +194,10 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function modalButtonClass(string $value): self
+    public function buttonClass(string $value): self
     {
         $new = clone $this;
-        $new->modalButtonClass = $value;
+        $new->buttonClass = $value;
 
         return $new;
     }
@@ -224,10 +224,10 @@ final class Modal extends Widget
      *
      * @return self
      */
-    public function modalContentClass(string $value): self
+    public function contentClass(string $value): self
     {
         $new = clone $this;
-        $new->modalContentClass = $value;
+        $new->contentClass = $value;
 
         return $new;
     }
@@ -353,14 +353,14 @@ final class Modal extends Widget
         $id = $attributes['id'];
 
         Html::addCssClass($attributes, $this->modalClass);
-        Html::addCssClass($contentAttributes, $this->modalContentClass);
+        Html::addCssClass($contentAttributes, $this->contentClass);
 
         if ($this->withoutToggleButton == false) {
             $html .= $this->renderToggleButton($id) . "\n";
         }
 
         $html .= Html::openTag('div', $attributes) . "\n"; // .modal
-        $html .= Div::tag()->class($this->modalBackgroundClass) . "\n";
+        $html .= Div::tag()->class($this->backgroundClass) . "\n";
 
         if ($this->withoutCloseButton === false) {
             $html .= $this->renderCloseButton() . "\n";
@@ -401,7 +401,7 @@ final class Modal extends Widget
             Html::addCssClass($toggleButtonAttributes, $this->toggleButtonColor);
         }
 
-        Html::addCssClass($toggleButtonAttributes, $this->modalButtonClass);
+        Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
         return Button::tag()->attributes($toggleButtonAttributes)->content($this->toggleButtonLabel)->render();
     }

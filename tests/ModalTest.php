@@ -241,7 +241,7 @@ final class ModalTest extends TestCase
         );
     }
 
-    public function testModalBlackGroundClass(): void
+    public function testBackgroundClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
@@ -256,11 +256,11 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->modalBackgroundClass('test-class')->begin() . Modal::end(),
+            Modal::widget()->backgroundClass('test-class')->begin() . Modal::end(),
         );
     }
 
-    public function testModalButtonClass(): void
+    public function testButtonClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
@@ -275,7 +275,7 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->modalButtonClass('test-class')->begin() . Modal::end(),
+            Modal::widget()->buttonClass('test-class')->begin() . Modal::end(),
         );
     }
 
@@ -298,7 +298,7 @@ final class ModalTest extends TestCase
         );
     }
 
-    public function testModalContentClass(): void
+    public function testContentClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
@@ -313,7 +313,7 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->modalContentClass('test-class')->begin() . Modal::end(),
+            Modal::widget()->contentClass('test-class')->begin() . Modal::end(),
         );
     }
 
@@ -323,14 +323,14 @@ final class ModalTest extends TestCase
 
         $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Modal::class));
+        $this->assertNotSame($widget, $widget->backgroundClass(''));
+        $this->assertNotSame($widget, $widget->buttonClass(''));
         $this->assertNotSame($widget, $widget->closeButtonAttributes([]));
         $this->assertNotSame($widget, $widget->closeButtonSize('is-small'));
         $this->assertNotSame($widget, $widget->contentAttributes([]));
+        $this->assertNotSame($widget, $widget->contentClass(''));
         $this->assertNotSame($widget, $widget->id(Modal::class));
-        $this->assertNotSame($widget, $widget->modalBackgroundClass(''));
-        $this->assertNotSame($widget, $widget->modalButtonClass(''));
         $this->assertNotSame($widget, $widget->modalClass(''));
-        $this->assertNotSame($widget, $widget->modalContentClass(''));
         $this->assertNotSame($widget, $widget->toggleButtonattributes([]));
         $this->assertNotSame($widget, $widget->toggleButtonColor(Modal::COLOR_PRIMARY));
         $this->assertNotSame($widget, $widget->toggleButtonLabel(''));
