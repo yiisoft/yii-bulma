@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Message;
 
 final class MessageTest extends TestCase
 {
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -35,6 +42,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testBodyAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -60,6 +70,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testCloseButtonAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -85,6 +98,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testHeaderAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -110,6 +126,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testHeaderColor(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -135,6 +154,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testHeaderColorException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -144,6 +166,9 @@ final class MessageTest extends TestCase
         Message::widget()->headerColor('is-non-existent')->render();
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testId(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -169,6 +194,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -193,6 +221,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testRenderWithEncode(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -218,6 +249,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testSize(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -243,6 +277,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testSizeException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -250,6 +287,9 @@ final class MessageTest extends TestCase
         Message::widget()->size('is-non-existent')->render();
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testWithoutCloseButton(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -272,6 +312,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testWithoutHeader(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -293,6 +336,9 @@ final class MessageTest extends TestCase
         );
     }
 
+    /**
+     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     */
     public function testImmutability(): void
     {
         $widget = Message::widget();
