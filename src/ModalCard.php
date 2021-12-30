@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use JsonException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\CustomTag;
@@ -442,7 +441,7 @@ final class ModalCard extends Widget
     /**
      * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value The toggle button color. Default seeting emtpy without any color.
+     * @param string $value The toggle button color. Default setting empty without any color.
      * Possible values are: ModalCard::COLOR_PRIMARY, ModalCard::COLOR_INFO, ModalCard::COLOR_SUCCESS,
      * ModalCard::COLOR_WARNING, ModalCard::COLOR_DANGER, ModalCard::COLOR_DARK
      *
@@ -584,8 +583,6 @@ final class ModalCard extends Widget
     /**
      * Renders the background transparent overlay.
      *
-     * @throws JsonException
-     *
      * @return string
      */
     private function renderBackgroundTransparentOverlay(): string
@@ -595,8 +592,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders begin body tag.
-     *
-     * @throws JsonException
      *
      * @return string
      */
@@ -612,8 +607,6 @@ final class ModalCard extends Widget
     /**
      * Renders end body tag.
      *
-     * @throws JsonException
-     *
      * @return string
      */
     private function renderBodyEnd(): string
@@ -623,8 +616,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders the close button.
-     *
-     * @throws JsonException
      *
      * @return string
      */
@@ -645,8 +636,6 @@ final class ModalCard extends Widget
     /**
      * Renders the footer.
      *
-     * @throws JsonException
-     *
      * @return string
      */
     private function renderFooter(): string
@@ -665,8 +654,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders header.
-     *
-     * @throws JsonException
      *
      * @return string
      */
@@ -695,7 +682,7 @@ final class ModalCard extends Widget
     /**
      * Renders the toggle button.
      *
-     * @throws JsonException
+     * @param string $id
      *
      * @return string
      */

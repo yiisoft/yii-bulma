@@ -5,15 +5,23 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Img;
 use Yiisoft\Html\Tag\Button;
+use Yiisoft\Html\Tag\Img;
 use Yiisoft\Html\Tag\P;
 use Yiisoft\Yii\Bulma\ModalCard;
 
 final class ModalCardTest extends TestCase
 {
-    /** @link https://bulmajs.tomerbe.co.uk/docs/0.12/2-core-components/modal/ */
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     *
+     * @link https://bulmajs.tomerbe.co.uk/docs/0.12/2-core-components/modal/
+     */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -53,6 +61,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testFooterAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -93,6 +104,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testCardAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -133,6 +147,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testToggleButtonLabel(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -173,6 +190,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testToggleButtonAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -213,6 +233,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testToggleButtonSize(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -253,6 +276,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testToggleButtonColor(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -293,6 +319,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testToggleWithoutToggleButton(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -332,6 +361,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testCloseButtonSize(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -372,6 +404,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testCloseButtonAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -412,6 +447,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testCloseButtonWithoutCloseButton(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -451,6 +489,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testHeaderOptions(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -491,6 +532,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testBodyAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -531,6 +575,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testTitleAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -572,12 +619,18 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
         ModalCard::widget()->toggleButtonSize('is-non-existent')->begin();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testExceptionToggleButtonColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -587,6 +640,9 @@ final class ModalCardTest extends TestCase
         ModalCard::widget()->toggleButtonColor('is-non-existent')->begin();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -594,6 +650,9 @@ final class ModalCardTest extends TestCase
         ModalCard::widget()->closeButtonSize('is-non-existent')->begin();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testModalCardAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -634,6 +693,9 @@ final class ModalCardTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testImmutability(): void
     {
         $widget = ModalCard::widget();
