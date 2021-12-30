@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\ProgressBar;
 
 final class ProgressBarTest extends TestCase
 {
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -21,6 +28,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -35,6 +45,9 @@ final class ProgressBarTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarSize(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -45,6 +58,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->size(ProgressBar::SIZE_LARGE)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarColor(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -55,6 +71,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->color(ProgressBar::COLOR_PRIMARY)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarMax(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -65,6 +84,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->maxValue(50)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarMaxException(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -74,6 +96,9 @@ final class ProgressBarTest extends TestCase
         ProgressBar::widget()->maxValue(150)->render();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarPercent(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -84,6 +109,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(75)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarValueException(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -93,6 +121,9 @@ final class ProgressBarTest extends TestCase
         ProgressBar::widget()->value(150)->render();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarWithZeroValues(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -103,6 +134,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(0)->maxValue(0)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testProgressBarWithNullValues(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -113,6 +147,9 @@ final class ProgressBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(null)->maxValue(null)->render());
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -120,6 +157,9 @@ final class ProgressBarTest extends TestCase
         ProgressBar::widget()->size('is-non-existent')->render();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testExceptionColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -129,6 +169,9 @@ final class ProgressBarTest extends TestCase
         ProgressBar::widget()->color('is-non-existent')->render();
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testImmutability(): void
     {
         $widget = ProgressBar::widget();
