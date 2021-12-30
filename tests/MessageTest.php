@@ -15,7 +15,7 @@ use Yiisoft\Yii\Bulma\Message;
 final class MessageTest extends TestCase
 {
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testAttributes(): void
     {
@@ -43,7 +43,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testBodyAttributes(): void
     {
@@ -71,7 +71,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testCloseButtonAttributes(): void
     {
@@ -99,7 +99,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testHeaderAttributes(): void
     {
@@ -127,7 +127,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testHeaderColor(): void
     {
@@ -155,7 +155,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testHeaderColorException(): void
     {
@@ -167,7 +167,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testId(): void
     {
@@ -195,7 +195,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testRender(): void
     {
@@ -222,7 +222,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testRenderWithEncode(): void
     {
@@ -250,7 +250,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testSize(): void
     {
@@ -278,7 +278,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testSizeException(): void
     {
@@ -288,7 +288,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testWithoutCloseButton(): void
     {
@@ -313,7 +313,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testWithoutHeader(): void
     {
@@ -337,7 +337,7 @@ final class MessageTest extends TestCase
     }
 
     /**
-     * @throws InvalidConfigException|NotFoundException|NotInstantiableException|CircularReferenceException
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     public function testImmutability(): void
     {
