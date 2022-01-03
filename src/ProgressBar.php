@@ -89,8 +89,8 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified progress bar color.
      *
      * @param string $value The progress bar color. By default there is no color.
-     * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
-     * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
+     * Possible values: ProgressBar::COLOR_PRIMARY, ProgressBar::COLOR_LINK, ProgressBar::COLOR_INFO,
+     * ProgressBar::COLOR_SUCCESS, ProgressBar::COLOR_WARNING, ProgressBar::COLOR_DANGER, ProgressBar::COLOR_DARK.
      *
      * @return self
      */
@@ -144,7 +144,7 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified progress bar size class.
      *
      * @param string $value The progress bar size class. Default setting is "normal".
-     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
+     * Possible values: ProgressBar::SIZE_SMALL, ProgressBar::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
      */
