@@ -132,7 +132,6 @@ final class Message extends Widget
      * The attributes for rendering the close button tag.
      *
      * The close button is displayed in the header of the Message. Clicking on the button will hide the message.
-     * If {@see withoutClosedButton} is false, no close button will be rendered.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -164,9 +163,9 @@ final class Message extends Widget
     /**
      * Set message header color.
      *
-     * @param string $value The header color. Default setting Modal::COLOR_DARK.
-     * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
-     * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
+     * @param string $value The header color. Default is Message::COLOR_DARK.
+     * Possible values: Message::COLOR_PRIMARY, Message::COLOR_LINK, Message::COLOR_INFO, Message::COLOR_SUCCESS,
+     * Message::COLOR_WARNING, Message::COLOR_DANGER, Message::COLOR_DARK.
      *
      * @return self
      *
@@ -175,7 +174,7 @@ final class Message extends Widget
     public function headerColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode(' ', self::COLOR_ALL);
+            $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
@@ -231,8 +230,8 @@ final class Message extends Widget
     /**
      * Set size.
      *
-     * @param string $value size class. Default setting empty normal.
-     * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
+     * @param string $value size class. By default, not class is added and the size is considered "normal".
+     * Possible values: Message::SIZE_SMALL, Message::SIZE_MEDIUM, Message::SIZE_LARGE.
      *
      * @return self
      *
@@ -241,7 +240,7 @@ final class Message extends Widget
     public function size(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode(' ', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -253,7 +252,7 @@ final class Message extends Widget
     /**
      * Allows you to remove the close button.
      *
-     * @param bool $value whether to remove the close button.
+     * @param bool $value Whether to remove the close button.
      *
      * @return self
      */
@@ -267,7 +266,7 @@ final class Message extends Widget
     /**
      * Allows you to disable header.
      *
-     * @param bool $value whether to disable header.
+     * @param bool $value Whether to disable header.
      *
      * @return self
      *
