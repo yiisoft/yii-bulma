@@ -239,7 +239,7 @@ final class ModalTest extends TestCase
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small is-medium is-large".');
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
         Modal::widget()->toggleButtonSize('is-non-existent');
     }
 
@@ -250,7 +250,7 @@ final class ModalTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
         );
         Modal::widget()->toggleButtonColor('is-non-existent');
     }
@@ -261,7 +261,7 @@ final class ModalTest extends TestCase
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small"is-medium"is-large".');
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
         Modal::widget()->closeButtonSize('is-non-existent');
     }
 

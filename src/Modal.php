@@ -131,7 +131,7 @@ final class Modal extends Widget
     public function closeButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('"', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -261,7 +261,7 @@ final class Modal extends Widget
     public function toggleButtonColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode(' ', self::COLOR_ALL);
+            $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
@@ -297,7 +297,7 @@ final class Modal extends Widget
     public function toggleButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode(' ', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
