@@ -52,8 +52,8 @@ Method | Description | Default
 -------|-------------|---------
 `attributes(array $value)` | The HTML attributes. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`color(string $value)` | Bar color. Options available are: (`ProgressBar::COLOR_PRIMARY`, `ProgressBar::COLOR_LINK`, `ProgressBar::COLOR_INFO`, `ProgressBar::COLOR_SUCCESS`, `ProgressBar::COLOR_WARNING`, `ProgressBar::COLOR_DANGER`, `ProgressBar::COLOR_DARK`). | Default setting empty whitout color.
+`color(string $value)` | Bar color. Options available are: (`ProgressBar::COLOR_PRIMARY`, `ProgressBar::COLOR_LINK`, `ProgressBar::COLOR_INFO`, `ProgressBar::COLOR_SUCCESS`, `ProgressBar::COLOR_WARNING`, `ProgressBar::COLOR_DANGER`, `ProgressBar::COLOR_DARK`). | Default is no color.
 `id(string $value)` | Widget ID. | `''`
 `maxValue(int $value)` | Maximum progress value. `0` means no maximum. | `100`
-`size(string $value)` | Bar size. Options available are: (`ProgressBar::SIZE_SMALL`, `ProgressBar::SIZE_MEDIUM`, `ProgressBar::SIZE_LARGE`). | Default setting empty normal.
+`size(string $value)` | Bar size. Options available are: (`ProgressBar::SIZE_SMALL`, `ProgressBar::SIZE_MEDIUM`, `ProgressBar::SIZE_LARGE`). | Default setting is normal.
 `value(float $value)` | The progress value. Set to `0` to display a loading animation. | `0`

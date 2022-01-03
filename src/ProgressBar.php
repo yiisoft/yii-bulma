@@ -88,7 +88,7 @@ final class ProgressBar extends Widget
     /**
      * Returns a new instance with the specified progress bar color.
      *
-     * @param string $value The progress bar color. Default setting color empty without any color.
+     * @param string $value The progress bar color. By default there is no color.
      * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
      * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
      *
@@ -97,7 +97,7 @@ final class ProgressBar extends Widget
     public function color(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode(' ', self::COLOR_ALL);
+            $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
@@ -143,7 +143,7 @@ final class ProgressBar extends Widget
     /**
      * Returns a new instance with the specified progress bar size class.
      *
-     * @param string $value The progress bar size class. Default setting empty normal.
+     * @param string $value The progress bar size class. Default setting is "normal".
      * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
      *
      * @return self
@@ -151,7 +151,7 @@ final class ProgressBar extends Widget
     public function size(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode(' ', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 

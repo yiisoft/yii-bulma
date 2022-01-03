@@ -153,7 +153,7 @@ final class ProgressBarTest extends TestCase
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small is-medium is-large".');
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
         ProgressBar::widget()->size('is-non-existent')->render();
     }
 
@@ -164,7 +164,7 @@ final class ProgressBarTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
         );
         ProgressBar::widget()->color('is-non-existent')->render();
     }
