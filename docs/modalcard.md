@@ -103,7 +103,7 @@ Method | Description | Default
 `cardAttributes(array $value)` | HTML attributes for the card. | []
 `closeButtonAttributes(array $value)` | HTML attributes for the close button. | []
 `closeButtonClass(string $value)` | The class for the close button. | `button delete`
-`closeButtonSize(string $value)` | Size close button. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting empty normal.
+`closeButtonSize(string $value)` | Сlose button size. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting is "normal".
 `contentClass(string $value)` | The class for the modal card content. | `modal-card-content`
 `footClass(string $value)` | The class for the modal card foot. | `modal-card-foot`
 `footer(string $value)` | The footer content. | `''`
@@ -116,10 +116,10 @@ Method | Description | Default
 `titleAttributes(array $value)` | HTML attributes for the title. | []
 `titleClass(string $value)` | The class for the modal card title. | `modal-card-title`
 `toggleButtonAttributes(array $value)` | HTML attributes for the toggle button. | []
-`toggleButtonColor(string $value)` | Color toggle button. Options available are: (`ModalCard::COLOR_PRIMARY`, `ModalCard::COLOR_INFO`, `ModalCard::COLOR_SUCCESS`, `ModalCard::COLOR_WARNING`, `ModalCard::COLOR_DANGER`, `ModalCard::COLOR_DARK`). | `''`
+`toggleButtonColor(string $value)` | Toggle button color. Options available are: (`ModalCard::COLOR_PRIMARY`, `ModalCard::COLOR_INFO`, `ModalCard::COLOR_SUCCESS`, `ModalCard::COLOR_WARNING`, `ModalCard::COLOR_DANGER`, `ModalCard::COLOR_DARK`). | `''`
 `toggleButtonId(?string $value)` | Toggle button ID. | `''`
 `toggleButtonLabel(string $value)` | Toggle button label. | `'Toggle button'`
-`toggleButtonSize(string $value)` | Size toggle button. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting empty normal.
-`withoutCloseButton(bool $value)` | Whether the close button is disable. | `false`
-`withoutToggleButton(bool $value)` | Whether the toggle button is disable. | `false`
+`toggleButtonSize(string $value)` | Toggle button size. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting is "normal".
+`withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
+`withoutToggleButton(bool $value)` | Whether the toggle button is disabled. | `false`
 

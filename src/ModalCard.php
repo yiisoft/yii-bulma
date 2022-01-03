@@ -171,7 +171,7 @@ final class ModalCard extends Widget
     /**
      * Returns a new instance with the specified close button size.
      *
-     * @param string $value The close button size. Default setting empty normal.
+     * @param string $value The close button size. Default setting is "normal".
      * Possible values are: ModalCard::SIZE_SMALL, ModalCard::SIZE_MEDIUM, ModalCard::SIZE_LARGE.
      *
      * @return self
@@ -179,7 +179,7 @@ final class ModalCard extends Widget
     public function closeButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode(' ', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 
@@ -441,7 +441,7 @@ final class ModalCard extends Widget
     /**
      * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value The toggle button color. Default setting empty without any color.
+     * @param string $value The toggle button color. By default there's no color set.
      * Possible values are: ModalCard::COLOR_PRIMARY, ModalCard::COLOR_INFO, ModalCard::COLOR_SUCCESS,
      * ModalCard::COLOR_WARNING, ModalCard::COLOR_DANGER, ModalCard::COLOR_DARK
      *
@@ -450,7 +450,7 @@ final class ModalCard extends Widget
     public function toggleButtonColor(string $value): self
     {
         if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode(' ', self::COLOR_ALL);
+            $values = implode('", "', self::COLOR_ALL);
             throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
         }
 
@@ -499,7 +499,7 @@ final class ModalCard extends Widget
     public function toggleButtonSize(string $value): self
     {
         if (!in_array($value, self::SIZE_ALL, true)) {
-            $values = implode('', self::SIZE_ALL);
+            $values = implode('", "', self::SIZE_ALL);
             throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
         }
 

@@ -625,6 +625,7 @@ final class ModalCardTest extends TestCase
     public function testExceptionToggleButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
         ModalCard::widget()->toggleButtonSize('is-non-existent')->begin();
     }
 
@@ -635,7 +636,7 @@ final class ModalCardTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
         );
         ModalCard::widget()->toggleButtonColor('is-non-existent')->begin();
     }
@@ -646,7 +647,7 @@ final class ModalCardTest extends TestCase
     public function testExceptionToggleCloseButtonSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small is-medium is-large".');
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
         ModalCard::widget()->closeButtonSize('is-non-existent')->begin();
     }
 
