@@ -69,16 +69,16 @@ final class ModalCard extends Widget
     private string $bodyClass = 'modal-card-body';
     private string $buttonClass = 'button modal-button';
     private array $cardAttributes = [];
+    private string $cardClass = 'modal';
     private array $closeButtonAttributes = [];
     private string $closeButtonClass = 'button delete';
     private string $closeButtonSize = '';
     private string $contentClass = 'modal-card';
     private string $footer = '';
     private array $headerAttributes = [];
+    private string $headerClass = 'modal-card-head';
     private array $footerAttributes = [];
-    private string $footClass = 'modal-card-foot';
-    private string $headClass = 'modal-card-head';
-    private string $modalCardClass = 'modal';
+    private string $footerClass = 'modal-card-foot';
     private string $title = '';
     private string $titleClass = 'modal-card-title';
     private array $titleAttributes = [];
@@ -321,10 +321,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function modalCardClass(string $value): self
+    public function cardClass(string $value): self
     {
         $new = clone $this;
-        $new->modalCardClass = $value;
+        $new->cardClass = $value;
 
         return $new;
     }
@@ -351,25 +351,25 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function footClass(string $value): self
+    public function footerClass(string $value): self
     {
         $new = clone $this;
-        $new->footClass = $value;
+        $new->footerClass = $value;
 
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified modal card head class.
+     * Returns a new instance with the specified modal card header class.
      *
      * @param string $value The modal card head class.
      *
      * @return self
      */
-    public function headClass(string $value): self
+    public function headerClass(string $value): self
     {
         $new = clone $this;
-        $new->headClass = $value;
+        $new->headerClass = $value;
 
         return $new;
     }
@@ -558,7 +558,7 @@ final class ModalCard extends Widget
             $html .= $this->renderToggleButton($id) . "\n";
         }
 
-        Html::addCssClass($attributes, $this->modalCardClass);
+        Html::addCssClass($attributes, $this->cardClass);
         Html::addCssClass($cardAttributes, $this->contentClass);
 
         $html .= Html::openTag('div', $attributes) . "\n"; // .modal
@@ -647,7 +647,7 @@ final class ModalCard extends Widget
             $footer = PHP_EOL . $footer . PHP_EOL;
         }
 
-        Html::addCssClass($footerAttributes, $this->footClass);
+        Html::addCssClass($footerAttributes, $this->footerClass);
 
         return CustomTag::name('footer')->attributes($footerAttributes)->content($footer)->encode(false)->render();
     }
@@ -663,7 +663,7 @@ final class ModalCard extends Widget
         $headerAttributes = $this->headerAttributes;
         $titleAttributes = $this->titleAttributes;
 
-        Html::addCssClass($headerAttributes, $this->headClass);
+        Html::addCssClass($headerAttributes, $this->headerClass);
         Html::addCssClass($titleAttributes, $this->titleClass);
 
         $content .= P::tag()->attributes($titleAttributes)->content($this->title)->render() . PHP_EOL;

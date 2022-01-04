@@ -101,17 +101,17 @@ Method | Description | Default
 `bodyClass(string $value)` | The class for the modal body. | `modal-card-body`
 `buttonClass(string $value)` | The class for the modal button. | `button modal-button`
 `cardAttributes(array $value)` | HTML attributes for the card. | []
+`cardClass(string $value)` | The class for the modal card. | `modal-card`
 `closeButtonAttributes(array $value)` | HTML attributes for the close button. | []
 `closeButtonClass(string $value)` | The class for the close button. | `button delete`
 `closeButtonSize(string $value)` | Сlose button size. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting is "normal".
 `contentClass(string $value)` | The class for the modal card content. | `modal-card-content`
-`footClass(string $value)` | The class for the modal card foot. | `modal-card-foot`
 `footer(string $value)` | The footer content. | `''`
 `footerAttributes(array $value)` | HTML attributes for the footer. | []
-`headClass(string $value)` | The class for the modal card head. | `modal-card-head`
+`footerClass(string $value)` | The class for the modal card footer. | `modal-card-foot`
 `headerAttributes(array $value)` | HTML attributes for the header. | []
+`headerClass(string $value)` | The class for the modal card header. | `modal-card-head`
 `id(string $value)` | Widget ID. | `''`
-`modalCardClass(string $value)` | The class for the modal card. | `modal-card`
 `title(string $value)` | The title content. | `''`
 `titleAttributes(array $value)` | HTML attributes for the title. | []
 `titleClass(string $value)` | The class for the modal card title. | `modal-card-title`
