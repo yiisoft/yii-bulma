@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma;
 
-use Yiisoft\Arrays\ArrayHelper;
+use InvalidArgumentException;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\Button;
+use Yiisoft\Html\Tag\Div;
+use Yiisoft\Html\Tag\P;
+use Yiisoft\Html\Tag\Span;
+use Yiisoft\Widget\Widget;
 
 /**
  * Message renders Bulma message component.
@@ -20,22 +25,83 @@ use Yiisoft\Html\Html;
  */
 final class Message extends Widget
 {
+    public const SIZE_SMALL = 'is-small';
+    public const SIZE_MEDIUM = 'is-medium';
+    public const SIZE_LARGE = 'is-large';
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
+    public const COLOR_PRIMARY = 'is-primary';
+    public const COLOR_LINK = 'is-link';
+    public const COLOR_INFO = 'is-info';
+    public const COLOR_SUCCESS = 'is-success';
+    public const COLOR_WARNING = 'is-warning';
+    public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
+    private const COLOR_ALL = [
+        self::COLOR_PRIMARY,
+        self::COLOR_LINK,
+        self::COLOR_INFO,
+        self::COLOR_SUCCESS,
+        self::COLOR_WARNING,
+        self::COLOR_DANGER,
+        self::COLOR_DARK,
+    ];
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
     private string $body = '';
-    private string $headerColor = 'is-dark';
+    private array $bodyAttributes = [];
+    private array $buttonSpanAttributes = [];
+    private string $buttonSpanAriaHidden = 'true';
+    private string $buttonCssClass = 'delete';
+    private bool $closedButton = false;
+    private array $closeButtonAttributes = [];
+    private bool $encode = false;
+    private array $headerAttributes = [];
+    private string $headerColor = self::COLOR_DARK;
     private string $headerMessage = '';
-    private array $options = [];
-    private array $bodyOptions = [];
-    private array $closeButtonOptions = [];
-    private array $headerOptions = [];
+    private string $messageBodyCssClass = 'message-body';
+    private string $messageCssClass = 'message';
+    private string $messageHeaderMessageCssClass = 'message-header';
     private string $size = '';
-    private bool $withoutCloseButton = false;
-    private bool $withoutHeader = true;
+    private bool $withoutHeader = false;
 
     /**
-     * Returns a new instance with the specified message body.
+     * The HTML attributes.
      *
-     * @param string $value The body content in the message component.
-     * Message widget will also be treated as the body content, and will be rendered before this.
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function attributes(array $values): self
+    {
+        $new = clone $this;
+        $new->attributes = $values;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
+     *
+     * @param string $value The prefix to the automatically generated widget IDs.
+     *
+     * @return self
+     */
+    public function autoIdPrefix(string $value): self
+    {
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * The body content.
+     *
+     * @param string $value The body content.
      *
      * @return self
      */
@@ -47,25 +113,80 @@ final class Message extends Widget
     }
 
     /**
-     * Returns a new instance with the specified color header message.
+     * The HTML attributes for the widget body tag.
      *
-     * @param string $value Setting default 'is-dark', 'is-primary', 'is-link', 'is-info', 'is-success', 'is-warning',
-     * 'is-danger'.
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function bodyAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->bodyAttributes = $values;
+        return $new;
+    }
+
+    /**
+     * The attributes for rendering the close button tag.
+     *
+     * The close button is displayed in the header of the Message. Clicking on the button will hide the message.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     */
+    public function closeButtonAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->closeButtonAttributes = $values;
+        return $new;
+    }
+
+    /**
+     * Set encode to true to encode the output.
+     *
+     * @param bool $value whether to encode the output.
      *
      * @return self
      */
+    public function encode(bool $value): self
+    {
+        $new = clone $this;
+        $new->encode = $value;
+        return $new;
+    }
+
+    /**
+     * Set message header color.
+     *
+     * @param string $value The header color. Default is Message::COLOR_DARK.
+     * Possible values: Message::COLOR_PRIMARY, Message::COLOR_LINK, Message::COLOR_INFO, Message::COLOR_SUCCESS,
+     * Message::COLOR_WARNING, Message::COLOR_DANGER, Message::COLOR_DARK.
+     *
+     * @return self
+     *
+     * @link https://bulma.io/documentation/components/message/#colors
+     */
     public function headerColor(string $value): self
     {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode('", "', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
         $new = clone $this;
         $new->headerColor = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified header message.
+     * The header message.
      *
-     * @param string $value The header message in the message component.
-     * Message widget will also be treated as the header content, and will be rendered before body.
+     * @param string $value The header message.
      *
      * @return self
      */
@@ -77,188 +198,186 @@ final class Message extends Widget
     }
 
     /**
-     * Returns a new instance with the specified HTML attributes for the widget container tag.
+     * The HTML attributes for the widget header tag.
      *
-     * @param array $value The HTML attributes for the widget container tag.
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
      */
-    public function options(array $value): self
+    public function headerAttributes(array $values): self
     {
         $new = clone $this;
-        $new->options = $value;
+        $new->headerAttributes = $values;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified HTML attributes for the widget body tag.
+     * Returns a new instance with the specified ID of the widget.
      *
-     * @param array $value The HTML attributes for the widget body tag.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value The ID of the widget.
      *
      * @return self
      */
-    public function bodyOptions(array $value): self
+    public function id(string $value): self
     {
         $new = clone $this;
-        $new->bodyOptions = $value;
+        $new->attributes['id'] = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the specified options for rendering the close button tag.
+     * Set size.
      *
-     * @param array $value The close button is displayed in the header of the modal window. Clicking on the button
-     * will hide the modal window. If {@see withoutCloseButton} is false, no close button will be rendered.
-     *
-     * @return self
-     */
-    public function closeButtonOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->closeButtonOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified HTML attributes for the widget header tag.
-     *
-     * @param array $value The HTML attributes for the widget header tag.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * @param string $value size class. By default, not class is added and the size is considered "normal".
+     * Possible values: Message::SIZE_SMALL, Message::SIZE_MEDIUM, Message::SIZE_LARGE.
      *
      * @return self
-     */
-    public function headerOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->headerOptions = $value;
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified size message widget.
      *
-     * @param string $value The size message widget. Default setting empty normal, 'is-small', 'is-medium', 'is-large'.
-     *
-     * @return self
+     * @link https://bulma.io/documentation/components/message/#sizes
      */
     public function size(string $value): self
     {
+        if (!in_array($value, self::SIZE_ALL, true)) {
+            $values = implode('", "', self::SIZE_ALL);
+            throw new InvalidArgumentException("Invalid size. Valid values are: \"$values\".");
+        }
+
         $new = clone $this;
         $new->size = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the disabled close button message widget.
+     * Allows you to remove the close button.
+     *
+     * @param bool $value Whether to remove the close button.
      *
      * @return self
      */
-    public function closeButton(): self
+    public function withoutCloseButton(bool $value): self
     {
         $new = clone $this;
-        $new->withoutCloseButton = true;
+        $new->closedButton = $value;
         return $new;
     }
 
     /**
-     * Returns a new instance with the disabled header message.
+     * Allows you to disable header.
+     *
+     * @param bool $value Whether to disable header.
      *
      * @return self
+     *
+     * @link https://bulma.io/documentation/components/message/#message-body-only
      */
-    public function withoutHeader(): self
+    public function withoutHeader(bool $value): self
     {
         $new = clone $this;
-        $new->withoutHeader = false;
+        $new->withoutHeader = $value;
         return $new;
     }
 
     protected function run(): string
     {
-        $this->buildOptions();
-
-        return
-            Html::openTag('div', $this->options) . "\n" .
-            $this->renderHeader() .
-            Html::openTag('div', $this->bodyOptions) . "\n" .
-            $this->renderBodyEnd() . "\n" .
-            Html::closeTag('div') . "\n" .
-            Html::closeTag('div');
+        return $this->renderMessage();
     }
 
-    private function buildOptions(): void
+    private function renderCloseButton(): string
     {
-        if (!isset($this->options['id'])) {
-            $this->options['id'] = "{$this->getId()}-message";
+        $html = '';
+
+        $buttonSpanAttributes = $this->buttonSpanAttributes;
+        $closeButtonAttributes = $this->closeButtonAttributes;
+
+        if ($this->closedButton === true) {
+            return $html;
         }
 
-        $this->options = $this->addOptions($this->options, 'message');
+        $buttonSpanAttributes['aria-hidden'] = $this->buttonSpanAriaHidden;
+        $closeButtonAttributes['type'] = 'button';
 
-        Html::addCssClass($this->options, $this->headerColor);
+        Html::addCssClass($closeButtonAttributes, $this->buttonCssClass);
+        unset($closeButtonAttributes['label']);
+
+        $label = Span::tag()->attributes($buttonSpanAttributes)->content('&times;')->encode(false)->render();
 
         if ($this->size !== '') {
-            Html::addCssClass($this->options, $this->size);
+            Html::addCssClass($closeButtonAttributes, $this->size);
         }
 
-        $this->bodyOptions = $this->addOptions($this->bodyOptions, 'message-body');
-        $this->closeButtonOptions = $this->addOptions($this->closeButtonOptions, 'delete');
-        $this->headerOptions = $this->addOptions($this->headerOptions, 'message-header');
+        return Button::tag()->attributes($closeButtonAttributes)->content($label)->encode(false)->render() . PHP_EOL;
     }
 
     private function renderHeader(): string
     {
         $html = '';
 
-        if ($this->withoutHeader) {
-            $html = Html::openTag('div', $this->headerOptions) . "\n" . $this->renderHeaderMessage() . "\n" .
-                Html::closeTag('div') . "\n";
+        $headerAttributes = $this->headerAttributes;
+        $headerMessage = $this->headerMessage;
+
+        Html::addCssClass($headerAttributes, $this->messageHeaderMessageCssClass);
+
+        $renderCloseButton = $this->renderCloseButton();
+
+        if ($this->encode) {
+            $headerMessage = Html::encode($headerMessage);
+        }
+
+        if ($renderCloseButton !== '') {
+            $headerMessage = PHP_EOL . P::tag()->content($headerMessage) . PHP_EOL . $renderCloseButton;
+        }
+
+        if ($this->withoutHeader === false) {
+            $html = Div::tag()
+                ->attributes($headerAttributes)
+                ->content($headerMessage)
+                ->encode(false)
+                ->render() . PHP_EOL;
         }
 
         return $html;
     }
 
-    private function renderHeaderMessage(): string
+    private function renderMessage(): string
     {
-        $result = $this->headerMessage;
+        $attributes = $this->attributes;
 
-        if ($this->renderCloseButton() !== null) {
-            $result = '<p>' . $this->headerMessage . '</p>' . "\n" . $this->renderCloseButton();
-        }
+        /** @var string */
+        $id = $attributes['id'] ?? (Html::generateId($this->autoIdPrefix) . '-message');
+        unset($attributes['id']);
 
-        return $result;
-    }
-
-    private function renderBodyEnd(): string
-    {
-        return $this->body;
-    }
-
-    private function renderCloseButton(): ?string
-    {
-        if ($this->withoutCloseButton === true) {
-            return null;
-        }
-
-        $spanOptions = ['aria-hidden' => 'true'];
-        $tag = ArrayHelper::remove($this->closeButtonOptions, 'tag', 'button');
-        $label = ArrayHelper::remove(
-            $this->closeButtonOptions,
-            'label',
-            Html::tag('span', '&times;', $spanOptions)->encode(false)->render()
-        );
-
-        if ($tag === 'button') {
-            $this->closeButtonOptions['type'] = 'button';
-        }
+        Html::addCssClass($attributes, $this->messageCssClass);
+        Html::addCssClass($attributes, $this->headerColor);
 
         if ($this->size !== '') {
-            Html::addCssClass($this->closeButtonOptions, $this->size);
+            Html::addCssClass($attributes, $this->size);
         }
 
-        return Html::tag($tag, $label ?? '', $this->closeButtonOptions)->encode(false)->render();
+        return Div::tag()
+            ->attributes($attributes)
+            ->content(PHP_EOL . $this->renderHeader() . $this->renderMessageBody())
+            ->encode(false)
+            ->id($id)
+            ->render();
+    }
+
+    private function renderMessageBody(): string
+    {
+        $body = $this->body;
+        $bodyAttributes = $this->bodyAttributes;
+
+        Html::addCssClass($bodyAttributes, $this->messageBodyCssClass);
+
+        if ($this->encode) {
+            $body = Html::encode($body);
+        }
+
+        if ($body !== '') {
+            $body = PHP_EOL . $body . PHP_EOL;
+        }
+
+        return Div::tag()->attributes($bodyAttributes)->content($body)->encode(false)->render() . PHP_EOL;
     }
 }

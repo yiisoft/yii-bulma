@@ -38,11 +38,11 @@ $this->setJsFiles($assetManager->getJsFiles());
 ?>
 
 <?= Message::widget()
+    ->attributes(['class' => 'has-text-justified'])
+    ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
     ->headerColor('is-success')
     ->headerMessage('Very important')
-    ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-    ->size('is-large')
-    ->options(['class' => 'has-text-justified']) ?>
+    ->size('is-large') ?>
 ```
 
 The code above generates the following HTML:
@@ -59,19 +59,21 @@ The code above generates the following HTML:
 </div>
 ```
 
-## Reference
+## Setters
+
+All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Message` class with the specified value.
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`attributes(array $value)` | The HTML attributes | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `body(string $value)` | Message body. | `''`
-`headerColor(string $value)` | Message color. (`is-dark`, `is-primary`, `is-link`, `is-info`, `is-success`, `is-warning`, `is-danger`). | `is-dark`
+`bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
+`closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
+`headerColor(string $value)` | Message color. Options available are: (`Message::COLOR_DARK`, `Message::COLOR_PRIMARY`, `Message::COLOR_LINK`, `Message::COLOR_INFO`, `Message::COLOR_SUCCESS`, `Message::COLOR_WARNING`, `Message::COLOR_DANGER`). | `Message::COLOR_DARK`
 `headerMessage(string $value)` | Message header. | `''`
-`options(array $value)` | HTML attributes for the widget container tag. | `[]`
-`bodyOptions(array $value)` | HTML attributes for the widget body tag. | `[]`
-`closeButtonOptions(array $value)`| Options for rendering the close button tag. | `[]`
-`headerOptions(array $value)` | HTML attributes for the widget header tag. | `[]`
-`size(string $value)` | Message widget size. Default is normal. Options available are: `is-small`, `is-medium`, `is-large`.  | `normal`
-`closeButton()` | Allows you to enable close button. | `true`
-`withoutHeader()` | Allows you to disable header. | `false`
+`headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
+`id(string $value)` | Widget ID. | `''`
+`size(string $value)` | Message widget size. Default is normal. Options available are: (`Message::SIZE_SMALL`, `Message::SIZE_MEDIUM`, `Message::SIZE_LARGE`.  | `normal`
+`withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
+`withoutHeader(bool $value)` | Whether the header is disabled. | `false`

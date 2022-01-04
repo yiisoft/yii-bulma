@@ -4,44 +4,110 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
+use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Message;
 
 final class MessageTest extends TestCase
 {
-    public function testMessage(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testAttributes(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->render();
+        $expected = <<<'HTML'
+        <div id="w1-message" class="has-text-justified message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->attributes(['class' => 'has-text-justified'])
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerMessage('Very important')
+                ->render(),
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testBodyAttributes(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
         </div>
+        <div class="has-text-justified message-body">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->bodyAttributes(['class' => 'has-text-justified'])
+                ->headerMessage('Very important')
+                ->render(),
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testCloseButtonAttributes(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
+        $expected = <<<'HTML'
+        <div id="w1-message" class="message is-dark">
+        <div class="message-header">
+        <p>Very important</p>
+        <button type="button" class="btn delete"><span aria-hidden="true">&times;</span></button>
+        </div>
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->closeButtonAttributes(['class' => 'btn'])
+                ->headerMessage('Very important')
+                ->render(),
+        );
     }
 
-    public function testMessageAutoIdPrefix(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testHeaderAttributes(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->autoIdPrefix('yii')
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->render();
         $expected = <<<'HTML'
-        <div id="yii1-message" class="message is-dark">
-        <div class="message-header">
+        <div id="w1-message" class="message is-dark">
+        <div class="has-text-justified message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -50,18 +116,23 @@ final class MessageTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerAttributes(['class' => 'has-text-justified'])
+                ->headerMessage('Very important')
+                ->render(),
+        );
     }
 
-    public function testMessageHeaderColor(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testHeaderColor(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->headerColor('is-success')
-            ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-success">
         <div class="message-header">
@@ -73,20 +144,37 @@ final class MessageTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->headerMessage('Very important')
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerColor('is-success')
+                ->render(),
+        );
     }
 
-    public function testMessageOptions(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testHeaderColorException(): void
     {
-        Message::counter(0);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
+        );
+        Message::widget()->headerColor('is-non-existent')->render();
+    }
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->options(['class' => 'has-text-justified'])
-            ->render();
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testId(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
         $expected = <<<'HTML'
-        <div id="w1-message" class="message has-text-justified is-dark">
+        <div id="id-tests" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -96,110 +184,78 @@ final class MessageTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->headerMessage('Very important')
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->id('id-tests')
+                ->render(),
+        );
     }
 
-    public function testMessageOptionsBody(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testRender(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->bodyOptions(['class' => 'has-text-justified'])
-            ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
         </div>
-        <div class="message-body has-text-justified">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMessageOptionsCloseButton(): void
-    {
-        Message::counter(0);
-
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->closeButtonOptions(['class' => 'btn'])
-            ->render();
-        $expected = <<<'HTML'
-        <div id="w1-message" class="message is-dark">
-        <div class="message-header">
-        <p>Very important</p>
-        <button type="button" class="delete btn"><span aria-hidden="true">&times;</span></button>
-        </div>
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->headerMessage('Very important')
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->render(),
+        );
     }
 
-    public function testMessageOptionsHeader(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testRenderWithEncode(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->headerOptions(['class' => 'has-text-justified'])
-            ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
-        <div class="message-header has-text-justified">
-        <p>Very important</p>
-        <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="message-body">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMessageId(): void
-    {
-        Message::counter(0);
-
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->id('testMe')
-            ->render();
-        $expected = <<<'HTML'
-        <div id="testMe-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="message-body">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        Holy &amp; guacamole!.
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->headerMessage('Very important')
+                ->body('Holy & guacamole!.')
+                ->encode(true)
+                ->render(),
+        );
     }
 
-    public function testMessageSize(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testSize(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->size('is-large')
-            ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark is-large">
         <div class="message-header">
@@ -211,39 +267,58 @@ final class MessageTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerMessage('Very important')
+                ->size('is-large')
+                ->render()
+        );
     }
 
-    public function testMessageWithoutCloseButton(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testSizeException(): void
     {
-        Message::counter(0);
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->closeButton()
-            ->render();
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
+        Message::widget()->size('is-non-existent')->render();
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testWithoutCloseButton(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
-        <div class="message-header">
-        Very important
-        </div>
+        <div class="message-header">Very important</div>
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerMessage('Very important')
+                ->withoutCloseButton(true)
+                ->render(),
+        );
     }
 
-    public function testMessageWithoutHeader(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testWithoutHeader(): void
     {
-        Message::counter(0);
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
 
-        $html = Message::widget()
-            ->headerMessage('Very important')
-            ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
-            ->withoutHeader()
-            ->render();
         $expected = <<<'HTML'
         <div id="w1-message" class="message is-dark">
         <div class="message-body">
@@ -251,24 +326,34 @@ final class MessageTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Message::widget()
+                ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
+                ->headerMessage('Very important')
+                ->withoutHeader(true)
+                ->render(),
+        );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testImmutability(): void
     {
         $widget = Message::widget();
 
-        $this->assertNotSame($widget, $widget->body(''));
-        $this->assertNotSame($widget, $widget->headerColor(''));
-        $this->assertNotSame($widget, $widget->headerMessage(''));
-        $this->assertNotSame($widget, $widget->options([]));
-        $this->assertNotSame($widget, $widget->bodyOptions([]));
-        $this->assertNotSame($widget, $widget->closeButtonOptions([]));
-        $this->assertNotSame($widget, $widget->headerOptions([]));
-        $this->assertNotSame($widget, $widget->size(''));
-        $this->assertNotSame($widget, $widget->closeButton());
-        $this->assertNotSame($widget, $widget->withoutHeader());
-        $this->assertNotSame($widget, $widget->id(Message::class));
+        $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Message::class));
+        $this->assertNotSame($widget, $widget->body(''));
+        $this->assertNotSame($widget, $widget->bodyAttributes([]));
+        $this->assertNotSame($widget, $widget->closeButtonAttributes([]));
+        $this->assertNotSame($widget, $widget->headerAttributes([]));
+        $this->assertNotSame($widget, $widget->headerColor('is-success'));
+        $this->assertNotSame($widget, $widget->headerMessage(''));
+        $this->assertNotSame($widget, $widget->id(Message::class));
+        $this->assertNotSame($widget, $widget->size('is-small'));
+        $this->assertNotSame($widget, $widget->withoutCloseButton(true));
+        $this->assertNotSame($widget, $widget->withoutHeader(false));
     }
 }
