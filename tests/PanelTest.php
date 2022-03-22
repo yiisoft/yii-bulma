@@ -219,22 +219,22 @@ final class PanelTest extends TestCase
                                 [
                                     'label' => 'Breadcrumbs',
                                     'urlAttributes' => ['data-category' => 'All'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'Dropdown',
                                     'urlAttributes' => ['data-category' => 'All'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'Panel',
                                     'urlAttributes' => ['data-category' => 'All'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'Tabs',
                                     'urlAttributes' => ['data-category' => 'All'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                             ],
                         ],
@@ -245,14 +245,14 @@ final class PanelTest extends TestCase
                                 [
                                     'label' => 'Breadcrumbs',
                                     'urlAttributes' => ['data-category' => 'Public'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'Tabs',
                                     'urlAttributes' => ['data-category' => 'Public'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
-                            ]
+                            ],
                         ],
                         [
                             'label' => 'Private',
@@ -261,14 +261,14 @@ final class PanelTest extends TestCase
                                 [
                                     'label' => 'Dropdown',
                                     'urlAttributes' => ['data-category' => 'Private'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'Panel',
                                     'urlAttributes' => ['data-category' => 'Private'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
-                            ]
+                            ],
                         ],
                         [
                             'label' => 'Sources',
@@ -277,15 +277,14 @@ final class PanelTest extends TestCase
                                 [
                                     'label' => 'Nav',
                                     'urlAttributes' => ['data-category' => 'Sources'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'NavBar',
                                     'urlAttributes' => ['data-category' => 'Sources'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
-                            ]
-
+                            ],
                         ],
                         [
                             'label' => 'Forks',
@@ -294,15 +293,14 @@ final class PanelTest extends TestCase
                                 [
                                     'label' => 'Model',
                                     'urlAttributes' => ['data-category' => 'Forks'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
                                 [
                                     'label' => 'ModalCard',
                                     'urlAttributes' => ['data-category' => 'Forks'],
-                                    'icon' => 'fas fa-book'
+                                    'icon' => 'fas fa-book',
                                 ],
-                            ]
-
+                            ],
                         ],
                     ]
                 )

@@ -470,5 +470,4 @@ final class NavBarTest extends TestCase
             NavBar::widget()->role('navigation-text')->begin() . NavBar::end()
         );
     }
-
 }

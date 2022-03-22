@@ -48,7 +48,7 @@ final class MenuTest extends TestCase
                         'labelTemplate' => '{label}',
                         'active' => false,
                     ],
-            ])
+                ])
             ->render()
         );
     }
@@ -82,18 +82,18 @@ final class MenuTest extends TestCase
                     [
                         'label' => 'Users',
                         'items' => [
-                        [
-                            'label' => 'Manager',
-                            'url' => 'user/index',
-                            'items' => [
-                                ['label' => 'Update', 'url' => 'user/update'],
-                                ['label' => 'Block', 'url' => 'user/block'],
+                            [
+                                'label' => 'Manager',
+                                'url' => 'user/index',
+                                'items' => [
+                                    ['label' => 'Update', 'url' => 'user/update'],
+                                    ['label' => 'Block', 'url' => 'user/block'],
+                                ],
                             ],
+                            ['label' => 'Export', 'url' => 'user/export'],
                         ],
-                        ['label' => 'Export', 'url' => 'user/export'],
                     ],
-                ],
-            ])
+                ])
             ->lastItemCssClass('testMe')
             ->render()
         );

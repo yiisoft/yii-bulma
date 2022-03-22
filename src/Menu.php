@@ -335,8 +335,9 @@ final class Menu extends Widget
     /**
      * Renders the menu.
      *
-     * @return string the result of Widget execution to be outputted.
      * @throws JsonException
+     *
+     * @return string the result of Widget execution to be outputted.
      */
     protected function run(): string
     {
