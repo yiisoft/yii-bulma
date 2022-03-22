@@ -20,8 +20,7 @@ final class MessageTest extends TestCase
     public function testAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="has-text-justified message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -48,8 +47,7 @@ final class MessageTest extends TestCase
     public function testBodyAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -76,8 +74,7 @@ final class MessageTest extends TestCase
     public function testCloseButtonAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -104,8 +101,7 @@ final class MessageTest extends TestCase
     public function testHeaderAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="has-text-justified message-header">
         <p>Very important</p>
@@ -132,8 +128,7 @@ final class MessageTest extends TestCase
     public function testHeaderColor(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-success">
         <div class="message-header">
         <p>Very important</p>
@@ -172,8 +167,7 @@ final class MessageTest extends TestCase
     public function testId(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="id-tests" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -197,11 +191,32 @@ final class MessageTest extends TestCase
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
+    public function testImmutability(): void
+    {
+        $widget = Message::widget();
+
+        $this->assertNotSame($widget, $widget->attributes([]));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Message::class));
+        $this->assertNotSame($widget, $widget->body(''));
+        $this->assertNotSame($widget, $widget->bodyAttributes([]));
+        $this->assertNotSame($widget, $widget->bodyCssClass(''));
+        $this->assertNotSame($widget, $widget->closeButtonAttributes([]));
+        $this->assertNotSame($widget, $widget->headerAttributes([]));
+        $this->assertNotSame($widget, $widget->headerColor('is-success'));
+        $this->assertNotSame($widget, $widget->headerMessage(''));
+        $this->assertNotSame($widget, $widget->id(Message::class));
+        $this->assertNotSame($widget, $widget->size('is-small'));
+        $this->assertNotSame($widget, $widget->withoutCloseButton(true));
+        $this->assertNotSame($widget, $widget->withoutHeader(false));
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -227,8 +242,7 @@ final class MessageTest extends TestCase
     public function testRenderWithEncode(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
         <p>Very important</p>
@@ -255,8 +269,7 @@ final class MessageTest extends TestCase
     public function testSize(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark is-large">
         <div class="message-header">
         <p>Very important</p>
@@ -293,8 +306,7 @@ final class MessageTest extends TestCase
     public function testWithoutCloseButton(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">Very important</div>
         <div class="message-body">
@@ -318,8 +330,7 @@ final class MessageTest extends TestCase
     public function testWithoutHeader(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
@@ -334,26 +345,5 @@ final class MessageTest extends TestCase
                 ->withoutHeader(true)
                 ->render(),
         );
-    }
-
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
-    public function testImmutability(): void
-    {
-        $widget = Message::widget();
-
-        $this->assertNotSame($widget, $widget->attributes([]));
-        $this->assertNotSame($widget, $widget->autoIdPrefix(Message::class));
-        $this->assertNotSame($widget, $widget->body(''));
-        $this->assertNotSame($widget, $widget->bodyAttributes([]));
-        $this->assertNotSame($widget, $widget->closeButtonAttributes([]));
-        $this->assertNotSame($widget, $widget->headerAttributes([]));
-        $this->assertNotSame($widget, $widget->headerColor('is-success'));
-        $this->assertNotSame($widget, $widget->headerMessage(''));
-        $this->assertNotSame($widget, $widget->id(Message::class));
-        $this->assertNotSame($widget, $widget->size('is-small'));
-        $this->assertNotSame($widget, $widget->withoutCloseButton(true));
-        $this->assertNotSame($widget, $widget->withoutHeader(false));
     }
 }

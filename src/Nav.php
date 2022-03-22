@@ -30,17 +30,17 @@ final class Nav extends Widget
     private bool $activateParents = false;
     private array $attributes = [];
     private string $currentPath = '';
+    private string $dropdownCssClass = 'navbar-dropdown';
+    private string $endCssClass = 'navbar-end';
     private bool $enclosedByStartMenu = false;
     private bool $enclosedByEndMenu = false;
-    private array $items = [];
     private string $hasDropdownCssClass = 'has-dropdown';
     private string $isHoverableCssClass = 'is-hoverable';
-    private string $navBarDropdownCssClass = 'navbar-dropdown';
-    private string $navBarEndCssClass = 'navbar-end';
-    private string $navBarItemCssClass = 'navbar-item';
-    private string $navBarLinkCssClass = 'navbar-link';
-    private string $navBarMenuCssClass = 'navbar-menu';
-    private string $navBarStartCssClass = 'navbar-start';
+    private string $itemCssClass = 'navbar-item';
+    private array $items = [];
+    private string $linkCssClass = 'navbar-link';
+    private string $menuCssClass = 'navbar-menu';
+    private string $startCssClass = 'navbar-start';
 
     /**
      * The HTML attributes. The following special options are recognized.
@@ -49,7 +49,7 @@ final class Nav extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -118,15 +118,19 @@ final class Nav extends Widget
      *
      * - label: string, required, the nav item label.
      * - url: optional, the item's URL. Defaults to "#".
+     * - urlAttributes: optional, the attributes to be rendered in the item's URL.
      * - visible: bool, optional, whether this menu item is visible. Defaults to true.
-     * - linkOptions: array, optional, the HTML attributes of the item's link.
-     * - options: array, optional, the HTML attributes of the item container (LI).
+     * - linkAttributes: array, optional, the HTML attributes of the item's link.
      * - active: bool, optional, whether the item should be on active state or not.
+     * - disable: bool, optional, whether the item should be disabled.
      * - dropdownAttributes: array, optional, the HTML options that will be passed to the {@see Dropdown} widget.
      * - items: array|string, optional, the configuration array for creating a {@see Dropdown} widget, or a string
      *   representing the dropdown menu.
      * - encode: bool, optional, whether the label will be HTML-encoded. If set, supersedes the $encodeLabels option for
      *   only this item.
+     * - iconAttributes: array, optional, the HTML attributes of the item's icon.
+     * - iconCssClass: string, optional, the icon CSS class.
+     * - iconText: string, optional, the icon text.
      *
      * If a menu item is a string, it will be rendered directly without HTML encoding.
      *
@@ -179,11 +183,11 @@ final class Nav extends Widget
     private function renderDropdown(array $items): string
     {
         return Dropdown::widget()
+            ->cssClass('navbar-dropdown')
             ->dividerCssClass('navbar-divider')
-            ->dropdownCssClass('navbar-dropdown')
-            ->dropdownItemCssClass('navbar-item')
-            ->items($items)
             ->enclosedByContainer()
+            ->itemCssClass('navbar-item')
+            ->items($items)
             ->render() . PHP_EOL;
     }
 
@@ -199,23 +203,33 @@ final class Nav extends Widget
      */
     private function isChildActive(array $items, bool &$active = false): array
     {
-        /** @var array|string $child */
+        /**
+         * @psalm-var array<
+         *  string,
+         *  array{
+         *    active?: bool,
+         *    disable?: bool,
+         *    encode?: bool,
+         *    icon?: string,
+         *    iconAttributes?: array,
+         *    items?: array,
+         *    label: string,
+         *    url: string,
+         *    visible?: bool
+         * }|string> $items
+         */
         foreach ($items as $i => $child) {
-            /** @var string */
             $url = $child['url'] ?? '#';
-
-            /** @var bool */
             $active = $child['active'] ?? false;
 
             if ($active === false && is_array($child)) {
-                $items[$i]['active'] = $this->isItemActive($url, $this->currentPath, $this->activateItems);
+                $child['active'] = $this->isItemActive($url, $this->currentPath, $this->activateItems);
             }
 
             if ($this->activateParents) {
                 $active = true;
             }
 
-            /** @var array */
             $childItems = $child['items'] ?? [];
 
             if ($childItems !== [] && is_array($items[$i])) {
@@ -338,10 +352,10 @@ final class Nav extends Widget
             $attributes = $this->attributes;
             Html::addCssClass(
                 $attributes,
-                [$this->navBarItemCssClass, $this->hasDropdownCssClass, $this->isHoverableCssClass]
+                [$this->itemCssClass, $this->hasDropdownCssClass, $this->isHoverableCssClass]
             );
-            Html::addCssClass($urlAttributes, $this->navBarLinkCssClass);
-            Html::addCssClass($dropdownAttributes, $this->navBarDropdownCssClass);
+            Html::addCssClass($urlAttributes, $this->linkCssClass);
+            Html::addCssClass($dropdownAttributes, $this->dropdownCssClass);
 
             $items = $this->isChildActive($items, $active);
             $dropdown = PHP_EOL . $this->renderDropdown($items);
@@ -381,18 +395,18 @@ final class Nav extends Widget
         $links = PHP_EOL . implode("\n", $items) . PHP_EOL;
 
         if ($this->enclosedByStartMenu) {
-            $links = PHP_EOL . Div::tag()->class($this->navBarStartCssClass)->content($links)->encode(false)->render() .
+            $links = PHP_EOL . Div::tag()->class($this->startCssClass)->content($links)->encode(false)->render() .
                 PHP_EOL;
         }
 
         if ($this->enclosedByEndMenu) {
-            $links = PHP_EOL . Div::tag()->class($this->navBarEndCssClass)->content($links)->encode(false)->render() .
+            $links = PHP_EOL . Div::tag()->class($this->endCssClass)->content($links)->encode(false)->render() .
                 PHP_EOL;
         }
 
         return $this->items !== []
              ? Div::tag()
-                ->class($this->navBarMenuCssClass)
+                ->class($this->menuCssClass)
                 ->content($links)
                 ->encode(false)
                 ->render()

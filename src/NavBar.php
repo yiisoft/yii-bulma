@@ -21,6 +21,7 @@ use Yiisoft\Widget\Widget;
  */
 final class NavBar extends Widget
 {
+    private string $ariaLabel = 'main navigation';
     private array $attributes = [];
     private string $autoIdPrefix = 'w';
     private array $brandAttributes = [];
@@ -29,22 +30,29 @@ final class NavBar extends Widget
     private string $brandText = '';
     private array $brandTextAttributes = [];
     private string $brandUrl = '/';
+    private string $brandCssClass = 'navbar-brand';
+    private array $burgerAttributes = [];
+    private string $burgerCssClass = 'navbar-burger';
     private string $buttonLinkAriaExpanded = 'false';
     private string $buttonLinkAriaLabelText = 'menu';
     private string $buttonLinkContent = '';
     private string $buttonLinkRole = 'button';
-    private string $navBarAriaLabel = 'main navigation';
-    private string $navBarBrandCssClass = 'navbar-brand';
-    private array $navBarBurgerAttributes = [];
-    private string $navBarBurgerCssClass = 'navbar-burger';
-    private string $navBarCssClass = 'navbar';
-    private string $navBarItemCssClass = 'navbar-item';
-    private string $navBarRole = 'navigation';
+    private string $cssClass = 'navbar';
+    private string $itemCssClass = 'navbar-item';
+    private string $role = 'navigation';
 
-    public function begin(): string
+    /**
+     * The ARIA label of the navbar.
+     *
+     * @param string $value
+     *
+     * @return self
+     */
+    public function ariaLabel(string $value): self
     {
-        parent::begin();
-        return $this->renderNavBar();
+        $new = clone $this;
+        $new->ariaLabel = $value;
+        return $new;
     }
 
     /**
@@ -54,7 +62,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -77,6 +85,12 @@ final class NavBar extends Widget
         return $new;
     }
 
+    public function begin(): string
+    {
+        parent::begin();
+        return $this->renderNavBar();
+    }
+
     /**
      * The HTML attributes of the navbar brand.
      *
@@ -84,12 +98,26 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function brandAttributes(array $values): self
     {
         $new = clone $this;
         $new->brandAttributes = $values;
+        return $new;
+    }
+
+    /**
+     * The CSS class of the brand.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function brandCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->brandCssClass = $value;
         return $new;
     }
 
@@ -114,7 +142,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function brandImageAttributes(array $values): self
     {
@@ -144,7 +172,7 @@ final class NavBar extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function brandTextAttributes(array $values): self
     {
@@ -165,6 +193,36 @@ final class NavBar extends Widget
     {
         $new = clone $this;
         $new->brandUrl = $value;
+        return $new;
+    }
+
+    /**
+     * The HTML attributes of the burger.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
+     */
+    public function burgerAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->burgerAttributes = $values;
+        return $new;
+    }
+
+    /**
+     * The CSS class of the burger.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function burgerCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->burgerCssClass = $value;
         return $new;
     }
 
@@ -225,6 +283,20 @@ final class NavBar extends Widget
     }
 
     /**
+     * The CSS class of the navbar.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function cssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->cssClass = $value;
+        return $new;
+    }
+
+    /**
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
@@ -239,88 +311,16 @@ final class NavBar extends Widget
     }
 
     /**
-     * The ARIA label of the navbar.
-     *
-     * @param string $value
-     *
-     * @return self
-     */
-    public function navBarAriaLabel(string $value): self
-    {
-        $new = clone $this;
-        $new->navBarAriaLabel = $value;
-        return $new;
-    }
-
-    /**
-     * The CSS class of the brand.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function navBarBrandCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->navBarBrandCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * The HTML attributes of the burger.
-     *
-     * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function navBarBurgerAttributes(array $values): self
-    {
-        $new = clone $this;
-        $new->navBarBurgerAttributes = $values;
-        return $new;
-    }
-
-    /**
-     * The CSS class of the burger.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function navBarBurgerCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->navBarBurgerCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * The CSS class of the navbar.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function navBarCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->navBarCssClass = $value;
-        return $new;
-    }
-
-    /**
      * The CSS class of the items navbar.
      *
      * @param string $value The CSS class.
      *
      * @return self
      */
-    public function navBarItemCssClass(string $value): self
+    public function itemCssClass(string $value): self
     {
         $new = clone $this;
-        $new->navBarItemCssClass = $value;
+        $new->itemCssClass = $value;
         return $new;
     }
 
@@ -331,10 +331,10 @@ final class NavBar extends Widget
      *
      * @return self
      */
-    public function navBarRole(string $value): self
+    public function role(string $value): self
     {
         $new = clone $this;
-        $new->navBarRole = $value;
+        $new->role = $value;
         return $new;
     }
 
@@ -346,14 +346,14 @@ final class NavBar extends Widget
     private function renderNavBar(): string
     {
         $attributes = $this->attributes;
-        Html::addCssClass($attributes, $this->navBarCssClass);
+        Html::addCssClass($attributes, $this->cssClass);
 
         if (!isset($attributes['id'])) {
             $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-navbar';
         }
 
-        $attributes['aria-label'] = $this->navBarAriaLabel;
-        $attributes['role'] = $this->navBarRole;
+        $attributes['aria-label'] = $this->ariaLabel;
+        $attributes['role'] = $this->role;
 
         return Html::openTag('nav', $attributes) . PHP_EOL . $this->renderNavBarBrand() . PHP_EOL;
     }
@@ -366,7 +366,7 @@ final class NavBar extends Widget
         if ($this->brandImage !== '') {
             $brandImage = Img::tag()->attributes($this->brandImageAttributes)->url($this->brandImage)->render();
             $brand = PHP_EOL . A::tag()
-                ->class($this->navBarItemCssClass)
+                ->class($this->itemCssClass)
                 ->content($brandImage)
                 ->encode(false)
                 ->url($this->brandUrl)
@@ -383,12 +383,12 @@ final class NavBar extends Widget
             if (empty($this->brandUrl)) {
                 $brand = PHP_EOL . Span::tag()
                     ->attributes($this->brandTextAttributes)
-                    ->class($this->navBarItemCssClass)
+                    ->class($this->itemCssClass)
                     ->content($brandText)
                     ->render();
             } else {
                 $brand = PHP_EOL . A::tag()
-                    ->class($this->navBarItemCssClass)
+                    ->class($this->itemCssClass)
                     ->content($brandText)
                     ->encode(false)
                     ->url($this->brandUrl)
@@ -400,7 +400,7 @@ final class NavBar extends Widget
 
         return Div::tag()
             ->attributes($this->brandAttributes)
-            ->class($this->navBarBrandCssClass)
+            ->class($this->brandCssClass)
             ->content($brand)
             ->encode(false)
             ->render();
@@ -415,7 +415,7 @@ final class NavBar extends Widget
      */
     private function renderNavBarBurger(): string
     {
-        $navBarBurgerAttributes = $this->navBarBurgerAttributes;
+        $burgerAttributes = $this->burgerAttributes;
         if ($this->buttonLinkContent === '') {
             $this->buttonLinkContent = PHP_EOL .
                 Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL .
@@ -423,13 +423,13 @@ final class NavBar extends Widget
                 Span::tag()->attributes(['aria-hidden' => 'true'])->render() . PHP_EOL;
         }
 
-        $navBarBurgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;
-        $navBarBurgerAttributes['aria-label'] = $this->buttonLinkAriaLabelText;
-        $navBarBurgerAttributes['role'] = $this->buttonLinkRole;
+        $burgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;
+        $burgerAttributes['aria-label'] = $this->buttonLinkAriaLabelText;
+        $burgerAttributes['role'] = $this->buttonLinkRole;
 
         return PHP_EOL . A::tag()
-            ->attributes($navBarBurgerAttributes)
-            ->class($this->navBarBurgerCssClass)
+            ->attributes($burgerAttributes)
+            ->class($this->burgerCssClass)
             ->content($this->buttonLinkContent)
             ->encode(false)
             ->render() . PHP_EOL;

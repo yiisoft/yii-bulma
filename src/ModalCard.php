@@ -71,7 +71,7 @@ final class ModalCard extends Widget
     private array $cardAttributes = [];
     private string $cardClass = 'modal';
     private array $closeButtonAttributes = [];
-    private string $closeButtonClass = 'button delete';
+    private string $closeButtonCssClass = 'button delete';
     private string $closeButtonSize = '';
     private string $contentClass = 'modal-card';
     private string $footer = '';
@@ -96,7 +96,7 @@ final class ModalCard extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -120,11 +120,25 @@ final class ModalCard extends Widget
     }
 
     /**
+     * Returns a new instance with the specified modal card background class.
+     *
+     * @param string $value The modal card background class.
+     *
+     * @return self
+     */
+    public function backgroundClass(string $value): self
+    {
+        $new = clone $this;
+        $new->backgroundClass = $value;
+        return $new;
+    }
+
+    /**
      * Returns a new instance with the specified body attributes.
      *
      * @param array $value The body attributes.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -132,6 +146,64 @@ final class ModalCard extends Widget
     {
         $new = clone $this;
         $new->bodyAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card body class.
+     *
+     * @param string $value The modal card body class.
+     *
+     * @return self
+     */
+    public function bodyClass(string $value): self
+    {
+        $new = clone $this;
+        $new->bodyClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card button class.
+     *
+     * @param string $value The modal card button class.
+     *
+     * @return self
+     */
+    public function buttonClass(string $value): self
+    {
+        $new = clone $this;
+        $new->buttonClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified card attributes.
+     *
+     * @param array $value The content attributes.
+     *
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function cardAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->cardAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified modal card class.
+     *
+     * @param string $value The modal card class.
+     *
+     * @return self
+     */
+    public function cardClass(string $value): self
+    {
+        $new = clone $this;
+        $new->cardClass = $value;
 
         return $new;
     }
@@ -141,7 +213,7 @@ final class ModalCard extends Widget
      *
      * @param array $value The close button attributes.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -149,7 +221,6 @@ final class ModalCard extends Widget
     {
         $new = clone $this;
         $new->closeButtonAttributes = $value;
-
         return $new;
     }
 
@@ -160,11 +231,10 @@ final class ModalCard extends Widget
      *
      * @return self
      */
-    public function closeButtonClass(string $value): self
+    public function closeButtonCssClass(string $value): self
     {
         $new = clone $this;
-        $new->closeButtonClass = $value;
-
+        $new->closeButtonCssClass = $value;
         return $new;
     }
 
@@ -185,147 +255,6 @@ final class ModalCard extends Widget
 
         $new = clone $this;
         $new->closeButtonSize = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified card attributes.
-     *
-     * @param array $value The content attributes.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function cardAttributes(array $value): self
-    {
-        $new = clone $this;
-        $new->cardAttributes = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified footer content.
-     *
-     * @param string $value The footer content in the modal window.
-     *
-     * @return self
-     */
-    public function footer(string $value): self
-    {
-        $new = clone $this;
-        $new->footer = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified footer attributes.
-     *
-     * @param array $value The footer attributes.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function footerAttributes(array $value): self
-    {
-        $new = clone $this;
-        $new->footerAttributes = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified header attributes.
-     *
-     * @param array $value The header attributes.
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     *
-     * @return self
-     */
-    public function headerAttributes(array $value): self
-    {
-        $new = clone $this;
-        $new->headerAttributes = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified ID of the widget.
-     *
-     * @param string|null $value The ID of the widget.
-     *
-     * @return self
-     */
-    public function id(?string $value): self
-    {
-        $new = clone $this;
-        $new->attributes['id'] = $value;
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified modal card background class.
-     *
-     * @param string $value The modal card background class.
-     *
-     * @return self
-     */
-    public function backgroundClass(string $value): self
-    {
-        $new = clone $this;
-        $new->backgroundClass = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified modal card body class.
-     *
-     * @param string $value The modal card body class.
-     *
-     * @return self
-     */
-    public function bodyClass(string $value): self
-    {
-        $new = clone $this;
-        $new->bodyClass = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified modal card button class.
-     *
-     * @param string $value The modal card button class.
-     *
-     * @return self
-     */
-    public function buttonClass(string $value): self
-    {
-        $new = clone $this;
-        $new->buttonClass = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified modal card class.
-     *
-     * @param string $value The modal card class.
-     *
-     * @return self
-     */
-    public function cardClass(string $value): self
-    {
-        $new = clone $this;
-        $new->cardClass = $value;
-
         return $new;
     }
 
@@ -341,6 +270,66 @@ final class ModalCard extends Widget
         $new = clone $this;
         $new->contentClass = $value;
 
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified footer content.
+     *
+     * @param string $value The footer content in the modal window.
+     *
+     * @return self
+     */
+    public function footer(string $value): self
+    {
+        $new = clone $this;
+        $new->footer = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified footer attributes.
+     *
+     * @param array $value The footer attributes.
+     *
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function footerAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->footerAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified header attributes.
+     *
+     * @param array $value The header attributes.
+     *
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
+     *
+     * @return self
+     */
+    public function headerAttributes(array $value): self
+    {
+        $new = clone $this;
+        $new->headerAttributes = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified ID of the widget.
+     *
+     * @param string|null $value The ID of the widget.
+     *
+     * @return self
+     */
+    public function id(?string $value): self
+    {
+        $new = clone $this;
+        $new->attributes['id'] = $value;
         return $new;
     }
 
@@ -409,7 +398,7 @@ final class ModalCard extends Widget
      *
      * @param array $value The title attributes.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -426,7 +415,7 @@ final class ModalCard extends Widget
      *
      * @param array $value The toggle button attributes.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -520,7 +509,6 @@ final class ModalCard extends Widget
     {
         $new = clone $this;
         $new->withoutCloseButton = $value;
-
         return $new;
     }
 
@@ -535,7 +523,6 @@ final class ModalCard extends Widget
     {
         $new = clone $this;
         $new->withoutToggleButton = $value;
-
         return $new;
     }
 
@@ -624,7 +611,7 @@ final class ModalCard extends Widget
         $closeButtonAttributes = $this->closeButtonAttributes;
         $closeButtonAttributes['aria-label'] = 'close';
 
-        Html::addCssClass($closeButtonAttributes, $this->closeButtonClass);
+        Html::addCssClass($closeButtonAttributes, $this->closeButtonCssClass);
 
         if ($this->closeButtonSize !== '') {
             Html::addCssClass($closeButtonAttributes, $this->closeButtonSize);

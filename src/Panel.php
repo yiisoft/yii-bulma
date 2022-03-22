@@ -8,10 +8,20 @@ use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\A;
+use Yiisoft\Html\Tag\I;
+use Yiisoft\Html\Tag\P;
+use Yiisoft\Html\Tag\Span;
+use Yiisoft\Widget\Widget;
 
 use function implode;
 use function in_array;
 
+/**
+ * Panel renders a panel component.
+ *
+ * @see https://bulma.io/documentation/components/panel/
+ */
 final class Panel extends Widget
 {
     public const COLOR_PRIMARY = 'is-primary';
@@ -20,6 +30,7 @@ final class Panel extends Widget
     public const COLOR_SUCCESS = 'is-success';
     public const COLOR_WARNING = 'is-warning';
     public const COLOR_DANGER = 'is-danger';
+    public const COLOR_DARK = 'is-dark';
     private const COLOR_ALL = [
         self::COLOR_PRIMARY,
         self::COLOR_LINK,
@@ -27,16 +38,233 @@ final class Panel extends Widget
         self::COLOR_SUCCESS,
         self::COLOR_WARNING,
         self::COLOR_DANGER,
+        self::COLOR_DARK,
     ];
 
-    private array $options = [];
-    private array $headingOptions = [];
-    private ?string $heading = null;
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
+    private string $blockClass = 'panel-block';
     private string $color = '';
+    private ?string $heading = null;
+    private array $headingAttributes = [];
+    private string $headingClass = 'panel-heading';
+    private string $iconClass = 'panel-icon';
+    private string $isActiveClass = 'is-active';
+    private string $panelClass = 'panel';
+    /** @psalm-var array<int, array> */
     private array $tabs = [];
-    private array $tabsOptions = [];
-    private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
+    private array $tabsAttributes = [];
+    private string $tabClass = 'panel-tabs';
+    /** @psalm-var array<int, string> */
     private array $tabItems = [];
+    private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
+
+    /**
+     * The HTML attributes.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     */
+    public function attributes(array $values): self
+    {
+        $new = clone $this;
+        $new->attributes = $values;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified prefix to the automatically generated widget IDs.
+     *
+     * @param string $value The prefix to the automatically generated widget IDs.
+     *
+     * @return self
+     */
+    public function autoIdPrefix(string $value): self
+    {
+        $new = clone $this;
+        $new->autoIdPrefix = $value;
+        return $new;
+    }
+
+    /**
+     * The panel block class.
+     *
+     * @param string $value The block class.
+     *
+     * @return self
+     */
+    public function blockClass(string $value): self
+    {
+        $new = clone $this;
+        $new->blockClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified panel color class.
+     *
+     * @param string $value The panel color class. Default any color.
+     * Possible values are: Panel::COLOR_PRIMARY, Panel::COLOR_INFO, Panel::COLOR_SUCCESS, Panel::COLOR_WARNING,
+     * Panel::COLOR_DANGER, Panel::COLOR_DARK
+     *
+     * @return self
+     */
+    public function color(string $value): self
+    {
+        if (!in_array($value, self::COLOR_ALL, true)) {
+            $values = implode(' ', self::COLOR_ALL);
+            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
+        }
+
+        $new = clone $this;
+        $new->color = $value;
+        return $new;
+    }
+
+    /**
+     * The panel class.
+     *
+     * @param string $value The panel class.
+     *
+     * @return self
+     */
+    public function cssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->panelClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified panel heading.
+     *
+     * @param string $value The panel heading.
+     *
+     * @return self
+     */
+    public function heading(string $value): self
+    {
+        $new = clone $this;
+        $new->heading = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified panel heading attributes.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     */
+    public function headingAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->headingAttributes = $values;
+        return $new;
+    }
+
+    /**
+     * The panel heading class.
+     *
+     * @param string $value The heading class.
+     *
+     * @return self
+     */
+    public function headingClass(string $value): self
+    {
+        $new = clone $this;
+        $new->headingClass = $value;
+        return $new;
+    }
+
+    /**
+     * The panel icon class.
+     *
+     * @param string $value The icon class.
+     *
+     * @return self
+     */
+    public function iconClass(string $value): self
+    {
+        $new = clone $this;
+        $new->iconClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified ID of the widget.
+     *
+     * @param string $value The ID of the widget.
+     *
+     * @return self
+     */
+    public function id(string $value): self
+    {
+        $new = clone $this;
+        $new->attributes['id'] = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified active tab class.
+     *
+     * @param string $value The active tab class.
+     *
+     * @return self
+     */
+    public function isActiveClass(string $value): self
+    {
+        $new = clone $this;
+        $new->isActiveClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified panel tabs.
+     *
+     * @param array $value The panel tabs.
+     *
+     * @return self
+     *
+     * @psalm-param array<int, array> $value
+     */
+    public function tabs(array $value): self
+    {
+        $new = clone $this;
+        $new->tabs = $value;
+        return $new;
+    }
+
+    /**
+     * The panel tab class.
+     *
+     * @param string $value The tab class.
+     *
+     * @return self
+     */
+    public function tabClass(string $value): self
+    {
+        $new = clone $this;
+        $new->tabClass = $value;
+        return $new;
+    }
+
+    /**
+     * Returns a new instance with the specified panel tabs attributes.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     */
+    public function tabsAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->tabsAttributes = $values;
+        return $new;
+    }
 
     /**
      * Returns a new instance with the specified template.
@@ -55,116 +283,32 @@ final class Panel extends Widget
     {
         $new = clone $this;
         $new->template = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified options.
-     *
-     * @param array $value The HTML attributes for the panel's container tag.
-     *
-     * @return self
-     */
-    public function options(array $value): self
-    {
-        $new = clone $this;
-        $new->options = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified panel heading.
-     *
-     * @param string $value The panel heading.
-     *
-     * @return self
-     */
-    public function heading(string $value): self
-    {
-        $new = clone $this;
-        $new->heading = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified panel heading options.
-     *
-     * @param array $value The panel heading options.
-     *
-     * @return self
-     */
-    public function headingOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->headingOptions = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified panel color class.
-     *
-     * @param string $value The panel color class.
-     *
-     * @return self
-     */
-    public function color(string $value): self
-    {
-        if (!in_array($value, self::COLOR_ALL, true)) {
-            $values = implode('", "', self::COLOR_ALL);
-            throw new InvalidArgumentException("Invalid color. Valid values are: \"$values\".");
-        }
-
-        $new = clone $this;
-        $new->color = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified panel tabs.
-     *
-     * @param array $value The panel tabs.
-     *
-     * @return self
-     */
-    public function tabs(array $value): self
-    {
-        $new = clone $this;
-        $new->tabs = $value;
-
-        return $new;
-    }
-
-    /**
-     * Returns a new instance with the specified panel tabs options.
-     *
-     * @param array $value The panel tabs options.
-     *
-     * @return self
-     */
-    public function tabsOptions(array $value): self
-    {
-        $new = clone $this;
-        $new->tabsOptions = $value;
-
         return $new;
     }
 
     protected function run(): string
     {
-        $this->buildOptions();
+        $attributes = $this->attributes;
 
-        $tag = ArrayHelper::getValue($this->options, 'tag', 'nav');
+        /** @var string */
+        $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-panel');
+
+        $id = $attributes['id'];
+
+        /** @var string */
+        $tag = $attributes['tag'] ?? 'nav';
+
+        Html::addCssClass($attributes, $this->panelClass);
+
+        if ($this->color !== '') {
+            Html::addCssClass($attributes, $this->color);
+        }
 
         return strtr($this->template, [
-            '{panelBegin}' => Html::openTag($tag, $this->options),
+            '{panelBegin}' => Html::openTag($tag, $attributes) . PHP_EOL,
             '{panelHeading}' => $this->renderHeading(),
-            '{panelTabs}' => $this->renderTabs(),
-            '{panelItems}' => implode("\n", $this->tabItems),
+            '{panelTabs}' => $this->renderTabs($id),
+            '{panelItems}' => implode('', $this->tabItems),
             '{panelEnd}' => Html::closeTag($tag),
         ]);
     }
@@ -176,9 +320,12 @@ final class Panel extends Widget
      */
     private function renderHeading(): string
     {
-        if ($this->heading !== null) {
-            Html::addCssClass($this->headingOptions, 'panel-heading');
-            return "\n" . Html::tag('p', $this->heading, $this->headingOptions) . "\n";
+        $headingAttributes = $this->headingAttributes;
+
+        if (!empty($this->heading)) {
+            Html::addCssClass($headingAttributes, $this->headingClass);
+
+            return P::tag()->attributes($headingAttributes)->content($this->heading)->render() . PHP_EOL;
         }
 
         return '';
@@ -189,53 +336,44 @@ final class Panel extends Widget
      *
      * @return string
      */
-    private function renderTabs(): string
+    private function renderTabs(string $id): string
     {
+        $tabsAttributes = $this->tabsAttributes;
+
         if (!empty($this->tabs)) {
             $tabs = '';
+
             foreach ($this->tabs as $index => $item) {
-                $tabs .= $this->renderTab($index, $item) . "\n";
+                $tabs .= $this->renderTab($index, $item, $id) . PHP_EOL;
             }
 
-            Html::addCssClass($this->tabsOptions, 'panel-tabs');
+            Html::addCssClass($tabsAttributes, $this->tabClass);
 
-            return "\n" . Html::tag('p', "\n" . $tabs, $this->tabsOptions)->encode(false) . "\n";
+            return P::tag()->attributes($tabsAttributes)->content(PHP_EOL . $tabs)->encode(false)->render() . PHP_EOL;
         }
 
         return '';
     }
 
-    private function buildOptions(): void
+    private function renderTab(int $index, array $item, string $id): string
     {
-        Html::addCssClass($this->options, 'panel');
+        /** @var string */
+        $url = $item['url'] ?? '';
 
-        $this->options['id'] ??= $this->getId() . '-panel';
+        /** @var string */
+        $label = $item['label'] ?? '';
 
-        if ($this->color !== '') {
-            Html::addCssClass($this->options, $this->color);
-        }
-    }
+        /** @var bool */
+        $encode = $item['encode'] ?? true;
 
-    /**
-     * @param int $index
-     * @param array $item
-     *
-     * @throws JsonException
-     *
-     * @return string
-     */
-    private function renderTab(int $index, array $item): string
-    {
-        $id = $this->getId() . '-panel-c' . $index;
-        $url = ArrayHelper::getValue($item, 'url', '');
-        $label = ArrayHelper::getValue($item, 'label', '');
-        $encode = ArrayHelper::getValue($item, 'encode', true);
-        $linkOptions = ArrayHelper::getValue($item, 'linkOptions', []);
-        $tabItems = ArrayHelper::getValue($item, 'items', []);
-        $tabItemsContainerOptions = ArrayHelper::getValue($item, 'itemsContainerOptions', []);
+        /** @var array */
+        $urlAttributes = $item['urlAttributes'] ?? [];
+
+        /** @var array */
+        $tabItems = $item['items'] ?? [];
 
         if ($url !== '') {
-            $linkOptions['href'] = $url;
+            $urlAttributes['href'] = $url;
         }
 
         if ($label === '') {
@@ -247,56 +385,66 @@ final class Panel extends Widget
         }
 
         if ($this->isActive($item)) {
-            Html::addCssClass($linkOptions, ['active' => 'is-active']);
+            Html::addCssClass($urlAttributes, $this->isActiveClass);
         }
 
-        if (is_array($tabItems) && !empty($tabItems)) {
-            $linkOptions['href'] ??= '#' . $id;
-            $tabItemsContainerOptions['id'] ??= $id;
+        if (!empty($tabItems)) {
+            /** @var string */
+            $urlAttributes['href'] ??= '#' . $id;
 
-            $tabItemsContainer = Html::openTag('div', $tabItemsContainerOptions) . "\n";
+            $tabsItems = '';
 
+            /** @psalm-var array[] */
             foreach ($tabItems as $tabItem) {
-                $tabItemsContainer .= $this->renderItem($tabItem) . "\n";
+                $tabsItems .= $this->renderItem($tabItem) . PHP_EOL;
             }
 
-            $tabItemsContainer .= Html::closeTag('div');
-
-            $this->tabItems[$index] = $tabItemsContainer;
+            $this->tabItems[$index] = $tabsItems;
         }
 
-        return Html::tag('a', $label, $linkOptions)->render();
+        return A::tag()->attributes($urlAttributes)->content($label)->encode(false)->render();
     }
 
     private function renderItem(array $item): string
     {
-        $options = ArrayHelper::getValue($item, 'options', []);
-        $label = ArrayHelper::getValue($item, 'label', '');
-        $icon = ArrayHelper::getValue($item, 'icon', '');
-        $encode = ArrayHelper::getValue($item, 'encode', true);
+        /** @var array */
+        $urlAttributes = $item['urlAttributes'] ?? [];
+
+        /** @var string */
+        $label = $item['label'] ?? '';
+
+        /** @var string */
+        $icon = $item['icon'] ?? '';
+
+        /** @var bool */
+        $encode = $item['encode'] ?? true;
 
         if ($label === '') {
             throw new InvalidArgumentException('The "label" option is required.');
         }
 
-        if ($encode === true) {
+        /** @var array */
+        $labelAttributes = $item['labelAttributes'] ?? [];
+
+        if ($encode) {
             $label = Html::encode($label);
         }
 
-        Html::addCssClass($options, 'panel-block');
+        Html::addCssClass($urlAttributes, $this->blockClass);
 
         if ($this->isActive($item)) {
-            Html::addCssClass($options, ['active' => 'is-active']);
+            Html::addCssClass($urlAttributes, $this->isActiveClass);
         }
 
-        $labelOptions = ['class' => 'panel-icon'];
+        Html::addCssClass($labelAttributes, $this->iconClass);
 
         if ($icon !== '') {
-            $icon = "\n" . Html::tag('i', '', ['class' => $icon, 'aria-hidden' => 'true']) . "\n";
-            $label = "\n" . Html::tag('span', $icon, $labelOptions)->encode(false) . "\n" . $label . "\n";
+            $icon = PHP_EOL . I::tag()->attributes(['aria-hidden' => 'true'])->class($icon) . PHP_EOL;
+            $label = PHP_EOL . Span::tag()->attributes($labelAttributes)->content($icon)->encode(false) . PHP_EOL .
+                 $label . PHP_EOL;
         }
 
-        return Html::tag('a', $label, $options)->encode(false)->render();
+        return A::tag()->attributes($urlAttributes)->content($label)->encode(false)->render();
     }
 
     /**

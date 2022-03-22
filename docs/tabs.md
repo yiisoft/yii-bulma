@@ -1,6 +1,11 @@
 # Tabs widget
 
-Responsive horizontal [navigation tabs](https://bulma.io/documentation/components/tabs/), with different styles.
+### Responsive horizontal [navigation tabs](https://bulma.io/documentation/components/tabs/), with different styles.
+
+<p align="center">
+    </br>
+    <img src="images/tabs.png">
+</p>
 
 ## Usage
 
@@ -98,14 +103,14 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
+`alignment(string $value)` | Alignment of the tabs list. | `''`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
-`items(array $value)` | List of tab items. | `[]`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
 `deactivateItems()` | Disable active items according to their current path. | `false`
-`withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |
+`id(string $value)` | Widget ID. | `''`
+`items(array $value)` | List of tab items. | `[]`
+`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
 `size(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
-`alignment(string $value)` | Alignment of the tabs list. | `''`
 `style(string $value)` | Style of the tabs list. | `''`
 `tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
+`withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |

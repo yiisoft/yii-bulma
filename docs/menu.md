@@ -1,8 +1,9 @@
 # Menu widget
 
-[The Bulma menu](https://bulma.io/documentation/components/menu/) is a vertical navigation component.
+### [The Bulma menu](https://bulma.io/documentation/components/menu/) is a vertical navigation component.
 
 <p align="center">
+    </br>
     <img src="images/menu.png">
 </p>
 
@@ -97,20 +98,41 @@ HTML produced is like the following:
 
 Method | Description | Default
 -------|-------------|---------
-`id(string $value)` | Widget ID. | `''`
-`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
-`deactivateItems()` | Disable active items according to their current path. | `false`
 `activateParents()` | Whether to activate parent menu items when one of the corresponding child menu items is active. | `true`
 `activeCssClass(string $value)` | The CSS class to be appended to the active menu item. | `is-active`
+`autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
+`attributes(array $value)` | HTML attributes for the widget container nav tag. | `[]`
 `brand(string $value)` | Custom brand content. | `''`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | `''`
-`withoutEncodeLabels()` | Disable encoding for labels. | `false`
+`deactivateItems()` | Disable active items according to their current path. | `false`
 `firstItemCssClass(string $value)` | The CSS class for the first item in the main menu or each submenu. | `''`
-`showEmptyItems()` | Whether to show empty menu items. An empty menu item is one whose `url` option is not set and which has no visible child menu items. | `false`
+`hiddenEmptyItems()` | Whether to hide empty menu items. | `false`
+`id(string $value)` | Widget ID. | `''`
+`itemAttributes(array $value)` | List of HTML attributes shared by all menu. | `[]`
 `items(array $value)` | List of menu items. | `[]`
-`itemOptions(array $value)` | List of HTML attributes shared by all menu. | `[]`
+`itemsTag(?string $value)` | Tag name of the container element, `null` value means that container tag will not be rendered. | `ul`
 `labelTemplate(string $value)`| The template used to render the body of a menu which is NOT a link. | `''`
 `lastItemCssClass(string $value)` | The CSS class that will be assigned to the last item in the main menu or each submenu. | `''`
-`linkTemplate(string $value)` | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
-`options(array $value)` | The HTML attributes for the menu's container tag. | `[]`
 `subMenuTemplate(string $value)` | The template used to render a list of sub-menus. | `<ul class = menu-list>\n{items}\n</ul>`
+`urlTemplate(string $value)` | The template used to render the body of a menu which is a link. | `<a href={url}>{icon}{label}</a>`
+
+### Items structure is an array of the following structure:
+
+```php
+[
+    [
+        'label' => '',
+        'labelTemplate' => '',
+        'url' => '',
+        'urlAttributes' => [],
+        'urlTemplate' => '',
+        'items' => [],
+        'itemAtrributes' => [],
+        'icon' => '',,
+        'iconAttributes' => [],
+        'active' => false,
+        'submenuTemplate' => '',
+        'encode' => false,
+        'visible' => true,
+    ],
+]

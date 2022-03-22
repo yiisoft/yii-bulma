@@ -4,579 +4,63 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
+use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Menu;
 
 final class MenuTest extends TestCase
 {
-    public function testMenu(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testActiveItemClosure(): void
     {
-        Menu::counter(0);
-
-        $html = Menu::widget()->items([['label' => 'Login', 'url' => 'auth/login']])->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
-        <li><a href="auth/login">Login</a></li>
+        <li><a href="#" class="is-active">item1</a></li>
+        <p class="menu-label">item2</p>
+
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuItems(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->items([
-                ['label' => 'General',
-                    'items' => [
-                        [
-                            'label' => 'Dashboard',
-                            'url' => 'site/index',
-                            'icon' => 'mdi mdi-desktop-mac',
-                            'iconOptions' => ['class' => 'icon'],
-                            'linkOptions' => ['class' => 'testMe'],
-                        ],
-                        [
-                            'label' => 'Logout',
-                            'url' => 'site/logout',
-                            'icon' => 'mdi mdi-logout',
-                            'iconOptions' => ['class' => 'icon'],
-                            'linkOptions' => ['class' => 'testMe'],
-                        ],
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->urlTemplate('')
+                ->labelTemplate('')
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                        'labelTemplate' => '{label}',
+                        'urlTemplate' => '<a href={url}>{icon}{label}</a>',
+                        'active' => function ($item, $hasActiveChild, $isItemActive, $widget) {
+                            return isset($item, $hasActiveChild, $isItemActive, $widget);
+                        },
                     ],
-                ],
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
+                    [
+                        'label' => 'item2',
+                        'labelTemplate' => '{label}',
+                        'active' => false,
                     ],
-                ],
             ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">General</p>
-        <ul class = menu-list>
-        <li><a href="site/index" class="testMe"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
-        <li><a href="site/logout" class="testMe"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
-        </ul>
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li><a href="user/index">Manager</a></li>
-        <li><a href="user/export">Export</a></li>
-        </ul>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+            ->render()
+        );
     }
 
-    public function testMenuItemEmpty(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testActivateItems(): void
     {
-        Menu::counter(0);
-
-        $html = Menu::widget()->items([])->render();
-        $this->assertEmpty($html);
-    }
-
-    public function testMenuItemEmptyLabel(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()->items([['url' => '#']])->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li><a href="#"></a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuItemVisible(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->items([
-                ['label' => 'General',
-                    'items' => [
-                        [
-                            'label' => 'Dashboard',
-                            'url' => 'site/index',
-                            'icon' => 'mdi mdi-desktop-mac',
-                            'iconOptions' => ['class' => 'icon'],
-                        ],
-                    ],
-                ],
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Logout',
-                    'url' => 'site/logout',
-                    'visible' => false,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">General</p>
-        <ul class = menu-list>
-        <li><a href="site/index"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
-        </ul>
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li><a href="user/index">Manager</a></li>
-        <li><a href="user/export">Export</a></li>
-        </ul>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuEncodeLabel(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->withoutEncodeLabels()
-            ->items([
-                [
-                    'label' => 'Authors & Publications',
-                    'url' => '#',
-                    'encode' => true,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li><a href="#">Authors &amp; Publications</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->items([
-                [
-                    'label' => 'Authors & Publications',
-                    'url' => '#',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li><a href="#">Authors &amp; Publications</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->withoutEncodeLabels()
-            ->items([
-                [
-                    'label' => 'Authors & Publications',
-                    'url' => '#',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li><a href="#">Authors & Publications</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuTagOption(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->options([
-                'tag' => false,
-            ])
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                    'options' => ['tag' => 'div'],
-                ],
-                [
-                    'label' => 'item2',
-                    'url' => '#',
-                    'options' => ['tag' => false],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-
-        <div><a href="#">item1</a></div>
-        <a href="#">item2</a>
-
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->options([
-                'tag' => false,
-            ])
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                ],
-                [
-                    'label' => 'item2',
-                    'url' => '#',
-                ],
-            ])
-            ->itemOptions(['tag' => false])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-
-        <a href="#">item1</a>
-        <a href="#">item2</a>
-
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuItemTemplate(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->labelTemplate('')
-            ->linkTemplate('')
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                    'template' => 'label: {label}; url: {url}',
-                ],
-                [
-                    'label' => 'item2',
-                    'template' => 'label: {label}',
-                ],
-                [
-                    'label' => 'item3 (no template)',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li>label: item1; url: "#"</li>
-        label: <p class="menu-label">item2</p>
-
-        item3 (no template)
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuActiveItemClosure(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->linkTemplate('')
-            ->labelTemplate('')
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                    'template' => 'label: {label}; url: {url}',
-                    'active' => function ($item, $hasActiveChild, $isItemActive, $widget) {
-                        return isset($item, $hasActiveChild, $isItemActive, $widget);
-                    },
-                ],
-                [
-                    'label' => 'item2',
-                    'template' => 'label: {label}',
-                    'active' => false,
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li>label: item1; url: "#" class="is-active"</li>
-        label: <p class="menu-label">item2</p>
-
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuItemClassAsArray(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->activeCssClass('item-active')
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                    'active' => true,
-                    'options' => [
-                        'class' => [
-                            'someclass',
-                        ],
-                    ],
-                ],
-                [
-                    'label' => 'item2',
-                    'url' => '#',
-                    'options' => [
-                        'class' => [
-                            'another-class',
-                            'other--class',
-                            'two classes',
-                        ],
-                    ],
-                ],
-                [
-                    'label' => 'item3',
-                    'url' => '#',
-                ],
-                [
-                    'label' => 'item4',
-                    'url' => '#',
-                    'options' => [
-                        'class' => [
-                            'some-other-class',
-                            'foo_bar_baz_class',
-                        ],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li class="someclass"><a href="#" class="item-active">item1</a></li>
-        <li class="another-class other--class two classes"><a href="#">item2</a></li>
-        <li><a href="#">item3</a></li>
-        <li class="some-other-class foo_bar_baz_class"><a href="#">item4</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuItemClassAsString(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->activeCssClass('item-active')
-            ->items([
-                [
-                    'label' => 'item1',
-                    'url' => '#',
-                    'options' => [
-                        'class' => 'someclass',
-                    ],
-                ],
-                [
-                    'label' => 'item2',
-                    'url' => '#',
-                ],
-                [
-                    'label' => 'item3',
-                    'url' => '#',
-                    'options' => [
-                        'class' => 'some classes',
-                    ],
-                ],
-                [
-                    'label' => 'item4',
-                    'url' => '#',
-                    'active' => true,
-                    'options' => [
-                        'class' => 'another-class other--class two classes',
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li class="someclass"><a href="#">item1</a></li>
-        <li><a href="#">item2</a></li>
-        <li class="some classes"><a href="#">item3</a></li>
-        <li class="another-class other--class two classes"><a href="#" class="item-active">item4</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuCurrentPath(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('/setting')
-            ->items([
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <li><a href="/setting" class="is-active">Setting</a></li>
-        <li><a href="/profile">Profile</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuFirstItemCssClass(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('/setting')
-            ->firstItemCssClass('testMe')
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li class="testMe"><a href="user/index">Manager</a></li>
-        <li><a href="user/export">Export</a></li>
-        </ul>
-        <li><a href="/setting" class="is-active">Setting</a></li>
-        <li><a href="/profile">Profile</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuLastItemCssClass(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('/setting')
-            ->lastItemCssClass('testMe')
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li><a href="user/index">Manager</a></li>
-        <li class="testMe"><a href="user/export">Export</a></li>
-        </ul>
-        <li><a href="/setting" class="is-active">Setting</a></li>
-        <li class="testMe"><a href="/profile">Profile</a></li>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-    }
-
-    public function testMenuActivateItems(): void
-    {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->deactivateItems()
-            ->currentPath('user/block')
-            ->lastItemCssClass('testMe')
-            ->items([
-                [
-                    'label' => 'Users',
-                    'items' => [
-                        [
-                            'label' => 'Manager',
-                            'url' => 'user/index',
-                            'items' => [
-                                ['label' => 'Update', 'url' => 'user/update'],
-                                ['label' => 'Block', 'url' => 'user/block'],
-                            ],
-                        ],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
         <p class="menu-label">Users</p>
         <ul class = menu-list>
@@ -589,17 +73,15 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('user/block')
-            ->lastItemCssClass('testMe')
-            ->items([
-                [
-                    'label' => 'Users',
-                    'items' => [
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('user/block')
+                ->deactivateItems()
+                ->items([
+                    [
+                        'label' => 'Users',
+                        'items' => [
                         [
                             'label' => 'Manager',
                             'url' => 'user/index',
@@ -612,9 +94,12 @@ final class MenuTest extends TestCase
                     ],
                 ],
             ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+            ->lastItemCssClass('testMe')
+            ->render()
+        );
+
+        $expected = <<<HTML
+        <aside id="w2-menu" class="menu">
         <ul class="menu-list">
         <p class="menu-label">Users</p>
         <ul class = menu-list>
@@ -627,74 +112,39 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('user/block')
+                ->items([
+                    [
+                        'label' => 'Users',
+                        'items' => [
+                            [
+                                'label' => 'Manager',
+                                'url' => 'user/index',
+                                'items' => [
+                                    ['label' => 'Update', 'url' => 'user/update'],
+                                    ['label' => 'Block', 'url' => 'user/block'],
+                                ],
+                            ],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                ])
+                ->lastItemCssClass('testMe')
+                ->render()
+        );
     }
 
-    public function testMenuActivateParentItems(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testActivateParentItems(): void
     {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('user/block')
-            ->lastItemCssClass('testMe')
-            ->items([
-                [
-                    'label' => 'Users',
-                    'items' => [
-                        [
-                            'label' => 'Manager',
-                            'url' => 'user/index',
-                            'items' => [
-                                ['label' => 'Update', 'url' => 'user/update'],
-                                ['label' => 'Block', 'url' => 'user/block'],
-                            ],
-                        ],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
-        <ul class="menu-list">
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li><a href="user/index">Manager</a><ul class = menu-list>
-        <li><a href="user/update">Update</a></li>
-        <li class="testMe"><a href="user/block" class="is-active">Block</a></li>
-        </ul></li>
-        <li class="testMe"><a href="user/export">Export</a></li>
-        </ul>
-        </ul>
-        </aside>
-        HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->activateParents()
-            ->currentPath('user/block')
-            ->lastItemCssClass('testMe')
-            ->items([
-                [
-                    'label' => 'Users',
-                    'items' => [
-                        [
-                            'label' => 'Manager',
-                            'url' => 'user/index',
-                            'items' => [
-                                ['label' => 'Update', 'url' => 'user/update'],
-                                ['label' => 'Block', 'url' => 'user/block'],
-                            ],
-                        ],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
         <p class="menu-label">Users</p>
         <ul class = menu-list>
@@ -707,39 +157,40 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->activateParents()
+                ->currentPath('user/block')
+                ->items([
+                    [
+                        'label' => 'Users',
+                        'items' => [
+                            [
+                                'label' => 'Manager',
+                                'url' => 'user/index',
+                                'items' => [
+                                    ['label' => 'Update', 'url' => 'user/update'],
+                                    ['label' => 'Block', 'url' => 'user/block'],
+                                ],
+                            ],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                ])
+                ->lastItemCssClass('testMe')
+            ->render()
+        );
     }
 
-    public function testMenuBrand(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testBrand(): void
     {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->brand(
-                '<div class=aside-tools>' . "\n" . '<div class=aside-tools-label>' . "\n" .
-                '<span><b>Brand</b> Example</span>' . "\n" . '</div>' . "\n" . '</div>'
-            )
-            ->currentPath('/setting')
-            ->lastItemCssClass('testMe')
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <div class=aside-tools>
         <div class=aside-tools-label>
         <span><b>Brand</b> Example</span>
@@ -756,74 +207,119 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->brand(
+                    '<div class=aside-tools>' . "\n" . '<div class=aside-tools-label>' . "\n" .
+                    '<span><b>Brand</b> Example</span>' . "\n" . '</div>' . "\n" . '</div>'
+                )
+                ->currentPath('/setting')
+                ->items([
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                    ],
+                ])
+                ->lastItemCssClass('testMe')
+                ->render()
+        );
     }
 
-    public function testMenuHiddenItems(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testCurrentPath(): void
     {
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('/setting')
-            ->showEmptyItems()
-            ->lastItemCssClass('testMe')
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
-                    ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'items' => [],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
-        <p class="menu-label">Users</p>
-        <ul class = menu-list>
-        <li><a href="user/index">Manager</a></li>
-        <li class="testMe"><a href="user/export">Export</a></li>
-        </ul>
         <li><a href="/setting" class="is-active">Setting</a></li>
-        <p class="menu-label">Profile</p>
-
+        <li><a href="/profile">Profile</a></li>
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
-
-        Menu::counter(0);
-
-        $html = Menu::widget()
-            ->currentPath('/setting')
-            ->lastItemCssClass('testMe')
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('/setting')
+                ->items([
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
                     ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'items' => [],
-                ],
-            ])
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testFirstItemCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li class="testMe"><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('/setting')
+                ->firstItemCssClass('testMe')
+                ->items([
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testHiddenItems(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
         <p class="menu-label">Users</p>
         <ul class = menu-list>
@@ -834,66 +330,508 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('/setting')
+                ->items([
+                    [
+                        'label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'items' => [],
+                    ],
+                ])
+                ->hiddenEmptyItems()
+                ->lastItemCssClass('testMe')
+                ->render()
+        );
     }
 
-    public function testMenuSubMenuTemplate(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testImmutability(): void
     {
-        Menu::counter(0);
+        $widget = Menu::widget();
 
-        $html = Menu::widget()
-            ->items([
-                ['label' => 'Users',
-                    'items' => [
-                        ['label' => 'Manager', 'url' => 'user/index'],
-                        ['label' => 'Export', 'url' => 'user/export'],
+        $this->assertNotSame($widget, $widget->activateParents());
+        $this->assertNotSame($widget, $widget->activeCssClass(''));
+        $this->assertNotSame($widget, $widget->attributes([]));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Menu::class));
+        $this->assertNotSame($widget, $widget->brand(''));
+        $this->assertNotSame($widget, $widget->currentPath(''));
+        $this->assertNotSame($widget, $widget->deactivateItems());
+        $this->assertNotSame($widget, $widget->firstItemCssClass(''));
+        $this->assertNotSame($widget, $widget->id(Menu::class));
+        $this->assertNotSame($widget, $widget->itemAttributes([]));
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->labelTemplate(''));
+        $this->assertNotSame($widget, $widget->lastItemCssClass(''));
+        $this->assertNotSame($widget, $widget->urlTemplate(''));
+        $this->assertNotSame($widget, $widget->subMenuTemplate(''));
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItems(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">General</p>
+        <ul class = menu-list>
+        <li><a href="site/index" class="testMe"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
+        <li><a href="site/logout" class="testMe"><span class="icon"><i class="mdi mdi-logout"></i></span>Logout</a></li>
+        </ul>
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    ['label' => 'General',
+                        'items' => [
+                            [
+                                'label' => 'Dashboard',
+                                'url' => 'site/index',
+                                'icon' => 'mdi mdi-desktop-mac',
+                                'iconAttributes' => ['class' => 'icon'],
+                                'linkAttributes' => ['class' => 'testMe'],
+                            ],
+                            [
+                                'label' => 'Logout',
+                                'url' => 'site/logout',
+                                'icon' => 'mdi mdi-logout',
+                                'iconAttributes' => ['class' => 'icon'],
+                                'linkAttributes' => ['class' => 'testMe'],
+                            ],
+                        ],
                     ],
-                ],
-                [
-                    'label' => 'Setting',
-                    'url' => '/setting',
-                ],
-                [
-                    'label' => 'Profile',
-                    'url' => '/profile',
-                ],
-            ])
-            ->subMenuTemplate('<ul>\n{items}\n</ul>')
-            ->render();
-        $expected = <<<'HTML'
-        <aside class="menu">
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsClassAsArray(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <li class="someclass"><a href="#" class="item-active">item1</a></li>
+        <li class="another-class other--class two classes"><a href="#">item2</a></li>
+        <li><a href="#">item3</a></li>
+        <li class="some-other-class foo_bar_baz_class"><a href="#">item4</a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->activeCssClass('item-active')
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                        'active' => true,
+                        'itemAttributes' => ['class' => ['someclass']],
+                    ],
+                    [
+                        'label' => 'item2',
+                        'url' => '#',
+                        'itemAttributes' => ['class' => ['another-class', 'other--class', 'two classes']],
+                    ],
+                    [
+                        'label' => 'item3',
+                        'url' => '#',
+                    ],
+                    [
+                        'label' => 'item4',
+                        'url' => '#',
+                        'itemAttributes' => ['class' => ['some-other-class', 'foo_bar_baz_class']],
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsClassAsString(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <li class="someclass"><a href="#">item1</a></li>
+        <li><a href="#">item2</a></li>
+        <li class="some classes"><a href="#">item3</a></li>
+        <li class="another-class other--class two classes"><a href="#" class="item-active">item4</a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->activeCssClass('item-active')
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                        'itemAttributes' => ['class' => 'someclass'],
+                    ],
+                    [
+                        'label' => 'item2',
+                        'url' => '#',
+                    ],
+                    [
+                        'label' => 'item3',
+                        'url' => '#',
+                        'itemAttributes' => ['class' => 'some classes'],
+                    ],
+                    [
+                        'label' => 'item4',
+                        'url' => '#',
+                        'active' => true,
+                        'itemAttributes' => ['class' => 'another-class other--class two classes'],
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsEmpty(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $html = Menu::widget()->items([])->render();
+        $this->assertEmpty($html);
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsEmptyLabel(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <li><a href="#"></a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE($expected, Menu::widget()->items([['url' => '#']])->render());
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsTag(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <div><a href="#">item1</a></div>
+        <a href="#">item2</a>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                        'tag' => 'div',
+                    ],
+                    [
+                        'label' => 'item2',
+                        'url' => '#',
+                        'tag' => null,
+                    ],
+                ])
+                ->render()
+        );
+
+        $expected = <<<HTML
+        <aside id="w2-menu" class="menu">
+        <ul class="menu-list">
+        <a href="#">item1</a>
+        <a href="#">item2</a>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                    ],
+                    [
+                        'label' => 'item2',
+                        'url' => '#',
+                    ],
+                ])
+                ->itemsTag(null)
+                ->render()
+        );
+
+        $expected = <<<HTML
+        <aside id="w3-menu" class="menu">
+        <ul class="menu-list">
+        <a href="#">item1</a>
+        <div><a href="#">item2</a></div>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                    ],
+                    [
+                        'label' => 'item2',
+                        'url' => '#',
+                        'tag' => 'div',
+                    ],
+                ])
+                ->itemsTag(null)
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsTemplate(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <li><a href="#">item1</a></li>
+        <p class="menu-label">item2</p>
+
+        item3 (no template)
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->labelTemplate('')
+                ->urlTemplate('')
+                ->items([
+                    [
+                        'label' => 'item1',
+                        'url' => '#',
+                        'labelTemplate' => '{label}',
+                        'urlTemplate' => '<a href={url}>{icon}{label}</a>',
+                    ],
+                    [
+                        'label' => 'item2',
+                        'labelTemplate' => '{label}',
+                    ],
+                    [
+                        'label' => 'item3 (no template)',
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsVisible(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">General</p>
+        <ul class = menu-list>
+        <li><a href="site/index"><span class="icon"><i class="mdi mdi-desktop-mac"></i></span>Dashboard</a></li>
+        </ul>
+        <p class="menu-label">Users</p>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    ['label' => 'General',
+                        'items' => [
+                            [
+                                'label' => 'Dashboard',
+                                'url' => 'site/index',
+                                'icon' => 'mdi mdi-desktop-mac',
+                                'iconAttributes' => ['class' => 'icon'],
+                            ],
+                        ],
+                    ],
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Logout',
+                        'url' => 'site/logout',
+                        'visible' => false,
+                    ],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testLastItemCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
         <ul class="menu-list">
         <p class="menu-label">Users</p>
-        <ul>\n<li><a href="user/index">Manager</a></li>
-        <li><a href="user/export">Export</a></li>\n</ul>
+        <ul class = menu-list>
+        <li><a href="user/index">Manager</a></li>
+        <li class="testMe"><a href="user/export">Export</a></li>
+        </ul>
+        <li><a href="/setting" class="is-active">Setting</a></li>
+        <li class="testMe"><a href="/profile">Profile</a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->currentPath('/setting')
+                ->items([
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                    ],
+                ])
+                ->lastItemCssClass('testMe')
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testSubMenuTemplate(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <p class="menu-label">Users</p>
+        <ul>
+        <li><a href="user/index">Manager</a></li>
+        <li><a href="user/export">Export</a></li>
+        </ul>
         <li><a href="/setting">Setting</a></li>
         <li><a href="/profile">Profile</a></li>
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, $html);
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()
+                ->items([
+                    ['label' => 'Users',
+                        'items' => [
+                            ['label' => 'Manager', 'url' => 'user/index'],
+                            ['label' => 'Export', 'url' => 'user/export'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Setting',
+                        'url' => '/setting',
+                    ],
+                    [
+                        'label' => 'Profile',
+                        'url' => '/profile',
+                    ],
+                ])
+                ->subMenuTemplate("<ul>\n{items}\n</ul>")
+                ->render(),
+        );
     }
 
-    public function testImmutability(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testRender(): void
     {
-        $widget = Menu::widget();
-
-        $this->assertNotSame($widget, $widget->deactivateItems());
-        $this->assertNotSame($widget, $widget->activateParents());
-        $this->assertNotSame($widget, $widget->activeCssClass(''));
-        $this->assertNotSame($widget, $widget->brand(''));
-        $this->assertNotSame($widget, $widget->currentPath(''));
-        $this->assertNotSame($widget, $widget->withoutEncodeLabels());
-        $this->assertNotSame($widget, $widget->firstItemCssClass(''));
-        $this->assertNotSame($widget, $widget->showEmptyItems());
-        $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->itemOptions([]));
-        $this->assertNotSame($widget, $widget->labelTemplate(''));
-        $this->assertNotSame($widget, $widget->lastItemCssClass(''));
-        $this->assertNotSame($widget, $widget->linkTemplate(''));
-        $this->assertNotSame($widget, $widget->options([]));
-        $this->assertNotSame($widget, $widget->subMenuTemplate(''));
-        $this->assertNotSame($widget, $widget->id(Menu::class));
-        $this->assertNotSame($widget, $widget->autoIdPrefix(Menu::class));
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <aside id="w1-menu" class="menu">
+        <ul class="menu-list">
+        <li><a href="auth/login">Login</a></li>
+        </ul>
+        </aside>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Menu::widget()->items([['label' => 'Login', 'url' => 'auth/login']])->render()
+        );
     }
 }

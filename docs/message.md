@@ -1,8 +1,9 @@
 # Message widget
 
-[The message component](https://bulma.io/documentation/components/message/) displays a message like the following:
+### [The message component](https://bulma.io/documentation/components/message/) displays a message like the following:
 
 <p align="center">
+    </br>
     <img src="images/message.png">
 </p>
 
@@ -69,10 +70,12 @@ Method | Description | Default
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `body(string $value)` | Message body. | `''`
 `bodyAttributes(array $value)` | HTML attributes for the body tag. | `[]`
+`bodyCssClass(string $value)` | CSS class for the body container. | `''`
 `closeButtonAttributes(array $value)`| HTML attributes for rendering the close button tag. | `[]`
+`encode()` | Enable/Disable encoding for labels. | `false`
+`headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `headerColor(string $value)` | Message color. Options available are: (`Message::COLOR_DARK`, `Message::COLOR_PRIMARY`, `Message::COLOR_LINK`, `Message::COLOR_INFO`, `Message::COLOR_SUCCESS`, `Message::COLOR_WARNING`, `Message::COLOR_DANGER`). | `Message::COLOR_DARK`
 `headerMessage(string $value)` | Message header. | `''`
-`headerAttributes(array $value)` | HTML attributes for the header tag. | `[]`
 `id(string $value)` | Widget ID. | `''`
 `size(string $value)` | Message widget size. Default is normal. Options available are: (`Message::SIZE_SMALL`, `Message::SIZE_MEDIUM`, `Message::SIZE_LARGE`.  | `normal`
 `withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`

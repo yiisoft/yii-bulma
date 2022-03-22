@@ -31,14 +31,29 @@ use function strtr;
  */
 final class Breadcrumbs extends Widget
 {
-    private string $autoIdPrefix = 'w';
-    private array $attributes = [];
     private string $activeItemTemplate = "<li class=\"is-active\"><a aria-current=\"page\">{link}</a></li>\n";
+    private array $attributes = [];
+    private string $autoIdPrefix = 'w';
     private bool $encode = false;
     private ?array $homeItem = ['label' => 'Home', 'url' => '/'];
     private array $items = [];
     private array $itemsAttributes = [];
     private string $itemTemplate = "<li>{link}</li>\n";
+
+    /**
+     * Returns a new instance with the specified active item template.
+     *
+     * @param string $value The template used to render each active item in the breadcrumbs. The token `{link}` will be
+     * replaced with the actual HTML link for each active item.
+     *
+     * @return self
+     */
+    public function activeItemTemplate(string $value): self
+    {
+        $new = clone $this;
+        $new->activeItemTemplate = $value;
+        return $new;
+    }
 
     /**
      * Defines a string value that labels the current element.
@@ -57,28 +72,13 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified active item template.
-     *
-     * @param string $value The template used to render each active item in the breadcrumbs. The token `{link}` will be
-     * replaced with the actual HTML link for each active item.
-     *
-     * @return self
-     */
-    public function activeItemTemplate(string $value): self
-    {
-        $new = clone $this;
-        $new->activeItemTemplate = $value;
-        return $new;
-    }
-
-    /**
      * The HTML attributes. The following special options are recognized.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -93,8 +93,6 @@ final class Breadcrumbs extends Widget
      * @param string $value The prefix to the automatically generated widget IDs.
      *
      * @return self
-     *
-     * {@see getId()}
      */
     public function autoIdPrefix(string $value): self
     {
@@ -106,7 +104,7 @@ final class Breadcrumbs extends Widget
     /**
      * Set encode to true to encode the output.
      *
-     * @param bool $value whether to encode the output.
+     * @param bool $value Whether to encode the output.
      *
      * @return self
      */
@@ -120,7 +118,7 @@ final class Breadcrumbs extends Widget
     /**
      * Returns a new instance with the specified first item in the breadcrumbs (called home link).
      *
-     * If a null is specified, the home item will not be rendered.
+     * If a `false` is specified, the home item will not be rendered.
      *
      * @param array|null $value Please refer to {@see items()} on the format.
      *
@@ -185,7 +183,7 @@ final class Breadcrumbs extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function itemsAttributes(array $value): self
     {
@@ -215,8 +213,8 @@ final class Breadcrumbs extends Widget
             return '';
         }
 
-        $customTag = CustomTag::name('nav');
         $attributes = $this->attributes;
+        $customTag = CustomTag::name('nav');
 
         Html::addCssClass($attributes, 'breadcrumb');
 
@@ -302,10 +300,10 @@ final class Breadcrumbs extends Widget
      */
     private function renderItems(): array
     {
-        $items = [];
+        $renderItems = [];
 
         if ($this->homeItem !== null) {
-            $items[] = $this->renderItem($this->homeItem, $this->itemTemplate);
+            $renderItems[] = $this->renderItem($this->homeItem, $this->itemTemplate);
         }
 
         /** @psalm-var string[]|string $item */
@@ -314,9 +312,12 @@ final class Breadcrumbs extends Widget
                 $item = ['label' => $item];
             }
 
-            $items[] = $this->renderItem($item, isset($item['url']) ? $this->itemTemplate : $this->activeItemTemplate);
+            $renderItems[] = $this->renderItem(
+                $item,
+                isset($item['url']) ? $this->itemTemplate : $this->activeItemTemplate,
+            );
         }
 
-        return $items;
+        return $renderItems;
     }
 }
