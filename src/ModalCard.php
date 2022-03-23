@@ -430,7 +430,7 @@ final class ModalCard extends Widget
     /**
      * Returns a new instance with the specified toggle button color.
      *
-     * @param string $value The toggle button color. By default there's no color set.
+     * @param string $value The toggle button color. By default, there's no color set.
      * Possible values are: ModalCard::COLOR_PRIMARY, ModalCard::COLOR_INFO, ModalCard::COLOR_SUCCESS,
      * ModalCard::COLOR_WARNING, ModalCard::COLOR_DANGER, ModalCard::COLOR_DARK
      *

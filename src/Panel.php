@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use JsonException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\A;
@@ -313,11 +312,6 @@ final class Panel extends Widget
         ]);
     }
 
-    /**
-     * @throws JsonException
-     *
-     * @return string
-     */
     private function renderHeading(): string
     {
         $headingAttributes = $this->headingAttributes;
@@ -331,11 +325,6 @@ final class Panel extends Widget
         return '';
     }
 
-    /**
-     * @throws JsonException
-     *
-     * @return string
-     */
     private function renderTabs(string $id): string
     {
         $tabsAttributes = $this->tabsAttributes;
@@ -344,7 +333,7 @@ final class Panel extends Widget
             $tabs = '';
 
             foreach ($this->tabs as $index => $item) {
-                $tabs .= $this->renderTab($index, $item, $id) . PHP_EOL;
+                $tabs .= $this->renderTab($index, $item, $id . '-' . $index) . PHP_EOL;
             }
 
             Html::addCssClass($tabsAttributes, $this->tabClass);

@@ -251,6 +251,47 @@ final class TabsTest extends TestCase
         );
     }
 
+    public function testItemsAttributes(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <div id="w1-test-id" class="tabs">
+        <ul class="test-class">
+        <li class="some-class-1 is-active"><a class="some-class-2" href="site/contact">Tab 1</a></li>
+        <li><a><span>Tab 2</span></a></li>
+        </ul>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Tabs::widget()
+                ->id('w1-test-id')
+                ->itemsAttributes(['class' => 'test-class'])
+                ->items([
+                    [
+                        'label' => 'Tab 1',
+                        'url' => 'site/contact',
+                        'active' => true,
+                        'attributes' => [
+                            'class' => 'some-class-1',
+                        ],
+                        'urlAttributes' => [
+                            'class' => 'some-class-2',
+                        ],
+                    ],
+                    [
+                        'label' => Html::tag('span', 'Tab 2'),
+                        'encode' => false,
+                    ],
+                    [
+                        'label' => 'Tab 3',
+                        'visible' => false,
+                    ],
+                ])
+                ->render()
+        );
+    }
+
     public function testMissingLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);

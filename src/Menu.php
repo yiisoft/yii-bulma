@@ -44,7 +44,6 @@ final class Menu extends Widget
     private string $lastItemCssClass = '';
     private string $urlTemplate = '<a href={url}>{icon}{label}</a>';
     private string $labelTemplate = '{label}';
-    private bool $encodeLabels = true;
     private string $subMenuTemplate = "<ul class = menu-list>\n{items}\n</ul>";
 
     /**
@@ -165,8 +164,6 @@ final class Menu extends Widget
     /**
      * Returns a new instance with the specified hidden empty items.
      *
-     * @param bool $value Whether to hide empty menu items.
-     *
      * @return self
      */
     public function hiddenEmptyItems(): self
@@ -213,10 +210,10 @@ final class Menu extends Widget
      *
      * @param array $value List of menu items. Each menu item should be an array of the following structure:
      *
-     * - label: string, optional, specifies the menu item label. When {@see encodeLabels} is true, the label will be
+     * - label: string, optional, specifies the menu item label. When {@see encode} is true, the label will be
      *   HTML-encoded. If the label is not specified, an empty string will be used.
      * - encode: bool, optional, whether this item`s label should be HTML-encoded. This param will override global
-     *   {@see encodeLabels} param.
+     *   {@see encode} param.
      * - url: string or array, optional, specifies the URL of the menu item. When this is set, the actual menu item
      *   content will be generated using {@see urlTemplate}; otherwise, {@see labelTemplate} will be used.
      * - visible: bool, optional, whether this menu item is visible. Defaults to true.
@@ -227,10 +224,10 @@ final class Menu extends Widget
      *   class will be appended with {@see activeCssClass}. If this option is not set, the menu item will be set active
      *   automatically when the current request is triggered by `url`. For more details, please refer to
      *   {@see isItemActive()}.
-     * - labeltemplate: string, optional, the template used to render the content of this menu item. The token `{label}`
+     * - labelTemplate: string, optional, the template used to render the content of this menu item. The token `{label}`
      *   will be replaced by the label of the menu item. If this option is not set, {@see labelTemplate} will be used
      *   instead.
-     * - urltemplate: string, optional, the template used to render the content of this menu item. The token `{url}`
+     * - urlTemplate: string, optional, the template used to render the content of this menu item. The token `{url}`
      *   will be replaced by the URL associated with this menu item. If this option is not set, {@see urlTemplate} will
      *   be used instead.
      * - subMenuTemplate: string, optional, the template used to render the list of sub-menus. The token `{items}` will

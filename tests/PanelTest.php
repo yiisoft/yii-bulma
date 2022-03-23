@@ -30,6 +30,31 @@ final class PanelTest extends TestCase
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
+    public function testBlockClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <nav id="w1-panel" class="panel">
+        <p class="panel-tabs">
+        <a href="#w1-panel-0">all</a>
+        </p>
+        <a class="test-class">Tabs</a>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Panel::widget()
+                ->blockClass('test-class')
+                ->tabs([
+                    ['label' => 'all', 'items' => [['label' => 'Tabs']]],
+                ])
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testColor(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -41,6 +66,25 @@ final class PanelTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Panel::widget()->heading('Repositories')->color(Panel::COLOR_PRIMARY)->render(),
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <nav id="w1-panel" class="test-class">
+        <p class="panel-tabs">
+        <a>all</a>
+        </p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Panel::widget()->cssClass('test-class')->tabs([['label' => 'all']])->render()
         );
     }
 
@@ -73,6 +117,23 @@ final class PanelTest extends TestCase
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
+    public function testHeadingClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <nav id="w1-panel" class="panel">
+        <p class="test-class">Repositories</p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Panel::widget()->heading('Repositories')->headingClass('test-class')->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testHeadingAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -96,10 +157,16 @@ final class PanelTest extends TestCase
 
         $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Panel::class));
+        $this->assertNotSame($widget, $widget->blockClass(''));
         $this->assertNotSame($widget, $widget->color('is-primary'));
+        $this->assertNotSame($widget, $widget->cssClass(''));
         $this->assertNotSame($widget, $widget->heading(''));
         $this->assertNotSame($widget, $widget->headingAttributes([]));
+        $this->assertNotSame($widget, $widget->headingClass(''));
+        $this->assertNotSame($widget, $widget->iconClass(''));
         $this->assertNotSame($widget, $widget->id(Panel::class));
+        $this->assertNotSame($widget, $widget->isActiveClass(''));
+        $this->assertNotSame($widget, $widget->tabClass(''));
         $this->assertNotSame($widget, $widget->tabs([]));
         $this->assertNotSame($widget, $widget->tabsAttributes([]));
         $this->assertNotSame($widget, $widget->template(''));
@@ -124,11 +191,11 @@ final class PanelTest extends TestCase
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
         <p class="panel-tabs">
-        <a class="is-active" href="#w1-panel" data-all>All</a>
-        <a href="#w1-panel" data-target="Public">Public</a>
-        <a href="#w1-panel" data-target="Private">Private</a>
-        <a href="#w1-panel" data-target="Sources">Sources</a>
-        <a href="#w1-panel" data-target="Forks">Forks</a>
+        <a class="is-active" href="#w1-panel-0" data-all>All</a>
+        <a href="#w1-panel-1" data-target="Public">Public</a>
+        <a href="#w1-panel-2" data-target="Private">Private</a>
+        <a href="#w1-panel-3" data-target="Sources">Sources</a>
+        <a href="#w1-panel-4" data-target="Forks">Forks</a>
         </p>
         <a class="panel-block" data-category="All">
         <span class="panel-icon">
@@ -311,6 +378,69 @@ final class PanelTest extends TestCase
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
+    public function testItemsActive(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <nav id="w1-panel" class="panel is-primary">
+        <p class="panel-heading">Primary</p>
+        <p class="panel-tabs">
+        <a href="#w1-panel-0" data-all>All</a>
+        <a href="#w1-panel-1" data-target="Public">Public</a>
+        </p>
+        <a class="panel-block is-active" data-category="All">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        Breadcrumbs
+        </a>
+        <a class="panel-block" data-category="Public">
+        <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+        </span>
+        Tabs
+        </a>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Panel::widget()
+                ->color(Panel::COLOR_PRIMARY)
+                ->heading('Primary')
+                ->tabs(
+                    [
+                        [
+                            'label' => 'All',
+                            'urlAttributes' => ['data-all' => true],
+                            'items' => [
+                                [
+                                    'label' => 'Breadcrumbs',
+                                    'active' => true,
+                                    'urlAttributes' => ['data-category' => 'All'],
+                                    'icon' => 'fas fa-book',
+                                ],
+                            ],
+                        ],
+                        [
+                            'label' => 'Public',
+                            'urlAttributes' => ['data-target' => 'Public'],
+                            'items' => [
+                                [
+                                    'label' => 'Tabs',
+                                    'urlAttributes' => ['data-category' => 'Public'],
+                                    'icon' => 'fas fa-book',
+                                ],
+                            ],
+                        ],
+                    ],
+                )
+                ->render()
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
@@ -359,6 +489,38 @@ final class PanelTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         Panel::widget()->tabs([[]])->render();
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testTabClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <nav id="w1-panel" class="panel">
+        <p class="test-class">
+        <a>All</a>
+        <a>Public</a>
+        <a>Private</a>
+        <a>Sources</a>
+        <a>Forks</a>
+        </p>
+        </nav>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Panel::widget()
+                ->tabClass('test-class')
+                ->tabs([
+                    ['label' => 'All'],
+                    ['label' => 'Public'],
+                    ['label' => 'Private'],
+                    ['label' => 'Sources'],
+                    ['label' => 'Forks'],
+                ])
+                ->render()
+        );
     }
 
     /**
@@ -493,6 +655,7 @@ final class PanelTest extends TestCase
                 ->tabs([
                     [
                         'label' => 'All',
+                        'url' => '#w1-panel',
                         'active' => true,
                         'urlAttributes' => ['data-all' => true],
                         'items' => [

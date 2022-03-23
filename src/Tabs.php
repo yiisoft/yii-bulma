@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
-use JsonException;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\A;
 use Yiisoft\Html\Tag\Div;
@@ -299,11 +298,6 @@ final class Tabs extends Widget
         return $new;
     }
 
-    /**
-     * @throws JsonException
-     *
-     * @return string
-     */
     protected function run(): string
     {
         $attributes = $this->attributes;
@@ -338,11 +332,6 @@ final class Tabs extends Widget
             ->render() . $this->renderTabsContent();
     }
 
-    /**
-     * @throws JsonException
-     *
-     * @return string
-     */
     private function renderItems(): string
     {
         $items = $this->items;
@@ -378,7 +367,7 @@ final class Tabs extends Widget
      * @param int $index
      * @param array $item
      *
-     * @throws InvalidArgumentException|JsonException
+     * @throws InvalidArgumentException
      *
      * @return string
      */
@@ -460,8 +449,6 @@ final class Tabs extends Widget
      * @param string $icon
      * @param array $iconAttributes
      *
-     * @throws JsonException
-     *
      * @return string
      */
     private function renderIcon(string $label, string $icon, array $iconAttributes): string
@@ -488,8 +475,6 @@ final class Tabs extends Widget
 
     /**
      * Renders tabs content.
-     *
-     * @throws JsonException
      *
      * @return string
      */
@@ -521,7 +506,7 @@ final class Tabs extends Widget
     private function isItemActive(array $item): bool
     {
         if (isset($item['active'])) {
-            return is_bool($item['active']) ? $item['active'] : false;
+            return is_bool($item['active']) && $item['active'];
         }
 
         return $this->activateItems && isset($item['url']) && $item['url'] === $this->currentPath;

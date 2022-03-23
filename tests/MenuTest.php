@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
+use InvalidArgumentException;
 use Yiisoft\Definitions\Exception\CircularReferenceException;
 use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Definitions\Exception\NotInstantiableException;
@@ -552,6 +553,16 @@ final class MenuTest extends TestCase
         </aside>
         HTML;
         $this->assertEqualsWithoutLE($expected, Menu::widget()->items([['url' => '#']])->render());
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidArgumentException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemsTagExeception(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Tag for item container cannot be empty.');
+        Menu::widget()->itemsTag('');
     }
 
     /**

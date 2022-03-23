@@ -184,7 +184,7 @@ final class ProgressBar extends Widget
         if (array_key_exists('value', $attributes)) {
             /** @var float|null */
             $attributes['value'] = $attributes['value'] === 0.0 ? null : $attributes['value'];
-            $content = $attributes['value'] > 0 ? (string)$attributes['value'] . '%' : '';
+            $content = $attributes['value'] > 0 ? $attributes['value'] . '%' : '';
         }
 
         return CustomTag::name('progress')->attributes($attributes)->content($content)->render();
