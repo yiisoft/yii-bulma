@@ -150,14 +150,14 @@ the Bulma CSS framework with PHP:
 
 - [Breadcrumbs](docs/breadcrumbs.md)
 - [Dropdown](docs/dropdown.md)
-- [NavBar](docs/navbar.md)
 - [Menu](docs/menu.md)
 - [Message](docs/message.md)
-- [ProgressBar](docs/progressbar.md)
 - [Modal](docs/modal.md)
 - [ModalCard](docs/modalcard.md)
-- [Tabs](docs/tabs.md)
+- [NavBar](docs/navbar.md)
 - [Panel](docs/panel.md)
+- [ProgressBar](docs/progressbar.md)
+- [Tabs](docs/tabs.md)
 
 ## Testing
 
