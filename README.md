@@ -62,22 +62,20 @@ Add to composer.json the following:
 }
 ```
 
-2.- Using the [npm-asset](https://www.npmjs.com/) package manager.    
-
-```shell
-npm install 
-```
-
-3.- Using the [fxpio/foxy](https://github.com/fxpio/foxy).
-
-Add to composer.json the following:
+Once the changes are made, you can install the assets using the following command:
 
 ```php
-{
-    "require": {
-        "foxy/foxy": "^1.2",
-    },
-}
+composer update --prefer-dist
+```
+
+2.- Using the [npm-asset](https://www.npmjs.com/) package manager.    
+
+Run the following command at the root directory of your application.
+
+```shell
+npm i bulma
+npm i @vizuaalog/bulmajs
+npm i bulma-helpers
 ```
 
 ## Using assets
