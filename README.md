@@ -27,6 +27,59 @@ and plugins in terms of Yii widgets, and thus makes using Bulma components/plugi
 composer require yiisoft/yii-bulma --prefer-dist
 ```
 
+## Install assets
+
+There are several ways to install the assets, they are:
+
+1.- Using the [AssetPackagist](https://asset-packagist.org/) package manager.
+
+Add to composer.json the following:
+
+```json
+{
+    "require": {
+        "npm-asset/bulma": "^0.9.3",
+        "npm-asset/bulma-helpers": "^0.4.2",
+        "npm-asset/vizuaalog--bulmajs": "^0.12.1",
+        "oomphinc/composer-installers-extender": "^2.0.0",
+    },
+    "extra": {
+        "installer-types": [
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "./node_modules/{$name}": [
+                "type:npm-asset"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
+```
+
+2.- Using the [npm-asset](https://www.npmjs.com/) package manager.    
+
+```shell
+npm install 
+```
+
+3.- Using the [fxpio/foxy](https://github.com/fxpio/foxy).
+
+Add to composer.json the following:
+
+```php
+{
+    "require": {
+        "foxy/foxy": "^1.2",
+    },
+}
+```
+
 ## Using assets
 
 Bulma is a CSS framework that provides all the CSS and SASS files to customize your application, the widgets by default
