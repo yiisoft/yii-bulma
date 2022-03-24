@@ -44,13 +44,13 @@ $this->setJsFiles($assetManager->getJsFiles());
                     'label' => 'Dashboard',
                     'url' => 'site/index',
                     'icon' => 'mdi mdi-desktop-mac',
-                    'iconOptions' => ['class' => 'icon']
+                    'iconAttributes' => ['class' => 'icon']
                 ],
                 [
                     'label' => 'Logout',
                     'url' => 'site/logout',
                     'icon' => 'mdi mdi-logout',
-                    'iconOptions' => ['class' => 'icon']
+                    'iconAttributes' => ['class' => 'icon']
                 ],
             ]
         ],
