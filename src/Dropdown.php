@@ -301,11 +301,10 @@ final class Dropdown extends Widget
      *   If not set, the item will be treated as a menu header when the item has no sub-menu.
      * - visible: bool, optional, whether this menu item is visible. Defaults to true.
      * - urlAttributes: array, optional, the HTML attributes of the item link.
-     * - attributes: array, optional, the HTML attributes of the item.
      * - items: array, optional, the submenu items. The structure is the same as this property.
      *   Note that Bootstrap doesn't support dropdown submenu. You have to add your own CSS styles to support it.
-     * - submenuOptions: array, optional, the HTML attributes for sub-menu container tag. If specified it will be
-     *   merged with {@see submenuOptions}.
+     * - submenuAttributes: array, optional, the HTML attributes for sub-menu container tag. If specified it will be
+     *   merged with {@see submenuAttributes}.
      *
      * To insert divider use `-`.
      *

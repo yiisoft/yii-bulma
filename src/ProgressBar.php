@@ -192,15 +192,16 @@ final class ProgressBar extends Widget
 
     private function build(array $attributes): array
     {
-        /** @var string */
-        $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-progressbar');
+        if (!array_key_exists('id', $attributes)) {
+            /** @var string */
+            $attributes['id'] = (Html::generateId($this->autoIdPrefix) . '-progressbar');
+        }
 
         if (array_key_exists('max', $attributes)) {
             /** @var int|null */
             $attributes['max'] = $attributes['max'] === 0 ? null : $attributes['max'];
         } else {
-            /** @var int|null */
-            $attributes['max'] ??= 100;
+            $attributes['max'] = 100;
         }
 
         Html::addCssClass($attributes, 'progress');

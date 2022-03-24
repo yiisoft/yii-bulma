@@ -344,7 +344,7 @@ final class Modal extends Widget
         Html::addCssClass($contentAttributes, $this->contentClass);
 
         if ($this->withoutToggleButton === false) {
-            $html .= $this->renderToggleButton($id) . "\n";
+            $html = $this->renderToggleButton($id) . "\n";
         }
 
         $html .= Html::openTag('div', $attributes) . "\n"; // .modal
