@@ -62,7 +62,7 @@ final class ProgressBar extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -103,7 +103,6 @@ final class ProgressBar extends Widget
 
         $new = clone $this;
         $new->color = $value;
-
         return $new;
     }
 
@@ -136,7 +135,6 @@ final class ProgressBar extends Widget
 
         $new = clone $this;
         $new->attributes['max'] = $value;
-
         return $new;
     }
 
@@ -157,7 +155,6 @@ final class ProgressBar extends Widget
 
         $new = clone $this;
         $new->size = $value;
-
         return $new;
     }
 
@@ -176,7 +173,6 @@ final class ProgressBar extends Widget
 
         $new = clone $this;
         $new->attributes['value'] = $value;
-
         return $new;
     }
 
@@ -188,7 +184,7 @@ final class ProgressBar extends Widget
         if (array_key_exists('value', $attributes)) {
             /** @var float|null */
             $attributes['value'] = $attributes['value'] === 0.0 ? null : $attributes['value'];
-            $content = $attributes['value'] > 0 ? (string)$attributes['value'] . '%' : '';
+            $content = $attributes['value'] > 0 ? $attributes['value'] . '%' : '';
         }
 
         return CustomTag::name('progress')->attributes($attributes)->content($content)->render();

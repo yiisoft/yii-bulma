@@ -19,10 +19,6 @@
     },
     "require": {
         "php": "^7.4|^8.0",
-        "npm-asset/bulma": "^0.9.3",
-        "npm-asset/bulma-helpers": "^0.4.0",
-        "npm-asset/vizuaalog--bulmajs": "^0.12.1",
-        "oomphinc/composer-installers-extender": "^2.0.0",
         "yiisoft/arrays": "^2.0",
         "yiisoft/assets": "^2.0",
         "yiisoft/html": "^2.0",
@@ -61,15 +57,11 @@
         "sort-packages": true,
         "allow-plugins": {
             "infection/extension-installer": true,
-            "composer/package-versions-deprecated": true
+            "composer/package-versions-deprecated": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
     "scripts": {
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"

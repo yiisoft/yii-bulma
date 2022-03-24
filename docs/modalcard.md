@@ -1,8 +1,9 @@
 # Modal card widget
 
-A classic [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
+### A classic [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
 
 <p align="center">
+    </br>
     <img src="images/modal_card.png">
 </p>
 
@@ -103,7 +104,7 @@ Method | Description | Default
 `cardAttributes(array $value)` | HTML attributes for the card. | []
 `cardClass(string $value)` | The class for the modal card. | `modal-card`
 `closeButtonAttributes(array $value)` | HTML attributes for the close button. | []
-`closeButtonClass(string $value)` | The class for the close button. | `button delete`
+`closeButtonCssClass(string $value)` | The class for the close button. | `button delete`
 `closeButtonSize(string $value)` | Сlose button size. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting is "normal".
 `contentClass(string $value)` | The class for the modal card content. | `modal-card-content`
 `footer(string $value)` | The footer content. | `''`

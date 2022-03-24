@@ -1,8 +1,9 @@
 # Breadcrumbs widget
 
-[The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component.
+### [The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component.
 
 <p align="center">
+    </br>
     <img src="images/breadcrumbs.png">
 </p>
 
@@ -84,7 +85,7 @@ Method | Description | Default
         'template' => '<li><a href="{url}">{icon}{label}</a></li>',
         'encode' => true,
         'icon' => 'fas fa-home',
-        'iconAttributes' => ['class' => 'icon']
+        'iconAttributes' => ['class' => 'icon'],
     ],
 ]
 ```

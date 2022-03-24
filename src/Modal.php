@@ -80,7 +80,7 @@ final class Modal extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -108,7 +108,7 @@ final class Modal extends Widget
      *
      * @param array $value The close button options.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -116,7 +116,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->closeButtonAttributes = $value;
-
         return $new;
     }
 
@@ -137,7 +136,6 @@ final class Modal extends Widget
 
         $new = clone $this;
         $new->closeButtonSize = $value;
-
         return $new;
     }
 
@@ -146,7 +144,7 @@ final class Modal extends Widget
      *
      * @param array $value The content options.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -183,7 +181,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->backgroundClass = $value;
-
         return $new;
     }
 
@@ -198,7 +195,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->buttonClass = $value;
-
         return $new;
     }
 
@@ -213,7 +209,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->modalClass = $value;
-
         return $new;
     }
 
@@ -228,7 +223,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->contentClass = $value;
-
         return $new;
     }
 
@@ -237,7 +231,7 @@ final class Modal extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      *
      * @return self
      */
@@ -245,7 +239,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->toggleButtonAttributes = $values;
-
         return $new;
     }
 
@@ -267,7 +260,6 @@ final class Modal extends Widget
 
         $new = clone $this;
         $new->toggleButtonColor = $value;
-
         return $new;
     }
 
@@ -282,7 +274,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->toggleButtonLabel = $value;
-
         return $new;
     }
 
@@ -303,7 +294,6 @@ final class Modal extends Widget
 
         $new = clone $this;
         $new->toggleButtonSize = $value;
-
         return $new;
     }
 
@@ -318,7 +308,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->withoutCloseButton = $value;
-
         return $new;
     }
 
@@ -333,7 +322,6 @@ final class Modal extends Widget
     {
         $new = clone $this;
         $new->withoutToggleButton = $value;
-
         return $new;
     }
 

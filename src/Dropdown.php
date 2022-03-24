@@ -35,19 +35,19 @@ final class Dropdown extends Widget
     private string $buttonIconText = '&#8595;';
     private string $buttonLabel = 'Click Me';
     private array $buttonLabelAttributes = [];
+    private string $cssClass = 'dropdown';
+    private string $contentCssClass = 'dropdown-content';
     private string $dividerCssClass = 'dropdown-divider';
-    private string $dropdownCssClass = 'dropdown';
-    private string $dropdownContentCssClass = 'dropdown-content';
-    private string $dropdownItemActiveCssClass = 'is-active';
-    private string $dropdownItemCssClass = 'dropdown-item';
-    private string $dropdownItemDisabledStyleCss = 'opacity:.65;pointer-events:none;';
-    private string $dropdownItemHeaderCssClass = 'dropdown-header';
-    private string $dropdownMenuCssClass = 'dropdown-menu';
-    private string $dropdownTriggerCssClass = 'dropdown-trigger';
     private bool $encloseByContainer = true;
+    private string $itemActiveCssClass = 'is-active';
+    private string $itemCssClass = 'dropdown-item';
+    private string $itemDisabledStyleCss = 'opacity:.65;pointer-events:none;';
+    private string $itemHeaderCssClass = 'dropdown-header';
     private array $items = [];
+    private string $menuCssClass = 'dropdown-menu';
     private bool $submenu = false;
     private array $submenuAttributes = [];
+    private string $triggerCssClass = 'dropdown-trigger';
 
     /**
      * The HTML attributes. The following special options are recognized.
@@ -56,7 +56,7 @@ final class Dropdown extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -164,6 +164,36 @@ final class Dropdown extends Widget
     }
 
     /**
+     * Set CSS class for dropdown content.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     *
+     * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
+     */
+    public function contentCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->contentCssClass = $value;
+        return $new;
+    }
+
+    /**
+     * Set CSS class for the dropdown container.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function cssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->cssClass = $value;
+        return $new;
+    }
+
+    /**
      * Set CSS class for horizontal line separating dropdown items.
      *
      * @param string $value The CSS class.
@@ -178,116 +208,16 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for the dropdown container.
+     * If the widget should be enclosed by container.
      *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set CSS class for dropdown content.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     *
-     * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
-     */
-    public function dropdownContentCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownContentCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set CSS class for active dropdown item.
-     *
-     * @param string $value The CSS class.
+     * @param bool $value Whether the widget should be enclosed by container. Defaults to true.
      *
      * @return self
      */
-    public function dropdownItemActiveCssClass(string $value): self
+    public function enclosedByContainer(bool $value = false): self
     {
         $new = clone $this;
-        $new->dropdownItemActiveCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set CSS class for dropdown item.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownItemCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownItemCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set Style attributes for disabled dropdown item.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownItemDisabledStyleCss(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownItemDisabledStyleCss = $value;
-        return $new;
-    }
-
-    /**
-     * Set CSS class for dropdown item header.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownItemHeaderCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownItemHeaderCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set Dropdown menu CSS class.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownMenuCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownMenuCssClass = $value;
-        return $new;
-    }
-
-    /**
-     * Set Dropdown trigger CSS class.
-     *
-     * @param string $value The CSS class.
-     *
-     * @return self
-     */
-    public function dropdownTriggerCssClass(string $value): self
-    {
-        $new = clone $this;
-        $new->dropdownTriggerCssClass = $value;
+        $new->encloseByContainer = $value;
         return $new;
     }
 
@@ -302,6 +232,62 @@ final class Dropdown extends Widget
     {
         $new = clone $this;
         $new->attributes['id'] = $value;
+        return $new;
+    }
+
+    /**
+     * Set CSS class for active dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function itemActiveCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->itemActiveCssClass = $value;
+        return $new;
+    }
+
+    /**
+     * Set CSS class for dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function itemCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->itemCssClass = $value;
+        return $new;
+    }
+
+    /**
+     * Set Style attributes for disabled dropdown item.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function itemDisabledStyleCss(string $value): self
+    {
+        $new = clone $this;
+        $new->itemDisabledStyleCss = $value;
+        return $new;
+    }
+
+    /**
+     * Set CSS class for dropdown item header.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function itemHeaderCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->itemHeaderCssClass = $value;
         return $new;
     }
 
@@ -335,6 +321,34 @@ final class Dropdown extends Widget
     }
 
     /**
+     * Set Dropdown menu CSS class.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function menuCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->menuCssClass = $value;
+        return $new;
+    }
+
+    /**
+     * Set Dropdown trigger CSS class.
+     *
+     * @param string $value The CSS class.
+     *
+     * @return self
+     */
+    public function triggerCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->triggerCssClass = $value;
+        return $new;
+    }
+
+    /**
      * Set if it is a submenu or sub-dropdown.
      *
      * @param bool $value Whether it is a submenu or sub-dropdown. Defaults to false.
@@ -363,20 +377,6 @@ final class Dropdown extends Widget
     }
 
     /**
-     * If the widget should be enclosed by container.
-     *
-     * @param bool $value Whether the widget should be enclosed by container. Defaults to true.
-     *
-     * @return self
-     */
-    public function enclosedByContainer(bool $value = false): self
-    {
-        $new = clone $this;
-        $new->encloseByContainer = $value;
-        return $new;
-    }
-
-    /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
     protected function run(): string
@@ -396,7 +396,7 @@ final class Dropdown extends Widget
         unset($attributes['id']);
 
         if ($this->encloseByContainer) {
-            Html::addCssClass($attributes, $this->dropdownCssClass);
+            Html::addCssClass($attributes, $this->cssClass);
             $html = Div::tag()
                 ->attributes($attributes)
                 ->content(PHP_EOL . $this->renderDropdownTrigger($id) . PHP_EOL)
@@ -443,7 +443,7 @@ final class Dropdown extends Widget
     private function renderDropdownButtonLink(): string
     {
         return A::tag()
-            ->class($this->dropdownItemCssClass)
+            ->class($this->itemCssClass)
             ->content(
                 $this->renderLabelButton(
                     $this->buttonLabel,
@@ -463,7 +463,7 @@ final class Dropdown extends Widget
     private function renderDropdownContent(): string
     {
         return Div::tag()
-            ->class($this->dropdownContentCssClass)
+            ->class($this->contentCssClass)
             ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
             ->encode(false)
             ->render();
@@ -475,7 +475,7 @@ final class Dropdown extends Widget
     private function renderDropdownMenu(string $id): string
     {
         return Div::tag()
-            ->class($this->dropdownMenuCssClass)
+            ->class($this->menuCssClass)
             ->content(PHP_EOL . $this->renderDropdownContent() . PHP_EOL)
             ->encode(false)
             ->id($id)
@@ -494,7 +494,7 @@ final class Dropdown extends Widget
         }
 
         return Div::tag()
-            ->class($this->dropdownTriggerCssClass)
+            ->class($this->triggerCssClass)
             ->content(PHP_EOL . $button)
             ->encode(false)
             ->render() . PHP_EOL . $this->renderDropdownMenu($id);
@@ -559,12 +559,12 @@ final class Dropdown extends Widget
 
                 $itemLabel = $this->renderLabelItem($itemLabel, $iconText, $iconCssClass, $iconAttributes);
 
-                Html::addCssClass($urlAttributes, $this->dropdownItemCssClass);
+                Html::addCssClass($urlAttributes, $this->itemCssClass);
 
                 if ($disabled) {
-                    Html::addCssStyle($urlAttributes, $this->dropdownItemDisabledStyleCss);
+                    Html::addCssStyle($urlAttributes, $this->itemDisabledStyleCss);
                 } elseif ($active) {
-                    Html::addCssClass($urlAttributes, $this->dropdownItemActiveCssClass);
+                    Html::addCssClass($urlAttributes, $this->itemActiveCssClass);
                 }
 
                 if ($items === []) {
@@ -574,7 +574,7 @@ final class Dropdown extends Widget
                         $content = $itemLabel;
                     } elseif ($url === '') {
                         $content = CustomTag::name('h6')
-                            ->class($this->dropdownItemHeaderCssClass)
+                            ->class($this->itemHeaderCssClass)
                             ->content($itemLabel)
                             ->encode(null)
                             ->render();
@@ -589,13 +589,13 @@ final class Dropdown extends Widget
 
                     $lines[] = $content;
                 } else {
-                    /** @var array */
-                    $submenuAttributes = array_merge($this->submenuAttributes, $item['submenuAttributes'] ?? []);
+                    $submenuAttributes = isset($item['submenuAttributes']) && is_array($item['submenuAttributes'])
+                        ? array_merge($this->submenuAttributes, $item['submenuAttributes']) : $this->submenuAttributes;
 
                     $lines[] = self::widget()
                         ->attributes($this->attributes)
                         ->dividerCssClass($this->dividerCssClass)
-                        ->dropdownItemCssClass($this->dropdownItemCssClass)
+                        ->itemCssClass($this->itemCssClass)
                         ->items($items)
                         ->submenu($submenu)
                         ->submenuAttributes($submenuAttributes)

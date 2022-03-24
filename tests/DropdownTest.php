@@ -5,16 +5,22 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
+use Yiisoft\Definitions\Exception\CircularReferenceException;
+use Yiisoft\Definitions\Exception\InvalidConfigException;
+use Yiisoft\Definitions\Exception\NotInstantiableException;
+use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Dropdown;
 
 final class DropdownTest extends TestCase
 {
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testButtonAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="is-link button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -40,11 +46,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testButtonIconCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -71,11 +79,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testButtonIconTextAndAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -102,11 +112,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testButtonLabel(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -132,11 +144,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testButtonLabelAttributes(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -162,11 +176,45 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testContentCssClass(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $expected = <<<HTML
+        <div class="dropdown">
+        <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <span>Click Me</span>
+        <span class="icon is-small"><i class>&#8595;</i></span>
+        </button>
+        </div>
+        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-content-test">
+        <a class="dropdown-item" href="#">Dropdown item</a>
+        </div>
+        </div>
+        </div>
+        HTML;
+        $this->assertEqualsWithoutLE(
+            $expected,
+            Dropdown::widget()
+                ->contentCssClass('dropdown-content-test')
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->render(),
+        );
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testDividerCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -194,20 +242,22 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownContentCssClass(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testId(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button class="button" aria-haspopup="true" aria-controls="id-test">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
-        <div class="dropdown-content-test">
+        <div id="id-test" class="dropdown-menu">
+        <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
         </div>
@@ -216,7 +266,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownContentCssClass('dropdown-content-test')
+                ->id('id-test')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
@@ -224,11 +274,44 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownItemActiveCssClass(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testImmutability(): void
+    {
+        $widget = Dropdown::widget();
+
+        $this->assertNotSame($widget, $widget->attributes([]));
+        $this->assertNotSame($widget, $widget->autoIdPrefix(Dropdown::class));
+        $this->assertNotSame($widget, $widget->buttonAttributes([]));
+        $this->assertNotSame($widget, $widget->buttonIconAttributes([]));
+        $this->assertNotSame($widget, $widget->buttonIconCssClass(''));
+        $this->assertNotSame($widget, $widget->buttonIconText(''));
+        $this->assertNotSame($widget, $widget->buttonLabel(''));
+        $this->assertNotSame($widget, $widget->buttonLabelAttributes([]));
+        $this->assertNotSame($widget, $widget->contentCssClass(''));
+        $this->assertNotSame($widget, $widget->cssClass(''));
+        $this->assertNotSame($widget, $widget->dividerCssClass(''));
+        $this->assertNotSame($widget, $widget->enclosedByContainer(false));
+        $this->assertNotSame($widget, $widget->id(Dropdown::class));
+        $this->assertNotSame($widget, $widget->itemActiveCssClass(''));
+        $this->assertNotSame($widget, $widget->itemCssClass(''));
+        $this->assertNotSame($widget, $widget->itemDisabledStyleCss(''));
+        $this->assertNotSame($widget, $widget->itemHeaderCssClass(''));
+        $this->assertNotSame($widget, $widget->items([]));
+        $this->assertNotSame($widget, $widget->menuCssClass(''));
+        $this->assertNotSame($widget, $widget->submenu(false));
+        $this->assertNotSame($widget, $widget->submenuAttributes([]));
+        $this->assertNotSame($widget, $widget->triggerCssClass(''));
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemActiveCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -246,7 +329,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownItemActiveCssClass('active')
+                ->itemActiveCssClass('active')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#', 'active' => true],
                 ])
@@ -254,11 +337,13 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownItemCssClass(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -276,7 +361,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownItemCssClass('dropdown-item-test')
+                ->itemCssClass('dropdown-item-test')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
@@ -284,11 +369,13 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownItemDisabledStyleCss(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemDisabledStyleCss(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -306,7 +393,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownItemDisabledStyleCss('opacity:.65;')
+                ->itemDisabledStyleCss('opacity:.65;')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#', 'disable' => true],
                 ])
@@ -314,11 +401,13 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownItemHeaderCssClass(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testItemHeaderCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -336,7 +425,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownItemHeaderCssClass('dropdown-header is-link')
+                ->itemHeaderCssClass('dropdown-header is-link')
                 ->items([
                     ['label' => 'Dropdown header'],
                 ])
@@ -344,11 +433,13 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownMenuCssClass(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testMenuCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -366,7 +457,7 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->dropdownMenuCssClass('dropdown-menu-test')
+                ->menuCssClass('dropdown-menu-test')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
@@ -374,36 +465,9 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testDropdownTriggerCssClass(): void
-    {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
-        <div class="dropdown">
-        <div class="dropdown-trigger-test">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
-        <span>Click Me</span>
-        <span class="icon is-small"><i class>&#8595;</i></span>
-        </button>
-        </div>
-        <div id="w1-dropdown" class="dropdown-menu">
-        <div class="dropdown-content">
-        <a class="dropdown-item" href="#">Dropdown item</a>
-        </div>
-        </div>
-        </div>
-        HTML;
-        $this->assertEqualsWithoutLE(
-            $expected,
-            Dropdown::widget()
-                ->dropdownTriggerCssClass('dropdown-trigger-test')
-                ->items([
-                    ['label' => 'Dropdown item', 'url' => '#'],
-                ])
-                ->render(),
-        );
-    }
-
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testMissingLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -412,13 +476,14 @@ final class DropdownTest extends TestCase
     }
 
     /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     *
      *  @link https://bulma.io/documentation/components/dropdown/
      */
     public function testRender(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -453,11 +518,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRenderItemsEncodeLabels(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -486,11 +553,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRenderIconText(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -520,11 +589,13 @@ final class DropdownTest extends TestCase
         );
     }
 
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
     public function testRenderSubmenu(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
@@ -573,34 +644,21 @@ final class DropdownTest extends TestCase
         );
     }
 
-    public function testUnClosedByContainer(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testTriggerCssClass(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $this->assertSame(
-            '<a class="dropdown-item" href="#">Dropdown item</a>',
-            Dropdown::widget()
-                ->items([
-                    ['label' => 'Dropdown item', 'url' => '#'],
-                ])
-                ->enclosedByContainer()
-                ->render(),
-        );
-    }
-
-    public function testId(): void
-    {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
-        $expected = <<<'HTML'
+        $expected = <<<HTML
         <div class="dropdown">
-        <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="id-test">
+        <div class="dropdown-trigger-test">
+        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="id-test" class="dropdown-menu">
+        <div id="w1-dropdown" class="dropdown-menu">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -610,39 +668,28 @@ final class DropdownTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Dropdown::widget()
-                ->id('id-test')
                 ->items([
                     ['label' => 'Dropdown item', 'url' => '#'],
                 ])
+                ->triggerCssClass('dropdown-trigger-test')
                 ->render(),
         );
     }
 
-    public function testImmutability(): void
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testUnClosedByContainer(): void
     {
-        $widget = Dropdown::widget();
-
-        $this->assertNotSame($widget, $widget->attributes([]));
-        $this->assertNotSame($widget, $widget->autoIdPrefix(Dropdown::class));
-        $this->assertNotSame($widget, $widget->buttonAttributes([]));
-        $this->assertNotSame($widget, $widget->buttonIconAttributes([]));
-        $this->assertNotSame($widget, $widget->buttonIconCssClass(''));
-        $this->assertNotSame($widget, $widget->buttonIconText(''));
-        $this->assertNotSame($widget, $widget->buttonLabel(''));
-        $this->assertNotSame($widget, $widget->buttonLabelAttributes([]));
-        $this->assertNotSame($widget, $widget->dividerCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownContentCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownItemActiveCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownItemCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownItemDisabledStyleCss(''));
-        $this->assertNotSame($widget, $widget->dropdownItemHeaderCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownMenuCssClass(''));
-        $this->assertNotSame($widget, $widget->dropdownTriggerCssClass(''));
-        $this->assertNotSame($widget, $widget->id(Dropdown::class));
-        $this->assertNotSame($widget, $widget->items([]));
-        $this->assertNotSame($widget, $widget->submenu(false));
-        $this->assertNotSame($widget, $widget->submenuAttributes([]));
-        $this->assertNotSame($widget, $widget->enclosedByContainer(false));
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $this->assertSame(
+            '<a class="dropdown-item" href="#">Dropdown item</a>',
+            Dropdown::widget()
+                ->items([
+                    ['label' => 'Dropdown item', 'url' => '#'],
+                ])
+                ->enclosedByContainer()
+                ->render(),
+        );
     }
 }

@@ -27,6 +27,57 @@ and plugins in terms of Yii widgets, and thus makes using Bulma components/plugi
 composer require yiisoft/yii-bulma --prefer-dist
 ```
 
+## Install assets
+
+There are several ways to install the assets, they are:
+
+1.- Using the [AssetPackagist](https://asset-packagist.org/) package manager.
+
+Add to composer.json the following:
+
+```json
+{
+    "require": {
+        "npm-asset/bulma": "^0.9.3",
+        "npm-asset/bulma-helpers": "^0.4.2",
+        "npm-asset/vizuaalog--bulmajs": "^0.12.1",
+        "oomphinc/composer-installers-extender": "^2.0.0",
+    },
+    "extra": {
+        "installer-types": [
+            "npm-asset"
+        ],
+        "installer-paths": {
+            "./node_modules/{$name}": [
+                "type:npm-asset"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
+```
+
+Once the changes are made, you can install the assets using the following command:
+
+```php
+composer update --prefer-dist
+```
+
+2.- Using the [npm-asset](https://www.npmjs.com/) package manager.    
+
+Run the following command at the root directory of your application.
+
+```shell
+npm i bulma
+npm i @vizuaalog/bulmajs
+npm i bulma-helpers
+```
+
 ## Using assets
 
 Bulma is a CSS framework that provides all the CSS and SASS files to customize your application, the widgets by default
@@ -97,14 +148,14 @@ the Bulma CSS framework with PHP:
 
 - [Breadcrumbs](docs/breadcrumbs.md)
 - [Dropdown](docs/dropdown.md)
-- [NavBar](docs/navbar.md)
 - [Menu](docs/menu.md)
 - [Message](docs/message.md)
-- [ProgressBar](docs/progressbar.md)
 - [Modal](docs/modal.md)
 - [ModalCard](docs/modalcard.md)
-- [Tabs](docs/tabs.md)
+- [NavBar](docs/navbar.md)
 - [Panel](docs/panel.md)
+- [ProgressBar](docs/progressbar.md)
+- [Tabs](docs/tabs.md)
 
 ## Testing
 

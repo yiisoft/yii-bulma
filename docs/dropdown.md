@@ -1,9 +1,9 @@
 # Dropdown widget
 
-[The dropdown component](https://bulma.io/documentation/components/dropdown/) is a container for a dropdown button and
-a dropdown menu.
+### [The dropdown component](https://bulma.io/documentation/components/dropdown/) is a container for a dropdown button and a dropdown menu.
 
 <p align="center">
+    </br>
     <img src="images/dropdown.png">
 </p>
 
@@ -84,20 +84,20 @@ Method | Description | Default
 `buttonIconText(string $value)` | Set icon text for the dropdown button. | `'&#8595;'`
 `buttonLabel(string $value)` | Set label for the dropdown button. | `'Click Me'`
 `buttonLabelAttributes(array $values)` | The HTML attributes for the dropdown button label. | `[]`
+`contentCssClass(string $value)` | Set CSS class for dropdown content. | `'dropdown-content'`
+`cssClass(string $value)` | Set CSS class for the dropdown container. | `'dropdown'`
 `dividerCssClass(string $value)` | Set CSS class for horizontal line separating dropdown items. | `'dropdown-divider'`
-`dropdownCssClass(string $value)` | Set CSS class for the dropdown container. | `'dropdown'`
-`dropdownContentCssClass(string $value)` | Set CSS class for dropdown content. | `'dropdown-content'`
-`dropdownItemActiveCssClass(string $value)` | Set CSS class for active dropdown item. | `'is-active'`
-`dropdownItemCssClass(string $value)` | Set CSS class for dropdown item. | `'dropdown-item'`
-`dropdownItemDisabledStyleCss(string $value)` | Set Style attributes for disabled dropdown item. | `'opacity:.65;pointer-events:none;'`
-`dropdownItemHeaderCssClass(string $value)` | Set CSS class for dropdown item header. | `'dropdown-header'`
-`dropdownMenuCssClass(string $value)` | Set CSS class for dropdown menu. | `'dropdown-menu'`
-`dropdownTriggerCssClass(string $value)` | Set CSS class for dropdown trigger. | `'dropdown-trigger'`
+`enclosedByContainer(bool $value = false)` | Whether the widget should be enclosed by a container. | `true`
 `id(string $value)` | Set the ID of the dropdown. | `''`
+`itemActiveCssClass(string $value)` | Set CSS class for active dropdown item. | `'is-active'`
+`itemCssClass(string $value)` | Set CSS class for dropdown item. | `'dropdown-item'`
+`itemDisabledStyleCss(string $value)` | Set Style attributes for disabled dropdown item. | `'opacity:.65;pointer-events:none;'`
+`itemHeaderCssClass(string $value)` | Set CSS class for dropdown item header. | `'dropdown-header'`
 `items(array $value)` | Set the dropdown items. | `[]`
+`menuCssClass(string $value)` | Set CSS class for dropdown menu. | `'dropdown-menu'`
 `submenu(bool $value)` | Set whether the dropdown is a submenu. | `false`
 `submenuAttributes(array $values)` | The HTML attributes for the dropdown submenu. | `[]`
-`enclosedByContainer(bool $value = false)` | Whether the widget should be enclosed by a container. | `true`
+`triggerCssClass(string $value)` | Set CSS class for dropdown trigger. | `'dropdown-trigger'`
 
 ### Items structure is an array of the following structure:
 

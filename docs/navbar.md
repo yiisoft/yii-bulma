@@ -1,17 +1,19 @@
 # Navbar and nav widget
 
-[The navbar component](https://bulma.io/documentation/components/navbar/) is a responsive and versatile horizontal
-navigation bar.
+### [The navbar component](https://bulma.io/documentation/components/navbar/) is a responsive and versatile horizontal navigation bar.
 
 <p align="center">
+    </br>
     <img src="images/navbar.png">
 </p>
 
 <p align="center">
+    </br>
     <img src="images/navbar-responsive-1.png">
 </p>
 
 <p align="center">
+    </br>
     <img src="images/navbar-responsive-2.png">
 </p>
 
@@ -131,25 +133,26 @@ All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Na
 
 Method | Description | Default
 -------|-------------|---------
+`ariaLabel(string $value)` | The ARIA label of the navbar. | `'main navigation'`
 `attributes(array $values)` | HTML attributes for the widget container nav. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `brandAttributes(array $values)` | HTML attributes for the navbar brand. | `[]`
+`brandCssClass(string $value)` | CSS class for the navbar brand. | `'navbar-brand'`
 `brandImage(string $value)` | Image for the navbar brand. | `''`
+`brandImageAttributes(array $values)` | HTML attributes for the navbar brand image. | `[]`
 `brandText(string $value)` | Text for the navbar brand. | `''`
 `brandTextAttributes(array $values)` | HTML attributes for the navbar brand text. | `[]`
 `brandUrl(string $value)` | URL for the navbar brand. | `''`
+`burgerAttributes(array $values)` | HTML attributes for the navbar burger. | `[]`
+`burgerCssClass(string $value)` | CSS class for the navbar burger. | `'navbar-burger'`
 `buttonLinkAriaExpanded(string $value)` | The ARIA expanded attribute of the button link. | `'false'`
 `buttonLinkAriaLabelText(string $value)` | The ARIA label text of the button link. | `'menu'`
 `buttonLinkContent(string $value)` | The content of the button link. | `''`
 `buttonLinkRole(string $value)` | The role of the button link. | `'button'`
+`cssClass(string $value)` | CSS class for the navbar. | `'navbar'`
 `id(string $value)` | Set the ID of the navbar. | `''`
-`navBarAriaLabel(string $value)` | The ARIA label of the navbar. | `'main navigation'`
-`navBarBrandCssClass(string $value)` | CSS class for the navbar brand. | `'navbar-brand'`
-`navBarBurgerAttributes(array $values)` | HTML attributes for the navbar burger. | `[]`
-`navBarBurgerCssClass(string $value)` | CSS class for the navbar burger. | `'navbar-burger'`
-`navBarCssClass(string $value)` | CSS class for the navbar. | `'navbar'`
-`navBarItemCssClass(string $value)` | CSS class for the navbar item. | `'navbar-item'`
-`navBarRole(string $value)` | The role of the navbar. | `'navigation'`
+`itemCssClass(string $value)` | CSS class for the navbar item. | `'navbar-item'`
+`role(string $value)` | The role of the navbar. | `'navigation'`
 
 All setters are immutable and return a new instance of the `Yiisoft\Yii\Bulma\Nav` class with the specified value.
 
@@ -160,7 +163,6 @@ Method | Description | Default
 `currentPath(string $value)` | Allows you to assign the current path of the url from request controller. | `''`
 `enclosedByEndMenu()` | Align the menu items to the right. | `false`
 `enclosedByStartMenu()` | Align the menu items to the left. | `false`
-`id(string $value)` | Set the ID of the navbar. | `''`
 `items(array $value)` | The menu items. | `[]`
 `withoutActivateItems()` |  Disable activate items according to whether their currentPath. | `false`
 

@@ -53,18 +53,18 @@ final class Message extends Widget
     private string $autoIdPrefix = 'w';
     private string $body = '';
     private array $bodyAttributes = [];
+    private string $bodyCssClass = 'message-body';
     private array $buttonSpanAttributes = [];
     private string $buttonSpanAriaHidden = 'true';
     private string $buttonCssClass = 'delete';
+    private string $cssClass = 'message';
     private bool $closedButton = false;
     private array $closeButtonAttributes = [];
     private bool $encode = false;
     private array $headerAttributes = [];
     private string $headerColor = self::COLOR_DARK;
     private string $headerMessage = '';
-    private string $messageBodyCssClass = 'message-body';
-    private string $messageCssClass = 'message';
-    private string $messageHeaderMessageCssClass = 'message-header';
+    private string $headerMessageCssClass = 'message-header';
     private string $size = '';
     private bool $withoutHeader = false;
 
@@ -75,7 +75,7 @@ final class Message extends Widget
      *
      * @return self
      *
-     * See {@see \Yiisoft\Html\Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -129,6 +129,20 @@ final class Message extends Widget
     }
 
     /**
+     * The CSS class for the body container.
+     *
+     * @param string $value The CSS class for the body container.
+     *
+     * @return self
+     */
+    public function bodyCssClass(string $value): self
+    {
+        $new = clone $this;
+        $new->bodyCssClass = $value;
+        return $new;
+    }
+
+    /**
      * The attributes for rendering the close button tag.
      *
      * The close button is displayed in the header of the Message. Clicking on the button will hide the message.
@@ -137,7 +151,7 @@ final class Message extends Widget
      *
      * @return self
      *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function closeButtonAttributes(array $values): self
     {
@@ -157,6 +171,22 @@ final class Message extends Widget
     {
         $new = clone $this;
         $new->encode = $value;
+        return $new;
+    }
+
+    /**
+     * The HTML attributes for the widget header tag.
+     *
+     * @param array $values Attribute values indexed by attribute names.
+     *
+     * @return self
+     *
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
+     */
+    public function headerAttributes(array $values): self
+    {
+        $new = clone $this;
+        $new->headerAttributes = $values;
         return $new;
     }
 
@@ -194,22 +224,6 @@ final class Message extends Widget
     {
         $new = clone $this;
         $new->headerMessage = $value;
-        return $new;
-    }
-
-    /**
-     * The HTML attributes for the widget header tag.
-     *
-     * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
-     *
-     * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
-     */
-    public function headerAttributes(array $values): self
-    {
-        $new = clone $this;
-        $new->headerAttributes = $values;
         return $new;
     }
 
@@ -317,7 +331,7 @@ final class Message extends Widget
         $headerAttributes = $this->headerAttributes;
         $headerMessage = $this->headerMessage;
 
-        Html::addCssClass($headerAttributes, $this->messageHeaderMessageCssClass);
+        Html::addCssClass($headerAttributes, $this->headerMessageCssClass);
 
         $renderCloseButton = $this->renderCloseButton();
 
@@ -348,7 +362,7 @@ final class Message extends Widget
         $id = $attributes['id'] ?? (Html::generateId($this->autoIdPrefix) . '-message');
         unset($attributes['id']);
 
-        Html::addCssClass($attributes, $this->messageCssClass);
+        Html::addCssClass($attributes, $this->cssClass);
         Html::addCssClass($attributes, $this->headerColor);
 
         if ($this->size !== '') {
@@ -368,7 +382,7 @@ final class Message extends Widget
         $body = $this->body;
         $bodyAttributes = $this->bodyAttributes;
 
-        Html::addCssClass($bodyAttributes, $this->messageBodyCssClass);
+        Html::addCssClass($bodyAttributes, $this->bodyCssClass);
 
         if ($this->encode) {
             $body = Html::encode($body);
