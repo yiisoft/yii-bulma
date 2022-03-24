@@ -13,6 +13,7 @@ use Yiisoft\Html\Tag\P;
 use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
+use function array_key_exists;
 use function array_merge;
 use function count;
 use function implode;
@@ -90,7 +91,7 @@ final class Menu extends Widget
     }
 
     /**
-     * The HTML attributes. The following special attributes are recognized.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -134,7 +135,7 @@ final class Menu extends Widget
     }
 
     /**
-     * Disables active items according to their current path and returns a new instance.
+     * Returns a new instance with the specified disables active items according to their current path.
      *
      * @return self
      *
@@ -297,7 +298,7 @@ final class Menu extends Widget
     }
 
     /**
-     * The template used to render a list of sub-menus.
+     * Returns a new instance with the specified the template used to render a list of sub-menus.
      *
      * In this template, the token `{items}` will be replaced with the rendered sub-menu items.
      *

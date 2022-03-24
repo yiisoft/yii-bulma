@@ -10,6 +10,7 @@ use Yiisoft\Html\Tag\Div;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Widget\Widget;
 
+use function array_key_exists;
 use function implode;
 use function in_array;
 
@@ -74,7 +75,7 @@ final class Modal extends Widget
     private bool $withoutToggleButton = false;
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -344,24 +345,24 @@ final class Modal extends Widget
         Html::addCssClass($contentAttributes, $this->contentClass);
 
         if ($this->withoutToggleButton === false) {
-            $html = $this->renderToggleButton($id) . "\n";
+            $html = $this->renderToggleButton($id) . PHP_EOL;
         }
 
-        $html .= Html::openTag('div', $attributes) . "\n"; // .modal
-        $html .= Div::tag()->class($this->backgroundClass) . "\n";
+        $html .= Html::openTag('div', $attributes) . PHP_EOL; // .modal
+        $html .= Div::tag()->class($this->backgroundClass) . PHP_EOL;
 
         if ($this->withoutCloseButton === false) {
-            $html .= $this->renderCloseButton() . "\n";
+            $html .= $this->renderCloseButton() . PHP_EOL;
         }
 
-        $html .= Html::openTag('div', $contentAttributes) . "\n"; // .modal-content
+        $html .= Html::openTag('div', $contentAttributes) . PHP_EOL; // .modal-content
 
         return $html;
     }
 
     protected function run(): string
     {
-        $html = Html::closeTag('div') . "\n"; // .modal-content
+        $html = Html::closeTag('div') . PHP_EOL; // .modal-content
         $html .= Html::closeTag('div'); // .modal
 
         return $html;

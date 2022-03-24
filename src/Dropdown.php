@@ -19,6 +19,7 @@ use Yiisoft\Widget\Widget;
 
 use function array_merge;
 use function implode;
+use function is_array;
 
 /**
  * The dropdown component is a container for a dropdown button and a dropdown menu.
@@ -50,7 +51,7 @@ final class Dropdown extends Widget
     private string $triggerCssClass = 'dropdown-trigger';
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -80,7 +81,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button.
+     * Returns a new instance with the specified HTML attributes for the dropdown button.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -94,7 +95,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button icon.
+     * Returns a new instance with the specified HTML attributes for the dropdown button icon.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -108,7 +109,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set icon CSS class for the dropdown button.
+     * Returns a new instance with the specified icon CSS class for the dropdown button.
      *
      * @param string $value The CSS class.
      *
@@ -122,7 +123,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set icon text for the dropdown button.
+     * Returns a new instance with the specified icon text for the dropdown button.
      *
      * @param string $value The text.
      *
@@ -136,7 +137,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set label for the dropdown button.
+     * Returns a new instance with the specified label for the dropdown button.
      *
      * @param string $value The label.
      *
@@ -150,7 +151,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for the dropdown button label.
+     * Returns a new instance with the specified HTML attributes for the dropdown button label.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -164,7 +165,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown content.
+     * Returns a new instance with the specified CSS class for dropdown content.
      *
      * @param string $value The CSS class.
      *
@@ -180,7 +181,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for the dropdown container.
+     * Returns a new instance with the specified CSS class for the dropdown container.
      *
      * @param string $value The CSS class.
      *
@@ -194,7 +195,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for horizontal line separating dropdown items.
+     * Returns a new instance with the specified CSS class for horizontal line separating dropdown items.
      *
      * @param string $value The CSS class.
      *
@@ -208,7 +209,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * If the widget should be enclosed by container.
+     * Returns a new instance with the specified if the widget should be enclosed by container.
      *
      * @param bool $value Whether the widget should be enclosed by container. Defaults to true.
      *
@@ -236,7 +237,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for active dropdown item.
+     * Returns a new instance with the specified CSS class for active dropdown item.
      *
      * @param string $value The CSS class.
      *
@@ -250,7 +251,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown item.
+     * Returns a new instance with the specified CSS class for dropdown item.
      *
      * @param string $value The CSS class.
      *
@@ -264,7 +265,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set Style attributes for disabled dropdown item.
+     * Returns a new instance with the specified style attributes for disabled dropdown item.
      *
      * @param string $value The CSS class.
      *
@@ -278,7 +279,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set CSS class for dropdown item header.
+     * Returns a new instance with the specified CSS class for dropdown item header.
      *
      * @param string $value The CSS class.
      *
@@ -292,8 +293,10 @@ final class Dropdown extends Widget
     }
 
     /**
-     * List of menu items in the dropdown. Each array element can be either an HTML string, or an array representing a
-     * single menu with the following structure:
+     * Returns a new instance with the specified list of items.
+     *
+     * Each array element can be either an HTML string, or an array representing a single menu with the following
+     * structure:
      *
      * - label: string, required, the label of the item link.
      * - encode: bool, optional, whether to HTML-encode item label.
@@ -320,7 +323,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set Dropdown menu CSS class.
+     * Returns a new instance with the specified dropdown menu CSS class.
      *
      * @param string $value The CSS class.
      *
@@ -334,7 +337,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set Dropdown trigger CSS class.
+     * Returns a new instance with the specified dropdown trigger CSS class.
      *
      * @param string $value The CSS class.
      *
@@ -348,7 +351,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * Set if it is a submenu or sub-dropdown.
+     * Returns a new instance with the specified if it is a submenu or sub-dropdown.
      *
      * @param bool $value Whether it is a submenu or sub-dropdown. Defaults to false.
      *
@@ -362,7 +365,7 @@ final class Dropdown extends Widget
     }
 
     /**
-     * The HTML attributes for sub-menu container tag.
+     * Returns a new instance with the specified HTML attributes for sub-menu container tag.
      *
      * @param array $values Attribute values indexed by attribute names.
      *

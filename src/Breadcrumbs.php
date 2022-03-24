@@ -56,7 +56,7 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Defines a string value that labels the current element.
+     * Returns a new instance with the specified aria-label attribute for the current element.
      *
      * @param string $value The value of the aria-label attribute.
      *
@@ -72,7 +72,7 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -102,7 +102,7 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Set encode to true to encode the output.
+     * Returns a new instance with the specified whether the tags for the breadcrumbs are encoded.
      *
      * @param bool $value Whether to encode the output.
      *
@@ -118,7 +118,7 @@ final class Breadcrumbs extends Widget
     /**
      * Returns a new instance with the specified first item in the breadcrumbs (called home link).
      *
-     * If a `false` is specified, the home item will not be rendered.
+     * If a `null` is specified, the home item will not be rendered.
      *
      * @param array|null $value Please refer to {@see items()} on the format.
      *
@@ -161,9 +161,12 @@ final class Breadcrumbs extends Widget
      *
      * ```php
      * [
-     *     'label' => 'label of the link',  // required
-     *     'url' => 'url of the link',      // optional, will be processed by Url::to()
+     *     'label' => 'label of the link', // required
+     *     'url' => 'url of the link', // optional, will be processed by Url::to()
      *     'template' => 'own template of the item', // optional, if not set $this->itemTemplate will be used
+     *     'encode' => true/false, // optional, is encoded is `true`, the tags will be encoded
+     *     'icon' => 'icon css class', // optional, icon css class
+     *     'iconAttributes' => [], // the html attributes for icon container
      * ]
      * ```
      *
@@ -177,7 +180,7 @@ final class Breadcrumbs extends Widget
     }
 
     /**
-     * Returns a new instance with the specified item HTML attributes.
+     * Returns a new instance with the specified items HTML attributes.
      *
      * @param array $value The HTML attributes for the item's widget.
      *
@@ -226,9 +229,9 @@ final class Breadcrumbs extends Widget
             $customTag = $customTag->id(Html::generateId($this->autoIdPrefix) . '-breadcrumbs');
         }
 
-        $content = "\n" . Html::openTag('ul', $this->itemsAttributes) . "\n" .
+        $content = PHP_EOL . Html::openTag('ul', $this->itemsAttributes) . PHP_EOL .
             implode('', $this->renderItems()) .
-            Html::closeTag('ul') . "\n";
+            Html::closeTag('ul') . PHP_EOL;
 
         return $customTag->content($content)->attributes($attributes)->encode(false)->render();
     }
@@ -268,22 +271,28 @@ final class Breadcrumbs extends Widget
         /** @var bool */
         $encode = $item['encode'] ?? $this->encode;
         unset($item['encode']);
+
         /** @var string|null */
         $icon = $item['icon'] ?? null;
         unset($item['icon']);
+
         /** @var array */
         $iconAttributes = $item['iconAttributes'] ?? [];
         unset($item['iconAttributes']);
+
         /** @var string */
         $template = $item['template'] ?? $template;
         unset($item['template']);
+
         /** @var string|null */
         $url = $item['url'] ?? null;
         unset($item['url']);
-        $icon = $this->renderIcon($icon, $iconAttributes);
+
         /** @var string */
         $label = $item['label'];
         unset($item['label']);
+
+        $icon = $this->renderIcon($icon, $iconAttributes);
 
         if ($icon !== '') {
             $label = $icon . Span::tag()->content($label)->render();

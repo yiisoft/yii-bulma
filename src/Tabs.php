@@ -12,9 +12,11 @@ use Yiisoft\Html\Tag\I;
 use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
+use function array_key_exists;
 use function array_reverse;
 use function implode;
 use function in_array;
+use function is_bool;
 
 /**
  * Simple responsive horizontal navigation tabs, with different styles.
@@ -107,7 +109,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -151,7 +153,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * Disables active items according to their current path and returns a new instance.
+     * Returns a new instance with the specified disables active items according to their current path.
      *
      * @return self
      */
@@ -163,7 +165,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * Set encode to true to encode the output.
+     * Returns a new instance with the specified whether the tags for the tabs are encoded.
      *
      * @param bool $value Whether to encode the output.
      *
@@ -444,13 +446,6 @@ final class Tabs extends Widget
         )->encode(false)->render();
     }
 
-    /**
-     * @param string $label
-     * @param string $icon
-     * @param array $iconAttributes
-     *
-     * @return string
-     */
     private function renderIcon(string $label, string $icon, array $iconAttributes): string
     {
         /** @var bool */

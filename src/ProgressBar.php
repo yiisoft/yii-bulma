@@ -9,6 +9,7 @@ use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\CustomTag;
 use Yiisoft\Widget\Widget;
 
+use function array_key_exists;
 use function implode;
 use function in_array;
 
@@ -56,7 +57,7 @@ final class ProgressBar extends Widget
     private string $size = '';
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *

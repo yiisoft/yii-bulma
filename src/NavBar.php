@@ -42,7 +42,7 @@ final class NavBar extends Widget
     private string $role = 'navigation';
 
     /**
-     * The ARIA label of the navbar.
+     * Returns a new instance with the specified aria-label attribute for the current element.
      *
      * @param string $value
      *
@@ -56,7 +56,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -92,7 +92,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the navbar brand.
+     * Returns a new instance with the specified HTML attributes for the navbar brand.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -108,7 +108,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The CSS class of the brand.
+     * Returns a new instance with the specified the CSS class of the brand.
      *
      * @param string $value The CSS class.
      *
@@ -122,7 +122,9 @@ final class NavBar extends Widget
     }
 
     /**
-     * Src of the brand image or empty if it's not used. Note that this param will override `$this->brandText` param.
+     * Returns a new instance with the specified src of the brand image, empty if it's not used.
+     *
+     * Note that this param will override `$this->brandText` param.
      *
      * @param string $value The src of the brand image.
      *
@@ -136,7 +138,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the brand image.
+     * Returns a new instance with the specified HTML attributes for the brand image.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -152,7 +154,8 @@ final class NavBar extends Widget
     }
 
     /**
-     * The text of the brand or empty if it's not used. Note that this is not HTML-encoded.
+     * Returns a new instance with the specified the text of the brand or empty if it's not used. Note that this is not
+     * HTML-encoded.
      *
      * @param string $value The text of the brand.
      *
@@ -166,7 +169,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the brand text.
+     * Returns a new instance with the specified HTML attributes for the brand text.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -182,8 +185,8 @@ final class NavBar extends Widget
     }
 
     /**
-     * The URL for the brand's hyperlink tag and will be used for the "href" attribute of the brand link. Default value
-     * is "/". You may set it to empty string if you want no link at all.
+     * Returns a new instance with the specified the URL for the brand's hyperlink tag and will be used for the "href"
+     * attribute of the brand link. Default value is "/". You may set it to empty string if you want no link at all.
      *
      * @param string $value
      *
@@ -197,7 +200,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The HTML attributes of the burger.
+     * Returns a new instance with the specified HTML attributes for the burger.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -213,7 +216,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The CSS class of the burger.
+     * Returns a new instance with the specified the CSS class of the burger.
      *
      * @param string $value The CSS class.
      *
@@ -227,7 +230,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The ARIA expanded attribute of the button link.
+     * Returns a new instance with the specified the ARIA expanded attribute of the button link.
      *
      * @param string $value
      *
@@ -241,7 +244,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The ARIA label text of the button link.
+     * Returns a new instance with the specified HTML attributes for the ARIA label text of the button link.
      *
      * @param string $value
      *
@@ -255,7 +258,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The content of the button link.
+     * Returns a new instance with the specified the content of the button link.
      *
      * @param string $value
      *
@@ -269,7 +272,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The role of the button link.
+     * Returns a new instance with the specified the role of the button link.
      *
      * @param string $value
      *
@@ -283,7 +286,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The CSS class of the navbar.
+     * Returns a new instance with the specified the CSS class of the navbar.
      *
      * @param string $value The CSS class.
      *
@@ -311,7 +314,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The CSS class of the items navbar.
+     * Returns a new instance with the specified the CSS class of the items navbar.
      *
      * @param string $value The CSS class.
      *
@@ -325,7 +328,7 @@ final class NavBar extends Widget
     }
 
     /**
-     * The role of the navbar.
+     * Returns a new instance with the specified the role of the navbar.
      *
      * @param string $value
      *

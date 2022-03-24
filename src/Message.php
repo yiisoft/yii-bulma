@@ -12,6 +12,9 @@ use Yiisoft\Html\Tag\P;
 use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
+use function implode;
+use function in_array;
+
 /**
  * Message renders Bulma message component.
  *
@@ -69,7 +72,7 @@ final class Message extends Widget
     private bool $withoutHeader = false;
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -99,7 +102,7 @@ final class Message extends Widget
     }
 
     /**
-     * The body content.
+     * Returns a new instance with the specified the body content.
      *
      * @param string $value The body content.
      *
@@ -113,7 +116,7 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget body tag.
+     * Returns a new instance with the specified HTML attributes for the widget body tag.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -129,7 +132,7 @@ final class Message extends Widget
     }
 
     /**
-     * The CSS class for the body container.
+     * Returns a new instance with the specified the CSS class for the body container.
      *
      * @param string $value The CSS class for the body container.
      *
@@ -143,7 +146,7 @@ final class Message extends Widget
     }
 
     /**
-     * The attributes for rendering the close button tag.
+     * Returns a new instance with the specified HTML attributes for the close button tag.
      *
      * The close button is displayed in the header of the Message. Clicking on the button will hide the message.
      *
@@ -161,7 +164,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set encode to true to encode the output.
+     * Returns a new instance with the specified whether the tags for the message are encoded.
      *
      * @param bool $value whether to encode the output.
      *
@@ -175,7 +178,7 @@ final class Message extends Widget
     }
 
     /**
-     * The HTML attributes for the widget header tag.
+     * Returns a new instance with the specified HTML attributes for the widget header tag.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -191,7 +194,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set message header color.
+     * Returns a new instance with the specified message header color.
      *
      * @param string $value The header color. Default is Message::COLOR_DARK.
      * Possible values: Message::COLOR_PRIMARY, Message::COLOR_LINK, Message::COLOR_INFO, Message::COLOR_SUCCESS,
@@ -214,7 +217,7 @@ final class Message extends Widget
     }
 
     /**
-     * The header message.
+     * Returns a new instance with the specified the header message.
      *
      * @param string $value The header message.
      *
@@ -242,7 +245,7 @@ final class Message extends Widget
     }
 
     /**
-     * Set size.
+     * Returns a new instance with the specified size for the widget.
      *
      * @param string $value size class. By default, not class is added and the size is considered "normal".
      * Possible values: Message::SIZE_SMALL, Message::SIZE_MEDIUM, Message::SIZE_LARGE.
@@ -264,7 +267,7 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to remove the close button.
+     * Returns a new instance with the specified allows you to remove the close button.
      *
      * @param bool $value Whether to remove the close button.
      *
@@ -278,7 +281,7 @@ final class Message extends Widget
     }
 
     /**
-     * Allows you to disable header.
+     * Returns a new instance with the specified allows you to disable header.
      *
      * @param bool $value Whether to disable header.
      *
