@@ -8,6 +8,11 @@ The modal structure:
     - `modal-content`: a horizontally and vertically centered container, in which you can include any content
     - `modal-close`: a simple cross located in the top right corner
 
+<p align="center">
+    </br>
+    <img src="images/modal.png">
+</p>    
+
 ## Usage
 
 ```php
