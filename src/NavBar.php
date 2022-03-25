@@ -42,7 +42,7 @@ final class NavBar extends Widget
     private string $role = 'navigation';
 
     /**
-     * Returns a new instance with the specified aria-label attribute for the current element.
+     * Returns a new instance with the specified `aria-label` attribute for the current element.
      *
      * @param string $value
      *

@@ -195,7 +195,7 @@ final class ProgressBar extends Widget
     {
         if (!array_key_exists('id', $attributes)) {
             /** @var string */
-            $attributes['id'] = (Html::generateId($this->autoIdPrefix) . '-progressbar');
+            $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-progressbar';
         }
 
         if (array_key_exists('max', $attributes)) {
