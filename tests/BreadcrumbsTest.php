@@ -219,8 +219,10 @@ final class BreadcrumbsTest extends TestCase
         $widget = Breadcrumbs::widget();
 
         $this->assertNotSame($widget, $widget->activeItemTemplate(''));
+        $this->assertNotSame($widget, $widget->ariaLabel(''));
         $this->assertNotSame($widget, $widget->attributes([]));
         $this->assertNotSame($widget, $widget->autoIdPrefix(Breadcrumbs::class));
+        $this->assertNotSame($widget, $widget->encode(false));
         $this->assertNotSame($widget, $widget->homeItem(null));
         $this->assertNotSame($widget, $widget->id(Breadcrumbs::class));
         $this->assertNotSame($widget, $widget->items([]));

@@ -9,6 +9,7 @@ use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\CustomTag;
 use Yiisoft\Widget\Widget;
 
+use function array_key_exists;
 use function implode;
 use function in_array;
 
@@ -56,7 +57,7 @@ final class ProgressBar extends Widget
     private string $size = '';
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -192,15 +193,16 @@ final class ProgressBar extends Widget
 
     private function build(array $attributes): array
     {
-        /** @var string */
-        $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-progressbar');
+        if (!array_key_exists('id', $attributes)) {
+            /** @var string */
+            $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-progressbar';
+        }
 
         if (array_key_exists('max', $attributes)) {
             /** @var int|null */
             $attributes['max'] = $attributes['max'] === 0 ? null : $attributes['max'];
         } else {
-            /** @var int|null */
-            $attributes['max'] ??= 100;
+            $attributes['max'] = 100;
         }
 
         Html::addCssClass($attributes, 'progress');

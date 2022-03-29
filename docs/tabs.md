@@ -41,7 +41,7 @@ echo Tabs::widget()
             'icon' => 'fas fa-image',
             'active' => true,
             'content' => 'Some text about pictures',
-            'contentOptions' => [
+            'contentAttributes' => [
                 'class' => 'is-active',
             ],
         ],
@@ -104,13 +104,13 @@ HTML produced is like the following:
 Method | Description | Default
 -------|-------------|---------
 `alignment(string $value)` | Alignment of the tabs list. | `''`
+`attributes(array $value)` | HTML attributes for the widget container nav tag. | `[]`
 `autoIdPrefix(string $value)` | Prefix to the automatically generated widget ID. | `w`
 `currentPath(string $value)` | Allows you to assign the current path of the URL from request controller. | ``
 `deactivateItems()` | Disable active items according to their current path. | `false`
 `id(string $value)` | Widget ID. | `''`
 `items(array $value)` | List of tab items. | `[]`
-`options(array $value)` | HTML attributes for the widget container tag. | [`class` => `tabs`]
 `size(string $value)` | Size of the tabs list. | `is-small`, `is-medium`, `is-large`
 `style(string $value)` | Style of the tabs list. | `''`
-`tabsContentOptions(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
+`tabsContentAttributes(array $value)` | List of HTML attributes for the `tabs-content` container. | `[]`
 `withoutEncodeLabels()` | When tags Labels HTML should not be encoded. | `false`       |

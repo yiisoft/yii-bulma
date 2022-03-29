@@ -18,6 +18,7 @@ use Yiisoft\Widget\Widget;
 
 use function implode;
 use function is_array;
+use function is_string;
 
 /**
  * Nav renders a nav HTML component.
@@ -43,7 +44,7 @@ final class Nav extends Widget
     private string $startCssClass = 'navbar-start';
 
     /**
-     * The HTML attributes. The following special options are recognized.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -59,7 +60,8 @@ final class Nav extends Widget
     }
 
     /**
-     * Whether to activate parent menu items when one of the corresponding child menu items is active.
+     * Returns a new instance with the specified whether to activate parent menu items when one of the corresponding
+     * child menu items is active.
      *
      * @return self
      */
@@ -71,7 +73,8 @@ final class Nav extends Widget
     }
 
     /**
-     * Allows you to assign the current path of the url from request controller.
+     * Returns a new instance with the specified allows you to assign the current path of the url from request
+     * controller.
      *
      * @param string $value The current path.
      *
@@ -85,7 +88,7 @@ final class Nav extends Widget
     }
 
     /**
-     * Align the menu items to the right.
+     * Returns a new instance with the specified align the menu items to the right.
      *
      * @return self
      *
@@ -99,7 +102,7 @@ final class Nav extends Widget
     }
 
     /**
-     * Align the menu items to left.
+     * Returns a new instance with the specified align the menu items to left.
      *
      * @return self
      *
@@ -113,7 +116,9 @@ final class Nav extends Widget
     }
 
     /**
-     * List of items in the nav widget. Each array element represents a single  menu item which can be either a string
+     * Returns a new instance with the specified items.
+     *
+     * Each array element represents a single  menu item which can be either a string
      * or an array with the following structure:
      *
      * - label: string, required, the nav item label.
@@ -146,7 +151,7 @@ final class Nav extends Widget
     }
 
     /**
-     * Disable activate items according to whether their currentPath.
+     * Returns a new instance with the specified disable activate items according to whether their currentPath.
      *
      * @return self
      *
@@ -392,7 +397,7 @@ final class Nav extends Widget
             }
         }
 
-        $links = PHP_EOL . implode("\n", $items) . PHP_EOL;
+        $links = PHP_EOL . implode(PHP_EOL, $items) . PHP_EOL;
 
         if ($this->enclosedByStartMenu) {
             $links = PHP_EOL . Div::tag()->class($this->startCssClass)->content($links)->encode(false)->render() .

@@ -75,13 +75,13 @@ $this->setJsFiles($assetManager->getJsFiles());
             'label' => 'Setting Account',
             'url' => '/setting/account',
             'icon' => 'fas fa-user-cog',
-            'iconOptions' => ['class' => 'icon']
+            'iconAttributes' => ['class' => 'icon']
         ],
         [
             'label' => 'Profile',
             'url' => '/profile',
             'icon' => 'fas fa-users',
-            'iconOptions' => ['class' => 'icon']
+            'iconAttributes' => ['class' => 'icon']
         ],
         [
             'label' => 'Admin' . Html::img(

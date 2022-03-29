@@ -76,7 +76,7 @@ final class ProgressBarTest extends TestCase
         $this->assertNotSame($widget, $widget->id(ProgressBar::class));
         $this->assertNotSame($widget, $widget->maxValue(100));
         $this->assertNotSame($widget, $widget->size('is-small'));
-        $this->assertNotSame($widget, $widget->value(1.0));
+        $this->assertNotSame($widget, $widget->value(100));
     }
 
     /**
@@ -141,7 +141,18 @@ final class ProgressBarTest extends TestCase
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
-    public function testValueException(): void
+    public function testValueExceptionWithLessThanZero(): void
+    {
+        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid value. It must be between 0 and 100.');
+        ProgressBar::widget()->value(-1)->render();
+    }
+
+    /**
+     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
+     */
+    public function testValueExceptionWithGreaterZero(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);

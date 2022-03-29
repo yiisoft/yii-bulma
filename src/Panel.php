@@ -59,7 +59,7 @@ final class Panel extends Widget
     private string $template = '{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}';
 
     /**
-     * The HTML attributes.
+     * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
      *
@@ -89,7 +89,7 @@ final class Panel extends Widget
     }
 
     /**
-     * The panel block class.
+     * Returns a new instance with the specified the panel block class.
      *
      * @param string $value The block class.
      *
@@ -124,7 +124,7 @@ final class Panel extends Widget
     }
 
     /**
-     * The panel class.
+     * Returns a new instance with the specified the panel class.
      *
      * @param string $value The panel class.
      *
@@ -166,7 +166,7 @@ final class Panel extends Widget
     }
 
     /**
-     * The panel heading class.
+     * Returns a new instance with the specified the panel heading class.
      *
      * @param string $value The heading class.
      *
@@ -180,7 +180,7 @@ final class Panel extends Widget
     }
 
     /**
-     * The panel icon class.
+     * Returns a new instance with the specified the panel icon class.
      *
      * @param string $value The icon class.
      *
@@ -238,7 +238,7 @@ final class Panel extends Widget
     }
 
     /**
-     * The panel tab class.
+     * Returns a new instance with the specified the panel tab class.
      *
      * @param string $value The tab class.
      *
