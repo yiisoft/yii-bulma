@@ -46,8 +46,7 @@
             "source-directory": "config"
         },
         "config-plugin": {
-            "params": "params.php",
-            "widgets": "widgets.php"
+            "params": "params.php"
         }
     },
     "config": {
