@@ -24,7 +24,9 @@ final class PanelTest extends TestCase
         <nav id="w1-panel" class="my-class panel">
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Panel::widget()->attributes(['class' => 'my-class'])->render());
+        $this->assertEqualsWithoutLE($expected, Panel::widget()
+            ->attributes(['class' => 'my-class'])
+            ->render());
     }
 
     /**
@@ -65,7 +67,10 @@ final class PanelTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Panel::widget()->heading('Repositories')->color(Panel::COLOR_PRIMARY)->render(),
+            Panel::widget()
+                ->heading('Repositories')
+                ->color(Panel::COLOR_PRIMARY)
+                ->render(),
         );
     }
 
@@ -84,7 +89,10 @@ final class PanelTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Panel::widget()->cssClass('test-class')->tabs([['label' => 'all']])->render()
+            Panel::widget()
+                ->cssClass('test-class')
+                ->tabs([['label' => 'all']])
+                ->render()
         );
     }
 
@@ -97,7 +105,9 @@ final class PanelTest extends TestCase
         $this->expectExceptionMessage(
             'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
         );
-        Panel::widget()->color('is-non-existent')->render();
+        Panel::widget()
+            ->color('is-non-existent')
+            ->render();
     }
 
     /**
@@ -111,7 +121,9 @@ final class PanelTest extends TestCase
         <p class="panel-heading">Repositories</p>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Panel::widget()->heading('Repositories')->render());
+        $this->assertEqualsWithoutLE($expected, Panel::widget()
+            ->heading('Repositories')
+            ->render());
     }
 
     /**
@@ -127,7 +139,10 @@ final class PanelTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Panel::widget()->heading('Repositories')->headingClass('test-class')->render()
+            Panel::widget()
+                ->heading('Repositories')
+                ->headingClass('test-class')
+                ->render()
         );
     }
 
@@ -144,7 +159,10 @@ final class PanelTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Panel::widget()->heading('Repositories')->headingAttributes(['class' => 'my-class'])->render(),
+            Panel::widget()
+                ->heading('Repositories')
+                ->headingAttributes(['class' => 'my-class'])
+                ->render(),
         );
     }
 
@@ -178,7 +196,9 @@ final class PanelTest extends TestCase
     public function testItemMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Panel::widget()->tabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])->render();
+        Panel::widget()
+            ->tabs([['label' => 'All', 'items' => [['icon' => 'fas fa-book']]]])
+            ->render();
     }
 
     /**
@@ -488,7 +508,9 @@ final class PanelTest extends TestCase
     public function testTabMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Panel::widget()->tabs([[]])->render();
+        Panel::widget()
+            ->tabs([[]])
+            ->render();
     }
 
     /**

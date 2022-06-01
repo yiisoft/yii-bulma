@@ -43,7 +43,9 @@ final class TabsTest extends TestCase
         </ul>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Tabs::widget()->alignment(Tabs::ALIGNMENT_CENTERED)->render());
+        $this->assertEqualsWithoutLE($expected, Tabs::widget()
+            ->alignment(Tabs::ALIGNMENT_CENTERED)
+            ->render());
     }
 
     public function testAttributes(): void
@@ -55,7 +57,9 @@ final class TabsTest extends TestCase
         </ul>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Tabs::widget()->attributes(['class' => 'some-class'])->render());
+        $this->assertEqualsWithoutLE($expected, Tabs::widget()
+            ->attributes(['class' => 'some-class'])
+            ->render());
     }
 
     public function testCurrentPath(): void
@@ -77,7 +81,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Tab 1', 'url' => 'site/index'],
                     ['label' => 'Tab 2', 'url' => 'site/contact'],
                 ])
-            ->render()
+                ->render()
         );
     }
 
@@ -125,19 +129,25 @@ final class TabsTest extends TestCase
     public function testExceptionSize(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->size('is-non-existent')->render();
+        Tabs::widget()
+            ->size('is-non-existent')
+            ->render();
     }
 
     public function testExceptionAlignment(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->alignment('is-non-existent')->render();
+        Tabs::widget()
+            ->alignment('is-non-existent')
+            ->render();
     }
 
     public function testExceptionStyle(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->style('is-non-existent')->render();
+        Tabs::widget()
+            ->style('is-non-existent')
+            ->render();
     }
 
     public function testIcon(): void
@@ -295,7 +305,9 @@ final class TabsTest extends TestCase
     public function testMissingLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        Tabs::widget()->items([['content' => 'Some text about music']])->render();
+        Tabs::widget()
+            ->items([['content' => 'Some text about music']])
+            ->render();
     }
 
     public function testRender(): void
@@ -319,7 +331,9 @@ final class TabsTest extends TestCase
         </ul>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Tabs::widget()->size(Tabs::SIZE_LARGE)->render());
+        $this->assertEqualsWithoutLE($expected, Tabs::widget()
+            ->size(Tabs::SIZE_LARGE)
+            ->render());
     }
 
     public function testStyle(): void
@@ -331,7 +345,9 @@ final class TabsTest extends TestCase
         </ul>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Tabs::widget()->style(Tabs::STYLE_TOGGLE_ROUNDED)->render());
+        $this->assertEqualsWithoutLE($expected, Tabs::widget()
+            ->style(Tabs::STYLE_TOGGLE_ROUNDED)
+            ->render());
     }
 
     public function testTabsContent(): void

@@ -33,8 +33,12 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->attributes(['class' => 'widescreen'])->begin() .
-            Div::tag()->class('box')->content('Say hello...') . PHP_EOL .
+            Modal::widget()
+                ->attributes(['class' => 'widescreen'])
+                ->begin() .
+            Div::tag()
+                ->class('box')
+                ->content('Say hello...') . PHP_EOL .
             Modal::end(),
         );
     }
@@ -56,7 +60,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->backgroundClass('test-class')->begin() . Modal::end(),
+            Modal::widget()
+                ->backgroundClass('test-class')
+                ->begin() . Modal::end(),
         );
     }
 
@@ -77,7 +83,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->buttonClass('test-class')->begin() . Modal::end(),
+            Modal::widget()
+                ->buttonClass('test-class')
+                ->begin() . Modal::end(),
         );
     }
 
@@ -98,7 +106,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->closeButtonAttributes(['class' => 'some-class'])->begin() . Modal::end(),
+            Modal::widget()
+                ->closeButtonAttributes(['class' => 'some-class'])
+                ->begin() . Modal::end(),
         );
     }
 
@@ -119,7 +129,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->closeButtonSize(Modal::SIZE_LARGE)->begin() . Modal::end(),
+            Modal::widget()
+                ->closeButtonSize(Modal::SIZE_LARGE)
+                ->begin() . Modal::end(),
         );
     }
 
@@ -140,7 +152,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->contentAttributes(['class' => 'some-class'])->begin() . Modal::end(),
+            Modal::widget()
+                ->contentAttributes(['class' => 'some-class'])
+                ->begin() . Modal::end(),
         );
     }
 
@@ -161,7 +175,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->contentClass('test-class')->begin() . Modal::end(),
+            Modal::widget()
+                ->contentClass('test-class')
+                ->begin() . Modal::end(),
         );
     }
 
@@ -239,7 +255,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->modalClass('test-class')->begin() . Modal::end(),
+            Modal::widget()
+                ->modalClass('test-class')
+                ->begin() . Modal::end(),
         );
     }
 
@@ -262,7 +280,10 @@ final class ModalTest extends TestCase
         $this->assertEqualsWithoutLE(
             $expected,
             Modal::widget()->begin() .
-            Div::tag()->class('box')->content('Say hello...')->render() . PHP_EOL .
+            Div::tag()
+                ->class('box')
+                ->content('Say hello...')
+                ->render() . PHP_EOL .
             Modal::end(),
         );
     }
@@ -284,7 +305,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->toggleButtonAttributes(['class' => 'testMe'])->begin() . Modal::end(),
+            Modal::widget()
+                ->toggleButtonAttributes(['class' => 'testMe'])
+                ->begin() . Modal::end(),
         );
     }
 
@@ -305,7 +328,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->toggleButtonColor(Modal::COLOR_INFO)->begin() . Modal::end(),
+            Modal::widget()
+                ->toggleButtonColor(Modal::COLOR_INFO)
+                ->begin() . Modal::end(),
         );
     }
 
@@ -326,7 +351,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->toggleButtonLabel('Click to open.')->begin() . Modal::end(),
+            Modal::widget()
+                ->toggleButtonLabel('Click to open.')
+                ->begin() . Modal::end(),
         );
     }
 
@@ -347,7 +374,9 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->toggleButtonSize(Modal::SIZE_LARGE)->begin() . Modal::end(),
+            Modal::widget()
+                ->toggleButtonSize(Modal::SIZE_LARGE)
+                ->begin() . Modal::end(),
         );
     }
 
@@ -365,7 +394,9 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutCloseButton(true)->begin() . Modal::end());
+        $this->assertEqualsWithoutLE($expected, Modal::widget()
+                ->withoutCloseButton(true)
+                ->begin() . Modal::end());
     }
 
     /**
@@ -382,6 +413,8 @@ final class ModalTest extends TestCase
         </div>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Modal::widget()->withoutToggleButton(true)->begin() . Modal::end());
+        $this->assertEqualsWithoutLE($expected, Modal::widget()
+                ->withoutToggleButton(true)
+                ->begin() . Modal::end());
     }
 }

@@ -472,7 +472,9 @@ final class DropdownTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" option is required.');
-        Dropdown::widget()->items([['url' => '#test']])->render();
+        Dropdown::widget()
+            ->items([['url' => '#test']])
+            ->render();
     }
 
     /**
@@ -640,7 +642,7 @@ final class DropdownTest extends TestCase
                         'submenu' => true,
                     ],
                 ])
-            ->render(),
+                ->render(),
         );
     }
 

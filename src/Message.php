@@ -21,7 +21,10 @@ use function in_array;
  * For example,
  *
  * ```php
- * <?= Message::widget()->headerColor('success')->header('System info')->body('Say hello...') ?>
+ * <?= Message::widget()
+ *     ->headerColor('success')
+ *     ->header('System info')
+ *     ->body('Say hello...') ?>
  * ```
  *
  * @link https://bulma.io/documentation/components/message/
@@ -318,13 +321,21 @@ final class Message extends Widget
         Html::addCssClass($closeButtonAttributes, $this->buttonCssClass);
         unset($closeButtonAttributes['label']);
 
-        $label = Span::tag()->attributes($buttonSpanAttributes)->content('&times;')->encode(false)->render();
+        $label = Span::tag()
+            ->attributes($buttonSpanAttributes)
+            ->content('&times;')
+            ->encode(false)
+            ->render();
 
         if ($this->size !== '') {
             Html::addCssClass($closeButtonAttributes, $this->size);
         }
 
-        return Button::tag()->attributes($closeButtonAttributes)->content($label)->encode(false)->render() . PHP_EOL;
+        return Button::tag()
+                ->attributes($closeButtonAttributes)
+                ->content($label)
+                ->encode(false)
+                ->render() . PHP_EOL;
     }
 
     private function renderHeader(): string
@@ -348,10 +359,10 @@ final class Message extends Widget
 
         if ($this->withoutHeader === false) {
             $html = Div::tag()
-                ->attributes($headerAttributes)
-                ->content($headerMessage)
-                ->encode(false)
-                ->render() . PHP_EOL;
+                    ->attributes($headerAttributes)
+                    ->content($headerMessage)
+                    ->encode(false)
+                    ->render() . PHP_EOL;
         }
 
         return $html;
@@ -395,6 +406,10 @@ final class Message extends Widget
             $body = PHP_EOL . $body . PHP_EOL;
         }
 
-        return Div::tag()->attributes($bodyAttributes)->content($body)->encode(false)->render() . PHP_EOL;
+        return Div::tag()
+                ->attributes($bodyAttributes)
+                ->content($body)
+                ->encode(false)
+                ->render() . PHP_EOL;
     }
 }

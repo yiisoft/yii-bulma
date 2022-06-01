@@ -188,7 +188,10 @@ final class ProgressBar extends Widget
             $content = $attributes['value'] > 0 ? $attributes['value'] . '%' : '';
         }
 
-        return CustomTag::name('progress')->attributes($attributes)->content($content)->render();
+        return CustomTag::name('progress')
+            ->attributes($attributes)
+            ->content($content)
+            ->render();
     }
 
     private function build(array $attributes): array

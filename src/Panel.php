@@ -319,7 +319,10 @@ final class Panel extends Widget
         if (!empty($this->heading)) {
             Html::addCssClass($headingAttributes, $this->headingClass);
 
-            return P::tag()->attributes($headingAttributes)->content($this->heading)->render() . PHP_EOL;
+            return P::tag()
+                    ->attributes($headingAttributes)
+                    ->content($this->heading)
+                    ->render() . PHP_EOL;
         }
 
         return '';
@@ -338,7 +341,11 @@ final class Panel extends Widget
 
             Html::addCssClass($tabsAttributes, $this->tabClass);
 
-            return P::tag()->attributes($tabsAttributes)->content(PHP_EOL . $tabs)->encode(false)->render() . PHP_EOL;
+            return P::tag()
+                    ->attributes($tabsAttributes)
+                    ->content(PHP_EOL . $tabs)
+                    ->encode(false)
+                    ->render() . PHP_EOL;
         }
 
         return '';
@@ -391,7 +398,11 @@ final class Panel extends Widget
             $this->tabItems[$index] = $tabsItems;
         }
 
-        return A::tag()->attributes($urlAttributes)->content($label)->encode(false)->render();
+        return A::tag()
+            ->attributes($urlAttributes)
+            ->content($label)
+            ->encode(false)
+            ->render();
     }
 
     private function renderItem(array $item): string
@@ -428,12 +439,21 @@ final class Panel extends Widget
         Html::addCssClass($labelAttributes, $this->iconClass);
 
         if ($icon !== '') {
-            $icon = PHP_EOL . I::tag()->attributes(['aria-hidden' => 'true'])->class($icon) . PHP_EOL;
-            $label = PHP_EOL . Span::tag()->attributes($labelAttributes)->content($icon)->encode(false) . PHP_EOL .
-                 $label . PHP_EOL;
+            $icon = PHP_EOL . I::tag()
+                    ->attributes(['aria-hidden' => 'true'])
+                    ->class($icon) . PHP_EOL;
+            $label = PHP_EOL . Span::tag()
+                    ->attributes($labelAttributes)
+                    ->content($icon)
+                    ->encode(false) . PHP_EOL .
+                $label . PHP_EOL;
         }
 
-        return A::tag()->attributes($urlAttributes)->content($label)->encode(false)->render();
+        return A::tag()
+            ->attributes($urlAttributes)
+            ->content($label)
+            ->encode(false)
+            ->render();
     }
 
     /**

@@ -188,12 +188,12 @@ final class Nav extends Widget
     private function renderDropdown(array $items): string
     {
         return Dropdown::widget()
-            ->cssClass('navbar-dropdown')
-            ->dividerCssClass('navbar-divider')
-            ->enclosedByContainer()
-            ->itemCssClass('navbar-item')
-            ->items($items)
-            ->render() . PHP_EOL;
+                ->cssClass('navbar-dropdown')
+                ->dividerCssClass('navbar-divider')
+                ->enclosedByContainer()
+                ->itemCssClass('navbar-item')
+                ->items($items)
+                ->render() . PHP_EOL;
     }
 
     /**
@@ -280,7 +280,11 @@ final class Nav extends Widget
         if ($iconText !== '' || $iconCssClass !== '') {
             $html = Span::tag()
                 ->attributes($iconAttributes)
-                ->content(CustomTag::name('i')->class($iconCssClass)->content($iconText)->encode(false)->render())
+                ->content(CustomTag::name('i')
+                    ->class($iconCssClass)
+                    ->content($iconText)
+                    ->encode(false)
+                    ->render())
                 ->encode(false)
                 ->render();
         }
@@ -364,8 +368,17 @@ final class Nav extends Widget
 
             $items = $this->isChildActive($items, $active);
             $dropdown = PHP_EOL . $this->renderDropdown($items);
-            $a = A::tag()->attributes($urlAttributes)->content($itemLabel)->encode(false)->url($url)->render();
-            $div = Div::tag()->attributes($dropdownAttributes)->content($dropdown)->encode(false)->render();
+            $a = A::tag()
+                ->attributes($urlAttributes)
+                ->content($itemLabel)
+                ->encode(false)
+                ->url($url)
+                ->render();
+            $div = Div::tag()
+                ->attributes($dropdownAttributes)
+                ->content($dropdown)
+                ->encode(false)
+                ->render();
             $html = Div::tag()
                 ->attributes($attributes)
                 ->content(PHP_EOL . $a . PHP_EOL . $div . PHP_EOL)
@@ -375,7 +388,12 @@ final class Nav extends Widget
 
         if ($html === '') {
             Html::addCssClass($urlAttributes, 'navbar-item');
-            $html = A::tag()->attributes($urlAttributes)->content($itemLabel)->url($url)->encode(false)->render();
+            $html = A::tag()
+                ->attributes($urlAttributes)
+                ->content($itemLabel)
+                ->url($url)
+                ->encode(false)
+                ->render();
         }
 
         return $html;
@@ -400,21 +418,29 @@ final class Nav extends Widget
         $links = PHP_EOL . implode(PHP_EOL, $items) . PHP_EOL;
 
         if ($this->enclosedByStartMenu) {
-            $links = PHP_EOL . Div::tag()->class($this->startCssClass)->content($links)->encode(false)->render() .
+            $links = PHP_EOL . Div::tag()
+                    ->class($this->startCssClass)
+                    ->content($links)
+                    ->encode(false)
+                    ->render() .
                 PHP_EOL;
         }
 
         if ($this->enclosedByEndMenu) {
-            $links = PHP_EOL . Div::tag()->class($this->endCssClass)->content($links)->encode(false)->render() .
+            $links = PHP_EOL . Div::tag()
+                    ->class($this->endCssClass)
+                    ->content($links)
+                    ->encode(false)
+                    ->render() .
                 PHP_EOL;
         }
 
         return $this->items !== []
-             ? Div::tag()
+            ? Div::tag()
                 ->class($this->menuCssClass)
                 ->content($links)
                 ->encode(false)
                 ->render()
-             : '';
+            : '';
     }
 }
