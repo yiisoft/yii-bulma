@@ -56,8 +56,12 @@ $this->registerJs($modalJS);
 
 <?= ModalCard::widget()
     ->footer(
-        Button::tag()->class('button is-success')->content('Save changes') .
-        Button::tag()->class('button is-danger is-outline')->content('Cancel')
+        Button::tag()
+            ->class('button is-success')
+            ->content('Save changes') .
+        Button::tag()
+            ->class('button is-danger is-outline')
+            ->content('Cancel')
     )
     ->title('Modal title.')
     ->begin() ?>

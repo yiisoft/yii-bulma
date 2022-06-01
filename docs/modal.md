@@ -92,8 +92,13 @@ JS;
 $this->registerJs($modalJS);
 ?>
 
-<?= Modal::widget()->id('modal')->begin() .
-        Div::tag()->class('box')->content('Say hello...')->render() . PHP_EOL .
+<?= Modal::widget()
+        ->id('modal')
+        ->begin() .
+    Div::tag()
+        ->class('box')
+        ->content('Say hello...')
+        ->render() . PHP_EOL .
     Modal::end() ?>
 ```
 

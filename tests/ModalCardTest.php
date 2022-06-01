@@ -47,8 +47,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->attributes(['class' => 'bg-white'])
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -89,8 +93,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->bodyAttributes(['class' => 'bg-white'])
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -131,8 +139,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->cardAttributes(['class' => 'bg-white'])
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -173,8 +185,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->closeButtonAttributes(['disabled' => true])
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -216,8 +232,12 @@ final class ModalCardTest extends TestCase
                 ->closeButtonAttributes(['disabled' => true])
                 ->closeButtonCssClass('button is-danger is-outline')
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -258,8 +278,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->closeButtonSize(ModalCard::SIZE_LARGE)
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -279,7 +303,9 @@ final class ModalCardTest extends TestCase
         $this->expectExceptionMessage(
             'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
         );
-        ModalCard::widget()->toggleButtonColor('is-non-existent')->begin();
+        ModalCard::widget()
+            ->toggleButtonColor('is-non-existent')
+            ->begin();
     }
 
     /**
@@ -289,7 +315,9 @@ final class ModalCardTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
-        ModalCard::widget()->toggleButtonSize('is-non-existent')->begin();
+        ModalCard::widget()
+            ->toggleButtonSize('is-non-existent')
+            ->begin();
     }
 
     /**
@@ -299,7 +327,9 @@ final class ModalCardTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
-        ModalCard::widget()->closeButtonSize('is-non-existent')->begin();
+        ModalCard::widget()
+            ->closeButtonSize('is-non-existent')
+            ->begin();
     }
 
     /**
@@ -331,8 +361,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->footerAttributes(['class' => 'bg-transparent'])
                 ->title('Modal title.')
@@ -373,8 +407,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->headerAttributes(['class' => 'bg-info'])
                 ->title('Modal title.')
@@ -452,8 +490,12 @@ final class ModalCardTest extends TestCase
             ModalCard::widget()
                 ->bodyAttributes(['class' => 'bg-white'])
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->titleAttributes(['class' => 'text-info'])
@@ -494,8 +536,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->toggleButtonAttributes(['disabled' => true])
@@ -536,8 +582,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->toggleButtonColor(ModalCard::COLOR_SUCCESS)
@@ -578,8 +628,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->toggleButtonLabel('Launch modal')
@@ -620,8 +674,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->toggleButtonSize(ModalCard::SIZE_LARGE)
@@ -664,8 +722,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->begin() .
@@ -704,8 +766,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->withoutCloseButton(true)
@@ -745,8 +811,12 @@ final class ModalCardTest extends TestCase
             $expected,
             ModalCard::widget()
                 ->footer(
-                    Button::tag()->class('button is-success')->content('Save changes') . PHP_EOL .
-                    Button::tag()->class('button is-danger is-outline')->content('Cancel')
+                    Button::tag()
+                        ->class('button is-success')
+                        ->content('Save changes') . PHP_EOL .
+                    Button::tag()
+                        ->class('button is-danger is-outline')
+                        ->content('Cancel')
                 )
                 ->title('Modal title.')
                 ->withoutToggleButton(true)

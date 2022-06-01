@@ -327,11 +327,11 @@ final class Tabs extends Widget
         }
 
         return Div::tag()
-            ->attributes($attributes)
-            ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
-            ->id($id)
-            ->encode(false)
-            ->render() . $this->renderTabsContent();
+                ->attributes($attributes)
+                ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
+                ->id($id)
+                ->encode(false)
+                ->render() . $this->renderTabsContent();
     }
 
     private function renderItems(): string
@@ -362,7 +362,9 @@ final class Tabs extends Widget
             $renderItems .= PHP_EOL . $this->renderItem($index, $item);
         }
 
-        return Html::tag('ul', $renderItems . PHP_EOL, $this->itemsAttributes)->encode(false)->render();
+        return Html::tag('ul', $renderItems . PHP_EOL, $this->itemsAttributes)
+            ->encode(false)
+            ->render();
     }
 
     /**
@@ -441,9 +443,15 @@ final class Tabs extends Widget
 
         return Html::tag(
             'li',
-            A::tag()->attributes($urlAttributes)->content($label)->encode(false)->render(),
+            A::tag()
+                ->attributes($urlAttributes)
+                ->content($label)
+                ->encode(false)
+                ->render(),
             $attributes
-        )->encode(false)->render();
+        )
+            ->encode(false)
+            ->render();
     }
 
     private function renderIcon(string $label, string $icon, array $iconAttributes): string
@@ -455,10 +463,14 @@ final class Tabs extends Widget
         $elements = [
             Span::tag()
                 ->attributes($iconAttributes)
-                ->content(I::tag()->attributes(['class' => $icon, 'aria-hidden' => 'true'])->render())
+                ->content(I::tag()
+                    ->attributes(['class' => $icon, 'aria-hidden' => 'true'])
+                    ->render())
                 ->encode(false)
                 ->render(),
-            Span::tag()->content($label)->render(),
+            Span::tag()
+                ->content($label)
+                ->render(),
         ];
 
         if ($rightSide === true) {
@@ -484,10 +496,10 @@ final class Tabs extends Widget
 
         if (!empty($this->tabsContent)) {
             $html .= PHP_EOL . Div::tag()
-                ->attributes($tabsContentAttributes)
-                ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
-                ->encode(false)
-                ->render();
+                    ->attributes($tabsContentAttributes)
+                    ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
+                    ->encode(false)
+                    ->render();
         }
 
         return $html;

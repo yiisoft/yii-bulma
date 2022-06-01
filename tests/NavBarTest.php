@@ -32,7 +32,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->ariaLabel('main')->begin() . NavBar::end()
+            NavBar::widget()
+                ->ariaLabel('main')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -55,7 +57,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->brandAttributes(['class' => 'text-danger'])->begin() . NavBar::end()
+            NavBar::widget()
+                ->brandAttributes(['class' => 'text-danger'])
+                ->begin() . NavBar::end()
         );
     }
 
@@ -78,7 +82,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->brandCssClass('has-text-center navbar-brand')->begin() . NavBar::end()
+            NavBar::widget()
+                ->brandCssClass('has-text-center navbar-brand')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -129,7 +135,9 @@ final class NavBarTest extends TestCase
         </div>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, NavBar::widget()->brandText('My Project')->begin() . NavBar::end());
+        $this->assertEqualsWithoutLE($expected, NavBar::widget()
+                ->brandText('My Project')
+                ->begin() . NavBar::end());
     }
 
     /**
@@ -210,7 +218,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->burgerAttributes(['class' => 'has-text-center'])->begin() . NavBar::end()
+            NavBar::widget()
+                ->burgerAttributes(['class' => 'has-text-center'])
+                ->begin() . NavBar::end()
         );
     }
 
@@ -233,7 +243,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->burgerCssClass('has-text-center navbar-burguer')->begin() . NavBar::end()
+            NavBar::widget()
+                ->burgerCssClass('has-text-center navbar-burguer')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -256,7 +268,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->buttonLinkAriaExpanded('true')->begin() . NavBar::end()
+            NavBar::widget()
+                ->buttonLinkAriaExpanded('true')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -279,7 +293,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->buttonLinkAriaLabelText('menu-text')->begin() . NavBar::end()
+            NavBar::widget()
+                ->buttonLinkAriaLabelText('menu-text')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -324,7 +340,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->buttonLinkRole('button-text')->begin() . NavBar::end()
+            NavBar::widget()
+                ->buttonLinkRole('button-text')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -347,7 +365,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->cssClass('has-text-danger navbar')->begin() . NavBar::end()
+            NavBar::widget()
+                ->cssClass('has-text-danger navbar')
+                ->begin() . NavBar::end()
         );
     }
 
@@ -368,7 +388,9 @@ final class NavBarTest extends TestCase
         </div>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, NavBar::widget()->id('id-test')->begin() . NavBar::end());
+        $this->assertEqualsWithoutLE($expected, NavBar::widget()
+                ->id('id-test')
+                ->begin() . NavBar::end());
     }
 
     /**
@@ -467,7 +489,9 @@ final class NavBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            NavBar::widget()->role('navigation-text')->begin() . NavBar::end()
+            NavBar::widget()
+                ->role('navigation-text')
+                ->begin() . NavBar::end()
         );
     }
 }

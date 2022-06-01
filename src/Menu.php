@@ -491,8 +491,10 @@ final class Menu extends Widget
                 }
             } elseif (!empty($menu)) {
                 $lines[] = $tag === null
-                ? $menu
-                : Html::tag($tag, $menu, $attributes)->encode(false)->render();
+                    ? $menu
+                    : Html::tag($tag, $menu, $attributes)
+                        ->encode(false)
+                        ->render();
             }
         }
 
@@ -551,7 +553,10 @@ final class Menu extends Widget
 
         return strtr(
             $labelTemplate,
-            ['{label}' => P::tag()->class('menu-label')->content($label)->render() . PHP_EOL]
+            ['{label}' => P::tag()
+                    ->class('menu-label')
+                    ->content($label)
+                    ->render() . PHP_EOL]
         );
     }
 
@@ -560,7 +565,9 @@ final class Menu extends Widget
         return $icon !== ''
             ? Span::tag()
                 ->attributes($iconAttributes)
-                ->content(I::tag()->class($icon)->render())
+                ->content(I::tag()
+                    ->class($icon)
+                    ->render())
                 ->encode(false)
                 ->render()
             : '';
@@ -591,6 +598,10 @@ final class Menu extends Widget
         $content .= PHP_EOL . $this->renderItems($items) . PHP_EOL;
         $content .= Html::closeTag('ul') . PHP_EOL;
 
-        return $customTag->attributes($attributes)->content($content)->encode(false)->render();
+        return $customTag
+            ->attributes($attributes)
+            ->content($content)
+            ->encode(false)
+            ->render();
     }
 }

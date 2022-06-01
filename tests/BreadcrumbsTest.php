@@ -30,7 +30,10 @@ final class BreadcrumbsTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Breadcrumbs::widget()->ariaLabel('main')->items([['label' => 'About', 'url' => '/about']])->render(),
+            Breadcrumbs::widget()
+                ->ariaLabel('main')
+                ->items([['label' => 'About', 'url' => '/about']])
+                ->render(),
         );
     }
 
@@ -81,7 +84,8 @@ final class BreadcrumbsTest extends TestCase
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
                         'url' => '/about',
                     ],
-                ])->render(),
+                ])
+                ->render(),
         );
 
         $expected = <<<HTML
@@ -101,7 +105,8 @@ final class BreadcrumbsTest extends TestCase
                         'label' => '<span><i class =fas fas-profile></i>Setting Profile</span>',
                         'url' => '/about',
                     ],
-                ])->render(),
+                ])
+                ->render(),
         );
     }
 
@@ -307,7 +312,9 @@ final class BreadcrumbsTest extends TestCase
      */
     public function testLinksEmpty(): void
     {
-        $this->assertempty(Breadcrumbs::widget()->items([])->render());
+        $this->assertempty(Breadcrumbs::widget()
+            ->items([])
+            ->render());
     }
 
     /**
@@ -324,7 +331,9 @@ final class BreadcrumbsTest extends TestCase
         </ul>
         </nav>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Breadcrumbs::widget()->items(['label' => 'about'])->render());
+        $this->assertEqualsWithoutLE($expected, Breadcrumbs::widget()
+            ->items(['label' => 'about'])
+            ->render());
     }
 
     /**
@@ -389,7 +398,8 @@ final class BreadcrumbsTest extends TestCase
                         ['label' => 'Components', 'url' => '/components'],
                         ['label' => 'Breadcrumb'],
                     ],
-                )->render(),
+                )
+                ->render(),
         );
     }
 

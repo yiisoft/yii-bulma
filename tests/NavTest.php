@@ -97,7 +97,8 @@ final class NavTest extends TestCase
                             ['label' => 'Components', 'url' => '#'],
                         ],
                     ],
-                ])->render(),
+                ])
+                ->render(),
         );
     }
 
@@ -144,7 +145,8 @@ final class NavTest extends TestCase
                         ],
                         'visible' => false,
                     ],
-                ])->render(),
+                ])
+                ->render(),
         );
     }
 
@@ -241,7 +243,9 @@ final class NavTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Nav::widget()->items([['label' => 'a & b', 'encode' => true]])->render(),
+            Nav::widget()
+                ->items([['label' => 'a & b', 'encode' => true]])
+                ->render(),
         );
     }
 
@@ -341,8 +345,8 @@ final class NavTest extends TestCase
                     ],
                     [
                         'label' => 'Admin' . Img::tag()
-                            ->attributes(['class' => 'img-rounded', 'aria-expanded' => 'false'])
-                            ->url('../../docs/images/icon-avatar.png'),
+                                ->attributes(['class' => 'img-rounded', 'aria-expanded' => 'false'])
+                                ->url('../../docs/images/icon-avatar.png'),
                         'items' => [
                             ['label' => 'Logout', 'url' => '/auth/logout'],
                         ],
@@ -406,7 +410,8 @@ final class NavTest extends TestCase
                             ['label' => 'Page3', 'content' => 'Page3', 'url' => '/site/page3', 'active' => true],
                         ],
                     ],
-                ])->render(),
+                ])
+                ->render(),
         );
     }
 
@@ -434,7 +439,9 @@ final class NavTest extends TestCase
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" option is required.');
-        Nav::widget()->items([['content' => 'Page1']])->render();
+        Nav::widget()
+            ->items([['content' => 'Page1']])
+            ->render();
     }
 
     /**
@@ -450,7 +457,9 @@ final class NavTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Nav::widget()->items([['label' => 'Page1', 'url' => '#']])->render(),
+            Nav::widget()
+                ->items([['label' => 'Page1', 'url' => '#']])
+                ->render(),
         );
     }
 
@@ -467,7 +476,9 @@ final class NavTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Nav::widget()->items([['label' => 'a & b', 'disabled' => true]])->render(),
+            Nav::widget()
+                ->items([['label' => 'a & b', 'disabled' => true]])
+                ->render(),
         );
     }
 
@@ -491,7 +502,9 @@ final class NavTest extends TestCase
                 ->render()
         );
 
-        $this->assertEmpty(Nav::widget()->items([])->render());
+        $this->assertEmpty(Nav::widget()
+            ->items([])
+            ->render());
     }
 
     /**
@@ -505,6 +518,8 @@ final class NavTest extends TestCase
         <a class="navbar-item" href="#">Page1</a>
         </div>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Nav::widget()->items([['label' => 'Page1']])->render());
+        $this->assertEqualsWithoutLE($expected, Nav::widget()
+            ->items([['label' => 'Page1']])
+            ->render());
     }
 }

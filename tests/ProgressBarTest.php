@@ -25,7 +25,9 @@ final class ProgressBarTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            ProgressBar::widget()->attributes(['class' => 'has-background-black'])->render(),
+            ProgressBar::widget()
+                ->attributes(['class' => 'has-background-black'])
+                ->render(),
         );
     }
 
@@ -38,7 +40,9 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress is-primary" max="100"></progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->color(ProgressBar::COLOR_PRIMARY)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->color(ProgressBar::COLOR_PRIMARY)
+            ->render());
     }
 
     /**
@@ -50,7 +54,9 @@ final class ProgressBarTest extends TestCase
         $this->expectExceptionMessage(
             'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
         );
-        ProgressBar::widget()->color('is-non-existent')->render();
+        ProgressBar::widget()
+            ->color('is-non-existent')
+            ->render();
     }
 
     /**
@@ -60,7 +66,9 @@ final class ProgressBarTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid size. Valid values are: "is-small", "is-medium", "is-large".');
-        ProgressBar::widget()->size('is-non-existent')->render();
+        ProgressBar::widget()
+            ->size('is-non-existent')
+            ->render();
     }
 
     /**
@@ -88,7 +96,9 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress" max="50"></progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->maxValue(50)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->maxValue(50)
+            ->render());
     }
 
     /**
@@ -99,7 +109,9 @@ final class ProgressBarTest extends TestCase
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid max value. It must be between 0 and 100.');
-        ProgressBar::widget()->maxValue(150)->render();
+        ProgressBar::widget()
+            ->maxValue(150)
+            ->render();
     }
 
     /**
@@ -111,7 +123,9 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress" value="75" max="100">75%</progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(75)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->value(75)
+            ->render());
     }
 
     /**
@@ -123,7 +137,9 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress is-large" max="100"></progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->size(ProgressBar::SIZE_LARGE)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->size(ProgressBar::SIZE_LARGE)
+            ->render());
     }
 
     /**
@@ -146,7 +162,9 @@ final class ProgressBarTest extends TestCase
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid value. It must be between 0 and 100.');
-        ProgressBar::widget()->value(-1)->render();
+        ProgressBar::widget()
+            ->value(-1)
+            ->render();
     }
 
     /**
@@ -157,7 +175,9 @@ final class ProgressBarTest extends TestCase
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid value. It must be between 0 and 100.');
-        ProgressBar::widget()->value(150)->render();
+        ProgressBar::widget()
+            ->value(150)
+            ->render();
     }
 
     /**
@@ -169,7 +189,10 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress"></progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(0)->maxValue(0)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->value(0)
+            ->maxValue(0)
+            ->render());
     }
 
     /**
@@ -181,6 +204,9 @@ final class ProgressBarTest extends TestCase
         $expected = <<<HTML
         <progress id="w1-progressbar" class="progress"></progress>
         HTML;
-        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()->value(null)->maxValue(null)->render());
+        $this->assertEqualsWithoutLE($expected, ProgressBar::widget()
+            ->value(null)
+            ->maxValue(null)
+            ->render());
     }
 }

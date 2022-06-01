@@ -50,7 +50,7 @@ final class MenuTest extends TestCase
                         'active' => false,
                     ],
                 ])
-            ->render()
+                ->render()
         );
     }
 
@@ -95,8 +95,8 @@ final class MenuTest extends TestCase
                         ],
                     ],
                 ])
-            ->lastItemCssClass('testMe')
-            ->render()
+                ->lastItemCssClass('testMe')
+                ->render()
         );
 
         $expected = <<<HTML
@@ -180,7 +180,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-            ->render()
+                ->render()
         );
     }
 
@@ -535,7 +535,9 @@ final class MenuTest extends TestCase
     public function testItemsEmpty(): void
     {
         $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-        $html = Menu::widget()->items([])->render();
+        $html = Menu::widget()
+            ->items([])
+            ->render();
         $this->assertEmpty($html);
     }
 
@@ -552,7 +554,9 @@ final class MenuTest extends TestCase
         </ul>
         </aside>
         HTML;
-        $this->assertEqualsWithoutLE($expected, Menu::widget()->items([['url' => '#']])->render());
+        $this->assertEqualsWithoutLE($expected, Menu::widget()
+            ->items([['url' => '#']])
+            ->render());
     }
 
     /**
@@ -842,7 +846,9 @@ final class MenuTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Menu::widget()->items([['label' => 'Login', 'url' => 'auth/login']])->render()
+            Menu::widget()
+                ->items([['label' => 'Login', 'url' => 'auth/login']])
+                ->render()
         );
     }
 }

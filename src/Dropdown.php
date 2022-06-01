@@ -428,35 +428,35 @@ final class Dropdown extends Widget
         $buttonAttributes['aria-controls'] = $id;
 
         return Button::tag()
-            ->attributes($buttonAttributes)
-            ->content(
-                $this->renderLabelButton(
-                    $this->buttonLabel,
-                    $this->buttonLabelAttributes,
-                    $this->buttonIconText,
-                    $this->buttonIconCssClass,
-                    $this->buttonIconAttributes,
+                ->attributes($buttonAttributes)
+                ->content(
+                    $this->renderLabelButton(
+                        $this->buttonLabel,
+                        $this->buttonLabelAttributes,
+                        $this->buttonIconText,
+                        $this->buttonIconCssClass,
+                        $this->buttonIconAttributes,
+                    )
                 )
-            )
-            ->encode(false)
-            ->render() . PHP_EOL;
+                ->encode(false)
+                ->render() . PHP_EOL;
     }
 
     private function renderDropdownButtonLink(): string
     {
         return A::tag()
-            ->class($this->itemCssClass)
-            ->content(
-                $this->renderLabelButton(
-                    $this->buttonLabel,
-                    $this->buttonLabelAttributes,
-                    $this->buttonIconText,
-                    $this->buttonIconCssClass,
-                    $this->buttonIconAttributes,
+                ->class($this->itemCssClass)
+                ->content(
+                    $this->renderLabelButton(
+                        $this->buttonLabel,
+                        $this->buttonLabelAttributes,
+                        $this->buttonIconText,
+                        $this->buttonIconCssClass,
+                        $this->buttonIconAttributes,
+                    )
                 )
-            )
-            ->encode(false)
-            ->render() . PHP_EOL;
+                ->encode(false)
+                ->render() . PHP_EOL;
     }
 
     /**
@@ -496,10 +496,10 @@ final class Dropdown extends Widget
         }
 
         return Div::tag()
-            ->class($this->triggerCssClass)
-            ->content(PHP_EOL . $button)
-            ->encode(false)
-            ->render() . PHP_EOL . $this->renderDropdownMenu($id);
+                ->class($this->triggerCssClass)
+                ->content(PHP_EOL . $button)
+                ->encode(false)
+                ->render() . PHP_EOL . $this->renderDropdownMenu($id);
     }
 
     /**
@@ -516,7 +516,9 @@ final class Dropdown extends Widget
         /** @var array|string $item */
         foreach ($this->items as $item) {
             if ($item === '-') {
-                $lines[] = CustomTag::name('hr')->class($this->dividerCssClass)->render();
+                $lines[] = CustomTag::name('hr')
+                    ->class($this->dividerCssClass)
+                    ->render();
             } else {
                 if (!isset($item['label'])) {
                     throw new InvalidArgumentException('The "label" option is required.');
@@ -571,7 +573,9 @@ final class Dropdown extends Widget
 
                 if ($items === []) {
                     if ($itemLabel === '-') {
-                        $content = CustomTag::name('hr')->class($this->dividerCssClass)->render();
+                        $content = CustomTag::name('hr')
+                            ->class($this->dividerCssClass)
+                            ->render();
                     } elseif ($enclose === false) {
                         $content = $itemLabel;
                     } elseif ($url === '') {
@@ -620,17 +624,21 @@ final class Dropdown extends Widget
 
         if ($label !== '') {
             $html = PHP_EOL . Span::tag()
-                ->attributes($labelAttributes)
-                ->content($label)
-                ->encode(false)
-                ->render();
+                    ->attributes($labelAttributes)
+                    ->content($label)
+                    ->encode(false)
+                    ->render();
         }
 
         if ($iconText !== '' || $iconCssClass !== '') {
             $html .= PHP_EOL .
                 Span::tag()
                     ->attributes($iconAttributes)
-                    ->content(CustomTag::name('i')->class($iconCssClass)->content($iconText)->encode(false)->render())
+                    ->content(CustomTag::name('i')
+                        ->class($iconCssClass)
+                        ->content($iconText)
+                        ->encode(false)
+                        ->render())
                     ->encode(false)
                     ->render();
         }
@@ -649,7 +657,11 @@ final class Dropdown extends Widget
         if ($iconText !== '' || $iconCssClass !== '') {
             $html = Span::tag()
                 ->attributes($iconAttributes)
-                ->content(CustomTag::name('i')->class($iconCssClass)->content($iconText)->encode(false)->render())
+                ->content(CustomTag::name('i')
+                    ->class($iconCssClass)
+                    ->content($iconText)
+                    ->encode(false)
+                    ->render())
                 ->encode(false)
                 ->render();
         }

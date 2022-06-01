@@ -233,7 +233,11 @@ final class Breadcrumbs extends Widget
             implode('', $this->renderItems()) .
             Html::closeTag('ul') . PHP_EOL;
 
-        return $customTag->content($content)->attributes($attributes)->encode(false)->render();
+        return $customTag
+            ->content($content)
+            ->attributes($attributes)
+            ->encode(false)
+            ->render();
     }
 
     private function renderIcon(?string $icon, array $iconAttributes): string
@@ -243,7 +247,9 @@ final class Breadcrumbs extends Widget
         if ($icon !== null) {
             $html = Span::tag()
                 ->attributes($iconAttributes)
-                ->content(I::tag()->attributes(['class' => $icon, 'aria-hidden' => 'true'])->render())
+                ->content(I::tag()
+                    ->attributes(['class' => $icon, 'aria-hidden' => 'true'])
+                    ->render())
                 ->encode($this->encode)
                 ->render();
         }
@@ -295,11 +301,18 @@ final class Breadcrumbs extends Widget
         $icon = $this->renderIcon($icon, $iconAttributes);
 
         if ($icon !== '') {
-            $label = $icon . Span::tag()->content($label)->render();
+            $label = $icon . Span::tag()
+                    ->content($label)
+                    ->render();
         }
 
         $link = $url !== null
-            ? A::tag()->attributes($item)->content($label)->url($url)->encode($encode)->render() : $label;
+            ? A::tag()
+                ->attributes($item)
+                ->content($label)
+                ->url($url)
+                ->encode($encode)
+                ->render() : $label;
 
         return strtr($template, ['{link}' => $link, '{label}' => $label, '{icon}' => $icon]);
     }
