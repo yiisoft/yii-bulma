@@ -556,7 +556,7 @@ final class Menu extends Widget
             ['{label}' => P::tag()
                     ->class('menu-label')
                     ->content($label)
-                    ->render() . PHP_EOL]
+                    ->render() . PHP_EOL, ]
         );
     }
 
