@@ -93,8 +93,6 @@ final class Tabs extends Widget
      * "is-left". Possible values: Tabs::ALIGNMENT_CENTERED, Tabs::ALIGNMENT_RIGHT.
      *
      * @throws InvalidArgumentException
-     *
-     * @return self
      */
     public function alignment(string $value): self
     {
@@ -113,8 +111,6 @@ final class Tabs extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -128,8 +124,6 @@ final class Tabs extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -142,8 +136,6 @@ final class Tabs extends Widget
      * Returns a new instance with the specified current path.
      *
      * @param string $value The current path.
-     *
-     * @return self
      */
     public function currentPath(string $value): self
     {
@@ -154,8 +146,6 @@ final class Tabs extends Widget
 
     /**
      * Returns a new instance with the specified disables active items according to their current path.
-     *
-     * @return self
      */
     public function deactivateItems(): self
     {
@@ -168,8 +158,6 @@ final class Tabs extends Widget
      * Returns a new instance with the specified whether the tags for the tabs are encoded.
      *
      * @param bool $value Whether to encode the output.
-     *
-     * @return self
      */
     public function encode(bool $value): self
     {
@@ -182,8 +170,6 @@ final class Tabs extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -210,8 +196,6 @@ final class Tabs extends Widget
      * - `rightSide`: bool, position the icon to the right.
      * - `content`: string, required if `items` is not set. The content (HTML) of the tab.
      * - `contentAttributes`: array, array, the HTML attributes of the tab content container.
-     *
-     * @return self
      */
     public function items(array $value): self
     {
@@ -226,8 +210,6 @@ final class Tabs extends Widget
      * @param array $value List of HTML attributes for the items.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function itemsAttributes(array $value): self
     {
@@ -245,8 +227,6 @@ final class Tabs extends Widget
      * {@see self::SIZE_ALL}
      *
      * @throws InvalidArgumentException
-     *
-     * @return self
      */
     public function size(string $value): self
     {
@@ -268,8 +248,6 @@ final class Tabs extends Widget
      * Tabs::STYLE_FULLWIDTH.
      *
      * @throws InvalidArgumentException
-     *
-     * @return self
      */
     public function style(string $value): self
     {
@@ -290,8 +268,6 @@ final class Tabs extends Widget
      * class `tabs-content`.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function tabsContentAttributes(array $value): self
     {
@@ -368,12 +344,7 @@ final class Tabs extends Widget
     }
 
     /**
-     * @param int $index
-     * @param array $item
-     *
      * @throws InvalidArgumentException
-     *
-     * @return string
      */
     private function renderItem(int $index, array $item): string
     {
@@ -482,8 +453,6 @@ final class Tabs extends Widget
 
     /**
      * Renders tabs content.
-     *
-     * @return string
      */
     private function renderTabsContent(): string
     {
@@ -505,11 +474,6 @@ final class Tabs extends Widget
         return $html;
     }
 
-    /**
-     * @param array $item
-     *
-     * @return bool
-     */
     private function isItemActive(array $item): bool
     {
         if (isset($item['active'])) {
