@@ -55,7 +55,6 @@ final class Dropdown extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -153,7 +152,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for dropdown content.
      *
      * @param string $value The CSS class.
-     *
      *
      * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
      */

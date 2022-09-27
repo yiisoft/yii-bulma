@@ -48,7 +48,6 @@ final class Nav extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -85,7 +84,6 @@ final class Nav extends Widget
     /**
      * Returns a new instance with the specified align the menu items to the right.
      *
-     *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
     public function enclosedByEndMenu(): self
@@ -97,7 +95,6 @@ final class Nav extends Widget
 
     /**
      * Returns a new instance with the specified align the menu items to left.
-     *
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
@@ -143,7 +140,6 @@ final class Nav extends Widget
 
     /**
      * Returns a new instance with the specified disable activate items according to whether their currentPath.
-     *
      *
      * {@see isItemActive}
      */
@@ -191,7 +187,6 @@ final class Nav extends Widget
      *
      * @param array $items {@see items}
      * @param bool $active Should the parent be active too.
-     *
      *
      * {@see items}
      */

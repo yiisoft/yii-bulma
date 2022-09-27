@@ -111,7 +111,6 @@ final class Tabs extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -346,7 +345,6 @@ final class Tabs extends Widget
 
     /**
      * @throws InvalidArgumentException
-     *
      */
     private function renderItem(int $index, array $item): string
     {

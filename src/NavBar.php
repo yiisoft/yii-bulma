@@ -43,8 +43,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified `aria-label` attribute for the current element.
-     *
-     *
      */
     public function ariaLabel(string $value): self
     {
@@ -57,7 +55,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -90,7 +87,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified HTML attributes for the navbar brand.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -132,7 +128,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function brandImageAttributes(array $values): self
@@ -160,7 +155,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function brandTextAttributes(array $values): self
@@ -173,8 +167,6 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified the URL for the brand's hyperlink tag and will be used for the "href"
      * attribute of the brand link. Default value is "/". You may set it to empty string if you want no link at all.
-     *
-     *
      */
     public function brandUrl(string $value): self
     {
@@ -187,7 +179,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified HTML attributes for the burger.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -212,8 +203,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified the ARIA expanded attribute of the button link.
-     *
-     *
      */
     public function buttonLinkAriaExpanded(string $value): self
     {
@@ -224,8 +213,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified HTML attributes for the ARIA label text of the button link.
-     *
-     *
      */
     public function buttonLinkAriaLabelText(string $value): self
     {
@@ -236,8 +223,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified the content of the button link.
-     *
-     *
      */
     public function buttonLinkContent(string $value): self
     {
@@ -248,8 +233,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified the role of the button link.
-     *
-     *
      */
     public function buttonLinkRole(string $value): self
     {
@@ -296,8 +279,6 @@ final class NavBar extends Widget
 
     /**
      * Returns a new instance with the specified the role of the navbar.
-     *
-     *
      */
     public function role(string $value): self
     {

@@ -89,7 +89,6 @@ final class Menu extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -125,7 +124,6 @@ final class Menu extends Widget
 
     /**
      * Returns a new instance with the specified disables active items according to their current path.
-     *
      *
      * {@see isItemActive}
      */
@@ -176,7 +174,6 @@ final class Menu extends Widget
      * @param array $value List of HTML attributes shared by all menu {@see items}. If any individual menu item
      * specifies its  `attributes`, it will be merged with this property before being used to generate the HTML
      * attributes for the menu item tag. The following special attributes are recognized:
-     *
      *
      * {@see Html::renderTagAttributes() For details on how attributes are being rendered}
      */
@@ -322,7 +319,6 @@ final class Menu extends Widget
      *
      * @param array $items {@see items}
      * @param bool $active Should the parent be active too.
-     *
      *
      * {@see items}
      */

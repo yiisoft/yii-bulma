@@ -63,7 +63,6 @@ final class Panel extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -204,7 +203,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified panel tabs.
      *
      * @param array $value The panel tabs.
-     *
      *
      * @psalm-param array<int, array> $value
      */
@@ -430,8 +428,6 @@ final class Panel extends Widget
 
     /**
      * Checking if active item.
-     *
-     *
      */
     private function isActive(array $item): bool
     {

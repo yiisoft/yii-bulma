@@ -79,7 +79,6 @@ final class Modal extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -339,8 +338,6 @@ final class Modal extends Widget
 
     /**
      * Renders the toggle button.
-     *
-     *
      */
     private function renderToggleButton(string $id): string
     {

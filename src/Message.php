@@ -79,7 +79,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -118,7 +117,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
     public function bodyAttributes(array $values): self
@@ -147,7 +145,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function closeButtonAttributes(array $values): self
@@ -174,7 +171,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function headerAttributes(array $values): self
@@ -190,7 +186,6 @@ final class Message extends Widget
      * @param string $value The header color. Default is Message::COLOR_DARK.
      * Possible values: Message::COLOR_PRIMARY, Message::COLOR_LINK, Message::COLOR_INFO, Message::COLOR_SUCCESS,
      * Message::COLOR_WARNING, Message::COLOR_DANGER, Message::COLOR_DARK.
-     *
      *
      * @link https://bulma.io/documentation/components/message/#colors
      */
@@ -236,7 +231,6 @@ final class Message extends Widget
      * @param string $value size class. By default, not class is added and the size is considered "normal".
      * Possible values: Message::SIZE_SMALL, Message::SIZE_MEDIUM, Message::SIZE_LARGE.
      *
-     *
      * @link https://bulma.io/documentation/components/message/#sizes
      */
     public function size(string $value): self
@@ -267,7 +261,6 @@ final class Message extends Widget
      * Returns a new instance with the specified allows you to disable header.
      *
      * @param bool $value Whether to disable header.
-     *
      *
      * @link https://bulma.io/documentation/components/message/#message-body-only
      */

@@ -58,7 +58,6 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The value of the aria-label attribute.
      *
-     *
      * @link https://www.w3.org/TR/wai-aria/#aria-label
      */
     public function ariaLabel(string $value): self
@@ -72,7 +71,6 @@ final class Breadcrumbs extends Widget
      * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -169,7 +167,6 @@ final class Breadcrumbs extends Widget
      * Returns a new instance with the specified items HTML attributes.
      *
      * @param array $value The HTML attributes for the item's widget.
-     *
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
