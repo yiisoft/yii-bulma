@@ -61,7 +61,6 @@ final class ProgressBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -76,8 +75,6 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -92,8 +89,6 @@ final class ProgressBar extends Widget
      * @param string $value The progress bar color. By default there is no color.
      * Possible values: ProgressBar::COLOR_PRIMARY, ProgressBar::COLOR_LINK, ProgressBar::COLOR_INFO,
      * ProgressBar::COLOR_SUCCESS, ProgressBar::COLOR_WARNING, ProgressBar::COLOR_DANGER, ProgressBar::COLOR_DARK.
-     *
-     * @return self
      */
     public function color(string $value): self
     {
@@ -111,8 +106,6 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -125,8 +118,6 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified maximum progress value.
      *
      * @param int|null $value Maximum progress value. Set `0` for no maximum.
-     *
-     * @return self
      */
     public function maxValue(?int $value): self
     {
@@ -144,8 +135,6 @@ final class ProgressBar extends Widget
      *
      * @param string $value The progress bar size class. Default setting is "normal".
      * Possible values: ProgressBar::SIZE_SMALL, ProgressBar::SIZE_MEDIUM, Model::SIZE_LARGE.
-     *
-     * @return self
      */
     public function size(string $value): self
     {
@@ -163,8 +152,6 @@ final class ProgressBar extends Widget
      * Returns a new instance with the specified value of the progress.
      *
      * @param float|null $value The value of the progress. Set `0` to display loading animation.
-     *
-     * @return self
      */
     public function value(?float $value): self
     {

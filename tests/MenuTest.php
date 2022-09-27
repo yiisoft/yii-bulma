@@ -40,9 +40,7 @@ final class MenuTest extends TestCase
                         'url' => '#',
                         'labelTemplate' => '{label}',
                         'urlTemplate' => '<a href={url}>{icon}{label}</a>',
-                        'active' => function ($item, $hasActiveChild, $isItemActive, $widget) {
-                            return isset($item, $hasActiveChild, $isItemActive, $widget);
-                        },
+                        'active' => fn($item, $hasActiveChild, $isItemActive, $widget) => isset($item, $hasActiveChild, $isItemActive, $widget),
                     ],
                     [
                         'label' => 'item2',

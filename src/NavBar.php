@@ -44,9 +44,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified `aria-label` attribute for the current element.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function ariaLabel(string $value): self
     {
@@ -60,7 +58,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -75,8 +72,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -96,7 +91,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -111,8 +105,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified the CSS class of the brand.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function brandCssClass(string $value): self
     {
@@ -127,8 +119,6 @@ final class NavBar extends Widget
      * Note that this param will override `$this->brandText` param.
      *
      * @param string $value The src of the brand image.
-     *
-     * @return self
      */
     public function brandImage(string $value): self
     {
@@ -142,7 +132,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -158,8 +147,6 @@ final class NavBar extends Widget
      * HTML-encoded.
      *
      * @param string $value The text of the brand.
-     *
-     * @return self
      */
     public function brandText(string $value): self
     {
@@ -173,7 +160,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -188,9 +174,7 @@ final class NavBar extends Widget
      * Returns a new instance with the specified the URL for the brand's hyperlink tag and will be used for the "href"
      * attribute of the brand link. Default value is "/". You may set it to empty string if you want no link at all.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function brandUrl(string $value): self
     {
@@ -204,7 +188,6 @@ final class NavBar extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -219,8 +202,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified the CSS class of the burger.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function burgerCssClass(string $value): self
     {
@@ -232,9 +213,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified the ARIA expanded attribute of the button link.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function buttonLinkAriaExpanded(string $value): self
     {
@@ -246,9 +225,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified HTML attributes for the ARIA label text of the button link.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function buttonLinkAriaLabelText(string $value): self
     {
@@ -260,9 +237,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified the content of the button link.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function buttonLinkContent(string $value): self
     {
@@ -274,9 +249,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified the role of the button link.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function buttonLinkRole(string $value): self
     {
@@ -289,8 +262,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified the CSS class of the navbar.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function cssClass(string $value): self
     {
@@ -303,8 +274,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -317,8 +286,6 @@ final class NavBar extends Widget
      * Returns a new instance with the specified the CSS class of the items navbar.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function itemCssClass(string $value): self
     {
@@ -330,9 +297,7 @@ final class NavBar extends Widget
     /**
      * Returns a new instance with the specified the role of the navbar.
      *
-     * @param string $value
      *
-     * @return self
      */
     public function role(string $value): self
     {

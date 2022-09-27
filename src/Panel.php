@@ -63,7 +63,6 @@ final class Panel extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -78,8 +77,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -92,8 +89,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified the panel block class.
      *
      * @param string $value The block class.
-     *
-     * @return self
      */
     public function blockClass(string $value): self
     {
@@ -108,8 +103,6 @@ final class Panel extends Widget
      * @param string $value The panel color class. Default any color.
      * Possible values are: Panel::COLOR_PRIMARY, Panel::COLOR_INFO, Panel::COLOR_SUCCESS, Panel::COLOR_WARNING,
      * Panel::COLOR_DANGER, Panel::COLOR_DARK
-     *
-     * @return self
      */
     public function color(string $value): self
     {
@@ -127,8 +120,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified the panel class.
      *
      * @param string $value The panel class.
-     *
-     * @return self
      */
     public function cssClass(string $value): self
     {
@@ -141,8 +132,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified panel heading.
      *
      * @param string $value The panel heading.
-     *
-     * @return self
      */
     public function heading(string $value): self
     {
@@ -155,8 +144,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified panel heading attributes.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function headingAttributes(array $values): self
     {
@@ -169,8 +156,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified the panel heading class.
      *
      * @param string $value The heading class.
-     *
-     * @return self
      */
     public function headingClass(string $value): self
     {
@@ -183,8 +168,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified the panel icon class.
      *
      * @param string $value The icon class.
-     *
-     * @return self
      */
     public function iconClass(string $value): self
     {
@@ -197,8 +180,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -211,8 +192,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified active tab class.
      *
      * @param string $value The active tab class.
-     *
-     * @return self
      */
     public function isActiveClass(string $value): self
     {
@@ -226,7 +205,6 @@ final class Panel extends Widget
      *
      * @param array $value The panel tabs.
      *
-     * @return self
      *
      * @psalm-param array<int, array> $value
      */
@@ -241,8 +219,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified the panel tab class.
      *
      * @param string $value The tab class.
-     *
-     * @return self
      */
     public function tabClass(string $value): self
     {
@@ -255,8 +231,6 @@ final class Panel extends Widget
      * Returns a new instance with the specified panel tabs attributes.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function tabsAttributes(array $values): self
     {
@@ -275,8 +249,6 @@ final class Panel extends Widget
      * - `{panelTabs}`: _string_, which will render the panel tabs.
      * - `{panelItems}`: _string_, which will render the panel items.
      * - `{panelEnd}`: _string_, which will render the panel container end.
-     *
-     * @return self
      */
     public function template(string $value): self
     {
@@ -459,9 +431,7 @@ final class Panel extends Widget
     /**
      * Checking if active item.
      *
-     * @param array $item
      *
-     * @return bool
      */
     private function isActive(array $item): bool
     {

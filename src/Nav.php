@@ -48,7 +48,6 @@ final class Nav extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -62,8 +61,6 @@ final class Nav extends Widget
     /**
      * Returns a new instance with the specified whether to activate parent menu items when one of the corresponding
      * child menu items is active.
-     *
-     * @return self
      */
     public function activateParents(): self
     {
@@ -77,8 +74,6 @@ final class Nav extends Widget
      * controller.
      *
      * @param string $value The current path.
-     *
-     * @return self
      */
     public function currentPath(string $value): self
     {
@@ -90,7 +85,6 @@ final class Nav extends Widget
     /**
      * Returns a new instance with the specified align the menu items to the right.
      *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
@@ -104,7 +98,6 @@ final class Nav extends Widget
     /**
      * Returns a new instance with the specified align the menu items to left.
      *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/navbar/#navbar-start-and-navbar-end
      */
@@ -140,8 +133,6 @@ final class Nav extends Widget
      * If a menu item is a string, it will be rendered directly without HTML encoding.
      *
      * @param array $value The menu items.
-     *
-     * @return self
      */
     public function items(array $value): self
     {
@@ -153,7 +144,6 @@ final class Nav extends Widget
     /**
      * Returns a new instance with the specified disable activate items according to whether their currentPath.
      *
-     * @return self
      *
      * {@see isItemActive}
      */
@@ -202,7 +192,6 @@ final class Nav extends Widget
      * @param array $items {@see items}
      * @param bool $active Should the parent be active too.
      *
-     * @return array
      *
      * {@see items}
      */

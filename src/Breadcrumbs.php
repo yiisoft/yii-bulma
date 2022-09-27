@@ -45,8 +45,6 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The template used to render each active item in the breadcrumbs. The token `{link}` will be
      * replaced with the actual HTML link for each active item.
-     *
-     * @return self
      */
     public function activeItemTemplate(string $value): self
     {
@@ -60,7 +58,6 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The value of the aria-label attribute.
      *
-     * @return self
      *
      * @link https://www.w3.org/TR/wai-aria/#aria-label
      */
@@ -76,7 +73,6 @@ final class Breadcrumbs extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -91,8 +87,6 @@ final class Breadcrumbs extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -105,8 +99,6 @@ final class Breadcrumbs extends Widget
      * Returns a new instance with the specified whether the tags for the breadcrumbs are encoded.
      *
      * @param bool $value Whether to encode the output.
-     *
-     * @return self
      */
     public function encode(bool $value): self
     {
@@ -123,8 +115,6 @@ final class Breadcrumbs extends Widget
      * @param array|null $value Please refer to {@see items()} on the format.
      *
      * @throws InvalidArgumentException If an empty array is specified.
-     *
-     * @return self
      */
     public function homeItem(?array $value): self
     {
@@ -143,8 +133,6 @@ final class Breadcrumbs extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -169,8 +157,6 @@ final class Breadcrumbs extends Widget
      *     'iconAttributes' => [], // the html attributes for icon container
      * ]
      * ```
-     *
-     * @return self
      */
     public function items(array $value): self
     {
@@ -184,7 +170,6 @@ final class Breadcrumbs extends Widget
      *
      * @param array $value The HTML attributes for the item's widget.
      *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -200,8 +185,6 @@ final class Breadcrumbs extends Widget
      *
      * @param string $value The template used to render each inactive item in the breadcrumbs. The token `{link}` will
      * be replaced with the actual HTML link for each inactive item.
-     *
-     * @return self
      */
     public function itemTemplate(string $value): self
     {

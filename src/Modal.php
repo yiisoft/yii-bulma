@@ -79,7 +79,6 @@ final class Modal extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -94,8 +93,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -110,8 +107,6 @@ final class Modal extends Widget
      * @param array $value The close button options.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function closeButtonAttributes(array $value): self
     {
@@ -125,8 +120,6 @@ final class Modal extends Widget
      *
      * @param string $value The close button size. Default setting empty normal.
      * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
-     *
-     * @return self
      */
     public function closeButtonSize(string $value): self
     {
@@ -146,8 +139,6 @@ final class Modal extends Widget
      * @param array $value The content options.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function contentAttributes(array $value): self
     {
@@ -161,8 +152,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -175,8 +164,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified modal background class.
      *
      * @param string $value The modal background class.
-     *
-     * @return self
      */
     public function backgroundClass(string $value): self
     {
@@ -189,8 +176,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified modal button class.
      *
      * @param string $value The modal button class.
-     *
-     * @return self
      */
     public function buttonClass(string $value): self
     {
@@ -203,8 +188,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified modal class.
      *
      * @param string $value The modal class.
-     *
-     * @return self
      */
     public function modalClass(string $value): self
     {
@@ -217,8 +200,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified modal content class.
      *
      * @param string $value The modal content class.
-     *
-     * @return self
      */
     public function contentClass(string $value): self
     {
@@ -233,8 +214,6 @@ final class Modal extends Widget
      * @param array $values Attribute values indexed by attribute names.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function toggleButtonAttributes(array $values): self
     {
@@ -249,8 +228,6 @@ final class Modal extends Widget
      * @param string $value The toggle button color. Default setting is empty without color.
      * Possible values: Modal::COLOR_PRIMARY, Modal::COLOR_LINK, Modal::COLOR_INFO, Modal::COLOR_SUCCESS,
      * Modal::COLOR_WARNING, Modal::COLOR_DANGER, Modal::COLOR_DARK.
-     *
-     * @return self
      */
     public function toggleButtonColor(string $value): self
     {
@@ -268,8 +245,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified toggle button label.
      *
      * @param string $value The toggle button label.
-     *
-     * @return self
      */
     public function toggleButtonLabel(string $value): self
     {
@@ -283,8 +258,6 @@ final class Modal extends Widget
      *
      * @param string $value The toggle button size. Default setting empty normal.
      * Possible values: Modal::SIZE_SMALL, Modal::SIZE_MEDIUM, Model::SIZE_LARGE.
-     *
-     * @return self
      */
     public function toggleButtonSize(string $value): self
     {
@@ -302,8 +275,6 @@ final class Modal extends Widget
      * Returns a new instance with the specified options for rendering the close button tag.
      *
      * @param bool $value Whether the close button is disabled.
-     *
-     * @return self
      */
     public function withoutCloseButton(bool $value): self
     {
@@ -316,8 +287,6 @@ final class Modal extends Widget
      * Returns a new instance with the disabled toggle button.
      *
      * @param bool $value Whether the toggle button is disabled.
-     *
-     * @return self
      */
     public function withoutToggleButton(bool $value): self
     {
@@ -371,9 +340,7 @@ final class Modal extends Widget
     /**
      * Renders the toggle button.
      *
-     * @param string $id
      *
-     * @return string
      */
     private function renderToggleButton(string $id): string
     {
@@ -400,8 +367,6 @@ final class Modal extends Widget
 
     /**
      * Renders the close button.
-     *
-     * @return string
      */
     private function renderCloseButton(): string
     {
