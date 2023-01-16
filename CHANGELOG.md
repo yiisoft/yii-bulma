@@ -3,6 +3,7 @@
 ## 1.0.1 under development
 
 - Chg #64: Adopt configuration to changes in `yiisoft/form` (vjik)
+- Chg: Allow yiisoft/arrays ^3.0 (samdark)
 
 ## 1.0.0 April 01, 2022
 

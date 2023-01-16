@@ -19,7 +19,7 @@
     },
     "require": {
         "php": "^7.4|^8.0",
-        "yiisoft/arrays": "^2.0",
+        "yiisoft/arrays": "^2.0|^3.0",
         "yiisoft/assets": "^2.0",
         "yiisoft/html": "^2.0",
         "yiisoft/widget": "^1.0"
