@@ -381,7 +381,7 @@ final class Dropdown extends Widget
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
-    protected function run(): string
+    public function render(): string
     {
         return $this->renderDropdown();
     }

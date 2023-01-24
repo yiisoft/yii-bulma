@@ -300,7 +300,7 @@ final class Tabs extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $attributes = $this->attributes;
 
@@ -327,11 +327,11 @@ final class Tabs extends Widget
         }
 
         return Div::tag()
-                ->attributes($attributes)
-                ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
-                ->id($id)
-                ->encode(false)
-                ->render() . $this->renderTabsContent();
+            ->attributes($attributes)
+            ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
+            ->id($id)
+            ->encode(false)
+            ->render() . $this->renderTabsContent();
     }
 
     private function renderItems(): string
@@ -496,10 +496,10 @@ final class Tabs extends Widget
 
         if (!empty($this->tabsContent)) {
             $html .= PHP_EOL . Div::tag()
-                    ->attributes($tabsContentAttributes)
-                    ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
-                    ->encode(false)
-                    ->render();
+                ->attributes($tabsContentAttributes)
+                ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
+                ->encode(false)
+                ->render();
         }
 
         return $html;

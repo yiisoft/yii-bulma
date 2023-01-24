@@ -360,7 +360,7 @@ final class Modal extends Widget
         return $html;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $html = Html::closeTag('div') . PHP_EOL; // .modal-content
         $html .= Html::closeTag('div'); // .modal
