@@ -18,7 +18,7 @@
         "source": "https://github.com/yiisoft/yii-bulma"
     },
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "yiisoft/arrays": "^2.0|^3.0",
         "yiisoft/assets": "^2.0",
         "yiisoft/html": "^2.0|^3.0",
