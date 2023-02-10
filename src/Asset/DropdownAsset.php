@@ -20,7 +20,7 @@ final class DropdownAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('dist/dropdown.js')
+            'filter' => (new PathMatcher())->only('dist/dropdown.js'),
         ];
     }
 }

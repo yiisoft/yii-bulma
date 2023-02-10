@@ -20,7 +20,7 @@ final class NavBarAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('dist/navbar.js')
+            'filter' => (new PathMatcher())->only('dist/navbar.js'),
         ];
     }
 }

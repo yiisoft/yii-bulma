@@ -20,7 +20,7 @@ final class FilePluginAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('dist/file.js')
+            'filter' => (new PathMatcher())->only('dist/file.js'),
         ];
     }
 }
