@@ -20,7 +20,7 @@ final class PanelAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('dist/panel.js')
+            'filter' => (new PathMatcher())->only('dist/panel.js'),
         ];
     }
 }

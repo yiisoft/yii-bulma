@@ -20,7 +20,7 @@ final class BulmaAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('css/bulma.css')
+            'filter' => (new PathMatcher())->only('css/bulma.css'),
         ];
     }
 }

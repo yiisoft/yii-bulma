@@ -20,7 +20,7 @@ final class BulmaHelpersAsset extends AssetBundle
     public function __construct()
     {
         $this->publishOptions = [
-            'filter' => (new PathMatcher())->only('bulma-helpers.css')
+            'filter' => (new PathMatcher())->only('bulma-helpers.css'),
         ];
     }
 }
