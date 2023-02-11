@@ -285,7 +285,7 @@ final class Panel extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $attributes = $this->attributes;
 
@@ -320,9 +320,9 @@ final class Panel extends Widget
             Html::addCssClass($headingAttributes, $this->headingClass);
 
             return P::tag()
-                    ->attributes($headingAttributes)
-                    ->content($this->heading)
-                    ->render() . PHP_EOL;
+                ->attributes($headingAttributes)
+                ->content($this->heading)
+                ->render() . PHP_EOL;
         }
 
         return '';
@@ -342,10 +342,10 @@ final class Panel extends Widget
             Html::addCssClass($tabsAttributes, $this->tabClass);
 
             return P::tag()
-                    ->attributes($tabsAttributes)
-                    ->content(PHP_EOL . $tabs)
-                    ->encode(false)
-                    ->render() . PHP_EOL;
+                ->attributes($tabsAttributes)
+                ->content(PHP_EOL . $tabs)
+                ->encode(false)
+                ->render() . PHP_EOL;
         }
 
         return '';
@@ -440,12 +440,12 @@ final class Panel extends Widget
 
         if ($icon !== '') {
             $icon = PHP_EOL . I::tag()
-                    ->attributes(['aria-hidden' => 'true'])
-                    ->class($icon) . PHP_EOL;
+                ->attributes(['aria-hidden' => 'true'])
+                ->class($icon) . PHP_EOL;
             $label = PHP_EOL . Span::tag()
-                    ->attributes($labelAttributes)
-                    ->content($icon)
-                    ->encode(false) . PHP_EOL .
+                ->attributes($labelAttributes)
+                ->content($icon)
+                ->encode(false) . PHP_EOL .
                 $label . PHP_EOL;
         }
 

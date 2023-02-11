@@ -210,7 +210,7 @@ final class Breadcrumbs extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         if (empty($this->items)) {
             return '';
@@ -234,8 +234,8 @@ final class Breadcrumbs extends Widget
             Html::closeTag('ul') . PHP_EOL;
 
         return $customTag
+            ->addAttributes($attributes)
             ->content($content)
-            ->attributes($attributes)
             ->encode(false)
             ->render();
     }
