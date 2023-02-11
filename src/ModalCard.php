@@ -502,7 +502,7 @@ final class ModalCard extends Widget
         return $html;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $html = $this->renderBodyEnd() . "\n";
         $html .= $this->renderFooter() . "\n";
@@ -557,8 +557,8 @@ final class ModalCard extends Widget
         }
 
         return Button::tag()
-                ->attributes($closeButtonAttributes)
-                ->render() . PHP_EOL;
+            ->attributes($closeButtonAttributes)
+            ->render() . PHP_EOL;
     }
 
     /**
@@ -595,19 +595,19 @@ final class ModalCard extends Widget
         Html::addCssClass($titleAttributes, $this->titleClass);
 
         $content .= P::tag()
-                ->attributes($titleAttributes)
-                ->content($this->title)
-                ->render() . PHP_EOL;
+            ->attributes($titleAttributes)
+            ->content($this->title)
+            ->render() . PHP_EOL;
 
         if ($this->withoutCloseButton === false) {
             $content .= $this->renderCloseButton();
         }
 
         return CustomTag::name('header')
-                ->attributes($headerAttributes)
-                ->content(PHP_EOL . $content)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            ->attributes($headerAttributes)
+            ->content(PHP_EOL . $content)
+            ->encode(false)
+            ->render() . PHP_EOL;
     }
 
     /**

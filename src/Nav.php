@@ -153,7 +153,7 @@ final class Nav extends Widget
     /**
      * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
      */
-    protected function run(): string
+    public function render(): string
     {
         return $this->renderNav();
     }
@@ -174,12 +174,12 @@ final class Nav extends Widget
     private function renderDropdown(array $items): string
     {
         return Dropdown::widget()
-                ->cssClass('navbar-dropdown')
-                ->dividerCssClass('navbar-divider')
-                ->enclosedByContainer()
-                ->itemCssClass('navbar-item')
-                ->items($items)
-                ->render() . PHP_EOL;
+            ->cssClass('navbar-dropdown')
+            ->dividerCssClass('navbar-divider')
+            ->enclosedByContainer()
+            ->itemCssClass('navbar-item')
+            ->items($items)
+            ->render() . PHP_EOL;
     }
 
     /**
@@ -263,9 +263,9 @@ final class Nav extends Widget
 
         if ($iconText !== '' || $iconCssClass !== '') {
             $html = Span::tag()
-                ->attributes($iconAttributes)
+                ->addAttributes($iconAttributes)
                 ->content(CustomTag::name('i')
-                    ->class($iconCssClass)
+                    ->addClass($iconCssClass)
                     ->content($iconText)
                     ->encode(false)
                     ->render())
@@ -403,19 +403,19 @@ final class Nav extends Widget
 
         if ($this->enclosedByStartMenu) {
             $links = PHP_EOL . Div::tag()
-                    ->class($this->startCssClass)
-                    ->content($links)
-                    ->encode(false)
-                    ->render() .
+                ->class($this->startCssClass)
+                ->content($links)
+                ->encode(false)
+                ->render() .
                 PHP_EOL;
         }
 
         if ($this->enclosedByEndMenu) {
             $links = PHP_EOL . Div::tag()
-                    ->class($this->endCssClass)
-                    ->content($links)
-                    ->encode(false)
-                    ->render() .
+                ->class($this->endCssClass)
+                ->content($links)
+                ->encode(false)
+                ->render() .
                 PHP_EOL;
         }
 

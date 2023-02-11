@@ -163,7 +163,7 @@ final class ProgressBar extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $attributes = $this->build($this->attributes);
         $content = '';

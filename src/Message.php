@@ -271,7 +271,7 @@ final class Message extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         return $this->renderMessage();
     }
@@ -304,10 +304,10 @@ final class Message extends Widget
         }
 
         return Button::tag()
-                ->attributes($closeButtonAttributes)
-                ->content($label)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            ->attributes($closeButtonAttributes)
+            ->content($label)
+            ->encode(false)
+            ->render() . PHP_EOL;
     }
 
     private function renderHeader(): string
@@ -331,10 +331,10 @@ final class Message extends Widget
 
         if ($this->withoutHeader === false) {
             $html = Div::tag()
-                    ->attributes($headerAttributes)
-                    ->content($headerMessage)
-                    ->encode(false)
-                    ->render() . PHP_EOL;
+                ->attributes($headerAttributes)
+                ->content($headerMessage)
+                ->encode(false)
+                ->render() . PHP_EOL;
         }
 
         return $html;
@@ -379,9 +379,9 @@ final class Message extends Widget
         }
 
         return Div::tag()
-                ->attributes($bodyAttributes)
-                ->content($body)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            ->attributes($bodyAttributes)
+            ->content($body)
+            ->encode(false)
+            ->render() . PHP_EOL;
     }
 }

@@ -287,7 +287,7 @@ final class NavBar extends Widget
         return $new;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         return Html::closeTag('nav');
     }
@@ -318,11 +318,11 @@ final class NavBar extends Widget
                 ->url($this->brandImage)
                 ->render();
             $brand = PHP_EOL . A::tag()
-                    ->class($this->itemCssClass)
-                    ->content($brandImage)
-                    ->encode(false)
-                    ->url($this->brandUrl)
-                    ->render();
+                ->class($this->itemCssClass)
+                ->content($brandImage)
+                ->encode(false)
+                ->url($this->brandUrl)
+                ->render();
         }
 
         if ($this->brandText !== '') {
@@ -334,25 +334,25 @@ final class NavBar extends Widget
 
             if (empty($this->brandUrl)) {
                 $brand = PHP_EOL . Span::tag()
-                        ->attributes($this->brandTextAttributes)
-                        ->class($this->itemCssClass)
-                        ->content($brandText)
-                        ->render();
+                    ->addAttributes($this->brandTextAttributes)
+                    ->addClass($this->itemCssClass)
+                    ->content($brandText)
+                    ->render();
             } else {
                 $brand = PHP_EOL . A::tag()
-                        ->class($this->itemCssClass)
-                        ->content($brandText)
-                        ->encode(false)
-                        ->url($this->brandUrl)
-                        ->render();
+                    ->addClass($this->itemCssClass)
+                    ->content($brandText)
+                    ->encode(false)
+                    ->url($this->brandUrl)
+                    ->render();
             }
         }
 
         $brand .= $this->renderNavBarBurger();
 
         return Div::tag()
-            ->attributes($this->brandAttributes)
-            ->class($this->brandCssClass)
+            ->addAttributes($this->brandAttributes)
+            ->addClass($this->brandCssClass)
             ->content($brand)
             ->encode(false)
             ->render();
@@ -386,10 +386,10 @@ final class NavBar extends Widget
         $burgerAttributes['role'] = $this->buttonLinkRole;
 
         return PHP_EOL . A::tag()
-                ->attributes($burgerAttributes)
-                ->class($this->burgerCssClass)
-                ->content($this->buttonLinkContent)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            ->addAttributes($burgerAttributes)
+            ->addClass($this->burgerCssClass)
+            ->content($this->buttonLinkContent)
+            ->encode(false)
+            ->render() . PHP_EOL;
     }
 }

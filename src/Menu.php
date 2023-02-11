@@ -303,7 +303,7 @@ final class Menu extends Widget
      *
      * @return string the result of Widget execution to be outputted.
      */
-    protected function run(): string
+    public function render(): string
     {
         $items = $this->normalizeItems($this->items);
 
@@ -563,7 +563,7 @@ final class Menu extends Widget
         $content .= Html::closeTag('ul') . PHP_EOL;
 
         return $customTag
-            ->attributes($attributes)
+            ->addAttributes($attributes)
             ->content($content)
             ->encode(false)
             ->render();
