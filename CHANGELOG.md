@@ -2,7 +2,6 @@
 
 ## 1.0.1 under development
 
-- Chg #64: Adopt configuration to changes in `yiisoft/form` (vjik)
 - Chg #64: Adapt configuration to changes in `yiisoft/form` (@vjik)
 - Enh: Allow `yiisoft/arrays` ^3.0 (@samdark)
 - Enh: Allow `yiisoft/html` ^3.0 (@samdark)
