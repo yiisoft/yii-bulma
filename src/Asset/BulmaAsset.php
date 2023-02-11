@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Asset;
 
 use Yiisoft\Assets\AssetBundle;
+use Yiisoft\Files\PathMatcher\PathMatcher;
 
 final class BulmaAsset extends AssetBundle
 {
@@ -16,9 +17,10 @@ final class BulmaAsset extends AssetBundle
         'css/bulma.css',
     ];
 
-    public array $publishOptions = [
-        'only' => [
-            'css/bulma.css',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->publishOptions = [
+            'filter' => (new PathMatcher())->only('css/bulma.css'),
+        ];
+    }
 }

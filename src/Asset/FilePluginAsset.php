@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Asset;
 
 use Yiisoft\Assets\AssetBundle;
+use Yiisoft\Files\PathMatcher\PathMatcher;
 
 final class FilePluginAsset extends AssetBundle
 {
@@ -16,9 +17,10 @@ final class FilePluginAsset extends AssetBundle
         'dist/file.js',
     ];
 
-    public array $publishOptions = [
-        'only' => [
-            'dist/file.js',
-        ],
-    ];
+    public function __construct()
+    {
+        $this->publishOptions = [
+            'filter' => (new PathMatcher())->only('dist/file.js'),
+        ];
+    }
 }
