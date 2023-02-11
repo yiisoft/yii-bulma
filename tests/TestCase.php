@@ -19,7 +19,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $this->container = new SimpleContainer();
-        WidgetFactory::initialize($this->container, []);
+        WidgetFactory::initialize($this->container);
     }
 
     protected function tearDown(): void
