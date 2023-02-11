@@ -79,8 +79,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -94,8 +92,6 @@ final class Message extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -108,8 +104,6 @@ final class Message extends Widget
      * Returns a new instance with the specified the body content.
      *
      * @param string $value The body content.
-     *
-     * @return self
      */
     public function body(string $value): self
     {
@@ -122,8 +116,6 @@ final class Message extends Widget
      * Returns a new instance with the specified HTML attributes for the widget body tag.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} for details on how attributes are being rendered.
      */
@@ -138,8 +130,6 @@ final class Message extends Widget
      * Returns a new instance with the specified the CSS class for the body container.
      *
      * @param string $value The CSS class for the body container.
-     *
-     * @return self
      */
     public function bodyCssClass(string $value): self
     {
@@ -155,8 +145,6 @@ final class Message extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
-     *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function closeButtonAttributes(array $values): self
@@ -170,8 +158,6 @@ final class Message extends Widget
      * Returns a new instance with the specified whether the tags for the message are encoded.
      *
      * @param bool $value whether to encode the output.
-     *
-     * @return self
      */
     public function encode(bool $value): self
     {
@@ -184,8 +170,6 @@ final class Message extends Widget
      * Returns a new instance with the specified HTML attributes for the widget header tag.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -202,8 +186,6 @@ final class Message extends Widget
      * @param string $value The header color. Default is Message::COLOR_DARK.
      * Possible values: Message::COLOR_PRIMARY, Message::COLOR_LINK, Message::COLOR_INFO, Message::COLOR_SUCCESS,
      * Message::COLOR_WARNING, Message::COLOR_DANGER, Message::COLOR_DARK.
-     *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/message/#colors
      */
@@ -223,8 +205,6 @@ final class Message extends Widget
      * Returns a new instance with the specified the header message.
      *
      * @param string $value The header message.
-     *
-     * @return self
      */
     public function headerMessage(string $value): self
     {
@@ -237,8 +217,6 @@ final class Message extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -252,8 +230,6 @@ final class Message extends Widget
      *
      * @param string $value size class. By default, not class is added and the size is considered "normal".
      * Possible values: Message::SIZE_SMALL, Message::SIZE_MEDIUM, Message::SIZE_LARGE.
-     *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/message/#sizes
      */
@@ -273,8 +249,6 @@ final class Message extends Widget
      * Returns a new instance with the specified allows you to remove the close button.
      *
      * @param bool $value Whether to remove the close button.
-     *
-     * @return self
      */
     public function withoutCloseButton(bool $value): self
     {
@@ -287,8 +261,6 @@ final class Message extends Widget
      * Returns a new instance with the specified allows you to disable header.
      *
      * @param bool $value Whether to disable header.
-     *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/message/#message-body-only
      */

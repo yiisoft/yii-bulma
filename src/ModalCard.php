@@ -95,8 +95,6 @@ final class ModalCard extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -110,8 +108,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -124,8 +120,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card background class.
      *
      * @param string $value The modal card background class.
-     *
-     * @return self
      */
     public function backgroundClass(string $value): self
     {
@@ -140,8 +134,6 @@ final class ModalCard extends Widget
      * @param array $value The body attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function bodyAttributes(array $value): self
     {
@@ -154,8 +146,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card body class.
      *
      * @param string $value The modal card body class.
-     *
-     * @return self
      */
     public function bodyClass(string $value): self
     {
@@ -168,8 +158,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card button class.
      *
      * @param string $value The modal card button class.
-     *
-     * @return self
      */
     public function buttonClass(string $value): self
     {
@@ -184,8 +172,6 @@ final class ModalCard extends Widget
      * @param array $value The content attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function cardAttributes(array $value): self
     {
@@ -198,8 +184,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card class.
      *
      * @param string $value The modal card class.
-     *
-     * @return self
      */
     public function cardClass(string $value): self
     {
@@ -215,8 +199,6 @@ final class ModalCard extends Widget
      * @param array $value The close button attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function closeButtonAttributes(array $value): self
     {
@@ -229,8 +211,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified close button class.
      *
      * @param string $value The close button class.
-     *
-     * @return self
      */
     public function closeButtonCssClass(string $value): self
     {
@@ -244,8 +224,6 @@ final class ModalCard extends Widget
      *
      * @param string $value The close button size. Default setting is "normal".
      * Possible values are: ModalCard::SIZE_SMALL, ModalCard::SIZE_MEDIUM, ModalCard::SIZE_LARGE.
-     *
-     * @return self
      */
     public function closeButtonSize(string $value): self
     {
@@ -263,8 +241,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card content class.
      *
      * @param string $value The modal card content class.
-     *
-     * @return self
      */
     public function contentClass(string $value): self
     {
@@ -278,8 +254,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified footer content.
      *
      * @param string $value The footer content in the modal window.
-     *
-     * @return self
      */
     public function footer(string $value): self
     {
@@ -294,8 +268,6 @@ final class ModalCard extends Widget
      * @param array $value The footer attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function footerAttributes(array $value): self
     {
@@ -310,8 +282,6 @@ final class ModalCard extends Widget
      * @param array $value The header attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function headerAttributes(array $value): self
     {
@@ -324,8 +294,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string|null $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(?string $value): self
     {
@@ -338,8 +306,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card footer class.
      *
      * @param string $value The modal card footer class.
-     *
-     * @return self
      */
     public function footerClass(string $value): self
     {
@@ -353,8 +319,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card header class.
      *
      * @param string $value The modal card head class.
-     *
-     * @return self
      */
     public function headerClass(string $value): self
     {
@@ -368,8 +332,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified modal card title class.
      *
      * @param string $value The modal card title class.
-     *
-     * @return self
      */
     public function titleClass(string $value): self
     {
@@ -383,8 +345,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified title content.
      *
      * @param string $value The title content in the modal window.
-     *
-     * @return self
      */
     public function title(string $value): self
     {
@@ -400,8 +360,6 @@ final class ModalCard extends Widget
      * @param array $value The title attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function titleAttributes(array $value): self
     {
@@ -417,8 +375,6 @@ final class ModalCard extends Widget
      * @param array $value The toggle button attributes.
      *
      * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
-     *
-     * @return self
      */
     public function toggleButtonAttributes(array $value): self
     {
@@ -434,8 +390,6 @@ final class ModalCard extends Widget
      * @param string $value The toggle button color. By default, there's no color set.
      * Possible values are: ModalCard::COLOR_PRIMARY, ModalCard::COLOR_INFO, ModalCard::COLOR_SUCCESS,
      * ModalCard::COLOR_WARNING, ModalCard::COLOR_DANGER, ModalCard::COLOR_DARK
-     *
-     * @return self
      */
     public function toggleButtonColor(string $value): self
     {
@@ -454,8 +408,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified ID of the toggle button.
      *
      * @param string|null $value The ID of the widget.
-     *
-     * @return self
      */
     public function toggleButtonId(?string $value): self
     {
@@ -468,8 +420,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified toggle button label.
      *
      * @param string $value The toggle button label.
-     *
-     * @return self
      */
     public function toggleButtonLabel(string $value): self
     {
@@ -483,8 +433,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified toggle button size.
      *
      * @param string $value The toggle button size.
-     *
-     * @return self
      */
     public function toggleButtonSize(string $value): self
     {
@@ -503,8 +451,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the specified options for rendering the close button tag.
      *
      * @param bool $value Whether the close button is disabled.
-     *
-     * @return self
      */
     public function withoutCloseButton(bool $value): self
     {
@@ -517,8 +463,6 @@ final class ModalCard extends Widget
      * Returns a new instance with the disabled toggle button.
      *
      * @param bool $value Whether the toggle button is disabled.
-     *
-     * @return self
      */
     public function withoutToggleButton(bool $value): self
     {
@@ -570,8 +514,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders the background transparent overlay.
-     *
-     * @return string
      */
     private function renderBackgroundTransparentOverlay(): string
     {
@@ -582,8 +524,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders begin body tag.
-     *
-     * @return string
      */
     private function renderBodyBegin(): string
     {
@@ -596,8 +536,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders end body tag.
-     *
-     * @return string
      */
     private function renderBodyEnd(): string
     {
@@ -606,8 +544,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders the close button.
-     *
-     * @return string
      */
     private function renderCloseButton(): string
     {
@@ -627,8 +563,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders the footer.
-     *
-     * @return string
      */
     private function renderFooter(): string
     {
@@ -650,8 +584,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders header.
-     *
-     * @return string
      */
     private function renderHeader(): string
     {
@@ -680,10 +612,6 @@ final class ModalCard extends Widget
 
     /**
      * Renders the toggle button.
-     *
-     * @param string $id
-     *
-     * @return string
      */
     private function renderToggleButton(string $id): string
     {

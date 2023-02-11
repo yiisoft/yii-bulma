@@ -31,10 +31,6 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Asserting two strings equality ignoring line endings.
-     *
-     * @param string $expected
-     * @param string $actual
-     * @param string $message
      */
     protected function assertEqualsWithoutLE(string $expected, string $actual, string $message = ''): void
     {
@@ -46,8 +42,6 @@ abstract class TestCase extends BaseTestCase
     /**
      * Sets an inaccessible object property to a designated value.
      *
-     * @param object $object
-     * @param string $propertyName
      * @param $value
      * @param bool $revoke whether to make property inaccessible after setting
      */

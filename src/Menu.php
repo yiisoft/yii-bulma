@@ -52,8 +52,6 @@ final class Menu extends Widget
      *
      * Activates parent menu items when one of the corresponding child menu items is active.
      * The activated parent menu items will also have its CSS classes appended with {@see activeCssClass()}.
-     *
-     * @return self
      */
     public function activateParents(): self
     {
@@ -66,8 +64,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified active CSS class.
      *
      * @param string $value The CSS class to be appended to the active menu item.
-     *
-     * @return self
      */
     public function activeCssClass(string $value): self
     {
@@ -80,8 +76,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -94,8 +88,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified HTML attributes for widget.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
@@ -110,8 +102,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified HTML code of brand.
      *
      * @param string $value The HTML code of brand.
-     *
-     * @return self
      */
     public function brand(string $value): self
     {
@@ -124,8 +114,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified current path.
      *
      * @param string $value The current path.
-     *
-     * @return self
      */
     public function currentPath(string $value): self
     {
@@ -136,8 +124,6 @@ final class Menu extends Widget
 
     /**
      * Returns a new instance with the specified disables active items according to their current path.
-     *
-     * @return self
      *
      * {@see isItemActive}
      */
@@ -152,8 +138,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified first item CSS class.
      *
      * @param string $value The CSS class that will be assigned to the first item in the main menu or each submenu.
-     *
-     * @return self
      */
     public function firstItemCssClass(string $value): self
     {
@@ -164,8 +148,6 @@ final class Menu extends Widget
 
     /**
      * Returns a new instance with the specified hidden empty items.
-     *
-     * @return self
      */
     public function hiddenEmptyItems(): self
     {
@@ -178,8 +160,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -194,8 +174,6 @@ final class Menu extends Widget
      * @param array $value List of HTML attributes shared by all menu {@see items}. If any individual menu item
      * specifies its  `attributes`, it will be merged with this property before being used to generate the HTML
      * attributes for the menu item tag. The following special attributes are recognized:
-     *
-     * @return self
      *
      * {@see Html::renderTagAttributes() For details on how attributes are being rendered}
      */
@@ -237,8 +215,6 @@ final class Menu extends Widget
      * - itemAttributes: array, optional, the HTML attributes for the item container tag.
      * - icon: string, optional, class icon.
      * - iconAttributes: array, optional, the HTML attributes for the container icon.
-     *
-     * @return self
      */
     public function items(array $value): self
     {
@@ -251,8 +227,6 @@ final class Menu extends Widget
      * Return a new instance with tag for item container.
      *
      * @param string|null $value The tag for item container, `null` value means that container tag will not be rendered.
-     *
-     * @return self
      */
     public function itemsTag(?string $value): self
     {
@@ -273,8 +247,6 @@ final class Menu extends Widget
      * In this template, the token `{label}` will be replaced with the label of the menu item.
      *
      * This property will be overridden by the `template` option set in individual menu items via {@see items}.
-     *
-     * @return self
      */
     public function labelTemplate(string $value): self
     {
@@ -287,8 +259,6 @@ final class Menu extends Widget
      * Returns a new instance with the specified last item CSS class.
      *
      * @param string $value The CSS class that will be assigned to the last item in the main menu or each submenu.
-     *
-     * @return self
      */
     public function lastItemCssClass(string $value): self
     {
@@ -303,8 +273,6 @@ final class Menu extends Widget
      * In this template, the token `{items}` will be replaced with the rendered sub-menu items.
      *
      * @param string $value
-     *
-     * @return self
      */
     public function subMenuTemplate(string $value): self
     {
@@ -320,8 +288,6 @@ final class Menu extends Widget
      * `{url}` will be replaced with the corresponding link URL; while `{label}` will be replaced with the link text.
      *
      * This property will be overridden by the `template` option set in individual menu items via {@see items}.
-     *
-     * @return self
      */
     public function urlTemplate(string $value): self
     {
@@ -353,8 +319,6 @@ final class Menu extends Widget
      *
      * @param array $items {@see items}
      * @param bool $active Should the parent be active too.
-     *
-     * @return array
      *
      * {@see items}
      */

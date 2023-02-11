@@ -55,8 +55,6 @@ final class Dropdown extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * @return self
-     *
      * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
@@ -70,8 +68,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified prefix to the automatically generated widget IDs.
      *
      * @param string $value The prefix to the automatically generated widget IDs.
-     *
-     * @return self
      */
     public function autoIdPrefix(string $value): self
     {
@@ -84,8 +80,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified HTML attributes for the dropdown button.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function buttonAttributes(array $values): self
     {
@@ -98,8 +92,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified HTML attributes for the dropdown button icon.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function buttonIconAttributes(array $values): self
     {
@@ -112,8 +104,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified icon CSS class for the dropdown button.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function buttonIconCssClass(string $value): self
     {
@@ -126,8 +116,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified icon text for the dropdown button.
      *
      * @param string $value The text.
-     *
-     * @return self
      */
     public function buttonIconText(string $value): self
     {
@@ -140,8 +128,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified label for the dropdown button.
      *
      * @param string $value The label.
-     *
-     * @return self
      */
     public function buttonLabel(string $value): self
     {
@@ -154,8 +140,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified HTML attributes for the dropdown button label.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function buttonLabelAttributes(array $values): self
     {
@@ -168,8 +152,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for dropdown content.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      *
      * @link https://bulma.io/documentation/components/dropdown/#dropdown-content
      */
@@ -184,8 +166,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for the dropdown container.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function cssClass(string $value): self
     {
@@ -198,8 +178,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for horizontal line separating dropdown items.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function dividerCssClass(string $value): self
     {
@@ -212,8 +190,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified if the widget should be enclosed by container.
      *
      * @param bool $value Whether the widget should be enclosed by container. Defaults to true.
-     *
-     * @return self
      */
     public function enclosedByContainer(bool $value = false): self
     {
@@ -226,8 +202,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified ID of the widget.
      *
      * @param string $value The ID of the widget.
-     *
-     * @return self
      */
     public function id(string $value): self
     {
@@ -240,8 +214,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for active dropdown item.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function itemActiveCssClass(string $value): self
     {
@@ -254,8 +226,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for dropdown item.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function itemCssClass(string $value): self
     {
@@ -268,8 +238,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified style attributes for disabled dropdown item.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function itemDisabledStyleCss(string $value): self
     {
@@ -282,8 +250,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified CSS class for dropdown item header.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function itemHeaderCssClass(string $value): self
     {
@@ -312,8 +278,6 @@ final class Dropdown extends Widget
      * To insert divider use `-`.
      *
      * @param array $value The menu items.
-     *
-     * @return self
      */
     public function items(array $value): self
     {
@@ -326,8 +290,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified dropdown menu CSS class.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function menuCssClass(string $value): self
     {
@@ -340,8 +302,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified dropdown trigger CSS class.
      *
      * @param string $value The CSS class.
-     *
-     * @return self
      */
     public function triggerCssClass(string $value): self
     {
@@ -354,8 +314,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified if it is a submenu or sub-dropdown.
      *
      * @param bool $value Whether it is a submenu or sub-dropdown. Defaults to false.
-     *
-     * @return self
      */
     public function submenu(bool $value): self
     {
@@ -368,8 +326,6 @@ final class Dropdown extends Widget
      * Returns a new instance with the specified HTML attributes for sub-menu container tag.
      *
      * @param array $values Attribute values indexed by attribute names.
-     *
-     * @return self
      */
     public function submenuAttributes(array $values): self
     {
