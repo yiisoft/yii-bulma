@@ -2,7 +2,6 @@
 
 ## 1.0.1 under development
 
-- Enh: Add composer require checker into CI
 - Chg #64: Adopt configuration to changes in `yiisoft/form` (vjik)
 - Chg #64: Adapt configuration to changes in `yiisoft/form` (@vjik)
 - Enh: Allow `yiisoft/arrays` ^3.0 (@samdark)
