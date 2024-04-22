@@ -1,6 +1,6 @@
 # Tabs widget
 
-### Responsive horizontal [navigation tabs](https://bulma.io/documentation/components/tabs/), with different styles.
+### Responsive horizontal [navigation tabs](https://bulma.io/documentation/components/tabs/), with different styles
 
 <p align="center">
     </br>
@@ -11,9 +11,6 @@
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\Tabs;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;

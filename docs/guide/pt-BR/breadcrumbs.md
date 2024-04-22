@@ -1,6 +1,6 @@
 # Breadcrumbs widget
 
-### [The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component.
+### [The Bulma breadcrumb](https://bulma.io/documentation/components/breadcrumb/) is a simple navigation component
 
 <p align="center">
     </br>
@@ -11,9 +11,6 @@
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\Breadcrumbs;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 
@@ -75,7 +72,7 @@ Method | Description | Default
 `itemsAttributes(array $value)` | HTML attributes for the items widget. | `[]`
 `itemTemplate(string $value)` | Template used to render each inactive item in the breadcrumbs. | `<li>{icon}{link}</li>\n`
 
-### Items structure is an array of the following structure:
+### Items structure is an array of the following structure
 
 ```php
 [

@@ -3,23 +3,21 @@
 A base [modal](https://bulma.io/documentation/components/modal/) overlay, in which you can include any content you want
 
 The modal structure:
+
 - `modal`: the main container
-    - `modal-background`: a transparent overlay that can act as a click target to close the modal
-    - `modal-content`: a horizontally and vertically centered container, in which you can include any content
-    - `modal-close`: a simple cross located in the top right corner
+  - `modal-background`: a transparent overlay that can act as a click target to close the modal
+  - `modal-content`: a horizontally and vertically centered container, in which you can include any content
+  - `modal-close`: a simple cross located in the top right corner
 
 <p align="center">
     </br>
     <img src="images/modal.png">
-</p>    
+</p>
 
 ## Usage
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Modal;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;

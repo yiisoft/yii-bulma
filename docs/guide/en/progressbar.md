@@ -19,9 +19,6 @@ In progress widget looks like this:
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\ProgressBar;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 

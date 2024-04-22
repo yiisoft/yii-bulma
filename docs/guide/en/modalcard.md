@@ -8,21 +8,19 @@
 </p>
 
 The modal structure:
+
 - `modal`: the main container
-    - `modal-background`: a transparent overlay that can act as a click target to close the modal
-    - `modal-card`: ...
-        - `modal-card-head`: ...
-            - `modal-card-title`: ...
-    - `modal-card-body`: ...
-    - `modal-card-foot`: ...
+  - `modal-background`: a transparent overlay that can act as a click target to close the modal
+  - `modal-card`: ...
+    - `modal-card-head`: ...
+      - `modal-card-title`: ...
+  - `modal-card-body`: ...
+  - `modal-card-foot`: ...
 
 ## Usage
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\P;
@@ -127,4 +125,3 @@ Method | Description | Default
 `toggleButtonSize(string $value)` | Toggle button size. Options available are: (`ModalCard::SIZE_SMALL`, `ModalCard::SIZE_MEDIUM`, `ModalCard::SIZE_LARGE`). | Default setting is "normal".
 `withoutCloseButton(bool $value)` | Whether the close button is disabled. | `false`
 `withoutToggleButton(bool $value)` | Whether the toggle button is disabled. | `false`
-
