@@ -147,7 +147,6 @@ $this->setJsFiles($assetManager->getJsFiles());
 ## Documentation
 
 - [Guides](docs/guide/README.md)
-- [Português - Brasil](docs/guide/pt-BR/README.md)
 - [Internals](docs/internals.md)
 
 ## Support
