@@ -1,6 +1,6 @@
 # Message widget
 
-### [The message component](https://bulma.io/documentation/components/message/) displays a message like the following:
+### [The message component](https://bulma.io/documentation/components/message/) displays a message like the following
 
 <p align="center">
     </br>
@@ -20,9 +20,6 @@ necessary JavaScript. Alternatively, you can use your own JavaScript code.
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\Message;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;

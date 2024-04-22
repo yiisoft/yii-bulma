@@ -21,6 +21,10 @@
 This [Yii Framework](https://www.yiiframework.com/) package encapsulates [Bulma](https://bulma.io) components
 and plugins in terms of Yii widgets, and thus makes using Bulma components/plugins in Yii applications convenient.
 
+## Requirements
+
+- PHP 8.0 or higher.
+
 ## Installation
 
 ```shell
@@ -31,9 +35,9 @@ composer require yiisoft/yii-bulma --prefer-dist
 
 There are several ways to install the assets, they are:
 
-1.- Using the [AssetPackagist](https://asset-packagist.org/) package manager.
+1. Using the [AssetPackagist](https://asset-packagist.org/) package manager.
 
-Add to composer.json the following:
+Add to composer.json file the following:
 
 ```json
 {
@@ -68,7 +72,7 @@ Once the changes are made, you can install the assets using the following comman
 composer update --prefer-dist
 ```
 
-2.- Using the [npm-asset](https://www.npmjs.com/) package manager.    
+2. Using the [npm-asset](https://www.npmjs.com/) package manager.
 
 Run the following command at the root directory of your application.
 
@@ -99,7 +103,6 @@ To use widgets only, register `BulmaAsset::class`, which we can do in several wa
 By registering the Asset in the `resources/layout/main.php` it will be available for all views.
 If you need it registered for individual view (such as `resources/views/site/contact.php`) only,
 register it in that view.
-
 
 ```php
 use  Yiisoft\Yii\Bulma\Asset\BulmaAsset;
@@ -141,48 +144,27 @@ $this->setCssFiles($assetManager->getCssFiles());
 $this->setJsFiles($assetManager->getJsFiles());
 ```
 
-## Widgets usage
+## Documentation
 
-We will quickly and easily describe how to use widgets, and be able to use all the power of
-the Bulma CSS framework with PHP:
+- [Guides](docs/guide/README.md)
+- [Internals](docs/internals.md)
 
-- [Breadcrumbs](docs/breadcrumbs.md)
-- [Dropdown](docs/dropdown.md)
-- [Menu](docs/menu.md)
-- [Message](docs/message.md)
-- [Modal](docs/modal.md)
-- [ModalCard](docs/modalcard.md)
-- [NavBar](docs/navbar.md)
-- [Panel](docs/panel.md)
-- [ProgressBar](docs/progressbar.md)
-- [Tabs](docs/tabs.md)
+## Support
 
-## Testing
+If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
+You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
 
-### Unit testing
+## Support the project
 
-The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
+[![Open Collective](https://img.shields.io/badge/Open%20Collective-sponsor-7eadf1?logo=open%20collective&logoColor=7eadf1&labelColor=555555)](https://opencollective.com/yiisoft)
 
-```shell
-./vendor/bin/phpunit
-```
+## Follow updates
 
-### Mutation testing
-
-The package tests are checked with [Infection](https://infection.github.io/) mutation framework with
-[Infection Static Analysis Plugin](https://github.com/Roave/infection-static-analysis-plugin). To run it:
-
-```shell
-./vendor/bin/roave-infection-static-analysis-plugin
-```
-
-### Static analysis
-
-The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
-
-```shell
-./vendor/bin/psalm
-```
+[![Official website](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](https://www.yiiframework.com/)
+[![Twitter](https://img.shields.io/badge/twitter-follow-1DA1F2?logo=twitter&logoColor=1DA1F2&labelColor=555555?style=flat)](https://twitter.com/yiiframework)
+[![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
+[![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
+[![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)
 
 ## License
 
@@ -190,15 +172,3 @@ The Yii Framework Bulma Integration is free software. It is released under the t
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
-
-### Support the project
-
-[![Open Collective](https://img.shields.io/badge/Open%20Collective-sponsor-7eadf1?logo=open%20collective&logoColor=7eadf1&labelColor=555555)](https://opencollective.com/yiisoft)
-
-### Follow updates
-
-[![Official website](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](https://www.yiiframework.com/)
-[![Twitter](https://img.shields.io/badge/twitter-follow-1DA1F2?logo=twitter&logoColor=1DA1F2&labelColor=555555?style=flat)](https://twitter.com/yiiframework)
-[![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
-[![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
-[![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)

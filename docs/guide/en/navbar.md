@@ -1,6 +1,6 @@
 # Navbar and nav widget
 
-### [The navbar component](https://bulma.io/documentation/components/navbar/) is a responsive and versatile horizontal navigation bar.
+### [The navbar component](https://bulma.io/documentation/components/navbar/) is a responsive and versatile horizontal navigation bar
 
 <p align="center">
     </br>
@@ -33,9 +33,6 @@ You can use Navbar the following way:
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\Nav;
 use Yiisoft\Yii\Bulma\NavBar;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
@@ -166,7 +163,7 @@ Method | Description | Default
 `items(array $value)` | The menu items. | `[]`
 `withoutActivateItems()` |  Disable activate items according to whether their currentPath. | `false`
 
-### Items structure is an array of the following structure:
+### Items structure is an array of the following structure
 
 ```php
 [

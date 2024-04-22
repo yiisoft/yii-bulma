@@ -11,9 +11,6 @@
 
 ```php
 <?php
-
-declare(strict_types=1);
-
 use Yiisoft\Yii\Bulma\Panel;
 use Yiisoft\Yii\Bulma\Asset\BulmaAsset;
 use Yiisoft\Yii\Bulma\Asset\BulmaJsAsset;
@@ -136,7 +133,7 @@ Method | Description | Default
 `tabsAttributes(array $value)` | HTML attributes for the tabs container tag. | `[]`
 `template(string $value)` | String the template for rendering panel. | `{panelBegin}{panelHeading}{panelTabs}{panelItems}{panelEnd}`
 
-### Tabs structure is an array of the following structure:
+### Tabs structure is an array of the following structure
 
 ```php
 [
