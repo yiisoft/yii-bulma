@@ -4,7 +4,7 @@
 
 <p align="center">
     </br>
-    <img src="images/breadcrumbs.png">
+    <img src="../../images/breadcrumbs.png">
 </p>
 
 ## Usage

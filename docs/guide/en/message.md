@@ -4,7 +4,7 @@
 
 <p align="center">
     </br>
-    <img src="images/message.png">
+    <img src="../../images/message.png">
 </p>
 
 HTML generated consists of:

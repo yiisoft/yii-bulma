@@ -6,13 +6,13 @@
 Loading widget looks like the following:
 
 <p align="center">
-    <img src="images/progressbar.png">
+    <img src="../../images/progressbar.png">
 </p>
 
 In progress widget looks like this:
 
 <p align="center">
-    <img src="images/progressbar-indeterminate.gif">
+    <img src="../../images/progressbar-indeterminate.gif">
 </p>
 
 ## Usage
