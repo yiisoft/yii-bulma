@@ -4,7 +4,7 @@
 
 <p align="center">
     </br>
-    <img src="images/dropdown.png">
+    <img src="../images/dropdown.png">
 </p>
 
 HTML generated consists of:

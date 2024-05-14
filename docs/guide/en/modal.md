@@ -11,7 +11,7 @@ The modal structure:
 
 <p align="center">
     </br>
-    <img src="images/modal.png">
+    <img src="../images/modal.png">
 </p>
 
 ## Usage
