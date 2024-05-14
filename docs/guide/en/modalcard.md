@@ -4,7 +4,7 @@
 
 <p align="center">
     </br>
-    <img src="../../images/modal_card.png">
+    <img src="../images/modal_card.png">
 </p>
 
 The modal structure:

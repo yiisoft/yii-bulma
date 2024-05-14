@@ -4,17 +4,17 @@
 
 <p align="center">
     </br>
-    <img src="../../images/navbar.png">
+    <img src="../images/navbar.png">
 </p>
 
 <p align="center">
     </br>
-    <img src="../../images/navbar-responsive-1.png">
+    <img src="../images/navbar-responsive-1.png">
 </p>
 
 <p align="center">
     </br>
-    <img src="../../images/navbar-responsive-2.png">
+    <img src="../images/navbar-responsive-2.png">
 </p>
 
 HTML generated consists of:
