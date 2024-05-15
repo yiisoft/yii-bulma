@@ -2,9 +2,6 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
-    <a href="https://bulma.io/" target="_blank">
-        <img src="https://bulma.io/assets/brand/Bulma%20Wordmark.svg" height="80px" alt="Bulma">
-    </a>
     <h1 align="center">Yii Framework Bulma Integration</h1>
     <br>
 </p>
