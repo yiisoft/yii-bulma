@@ -21,6 +21,9 @@ on:
 
 name: static analysis
 
+permissions:
+  contents: read
+
 jobs:
   psalm:
     uses: yiisoft/actions/.github/workflows/psalm.yml@master
@@ -28,4 +31,4 @@ jobs:
       os: >-
         ['ubuntu-latest']
       php: >-
-        ['8.0', '8.1']
+        ['8.1']
