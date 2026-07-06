@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   rector:
-    uses: yiisoft/actions/.github/workflows/rector.yml@master # zizmor: ignore[unpinned-uses]
+    uses: yiisoft/actions/.github/workflows/rector.yml@master
     with:
       os: >-
         ['ubuntu-latest']
