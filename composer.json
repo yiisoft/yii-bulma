@@ -22,7 +22,7 @@
         "yiisoft/arrays": "^2.0|^3.0",
         "yiisoft/assets": "^4.0.0",
         "yiisoft/files": "^2.0",
-        "yiisoft/html": "^2.0|^3.0",
+        "yiisoft/html": "^2.5.0 || ^3.0",
         "yiisoft/widget": "^2.0"
     },
     "require-dev": {
@@ -31,7 +31,7 @@
         "rector/rector": "^0.16.0",
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
-        "vimeo/psalm": "^5.11",
+        "vimeo/psalm": "^4.30 || ^5.11",
         "yiisoft/test-support": "^3.0"
     },
     "autoload": {

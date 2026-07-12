@@ -9,6 +9,7 @@
 - Bug #81: Fixed publish options in assets (@vjik)
 - Chg #79: Raise version PHP 8.0, adopt last change `yiisoft/widget` (@terabytesoftw)
 - Enh #62: Explicitly add transitive dependency `yiisoft/files` (@vjik)
+- Bug #101: Fix `yiisoft/html` version constraint (@vjik)
 
 ## 1.0.0 April 01, 2022
 
