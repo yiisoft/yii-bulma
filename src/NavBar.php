@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma;
 
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\A;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\Img;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 /**
@@ -313,16 +309,11 @@ final class NavBar extends Widget
         $brandImage = '';
 
         if ($this->brandImage !== '') {
-            $brandImage = Img::tag()
+            $brandImage = Html::img($this->brandImage, null)
                 ->addAttributes($this->brandImageAttributes)
-                ->url($this->brandImage)
                 ->render();
-            $brand = PHP_EOL . A::tag()
-                ->addClass($this->itemCssClass)
-                ->content($brandImage)
-                ->encode(false)
-                ->url($this->brandUrl)
-                ->render();
+            $brand = PHP_EOL . Html::a($brandImage, $this->brandUrl, ['class' => $this->itemCssClass])
+                ->encode(false);
         }
 
         if ($this->brandText !== '') {
@@ -333,27 +324,18 @@ final class NavBar extends Widget
             }
 
             if (empty($this->brandUrl)) {
-                $brand = PHP_EOL . Span::tag()
-                    ->addAttributes($this->brandTextAttributes)
-                    ->addClass($this->itemCssClass)
-                    ->content($brandText)
-                    ->render();
+                $brand = PHP_EOL . Html::span($brandText, $this->brandTextAttributes)
+                    ->addClass($this->itemCssClass);
             } else {
-                $brand = PHP_EOL . A::tag()
-                    ->addClass($this->itemCssClass)
-                    ->content($brandText)
-                    ->encode(false)
-                    ->url($this->brandUrl)
-                    ->render();
+                $brand = PHP_EOL . Html::a($brandText, $this->brandUrl, ['class' => $this->itemCssClass])
+                    ->encode(false);
             }
         }
 
         $brand .= $this->renderNavBarBurger();
 
-        return Div::tag()
-            ->addAttributes($this->brandAttributes)
+        return Html::div($brand, $this->brandAttributes)
             ->addClass($this->brandCssClass)
-            ->content($brand)
             ->encode(false)
             ->render();
     }
@@ -370,26 +352,17 @@ final class NavBar extends Widget
         $burgerAttributes = $this->burgerAttributes;
         if ($this->buttonLinkContent === '') {
             $this->buttonLinkContent = PHP_EOL .
-                Span::tag()
-                    ->addAttributes(['aria-hidden' => 'true'])
-                    ->render() . PHP_EOL .
-                Span::tag()
-                    ->addAttributes(['aria-hidden' => 'true'])
-                    ->render() . PHP_EOL .
-                Span::tag()
-                    ->addAttributes(['aria-hidden' => 'true'])
-                    ->render() . PHP_EOL;
+                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL .
+                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL .
+                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL;
         }
 
         $burgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;
         $burgerAttributes['aria-label'] = $this->buttonLinkAriaLabelText;
         $burgerAttributes['role'] = $this->buttonLinkRole;
 
-        return PHP_EOL . A::tag()
-            ->addAttributes($burgerAttributes)
+        return PHP_EOL . Html::a($this->buttonLinkContent, attributes: $burgerAttributes)
             ->addClass($this->burgerCssClass)
-            ->content($this->buttonLinkContent)
-            ->encode(false)
-            ->render() . PHP_EOL;
+            ->encode(false) . PHP_EOL;
     }
 }

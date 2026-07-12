@@ -6,8 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\Button;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -317,7 +315,7 @@ final class Modal extends Widget
         }
 
         $html .= Html::openTag('div', $attributes) . PHP_EOL; // .modal
-        $html .= Div::tag()->addClass($this->backgroundClass) . PHP_EOL;
+        $html .= Html::div(attributes: ['class' => $this->backgroundClass]) . PHP_EOL;
 
         if ($this->withoutCloseButton === false) {
             $html .= $this->renderCloseButton() . PHP_EOL;
@@ -356,10 +354,7 @@ final class Modal extends Widget
 
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
-        return Button::tag()
-            ->addAttributes($toggleButtonAttributes)
-            ->content($this->toggleButtonLabel)
-            ->render();
+        return Html::tag('button', $this->toggleButtonLabel, $toggleButtonAttributes)->render();
     }
 
     /**
@@ -376,8 +371,6 @@ final class Modal extends Widget
 
         Html::addCssClass($closeButtonAttributes, $this->closeButtonClass);
 
-        return Button::tag()
-            ->addAttributes($closeButtonAttributes)
-            ->render();
+        return Html::tag('button', attributes: $closeButtonAttributes)->render();
     }
 }

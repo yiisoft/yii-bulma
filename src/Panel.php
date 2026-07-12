@@ -7,10 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use InvalidArgumentException;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\A;
-use Yiisoft\Html\Tag\I;
-use Yiisoft\Html\Tag\P;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function implode;
@@ -259,9 +255,9 @@ final class Panel extends Widget
     {
         $attributes = $this->attributes;
 
-        /** @var string */
-        $attributes['id'] ??= (Html::generateId($this->autoIdPrefix) . '-panel');
+        $attributes['id'] ??= Html::generateId($this->autoIdPrefix) . '-panel';
 
+        /** @var non-empty-string $id */
         $id = $attributes['id'];
 
         /** @var string */
@@ -286,16 +282,13 @@ final class Panel extends Widget
     {
         $headingAttributes = $this->headingAttributes;
 
-        if (!empty($this->heading)) {
-            Html::addCssClass($headingAttributes, $this->headingClass);
-
-            return P::tag()
-                ->addAttributes($headingAttributes)
-                ->content($this->heading)
-                ->render() . PHP_EOL;
+        $heading = (string) $this->heading;
+        if ($heading === '') {
+            return '';
         }
 
-        return '';
+        Html::addCssClass($headingAttributes, $this->headingClass);
+        return Html::p($heading, $headingAttributes) . PHP_EOL;
     }
 
     private function renderTabs(string $id): string
@@ -311,11 +304,8 @@ final class Panel extends Widget
 
             Html::addCssClass($tabsAttributes, $this->tabClass);
 
-            return P::tag()
-                ->addAttributes($tabsAttributes)
-                ->content(PHP_EOL . $tabs)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            return Html::p(PHP_EOL . $tabs, $tabsAttributes)
+                    ->encode(false) . PHP_EOL;
         }
 
         return '';
@@ -368,11 +358,7 @@ final class Panel extends Widget
             $this->tabItems[$index] = $tabsItems;
         }
 
-        return A::tag()
-            ->addAttributes($urlAttributes)
-            ->content($label)
-            ->encode(false)
-            ->render();
+        return Html::a($label, attributes: $urlAttributes)->encode(false)->render();
     }
 
     private function renderItem(array $item): string
@@ -409,21 +395,13 @@ final class Panel extends Widget
         Html::addCssClass($labelAttributes, $this->iconClass);
 
         if ($icon !== '') {
-            $icon = PHP_EOL . I::tag()
-                ->addAttributes(['aria-hidden' => 'true'])
-                ->addClass($icon) . PHP_EOL;
-            $label = PHP_EOL . Span::tag()
-                ->addAttributes($labelAttributes)
-                ->content($icon)
+            $icon = PHP_EOL . Html::i(attributes: ['aria-hidden' => 'true'])->addClass($icon) . PHP_EOL;
+            $label = PHP_EOL . Html::span($icon, $labelAttributes)
                 ->encode(false) . PHP_EOL .
                 $label . PHP_EOL;
         }
 
-        return A::tag()
-            ->addAttributes($urlAttributes)
-            ->content($label)
-            ->encode(false)
-            ->render();
+        return Html::a($label, attributes: $urlAttributes)->encode(false)->render();
     }
 
     /**

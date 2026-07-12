@@ -6,10 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\A;
-use Yiisoft\Html\Tag\CustomTag;
-use Yiisoft\Html\Tag\I;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -197,7 +193,7 @@ final class Breadcrumbs extends Widget
         }
 
         $attributes = $this->attributes;
-        $customTag = CustomTag::name('nav');
+        $customTag = Html::tag('nav');
 
         Html::addCssClass($attributes, 'breadcrumb');
 
@@ -225,11 +221,10 @@ final class Breadcrumbs extends Widget
         $html = '';
 
         if ($icon !== null) {
-            $html = Span::tag()
-                ->addAttributes($iconAttributes)
-                ->content(I::tag()
-                    ->addAttributes(['class' => $icon, 'aria-hidden' => 'true'])
-                    ->render())
+            $html = Html::span(
+                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true'])->render(),
+                attributes: $iconAttributes,
+            )
                 ->encode($this->encode)
                 ->render();
         }
@@ -281,16 +276,11 @@ final class Breadcrumbs extends Widget
         $icon = $this->renderIcon($icon, $iconAttributes);
 
         if ($icon !== '') {
-            $label = $icon . Span::tag()
-                    ->content($label)
-                    ->render();
+            $label = $icon . Html::span($label);
         }
 
         $link = $url !== null
-            ? A::tag()
-                ->addAttributes($item)
-                ->content($label)
-                ->url($url)
+            ? Html::a($label, $url, attributes: $item)
                 ->encode($encode)
                 ->render() : $label;
 

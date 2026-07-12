@@ -7,10 +7,6 @@ namespace Yiisoft\Yii\Bulma;
 use InvalidArgumentException;
 use JsonException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\CustomTag;
-use Yiisoft\Html\Tag\I;
-use Yiisoft\Html\Tag\P;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -517,21 +513,17 @@ final class Menu extends Widget
 
         return strtr(
             $labelTemplate,
-            ['{label}' => P::tag()
-                    ->addClass('menu-label')
-                    ->content($label)
-                    ->render() . PHP_EOL, ]
+            ['{label}' => Html::p($label, ['class' => 'menu-label']) . PHP_EOL]
         );
     }
 
     private function renderIcon(string $icon, array $iconAttributes): string
     {
         return $icon !== ''
-            ? Span::tag()
-                ->addAttributes($iconAttributes)
-                ->content(I::tag()
-                    ->addClass($icon)
-                    ->render())
+            ? Html::span(
+                Html::i(attributes: ['class' => $icon])->render(),
+                $iconAttributes,
+            )
                 ->encode(false)
                 ->render()
             : '';
@@ -544,7 +536,7 @@ final class Menu extends Widget
     {
         $attributes = $this->attributes;
         $content = '';
-        $customTag = CustomTag::name('aside');
+        $customTag = Html::tag('aside');
         $itemsAttributes = $this->itemsAttributes;
 
         if (!array_key_exists('id', $attributes)) {

@@ -6,10 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\A;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\I;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -280,12 +276,12 @@ final class Tabs extends Widget
     {
         $attributes = $this->attributes;
 
-        $id = Html::generateId($this->autoIdPrefix) . '-tabs';
-
         if (array_key_exists('id', $attributes)) {
-            /** @var string */
+            /** @var non-empty-string */
             $id = $attributes['id'];
             unset($attributes['id']);
+        } else {
+            $id = Html::generateId($this->autoIdPrefix) . '-tabs';
         }
 
         Html::addCssClass($attributes, 'tabs');
@@ -302,12 +298,9 @@ final class Tabs extends Widget
             Html::addCssClass($attributes, $this->style);
         }
 
-        return Div::tag()
-            ->addAttributes($attributes)
-            ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
+        return Html::div(PHP_EOL . $this->renderItems() . PHP_EOL, $attributes)
             ->id($id)
-            ->encode(false)
-            ->render() . $this->renderTabsContent();
+            ->encode(false) . $this->renderTabsContent();
     }
 
     private function renderItems(): string
@@ -405,20 +398,12 @@ final class Tabs extends Widget
             /** @var string */
             $contentAttributes['id'] ??= Html::generateId($this->autoIdPrefix) . '-tabs-c' . $index;
 
-            $this->tabsContent[] = Div::tag()
-                ->addAttributes($contentAttributes)
-                ->content($content)
-                ->encode(false)
-                ->render();
+            $this->tabsContent[] = Html::div($content, $contentAttributes)->encode(false)->render();
         }
 
         return Html::tag(
             'li',
-            A::tag()
-                ->addAttributes($urlAttributes)
-                ->content($label)
-                ->encode(false)
-                ->render(),
+            Html::a($label, attributes: $urlAttributes)->encode(false)->render(),
             $attributes
         )
             ->encode(false)
@@ -432,16 +417,13 @@ final class Tabs extends Widget
         unset($iconAttributes['rightSide']);
 
         $elements = [
-            Span::tag()
-                ->addAttributes($iconAttributes)
-                ->content(I::tag()
-                    ->addAttributes(['class' => $icon, 'aria-hidden' => 'true'])
-                    ->render())
+            Html::span(
+                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true'])->render(),
+                $iconAttributes,
+            )
                 ->encode(false)
                 ->render(),
-            Span::tag()
-                ->content($label)
-                ->render(),
+            Html::span($label)->render(),
         ];
 
         if ($rightSide === true) {
@@ -464,11 +446,11 @@ final class Tabs extends Widget
         Html::addCssClass($tabsContentAttributes, 'tabs-content');
 
         if (!empty($this->tabsContent)) {
-            $html .= PHP_EOL . Div::tag()
-                ->addAttributes($tabsContentAttributes)
-                ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
-                ->encode(false)
-                ->render();
+            $html .= PHP_EOL . Html::div(
+                PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL,
+                $tabsContentAttributes,
+            )
+                ->encode(false);
         }
 
         return $html;

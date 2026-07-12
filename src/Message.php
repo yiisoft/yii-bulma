@@ -6,10 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Button;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\P;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function implode;
@@ -293,9 +289,7 @@ final class Message extends Widget
         Html::addCssClass($closeButtonAttributes, $this->buttonCssClass);
         unset($closeButtonAttributes['label']);
 
-        $label = Span::tag()
-            ->addAttributes($buttonSpanAttributes)
-            ->content('&times;')
+        $label = Html::span('&times;', $buttonSpanAttributes)
             ->encode(false)
             ->render();
 
@@ -303,11 +297,8 @@ final class Message extends Widget
             Html::addCssClass($closeButtonAttributes, $this->size);
         }
 
-        return Button::tag()
-            ->addAttributes($closeButtonAttributes)
-            ->content($label)
-            ->encode(false)
-            ->render() . PHP_EOL;
+        return Html::tag('button', $label, $closeButtonAttributes)
+            ->encode(false) . PHP_EOL;
     }
 
     private function renderHeader(): string
@@ -326,15 +317,12 @@ final class Message extends Widget
         }
 
         if ($renderCloseButton !== '') {
-            $headerMessage = PHP_EOL . P::tag()->content($headerMessage) . PHP_EOL . $renderCloseButton;
+            $headerMessage = PHP_EOL . Html::p($headerMessage) . PHP_EOL . $renderCloseButton;
         }
 
         if ($this->withoutHeader === false) {
-            $html = Div::tag()
-                ->addAttributes($headerAttributes)
-                ->content($headerMessage)
-                ->encode(false)
-                ->render() . PHP_EOL;
+            $html = Html::div($headerMessage, $headerAttributes)
+                ->encode(false) . PHP_EOL;
         }
 
         return $html;
@@ -344,7 +332,7 @@ final class Message extends Widget
     {
         $attributes = $this->attributes;
 
-        /** @var string */
+        /** @var non-empty-string */
         $id = $attributes['id'] ?? (Html::generateId($this->autoIdPrefix) . '-message');
         unset($attributes['id']);
 
@@ -355,9 +343,10 @@ final class Message extends Widget
             Html::addCssClass($attributes, $this->size);
         }
 
-        return Div::tag()
-            ->addAttributes($attributes)
-            ->content(PHP_EOL . $this->renderHeader() . $this->renderMessageBody())
+        return Html::div(
+            PHP_EOL . $this->renderHeader() . $this->renderMessageBody(),
+            $attributes,
+        )
             ->encode(false)
             ->id($id)
             ->render();
@@ -378,10 +367,7 @@ final class Message extends Widget
             $body = PHP_EOL . $body . PHP_EOL;
         }
 
-        return Div::tag()
-            ->addAttributes($bodyAttributes)
-            ->content($body)
-            ->encode(false)
-            ->render() . PHP_EOL;
+        return Html::div($body, $bodyAttributes)
+            ->encode(false) . PHP_EOL;
     }
 }
