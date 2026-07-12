@@ -353,18 +353,18 @@ final class Nav extends Widget
             $items = $this->isChildActive($items, $active);
             $dropdown = PHP_EOL . $this->renderDropdown($items);
             $a = A::tag()
-                ->attributes($urlAttributes)
+                ->addAttributes($urlAttributes)
                 ->content($itemLabel)
                 ->encode(false)
                 ->url($url)
                 ->render();
             $div = Div::tag()
-                ->attributes($dropdownAttributes)
+                ->addAttributes($dropdownAttributes)
                 ->content($dropdown)
                 ->encode(false)
                 ->render();
             $html = Div::tag()
-                ->attributes($attributes)
+                ->addAttributes($attributes)
                 ->content(PHP_EOL . $a . PHP_EOL . $div . PHP_EOL)
                 ->encode(false)
                 ->render();
@@ -373,7 +373,7 @@ final class Nav extends Widget
         if ($html === '') {
             Html::addCssClass($urlAttributes, 'navbar-item');
             $html = A::tag()
-                ->attributes($urlAttributes)
+                ->addAttributes($urlAttributes)
                 ->content($itemLabel)
                 ->url($url)
                 ->encode(false)
@@ -403,7 +403,7 @@ final class Nav extends Widget
 
         if ($this->enclosedByStartMenu) {
             $links = PHP_EOL . Div::tag()
-                ->class($this->startCssClass)
+                ->addClass($this->startCssClass)
                 ->content($links)
                 ->encode(false)
                 ->render() .
@@ -412,7 +412,7 @@ final class Nav extends Widget
 
         if ($this->enclosedByEndMenu) {
             $links = PHP_EOL . Div::tag()
-                ->class($this->endCssClass)
+                ->addClass($this->endCssClass)
                 ->content($links)
                 ->encode(false)
                 ->render() .
@@ -421,7 +421,7 @@ final class Nav extends Widget
 
         return $this->items !== []
             ? Div::tag()
-                ->class($this->menuCssClass)
+                ->addClass($this->menuCssClass)
                 ->content($links)
                 ->encode(false)
                 ->render()

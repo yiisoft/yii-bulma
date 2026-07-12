@@ -518,7 +518,7 @@ final class ModalCard extends Widget
     private function renderBackgroundTransparentOverlay(): string
     {
         return Div::tag()
-            ->class($this->backgroundClass)
+            ->addClass($this->backgroundClass)
             ->render();
     }
 
@@ -557,7 +557,7 @@ final class ModalCard extends Widget
         }
 
         return Button::tag()
-            ->attributes($closeButtonAttributes)
+            ->addAttributes($closeButtonAttributes)
             ->render() . PHP_EOL;
     }
 
@@ -576,7 +576,7 @@ final class ModalCard extends Widget
         Html::addCssClass($footerAttributes, $this->footerClass);
 
         return CustomTag::name('footer')
-            ->attributes($footerAttributes)
+            ->addAttributes($footerAttributes)
             ->content($footer)
             ->encode(false)
             ->render();
@@ -595,7 +595,7 @@ final class ModalCard extends Widget
         Html::addCssClass($titleAttributes, $this->titleClass);
 
         $content .= P::tag()
-            ->attributes($titleAttributes)
+            ->addAttributes($titleAttributes)
             ->content($this->title)
             ->render() . PHP_EOL;
 
@@ -604,7 +604,7 @@ final class ModalCard extends Widget
         }
 
         return CustomTag::name('header')
-            ->attributes($headerAttributes)
+            ->addAttributes($headerAttributes)
             ->content(PHP_EOL . $content)
             ->encode(false)
             ->render() . PHP_EOL;
@@ -635,7 +635,7 @@ final class ModalCard extends Widget
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
         return Button::tag()
-            ->attributes($toggleButtonAttributes)
+            ->addAttributes($toggleButtonAttributes)
             ->content($this->toggleButtonLabel)
             ->render();
     }

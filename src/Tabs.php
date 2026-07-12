@@ -303,7 +303,7 @@ final class Tabs extends Widget
         }
 
         return Div::tag()
-            ->attributes($attributes)
+            ->addAttributes($attributes)
             ->content(PHP_EOL . $this->renderItems() . PHP_EOL)
             ->id($id)
             ->encode(false)
@@ -406,7 +406,7 @@ final class Tabs extends Widget
             $contentAttributes['id'] ??= Html::generateId($this->autoIdPrefix) . '-tabs-c' . $index;
 
             $this->tabsContent[] = Div::tag()
-                ->attributes($contentAttributes)
+                ->addAttributes($contentAttributes)
                 ->content($content)
                 ->encode(false)
                 ->render();
@@ -415,7 +415,7 @@ final class Tabs extends Widget
         return Html::tag(
             'li',
             A::tag()
-                ->attributes($urlAttributes)
+                ->addAttributes($urlAttributes)
                 ->content($label)
                 ->encode(false)
                 ->render(),
@@ -433,9 +433,9 @@ final class Tabs extends Widget
 
         $elements = [
             Span::tag()
-                ->attributes($iconAttributes)
+                ->addAttributes($iconAttributes)
                 ->content(I::tag()
-                    ->attributes(['class' => $icon, 'aria-hidden' => 'true'])
+                    ->addAttributes(['class' => $icon, 'aria-hidden' => 'true'])
                     ->render())
                 ->encode(false)
                 ->render(),
@@ -465,7 +465,7 @@ final class Tabs extends Widget
 
         if (!empty($this->tabsContent)) {
             $html .= PHP_EOL . Div::tag()
-                ->attributes($tabsContentAttributes)
+                ->addAttributes($tabsContentAttributes)
                 ->content(PHP_EOL . implode(PHP_EOL, $tabsContent) . PHP_EOL)
                 ->encode(false)
                 ->render();

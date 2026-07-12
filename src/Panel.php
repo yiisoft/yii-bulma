@@ -290,7 +290,7 @@ final class Panel extends Widget
             Html::addCssClass($headingAttributes, $this->headingClass);
 
             return P::tag()
-                ->attributes($headingAttributes)
+                ->addAttributes($headingAttributes)
                 ->content($this->heading)
                 ->render() . PHP_EOL;
         }
@@ -312,7 +312,7 @@ final class Panel extends Widget
             Html::addCssClass($tabsAttributes, $this->tabClass);
 
             return P::tag()
-                ->attributes($tabsAttributes)
+                ->addAttributes($tabsAttributes)
                 ->content(PHP_EOL . $tabs)
                 ->encode(false)
                 ->render() . PHP_EOL;
@@ -369,7 +369,7 @@ final class Panel extends Widget
         }
 
         return A::tag()
-            ->attributes($urlAttributes)
+            ->addAttributes($urlAttributes)
             ->content($label)
             ->encode(false)
             ->render();
@@ -410,17 +410,17 @@ final class Panel extends Widget
 
         if ($icon !== '') {
             $icon = PHP_EOL . I::tag()
-                ->attributes(['aria-hidden' => 'true'])
-                ->class($icon) . PHP_EOL;
+                ->addAttributes(['aria-hidden' => 'true'])
+                ->addClass($icon) . PHP_EOL;
             $label = PHP_EOL . Span::tag()
-                ->attributes($labelAttributes)
+                ->addAttributes($labelAttributes)
                 ->content($icon)
                 ->encode(false) . PHP_EOL .
                 $label . PHP_EOL;
         }
 
         return A::tag()
-            ->attributes($urlAttributes)
+            ->addAttributes($urlAttributes)
             ->content($label)
             ->encode(false)
             ->render();

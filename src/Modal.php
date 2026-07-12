@@ -317,7 +317,7 @@ final class Modal extends Widget
         }
 
         $html .= Html::openTag('div', $attributes) . PHP_EOL; // .modal
-        $html .= Div::tag()->class($this->backgroundClass) . PHP_EOL;
+        $html .= Div::tag()->addClass($this->backgroundClass) . PHP_EOL;
 
         if ($this->withoutCloseButton === false) {
             $html .= $this->renderCloseButton() . PHP_EOL;
@@ -357,7 +357,7 @@ final class Modal extends Widget
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
         return Button::tag()
-            ->attributes($toggleButtonAttributes)
+            ->addAttributes($toggleButtonAttributes)
             ->content($this->toggleButtonLabel)
             ->render();
     }
@@ -377,7 +377,7 @@ final class Modal extends Widget
         Html::addCssClass($closeButtonAttributes, $this->closeButtonClass);
 
         return Button::tag()
-            ->attributes($closeButtonAttributes)
+            ->addAttributes($closeButtonAttributes)
             ->render();
     }
 }

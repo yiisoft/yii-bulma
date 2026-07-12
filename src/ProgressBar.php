@@ -175,7 +175,7 @@ final class ProgressBar extends Widget
         }
 
         return CustomTag::name('progress')
-            ->attributes($attributes)
+            ->addAttributes($attributes)
             ->content($content)
             ->render();
     }

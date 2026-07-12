@@ -314,11 +314,11 @@ final class NavBar extends Widget
 
         if ($this->brandImage !== '') {
             $brandImage = Img::tag()
-                ->attributes($this->brandImageAttributes)
+                ->addAttributes($this->brandImageAttributes)
                 ->url($this->brandImage)
                 ->render();
             $brand = PHP_EOL . A::tag()
-                ->class($this->itemCssClass)
+                ->addClass($this->itemCssClass)
                 ->content($brandImage)
                 ->encode(false)
                 ->url($this->brandUrl)
@@ -371,13 +371,13 @@ final class NavBar extends Widget
         if ($this->buttonLinkContent === '') {
             $this->buttonLinkContent = PHP_EOL .
                 Span::tag()
-                    ->attributes(['aria-hidden' => 'true'])
+                    ->addAttributes(['aria-hidden' => 'true'])
                     ->render() . PHP_EOL .
                 Span::tag()
-                    ->attributes(['aria-hidden' => 'true'])
+                    ->addAttributes(['aria-hidden' => 'true'])
                     ->render() . PHP_EOL .
                 Span::tag()
-                    ->attributes(['aria-hidden' => 'true'])
+                    ->addAttributes(['aria-hidden' => 'true'])
                     ->render() . PHP_EOL;
         }
 

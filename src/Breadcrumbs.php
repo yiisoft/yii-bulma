@@ -226,9 +226,9 @@ final class Breadcrumbs extends Widget
 
         if ($icon !== null) {
             $html = Span::tag()
-                ->attributes($iconAttributes)
+                ->addAttributes($iconAttributes)
                 ->content(I::tag()
-                    ->attributes(['class' => $icon, 'aria-hidden' => 'true'])
+                    ->addAttributes(['class' => $icon, 'aria-hidden' => 'true'])
                     ->render())
                 ->encode($this->encode)
                 ->render();
@@ -288,7 +288,7 @@ final class Breadcrumbs extends Widget
 
         $link = $url !== null
             ? A::tag()
-                ->attributes($item)
+                ->addAttributes($item)
                 ->content($label)
                 ->url($url)
                 ->encode($encode)

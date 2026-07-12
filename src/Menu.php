@@ -518,7 +518,7 @@ final class Menu extends Widget
         return strtr(
             $labelTemplate,
             ['{label}' => P::tag()
-                    ->class('menu-label')
+                    ->addClass('menu-label')
                     ->content($label)
                     ->render() . PHP_EOL, ]
         );
@@ -528,9 +528,9 @@ final class Menu extends Widget
     {
         return $icon !== ''
             ? Span::tag()
-                ->attributes($iconAttributes)
+                ->addAttributes($iconAttributes)
                 ->content(I::tag()
-                    ->class($icon)
+                    ->addClass($icon)
                     ->render())
                 ->encode(false)
                 ->render()

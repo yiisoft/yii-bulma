@@ -294,7 +294,7 @@ final class Message extends Widget
         unset($closeButtonAttributes['label']);
 
         $label = Span::tag()
-            ->attributes($buttonSpanAttributes)
+            ->addAttributes($buttonSpanAttributes)
             ->content('&times;')
             ->encode(false)
             ->render();
@@ -304,7 +304,7 @@ final class Message extends Widget
         }
 
         return Button::tag()
-            ->attributes($closeButtonAttributes)
+            ->addAttributes($closeButtonAttributes)
             ->content($label)
             ->encode(false)
             ->render() . PHP_EOL;
@@ -331,7 +331,7 @@ final class Message extends Widget
 
         if ($this->withoutHeader === false) {
             $html = Div::tag()
-                ->attributes($headerAttributes)
+                ->addAttributes($headerAttributes)
                 ->content($headerMessage)
                 ->encode(false)
                 ->render() . PHP_EOL;
@@ -356,7 +356,7 @@ final class Message extends Widget
         }
 
         return Div::tag()
-            ->attributes($attributes)
+            ->addAttributes($attributes)
             ->content(PHP_EOL . $this->renderHeader() . $this->renderMessageBody())
             ->encode(false)
             ->id($id)
@@ -379,7 +379,7 @@ final class Message extends Widget
         }
 
         return Div::tag()
-            ->attributes($bodyAttributes)
+            ->addAttributes($bodyAttributes)
             ->content($body)
             ->encode(false)
             ->render() . PHP_EOL;
