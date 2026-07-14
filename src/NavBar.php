@@ -7,6 +7,8 @@ namespace Yiisoft\Yii\Bulma;
 use Yiisoft\Html\Html;
 use Yiisoft\Widget\Widget;
 
+use const PHP_EOL;
+
 /**
  * NavBar renders a navbar HTML component.
  *
@@ -351,10 +353,10 @@ final class NavBar extends Widget
     {
         $burgerAttributes = $this->burgerAttributes;
         if ($this->buttonLinkContent === '') {
-            $this->buttonLinkContent = PHP_EOL .
-                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL .
-                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL .
-                Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL;
+            $this->buttonLinkContent = PHP_EOL
+                . Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL
+                . Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL
+                . Html::span(attributes: ['aria-hidden' => 'true']) . PHP_EOL;
         }
 
         $burgerAttributes['aria-expanded'] = $this->buttonLinkAriaExpanded;

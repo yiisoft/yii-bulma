@@ -13,6 +13,8 @@ use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Div;
 use Yiisoft\Yii\Bulma\Modal;
 
+use const PHP_EOL;
+
 final class ModalTest extends TestCase
 {
     /**
@@ -35,11 +37,11 @@ final class ModalTest extends TestCase
             $expected,
             Modal::widget()
                 ->attributes(['class' => 'widescreen'])
-                ->begin() .
-            Div::tag()
+                ->begin()
+            . Div::tag()
                 ->class('box')
-                ->content('Say hello...') . PHP_EOL .
-            Modal::end(),
+                ->content('Say hello...') . PHP_EOL
+            . Modal::end(),
         );
     }
 
@@ -198,7 +200,7 @@ final class ModalTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".',
         );
         Modal::widget()->toggleButtonColor('is-non-existent');
     }
@@ -279,12 +281,12 @@ final class ModalTest extends TestCase
         HTML;
         $this->assertEqualsWithoutLE(
             $expected,
-            Modal::widget()->begin() .
-            Div::tag()
+            Modal::widget()->begin()
+            . Div::tag()
                 ->class('box')
                 ->content('Say hello...')
-                ->render() . PHP_EOL .
-            Modal::end(),
+                ->render() . PHP_EOL
+            . Modal::end(),
         );
     }
 

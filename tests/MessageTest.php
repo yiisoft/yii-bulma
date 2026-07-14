@@ -156,7 +156,7 @@ final class MessageTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".',
         );
         Message::widget()
             ->headerColor('is-non-existent')
@@ -288,7 +288,7 @@ final class MessageTest extends TestCase
                 ->body('<strong>Holy guacamole!</strong> You should check in on some of those fields below.')
                 ->headerMessage('Very important')
                 ->size('is-large')
-                ->render()
+                ->render(),
         );
     }
 

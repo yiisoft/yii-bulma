@@ -189,7 +189,7 @@ final class BreadcrumbsTest extends TestCase
                         'url' => '/',
                         'icon' => 'fas fa-home',
                         'iconAttributes' => ['class' => 'icon is-small'],
-                    ]
+                    ],
                 )
                 ->items(
                     [
@@ -210,9 +210,9 @@ final class BreadcrumbsTest extends TestCase
                             'icon' => 'fas fa-thumbs-up',
                             'iconAttributes' => ['class' => 'icon is-small'],
                         ],
-                    ]
+                    ],
                 )
-                ->render()
+                ->render(),
         );
     }
 

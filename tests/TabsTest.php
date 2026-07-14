@@ -30,7 +30,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Tab 1', 'url' => 'site/index'],
                     ['label' => 'Tab 2', 'url' => 'site/contact'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -81,7 +81,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Tab 1', 'url' => 'site/index'],
                     ['label' => 'Tab 2', 'url' => 'site/contact'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -103,7 +103,7 @@ final class TabsTest extends TestCase
                     ['label' => Html::tag('span', 'Tab 1')],
                     ['label' => Html::tag('span', 'Tab 2')],
                 ])
-                ->render()
+                ->render(),
         );
 
         $expected = <<<HTML
@@ -122,7 +122,7 @@ final class TabsTest extends TestCase
                     ['label' => Html::tag('span', 'Tab 1')],
                     ['label' => Html::tag('span', 'Tab 2')],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -170,7 +170,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Music', 'icon' => 'fas fa-music'],
                     ['label' => 'Videos', 'icon' => 'fas fa-film'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -201,7 +201,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Music', 'icon' => 'fas fa-music'],
                     ['label' => 'Videos', 'icon' => 'fas fa-film'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -257,7 +257,7 @@ final class TabsTest extends TestCase
                         'visible' => false,
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -298,7 +298,7 @@ final class TabsTest extends TestCase
                         'visible' => false,
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -385,7 +385,7 @@ final class TabsTest extends TestCase
                     ['label' => 'Videos', 'content' => 'Some text about videos'],
                     ['label' => 'Documents', 'content' => 'Some text about documents'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -409,7 +409,7 @@ final class TabsTest extends TestCase
                 ->items([
                     ['label' => 'Music', 'content' => 'Some text about music'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 }
