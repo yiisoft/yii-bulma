@@ -536,7 +536,7 @@ final class Menu extends Widget
     {
         $attributes = $this->attributes;
         $content = '';
-        $customTag = Html::tag('aside');
+        $customTag = Html::aside();
         $itemsAttributes = $this->itemsAttributes;
 
         if (!array_key_exists('id', $attributes)) {
