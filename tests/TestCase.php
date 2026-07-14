@@ -53,15 +53,7 @@ abstract class TestCase extends BaseTestCase
             $class = $class->getParentClass();
         }
 
-        $property = $class->getProperty($propertyName);
-
-        $property->setAccessible(true);
-
-        $property->setValue($object, $value);
-
-        if ($revoke) {
-            $property->setAccessible(false);
-        }
+        $class->getProperty($propertyName)->setValue($object, $value);
     }
 }
 
