@@ -530,7 +530,7 @@ final class Dropdown extends Widget
                     } elseif ($enclose === false) {
                         $content = $itemLabel;
                     } elseif ($url === '') {
-                        $content = Html::tag('h6', $itemLabel, ['class' => $this->itemHeaderCssClass])
+                        $content = Html::h6($itemLabel, ['class' => $this->itemHeaderCssClass])
                             ->encode(null)
                             ->render();
                     } else {
