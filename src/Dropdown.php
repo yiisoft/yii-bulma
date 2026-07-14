@@ -574,7 +574,7 @@ final class Dropdown extends Widget
 
         if ($iconText !== '' || $iconCssClass !== '') {
             $html .= PHP_EOL . Html::span(
-                Html::tag('i', $iconText, ['class' => $iconCssClass])
+                Html::i($iconText, ['class' => $iconCssClass])
                     ->encode(false)
                     ->render(),
                 $iconAttributes,
