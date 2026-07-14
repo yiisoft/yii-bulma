@@ -21,5 +21,4 @@ updates:
     groups:
       composer-dev-dependencies:
         dependency-type: "development"
-        patterns: [ "*" ]
     versioning-strategy: "widen"
