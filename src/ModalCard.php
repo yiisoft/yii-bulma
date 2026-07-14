@@ -588,7 +588,7 @@ final class ModalCard extends Widget
             $content .= $this->renderCloseButton();
         }
 
-        return Html::tag('header', PHP_EOL . $content, $headerAttributes)->encode(false) . PHP_EOL;
+        return Html::header(PHP_EOL . $content, $headerAttributes)->encode(false) . PHP_EOL;
     }
 
     /**
