@@ -6,10 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Button;
-use Yiisoft\Html\Tag\CustomTag;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\P;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -517,9 +513,7 @@ final class ModalCard extends Widget
      */
     private function renderBackgroundTransparentOverlay(): string
     {
-        return Div::tag()
-            ->class($this->backgroundClass)
-            ->render();
+        return Html::div(attributes: ['class' => $this->backgroundClass])->render();
     }
 
     /**
@@ -556,9 +550,7 @@ final class ModalCard extends Widget
             Html::addCssClass($closeButtonAttributes, $this->closeButtonSize);
         }
 
-        return Button::tag()
-            ->attributes($closeButtonAttributes)
-            ->render() . PHP_EOL;
+        return Html::tag('button', attributes: $closeButtonAttributes) . PHP_EOL;
     }
 
     /**
@@ -575,11 +567,7 @@ final class ModalCard extends Widget
 
         Html::addCssClass($footerAttributes, $this->footerClass);
 
-        return CustomTag::name('footer')
-            ->attributes($footerAttributes)
-            ->content($footer)
-            ->encode(false)
-            ->render();
+        return Html::footer($footer, $footerAttributes)->encode(false)->render();
     }
 
     /**
@@ -594,20 +582,13 @@ final class ModalCard extends Widget
         Html::addCssClass($headerAttributes, $this->headerClass);
         Html::addCssClass($titleAttributes, $this->titleClass);
 
-        $content .= P::tag()
-            ->attributes($titleAttributes)
-            ->content($this->title)
-            ->render() . PHP_EOL;
+        $content .= Html::p($this->title, $titleAttributes) . PHP_EOL;
 
         if ($this->withoutCloseButton === false) {
             $content .= $this->renderCloseButton();
         }
 
-        return CustomTag::name('header')
-            ->attributes($headerAttributes)
-            ->content(PHP_EOL . $content)
-            ->encode(false)
-            ->render() . PHP_EOL;
+        return Html::header(PHP_EOL . $content, $headerAttributes)->encode(false) . PHP_EOL;
     }
 
     /**
@@ -634,9 +615,6 @@ final class ModalCard extends Widget
 
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
-        return Button::tag()
-            ->attributes($toggleButtonAttributes)
-            ->content($this->toggleButtonLabel)
-            ->render();
+        return Html::tag('button', $this->toggleButtonLabel, $toggleButtonAttributes)->render();
     }
 }

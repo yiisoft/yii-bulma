@@ -10,10 +10,6 @@ use Yiisoft\Definitions\Exception\InvalidConfigException;
 use Yiisoft\Definitions\Exception\NotInstantiableException;
 use Yiisoft\Factory\NotFoundException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\A;
-use Yiisoft\Html\Tag\CustomTag;
-use Yiisoft\Html\Tag\Div;
-use Yiisoft\Html\Tag\Span;
 use Yiisoft\Widget\Widget;
 
 use function implode;
@@ -262,13 +258,10 @@ final class Nav extends Widget
         $html = '';
 
         if ($iconText !== '' || $iconCssClass !== '') {
-            $html = Span::tag()
-                ->addAttributes($iconAttributes)
-                ->content(CustomTag::name('i')
-                    ->addClass($iconCssClass)
-                    ->content($iconText)
-                    ->encode(false)
-                    ->render())
+            $html = Html::span(
+                Html::i($iconText, ['class' => $iconCssClass])->encode(false),
+                $iconAttributes,
+            )
                 ->encode(false)
                 ->render();
         }
@@ -352,32 +345,16 @@ final class Nav extends Widget
 
             $items = $this->isChildActive($items, $active);
             $dropdown = PHP_EOL . $this->renderDropdown($items);
-            $a = A::tag()
-                ->attributes($urlAttributes)
-                ->content($itemLabel)
-                ->encode(false)
-                ->url($url)
-                ->render();
-            $div = Div::tag()
-                ->attributes($dropdownAttributes)
-                ->content($dropdown)
-                ->encode(false)
-                ->render();
-            $html = Div::tag()
-                ->attributes($attributes)
-                ->content(PHP_EOL . $a . PHP_EOL . $div . PHP_EOL)
+            $a = Html::a($itemLabel, $url, $urlAttributes)->encode(false)->render();
+            $div = Html::div($dropdown, $dropdownAttributes)->encode(false)->render();
+            $html = Html::div(PHP_EOL . $a . PHP_EOL . $div . PHP_EOL, $attributes)
                 ->encode(false)
                 ->render();
         }
 
         if ($html === '') {
             Html::addCssClass($urlAttributes, 'navbar-item');
-            $html = A::tag()
-                ->attributes($urlAttributes)
-                ->content($itemLabel)
-                ->url($url)
-                ->encode(false)
-                ->render();
+            $html = Html::a($itemLabel, $url, $urlAttributes)->encode(false)->render();
         }
 
         return $html;
@@ -402,27 +379,19 @@ final class Nav extends Widget
         $links = PHP_EOL . implode(PHP_EOL, $items) . PHP_EOL;
 
         if ($this->enclosedByStartMenu) {
-            $links = PHP_EOL . Div::tag()
-                ->class($this->startCssClass)
-                ->content($links)
-                ->encode(false)
-                ->render() .
+            $links = PHP_EOL . Html::div($links, ['class' => $this->startCssClass])
+                ->encode(false) .
                 PHP_EOL;
         }
 
         if ($this->enclosedByEndMenu) {
-            $links = PHP_EOL . Div::tag()
-                ->class($this->endCssClass)
-                ->content($links)
-                ->encode(false)
-                ->render() .
+            $links = PHP_EOL . Html::div($links, ['class' => $this->endCssClass])
+                ->encode(false) .
                 PHP_EOL;
         }
 
         return $this->items !== []
-            ? Div::tag()
-                ->class($this->menuCssClass)
-                ->content($links)
+            ? Html::div($links, ['class' => $this->menuCssClass])
                 ->encode(false)
                 ->render()
             : '';

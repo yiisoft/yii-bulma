@@ -6,7 +6,6 @@ namespace Yiisoft\Yii\Bulma;
 
 use InvalidArgumentException;
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\CustomTag;
 use Yiisoft\Widget\Widget;
 
 use function array_key_exists;
@@ -174,10 +173,7 @@ final class ProgressBar extends Widget
             $content = $attributes['value'] > 0 ? $attributes['value'] . '%' : '';
         }
 
-        return CustomTag::name('progress')
-            ->attributes($attributes)
-            ->content($content)
-            ->render();
+        return Html::tag('progress', $content, $attributes)->render();
     }
 
     private function build(array $attributes): array
