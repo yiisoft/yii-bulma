@@ -50,7 +50,7 @@ final class PanelTest extends TestCase
                 ->tabs([
                     ['label' => 'all', 'items' => [['label' => 'Tabs']]],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -92,7 +92,7 @@ final class PanelTest extends TestCase
             Panel::widget()
                 ->cssClass('test-class')
                 ->tabs([['label' => 'all']])
-                ->render()
+                ->render(),
         );
     }
 
@@ -103,7 +103,7 @@ final class PanelTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".'
+            'Invalid color. Valid values are: "is-primary is-link is-info is-success is-warning is-danger is-dark".',
         );
         Panel::widget()
             ->color('is-non-existent')
@@ -142,7 +142,7 @@ final class PanelTest extends TestCase
             Panel::widget()
                 ->heading('Repositories')
                 ->headingClass('test-class')
-                ->render()
+                ->render(),
         );
     }
 
@@ -389,9 +389,9 @@ final class PanelTest extends TestCase
                                 ],
                             ],
                         ],
-                    ]
+                    ],
                 )
-                ->render()
+                ->render(),
         );
     }
 
@@ -454,7 +454,7 @@ final class PanelTest extends TestCase
                         ],
                     ],
                 )
-                ->render()
+                ->render(),
         );
     }
 
@@ -498,7 +498,7 @@ final class PanelTest extends TestCase
                     ['label' => 'Sources'],
                     ['label' => 'Forks'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -541,7 +541,7 @@ final class PanelTest extends TestCase
                     ['label' => 'Sources'],
                     ['label' => 'Forks'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -572,7 +572,7 @@ final class PanelTest extends TestCase
                     ['label' => 'Sources'],
                     ['label' => 'Forks'],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -604,7 +604,7 @@ final class PanelTest extends TestCase
                     ['label' => 'Forks'],
                 ])
                 ->tabsAttributes(['class' => 'my-class'])
-                ->render()
+                ->render(),
         );
     }
 
@@ -698,7 +698,7 @@ final class PanelTest extends TestCase
                     ['label' => 'Sources', 'urlAttributes' => ['data-target' => 'Sources']],
                     ['label' => 'Forks', 'urlAttributes' => ['data-target' => 'Fork']],
                 ])
-                ->render()
+                ->render(),
         );
     }
 }

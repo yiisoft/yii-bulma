@@ -12,6 +12,8 @@ use Yiisoft\Widget\Widget;
 use function implode;
 use function in_array;
 
+use const PHP_EOL;
+
 /**
  * Panel renders a panel component.
  *
@@ -59,7 +61,7 @@ final class Panel extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -397,8 +399,8 @@ final class Panel extends Widget
         if ($icon !== '') {
             $icon = PHP_EOL . Html::i(attributes: ['aria-hidden' => 'true'])->addClass($icon) . PHP_EOL;
             $label = PHP_EOL . Html::span($icon, $labelAttributes)
-                ->encode(false) . PHP_EOL .
-                $label . PHP_EOL;
+                ->encode(false) . PHP_EOL
+                . $label . PHP_EOL;
         }
 
         return Html::a($label, attributes: $urlAttributes)->encode(false)->render();

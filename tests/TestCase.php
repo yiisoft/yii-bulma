@@ -67,6 +67,4 @@ abstract class TestCase extends BaseTestCase
 
 namespace Yiisoft\Html;
 
-function hrtime(bool $getAsNumber = false): void
-{
-}
+function hrtime(bool $getAsNumber = false): void {}

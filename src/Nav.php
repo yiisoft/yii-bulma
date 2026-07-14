@@ -16,6 +16,8 @@ use function implode;
 use function is_array;
 use function is_string;
 
+use const PHP_EOL;
+
 /**
  * Nav renders a nav HTML component.
  *
@@ -44,7 +46,7 @@ final class Nav extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -253,7 +255,7 @@ final class Nav extends Widget
         string $label,
         string $iconText,
         string $iconCssClass,
-        array $iconAttributes = []
+        array $iconAttributes = [],
     ): string {
         $html = '';
 
@@ -338,7 +340,7 @@ final class Nav extends Widget
             $attributes = $this->attributes;
             Html::addCssClass(
                 $attributes,
-                [$this->itemCssClass, $this->hasDropdownCssClass, $this->isHoverableCssClass]
+                [$this->itemCssClass, $this->hasDropdownCssClass, $this->isHoverableCssClass],
             );
             Html::addCssClass($urlAttributes, $this->linkCssClass);
             Html::addCssClass($dropdownAttributes, $this->dropdownCssClass);
@@ -380,14 +382,14 @@ final class Nav extends Widget
 
         if ($this->enclosedByStartMenu) {
             $links = PHP_EOL . Html::div($links, ['class' => $this->startCssClass])
-                ->encode(false) .
-                PHP_EOL;
+                ->encode(false)
+                . PHP_EOL;
         }
 
         if ($this->enclosedByEndMenu) {
             $links = PHP_EOL . Html::div($links, ['class' => $this->endCssClass])
-                ->encode(false) .
-                PHP_EOL;
+                ->encode(false)
+                . PHP_EOL;
         }
 
         return $this->items !== []

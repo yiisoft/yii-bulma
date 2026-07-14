@@ -499,7 +499,7 @@ final class NavTest extends TestCase
             $expected,
             Nav::widget()
                 ->items([['label' => 'Page1', 'items' => null], ['label' => 'Page4', 'items' => []]])
-                ->render()
+                ->render(),
         );
 
         $this->assertEmpty(Nav::widget()
