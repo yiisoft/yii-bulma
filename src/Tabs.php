@@ -401,8 +401,7 @@ final class Tabs extends Widget
             $this->tabsContent[] = Html::div($content, $contentAttributes)->encode(false)->render();
         }
 
-        return Html::tag(
-            'li',
+return Html::li(
             Html::a($label, attributes: $urlAttributes)->encode(false)->render(),
             $attributes
         )
