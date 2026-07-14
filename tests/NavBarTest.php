@@ -34,7 +34,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->ariaLabel('main')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -59,7 +59,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->brandAttributes(['class' => 'text-danger'])
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -84,7 +84,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->brandCssClass('has-text-center navbar-brand')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -112,8 +112,8 @@ final class NavBarTest extends TestCase
                 ->brandImage('https://bulma.io/images/bulma-logo.png')
                 ->brandImageAttributes(['style' => ['width' => '112', 'height' => '28']])
                 ->brandUrl('https://bulma.io')
-                ->begin() .
-            NavBar::end()
+                ->begin()
+            . NavBar::end(),
         );
     }
 
@@ -165,8 +165,8 @@ final class NavBarTest extends TestCase
                 ->brandImageAttributes(['title' => 'bulma', 'style' => ['width' => '112', 'height' => '28']])
                 ->brandText('My Project')
                 ->brandUrl('https://bulma.io')
-                ->begin() .
-            NavBar::end()
+                ->begin()
+            . NavBar::end(),
         );
     }
 
@@ -194,8 +194,8 @@ final class NavBarTest extends TestCase
                 ->brandText('My Project')
                 ->brandTextAttributes(['class' => 'has-text-primary'])
                 ->brandUrl('')
-                ->begin() .
-            NavBar::end()
+                ->begin()
+            . NavBar::end(),
         );
     }
 
@@ -220,7 +220,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->burgerAttributes(['class' => 'has-text-center'])
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -245,7 +245,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->burgerCssClass('has-text-center navbar-burguer')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -270,7 +270,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->buttonLinkAriaExpanded('true')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -295,7 +295,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->buttonLinkAriaLabelText('menu-text')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -316,8 +316,8 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->buttonLinkContent('<span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span>')
-                ->begin() .
-            NavBar::end()
+                ->begin()
+            . NavBar::end(),
         );
     }
 
@@ -342,7 +342,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->buttonLinkRole('button-text')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -367,7 +367,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->cssClass('has-text-danger navbar')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 
@@ -445,8 +445,8 @@ final class NavBarTest extends TestCase
             NavBar::widget()
                 ->brandText('link-text')
                 ->itemCssClass('has-text-center navbar-item')
-                ->begin() .
-            NavBar::end()
+                ->begin()
+            . NavBar::end(),
         );
     }
 
@@ -491,7 +491,7 @@ final class NavBarTest extends TestCase
             $expected,
             NavBar::widget()
                 ->role('navigation-text')
-                ->begin() . NavBar::end()
+                ->begin() . NavBar::end(),
         );
     }
 }

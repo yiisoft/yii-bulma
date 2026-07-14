@@ -13,6 +13,8 @@ use function implode;
 use function is_array;
 use function strtr;
 
+use const PHP_EOL;
+
 /**
  * The Bulma breadcrumb is a simple navigation component.
  *
@@ -68,7 +70,7 @@ final class Breadcrumbs extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -205,9 +207,9 @@ final class Breadcrumbs extends Widget
             $customTag = $customTag->id(Html::generateId($this->autoIdPrefix) . '-breadcrumbs');
         }
 
-        $content = PHP_EOL . Html::openTag('ul', $this->itemsAttributes) . PHP_EOL .
-            implode('', $this->renderItems()) .
-            Html::closeTag('ul') . PHP_EOL;
+        $content = PHP_EOL . Html::openTag('ul', $this->itemsAttributes) . PHP_EOL
+            . implode('', $this->renderItems())
+            . Html::closeTag('ul') . PHP_EOL;
 
         return $customTag
             ->addAttributes($attributes)

@@ -14,6 +14,8 @@ use function implode;
 use function in_array;
 use function is_bool;
 
+use const PHP_EOL;
+
 /**
  * Simple responsive horizontal navigation tabs, with different styles.
  *
@@ -44,24 +46,24 @@ final class Tabs extends Widget
 {
     public const ALIGNMENT_CENTERED = 'is-centered';
     public const ALIGNMENT_RIGHT = 'is-right';
-    private const ALIGNMENT_ALL = [
-        self::ALIGNMENT_CENTERED,
-        self::ALIGNMENT_RIGHT,
-    ];
 
     public const SIZE_SMALL = 'is-small';
     public const SIZE_MEDIUM = 'is-medium';
     public const SIZE_LARGE = 'is-large';
-    private const SIZE_ALL = [
-        self::SIZE_SMALL,
-        self::SIZE_MEDIUM,
-        self::SIZE_LARGE,
-    ];
 
     public const STYLE_BOX = 'is-boxed';
     public const STYLE_TOGGLE = 'is-toggle';
     public const STYLE_TOGGLE_ROUNDED = 'is-toggle is-toggle-rounded';
     public const STYLE_FULLWIDTH = 'is-fullwidth';
+    private const ALIGNMENT_ALL = [
+        self::ALIGNMENT_CENTERED,
+        self::ALIGNMENT_RIGHT,
+    ];
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
     private const STYLE_ALL = [
         self::STYLE_BOX,
         self::STYLE_TOGGLE,
@@ -107,7 +109,7 @@ final class Tabs extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {

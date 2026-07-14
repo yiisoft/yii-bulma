@@ -15,6 +15,8 @@ use function count;
 use function implode;
 use function strtr;
 
+use const PHP_EOL;
+
 /**
  * The Bulma menu is a vertical navigation component.
  *
@@ -85,7 +87,7 @@ final class Menu extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -513,7 +515,7 @@ final class Menu extends Widget
 
         return strtr(
             $labelTemplate,
-            ['{label}' => Html::p($label, ['class' => 'menu-label']) . PHP_EOL]
+            ['{label}' => Html::p($label, ['class' => 'menu-label']) . PHP_EOL],
         );
     }
 

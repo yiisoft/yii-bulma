@@ -12,6 +12,8 @@ use function array_key_exists;
 use function implode;
 use function in_array;
 
+use const PHP_EOL;
+
 /**
  * Modal renders a modal window that can be toggled by clicking on a button.
  *
@@ -33,11 +35,6 @@ final class Modal extends Widget
     public const SIZE_SMALL = 'is-small';
     public const SIZE_MEDIUM = 'is-medium';
     public const SIZE_LARGE = 'is-large';
-    private const SIZE_ALL = [
-        self::SIZE_SMALL,
-        self::SIZE_MEDIUM,
-        self::SIZE_LARGE,
-    ];
 
     public const COLOR_PRIMARY = 'is-primary';
     public const COLOR_LINK = 'is-link';
@@ -46,6 +43,11 @@ final class Modal extends Widget
     public const COLOR_WARNING = 'is-warning';
     public const COLOR_DANGER = 'is-danger';
     public const COLOR_DARK = 'is-dark';
+    private const SIZE_ALL = [
+        self::SIZE_SMALL,
+        self::SIZE_MEDIUM,
+        self::SIZE_LARGE,
+    ];
     private const COLOR_ALL = [
         self::COLOR_PRIMARY,
         self::COLOR_LINK,
@@ -77,7 +79,7 @@ final class Modal extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {

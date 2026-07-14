@@ -40,7 +40,7 @@ final class MenuTest extends TestCase
                         'url' => '#',
                         'labelTemplate' => '{label}',
                         'urlTemplate' => '<a href={url}>{icon}{label}</a>',
-                        'active' => fn ($item, $hasActiveChild, $isItemActive, $widget) => isset($item, $hasActiveChild, $isItemActive, $widget),
+                        'active' => fn($item, $hasActiveChild, $isItemActive, $widget) => isset($item, $hasActiveChild, $isItemActive, $widget),
                     ],
                     [
                         'label' => 'item2',
@@ -48,7 +48,7 @@ final class MenuTest extends TestCase
                         'active' => false,
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -94,7 +94,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
 
         $expected = <<<HTML
@@ -132,7 +132,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
     }
 
@@ -178,7 +178,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
     }
 
@@ -210,8 +210,8 @@ final class MenuTest extends TestCase
             $expected,
             Menu::widget()
                 ->brand(
-                    '<div class=aside-tools>' . "\n" . '<div class=aside-tools-label>' . "\n" .
-                    '<span><b>Brand</b> Example</span>' . "\n" . '</div>' . "\n" . '</div>'
+                    '<div class=aside-tools>' . "\n" . '<div class=aside-tools-label>' . "\n"
+                    . '<span><b>Brand</b> Example</span>' . "\n" . '</div>' . "\n" . '</div>',
                 )
                 ->currentPath('/setting')
                 ->items([
@@ -231,7 +231,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
     }
 
@@ -263,7 +263,7 @@ final class MenuTest extends TestCase
                         'url' => '/profile',
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -307,7 +307,7 @@ final class MenuTest extends TestCase
                         'url' => '/profile',
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -352,7 +352,7 @@ final class MenuTest extends TestCase
                 ])
                 ->hiddenEmptyItems()
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
     }
 
@@ -431,7 +431,7 @@ final class MenuTest extends TestCase
                         ],
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -477,7 +477,7 @@ final class MenuTest extends TestCase
                         'itemAttributes' => ['class' => ['some-other-class', 'foo_bar_baz_class']],
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -523,7 +523,7 @@ final class MenuTest extends TestCase
                         'itemAttributes' => ['class' => 'another-class other--class two classes'],
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -596,7 +596,7 @@ final class MenuTest extends TestCase
                         'tag' => null,
                     ],
                 ])
-                ->render()
+                ->render(),
         );
 
         $expected = <<<HTML
@@ -621,7 +621,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->itemsTag(null)
-                ->render()
+                ->render(),
         );
 
         $expected = <<<HTML
@@ -647,7 +647,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->itemsTag(null)
-                ->render()
+                ->render(),
         );
     }
 
@@ -687,7 +687,7 @@ final class MenuTest extends TestCase
                         'label' => 'item3 (no template)',
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -738,7 +738,7 @@ final class MenuTest extends TestCase
                         'visible' => false,
                     ],
                 ])
-                ->render()
+                ->render(),
         );
     }
 
@@ -782,7 +782,7 @@ final class MenuTest extends TestCase
                     ],
                 ])
                 ->lastItemCssClass('testMe')
-                ->render()
+                ->render(),
         );
     }
 
@@ -846,7 +846,7 @@ final class MenuTest extends TestCase
             $expected,
             Menu::widget()
                 ->items([['label' => 'Login', 'url' => 'auth/login']])
-                ->render()
+                ->render(),
         );
     }
 }

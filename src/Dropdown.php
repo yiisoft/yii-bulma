@@ -16,6 +16,8 @@ use function array_merge;
 use function implode;
 use function is_array;
 
+use const PHP_EOL;
+
 /**
  * The dropdown component is a container for a dropdown button and a dropdown menu.
  *
@@ -50,7 +52,7 @@ final class Dropdown extends Widget
      *
      * @param array $values Attribute values indexed by attribute names.
      *
-     * {@see \Yiisoft\Html\Html::renderTagAttributes()} For details on how attributes are being rendered.
+     * {@see Html::renderTagAttributes()} For details on how attributes are being rendered.
      */
     public function attributes(array $values): self
     {
@@ -564,7 +566,7 @@ final class Dropdown extends Widget
         array $labelAttributes,
         string $iconText,
         string $iconCssClass,
-        array $iconAttributes = []
+        array $iconAttributes = [],
     ): string {
         $html = '';
 
@@ -587,7 +589,7 @@ final class Dropdown extends Widget
         string $label,
         string $iconText,
         string $iconCssClass,
-        array $iconAttributes = []
+        array $iconAttributes = [],
     ): string {
         $html = '';
 
