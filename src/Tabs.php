@@ -401,12 +401,12 @@ final class Tabs extends Widget
             $this->tabsContent[] = Html::div($content, $contentAttributes)->encode(false)->render();
         }
 
-return Html::li(
+        return Html::li(
             Html::a($label, attributes: $urlAttributes)->encode(false)->render(),
             $attributes
         )
-            ->encode(false)
-            ->render();
+                    ->encode(false)
+                    ->render();
     }
 
     private function renderIcon(string $label, string $icon, array $iconAttributes): string
