@@ -567,7 +567,7 @@ final class ModalCard extends Widget
 
         Html::addCssClass($footerAttributes, $this->footerClass);
 
-        return Html::tag('footer', $footer, $footerAttributes)->encode(false)->render();
+        return Html::footer($footer, $footerAttributes)->encode(false)->render();
     }
 
     /**
