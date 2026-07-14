@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-final class ConfigTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+use function dirname;
+
+final class ConfigTest extends TestCase
 {
     public function testParams(): void
     {
