@@ -259,9 +259,7 @@ final class Nav extends Widget
 
         if ($iconText !== '' || $iconCssClass !== '') {
             $html = Html::span(
-                Html::i($iconText, ['class' => $iconCssClass])
-                    ->encode(false)
-                    ->render(),
+                Html::i($iconText, ['class' => $iconCssClass])->encode(false),
                 $iconAttributes,
             )
                 ->encode(false)

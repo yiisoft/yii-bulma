@@ -222,7 +222,7 @@ final class Breadcrumbs extends Widget
 
         if ($icon !== null) {
             $html = Html::span(
-                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true'])->render(),
+                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true']),
                 attributes: $iconAttributes,
             )
                 ->encode($this->encode)
@@ -280,9 +280,8 @@ final class Breadcrumbs extends Widget
         }
 
         $link = $url !== null
-            ? Html::a($label, $url, attributes: $item)
-                ->encode($encode)
-                ->render() : $label;
+            ? Html::a($label, $url, attributes: $item)->encode($encode)->render()
+            : $label;
 
         return strtr($template, ['{link}' => $link, '{label}' => $label, '{icon}' => $icon]);
     }

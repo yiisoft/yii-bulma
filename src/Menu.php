@@ -521,7 +521,7 @@ final class Menu extends Widget
     {
         return $icon !== ''
             ? Html::span(
-                Html::i(attributes: ['class' => $icon])->render(),
+                Html::i(attributes: ['class' => $icon]),
                 $iconAttributes,
             )
                 ->encode(false)

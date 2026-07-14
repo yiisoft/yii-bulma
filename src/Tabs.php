@@ -402,7 +402,7 @@ final class Tabs extends Widget
         }
 
         return Html::li(
-            Html::a($label, attributes: $urlAttributes)->encode(false)->render(),
+            Html::a($label, attributes: $urlAttributes)->encode(false),
             $attributes
         )
                     ->encode(false)
@@ -417,7 +417,7 @@ final class Tabs extends Widget
 
         $elements = [
             Html::span(
-                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true'])->render(),
+                Html::i(attributes: ['class' => $icon, 'aria-hidden' => 'true']),
                 $iconAttributes,
             )
                 ->encode(false)
