@@ -26,12 +26,14 @@
         "yiisoft/widget": "^2.0"
     },
     "require-dev": {
-        "maglnet/composer-require-checker": "^4.4",
+        "bamarni/composer-bin-plugin": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.95.13",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^0.16.0",
+        "rector/rector": "^2.5.7",
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^4.30 || ^5.26.1 || ^6.16.1",
+        "yiisoft/code-style": "^1.0",
         "yiisoft/test-support": "^3.0"
     },
     "autoload": {
@@ -45,6 +47,11 @@
         }
     },
     "extra": {
+        "bamarni-bin": {
+            "bin-links": true,
+            "target-directory": "tools",
+            "forward-command": true
+        },
         "config-plugin-options": {
             "source-directory": "config"
         },
@@ -55,6 +62,7 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
             "infection/extension-installer": true,
             "composer/package-versions-deprecated": true,
             "composer/installers": true,
@@ -62,7 +70,9 @@
         }
     },
     "scripts": {
+        "cs-fix": "php-cs-fixer fix",
         "psalm": "psalm",
+        "rector": "rector",
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"
     }

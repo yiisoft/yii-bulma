@@ -15,6 +15,8 @@ use Yiisoft\Html\Tag\Img;
 use Yiisoft\Html\Tag\P;
 use Yiisoft\Yii\Bulma\ModalCard;
 
+use const PHP_EOL;
+
 final class ModalCardTest extends TestCase
 {
     /**
@@ -49,17 +51,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -95,17 +97,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -141,17 +143,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -187,17 +189,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -234,17 +236,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -280,17 +282,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -301,7 +303,7 @@ final class ModalCardTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".'
+            'Invalid color. Valid values are: "is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger", "is-dark".',
         );
         ModalCard::widget()
             ->toggleButtonColor('is-non-existent')
@@ -363,18 +365,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->footerAttributes(['class' => 'bg-transparent'])
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -409,18 +411,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->headerAttributes(['class' => 'bg-info'])
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -492,18 +494,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->titleAttributes(['class' => 'text-info'])
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -538,18 +540,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->toggleButtonAttributes(['disabled' => true])
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -584,18 +586,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->toggleButtonColor(ModalCard::COLOR_SUCCESS)
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -630,18 +632,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->toggleButtonLabel('Launch modal')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -676,18 +678,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->toggleButtonSize(ModalCard::SIZE_LARGE)
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -724,17 +726,17 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -768,18 +770,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->withoutCloseButton(true)
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 
@@ -813,18 +815,18 @@ final class ModalCardTest extends TestCase
                 ->footer(
                     Button::tag()
                         ->class('button is-success')
-                        ->content('Save changes') . PHP_EOL .
-                    Button::tag()
+                        ->content('Save changes') . PHP_EOL
+                    . Button::tag()
                         ->class('button is-danger is-outline')
-                        ->content('Cancel')
+                        ->content('Cancel'),
                 )
                 ->title('Modal title.')
                 ->withoutToggleButton(true)
-                ->begin() .
-            P::tag()
+                ->begin()
+            . P::tag()
                 ->class('image is-4by3')
-                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL .
-            ModalCard::end(),
+                ->content(Img::tag()->src('https://bulma.io/images/placeholders/1280x960.png')) . PHP_EOL
+            . ModalCard::end(),
         );
     }
 }
