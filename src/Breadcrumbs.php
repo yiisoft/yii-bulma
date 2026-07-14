@@ -193,7 +193,7 @@ final class Breadcrumbs extends Widget
         }
 
         $attributes = $this->attributes;
-        $customTag = Html::tag('nav');
+        $customTag = Html::nav();
 
         Html::addCssClass($attributes, 'breadcrumb');
 
