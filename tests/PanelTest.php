@@ -5,21 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Panel;
 
 final class PanelTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="my-class panel">
         </nav>
@@ -29,12 +20,8 @@ final class PanelTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBlockClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -54,12 +41,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testColor(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Repositories</p>
@@ -74,12 +57,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="test-class">
         <p class="panel-tabs">
@@ -96,9 +75,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testExceptionColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -110,12 +86,8 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeading(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-heading">Repositories</p>
@@ -126,12 +98,8 @@ final class PanelTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeadingClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="test-class">Repositories</p>
@@ -146,12 +114,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeadingAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="my-class panel-heading">Repositories</p>
@@ -166,9 +130,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Panel::widget();
@@ -190,9 +151,6 @@ final class PanelTest extends TestCase
         $this->assertNotSame($widget, $widget->template(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -201,12 +159,8 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
@@ -395,12 +349,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
@@ -458,12 +408,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         </nav>
@@ -471,12 +417,8 @@ final class PanelTest extends TestCase
         $this->assertEqualsWithoutLE($expected, Panel::widget()->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -502,9 +444,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -513,12 +452,8 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="test-class">
@@ -545,12 +480,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabs(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -576,12 +507,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabsAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="my-class panel-tabs">
@@ -608,12 +535,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $template = <<<HTML
         {panelBegin}{panelHeading}{panelTabs}
         <div class="panel-block">

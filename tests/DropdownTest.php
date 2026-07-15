@@ -5,21 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Dropdown;
 
 final class DropdownTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -46,12 +37,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonIconCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -79,12 +66,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonIconTextAndAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -112,12 +95,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLabel(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -144,12 +123,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLabelAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -176,12 +151,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testContentCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -208,12 +179,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testDividerCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -242,12 +209,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testId(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -274,9 +237,6 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Dropdown::widget();
@@ -305,12 +265,8 @@ final class DropdownTest extends TestCase
         $this->assertNotSame($widget, $widget->triggerCssClass(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemActiveCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -337,12 +293,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -369,12 +321,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemDisabledStyleCss(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -401,12 +349,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemHeaderCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -433,12 +377,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testMenuCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -465,9 +405,6 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testMissingLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -478,13 +415,10 @@ final class DropdownTest extends TestCase
     }
 
     /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     *
      *  @link https://bulma.io/documentation/components/dropdown/
      */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -520,12 +454,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderItemsEncodeLabels(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -555,12 +485,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderIconText(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -591,12 +517,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderSubmenu(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
@@ -646,12 +568,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTriggerCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger-test">
@@ -678,12 +596,8 @@ final class DropdownTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testUnClosedByContainer(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->assertSame(
             '<a class="dropdown-item" href="#">Dropdown item</a>',
             Dropdown::widget()

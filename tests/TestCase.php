@@ -6,7 +6,7 @@ namespace Yiisoft\Yii\Bulma\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Container\ContainerInterface;
-use ReflectionClass;
+use Yiisoft\Html\IdGenerator;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Widget\WidgetFactory;
 
@@ -20,6 +20,9 @@ abstract class TestCase extends BaseTestCase
 
         $this->container = new SimpleContainer();
         WidgetFactory::initialize($this->container);
+
+        IdGenerator\disableSeed();
+        IdGenerator\reset();
     }
 
     protected function tearDown(): void
@@ -27,6 +30,8 @@ abstract class TestCase extends BaseTestCase
         unset($this->container);
 
         parent::tearDown();
+
+        IdGenerator\enableSeed();
     }
 
     /**
@@ -38,25 +43,4 @@ abstract class TestCase extends BaseTestCase
         $actual = str_replace("\r\n", "\n", $actual);
         self::assertEquals($expected, $actual, $message);
     }
-
-    /**
-     * Sets an inaccessible object property to a designated value.
-     *
-     * @param $value
-     * @param bool $revoke whether to make property inaccessible after setting
-     */
-    protected function setInaccessibleProperty(object $object, string $propertyName, $value, bool $revoke = true): void
-    {
-        $class = new ReflectionClass($object);
-
-        while (!$class->hasProperty($propertyName)) {
-            $class = $class->getParentClass();
-        }
-
-        $class->getProperty($propertyName)->setValue($object, $value);
-    }
 }
-
-namespace Yiisoft\Html;
-
-function hrtime(bool $getAsNumber = false): void {}

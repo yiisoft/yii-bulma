@@ -5,21 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Menu;
 
 final class MenuTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testActiveItemClosure(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -52,12 +43,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testActivateItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -136,12 +123,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testActivateParentItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -182,12 +165,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrand(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <div class=aside-tools>
@@ -235,12 +214,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testCurrentPath(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -267,12 +242,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testFirstItemCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -311,12 +282,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHiddenItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -356,9 +323,6 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Menu::widget();
@@ -380,12 +344,8 @@ final class MenuTest extends TestCase
         $this->assertNotSame($widget, $widget->subMenuTemplate(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -435,12 +395,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsClassAsArray(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -481,12 +437,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsClassAsString(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -527,24 +479,16 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsEmpty(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $html = Menu::widget()
             ->items([])
             ->render();
         $this->assertEmpty($html);
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsEmptyLabel(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -557,9 +501,6 @@ final class MenuTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidArgumentException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsTagExeception(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -567,12 +508,8 @@ final class MenuTest extends TestCase
         Menu::widget()->itemsTag('');
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsTag(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -651,12 +588,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -691,12 +624,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsVisible(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -742,12 +671,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testLastItemCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -786,12 +711,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testSubMenuTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">
@@ -829,12 +750,8 @@ final class MenuTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <aside id="w1-menu" class="menu">
         <ul class="menu-list">

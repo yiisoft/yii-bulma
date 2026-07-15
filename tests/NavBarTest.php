@@ -4,21 +4,12 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Bulma\Tests;
 
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\NavBar;
 
 final class NavBarTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAriaLabel(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main" role="navigation">
         <div class="navbar-brand">
@@ -38,12 +29,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="text-danger navbar-brand">
@@ -63,12 +50,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="has-text-center navbar-brand">
@@ -88,12 +71,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandImageAndUrl(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -117,12 +96,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandText(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -140,12 +115,8 @@ final class NavBarTest extends TestCase
                 ->begin() . NavBar::end());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandImageUrlText(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -170,12 +141,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBrandUrlEmptyText(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -199,12 +166,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBurgerAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -224,12 +187,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBurgerCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -249,12 +208,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLinkAriaExpanded(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -274,12 +229,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLinkAriaLabelText(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -299,12 +250,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLinkContent(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -321,12 +268,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testButtonLinkRole(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -346,12 +289,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="has-text-danger navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -371,12 +310,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testId(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="id-test" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -393,9 +328,6 @@ final class NavBarTest extends TestCase
                 ->begin() . NavBar::end());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = NavBar::widget();
@@ -422,12 +354,8 @@ final class NavBarTest extends TestCase
         $this->assertNotSame($widget, $widget->role(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -450,12 +378,8 @@ final class NavBarTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
@@ -470,12 +394,8 @@ final class NavBarTest extends TestCase
         $this->assertEqualsWithoutLE($expected, NavBar::widget()->begin() . NavBar::end());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRole(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation-text">
         <div class="navbar-brand">

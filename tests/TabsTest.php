@@ -12,7 +12,6 @@ final class TabsTest extends TestCase
 {
     public function testActivateItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -36,7 +35,6 @@ final class TabsTest extends TestCase
 
     public function testAlignment(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs is-centered">
         <ul>
@@ -50,7 +48,6 @@ final class TabsTest extends TestCase
 
     public function testAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="some-class tabs">
         <ul>
@@ -64,7 +61,6 @@ final class TabsTest extends TestCase
 
     public function testCurrentPath(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -87,7 +83,6 @@ final class TabsTest extends TestCase
 
     public function testEncode(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -152,7 +147,6 @@ final class TabsTest extends TestCase
 
     public function testIcon(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -176,7 +170,6 @@ final class TabsTest extends TestCase
 
     public function testIconAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -224,7 +217,6 @@ final class TabsTest extends TestCase
 
     public function testItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -263,7 +255,6 @@ final class TabsTest extends TestCase
 
     public function testItemsAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-test-id" class="tabs">
         <ul class="test-class">
@@ -312,7 +303,6 @@ final class TabsTest extends TestCase
 
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -324,7 +314,6 @@ final class TabsTest extends TestCase
 
     public function testSize(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs is-large">
         <ul>
@@ -338,7 +327,6 @@ final class TabsTest extends TestCase
 
     public function testStyle(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs is-toggle is-toggle-rounded">
         <ul>
@@ -352,7 +340,6 @@ final class TabsTest extends TestCase
 
     public function testTabsContent(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>
@@ -391,7 +378,6 @@ final class TabsTest extends TestCase
 
     public function testTabsContentAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-tabs" class="tabs">
         <ul>

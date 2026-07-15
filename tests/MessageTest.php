@@ -5,21 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Message;
 
 final class MessageTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="has-text-justified message is-dark">
         <div class="message-header">
@@ -41,12 +32,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBodyAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
@@ -68,12 +55,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testCloseButtonAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
@@ -95,12 +78,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeaderAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="has-text-justified message-header">
@@ -122,12 +101,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeaderColor(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-success">
         <div class="message-header">
@@ -149,9 +124,6 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeaderColorException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -163,12 +135,8 @@ final class MessageTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testId(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="id-tests" class="message is-dark">
         <div class="message-header">
@@ -190,9 +158,6 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Message::widget();
@@ -212,12 +177,8 @@ final class MessageTest extends TestCase
         $this->assertNotSame($widget, $widget->withoutHeader(false));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
@@ -238,12 +199,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderWithEncode(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">
@@ -265,12 +222,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testSize(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark is-large">
         <div class="message-header">
@@ -292,9 +245,6 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testSizeException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -304,12 +254,8 @@ final class MessageTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testWithoutCloseButton(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-header">Very important</div>
@@ -328,12 +274,8 @@ final class MessageTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testWithoutHeader(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div id="w1-message" class="message is-dark">
         <div class="message-body">

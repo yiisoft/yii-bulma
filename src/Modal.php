@@ -356,7 +356,7 @@ final class Modal extends Widget
 
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
-        return Html::tag('button', $this->toggleButtonLabel, $toggleButtonAttributes)->render();
+        return Html::button($this->toggleButtonLabel, $toggleButtonAttributes)->render();
     }
 
     /**
@@ -373,6 +373,6 @@ final class Modal extends Widget
 
         Html::addCssClass($closeButtonAttributes, $this->closeButtonClass);
 
-        return Html::tag('button', attributes: $closeButtonAttributes)->render();
+        return Html::button('', $closeButtonAttributes)->render();
     }
 }
