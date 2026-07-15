@@ -12,7 +12,7 @@ final class PanelTest extends TestCase
     public function testAttributes(): void
     {
         $expected = <<<HTML
-        <nav id="w1-panel" class="my-class panel">
+        <nav class="my-class panel" id="w1-panel">
         </nav>
         HTML;
         $this->assertEqualsWithoutLE($expected, Panel::widget()
@@ -165,81 +165,81 @@ final class PanelTest extends TestCase
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
         <p class="panel-tabs">
-        <a class="is-active" href="#w1-panel-0" data-all>All</a>
-        <a href="#w1-panel-1" data-target="Public">Public</a>
-        <a href="#w1-panel-2" data-target="Private">Private</a>
-        <a href="#w1-panel-3" data-target="Sources">Sources</a>
-        <a href="#w1-panel-4" data-target="Forks">Forks</a>
+        <a data-all class="is-active" href="#w1-panel-0">All</a>
+        <a data-target="Public" href="#w1-panel-1">Public</a>
+        <a data-target="Private" href="#w1-panel-2">Private</a>
+        <a data-target="Sources" href="#w1-panel-3">Sources</a>
+        <a data-target="Forks" href="#w1-panel-4">Forks</a>
         </p>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Dropdown
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Panel
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
-        <a class="panel-block" data-category="Private">
+        <a data-category="Private" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Dropdown
         </a>
-        <a class="panel-block" data-category="Private">
+        <a data-category="Private" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Panel
         </a>
-        <a class="panel-block" data-category="Sources">
+        <a data-category="Sources" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Nav
         </a>
-        <a class="panel-block" data-category="Sources">
+        <a data-category="Sources" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         NavBar
         </a>
-        <a class="panel-block" data-category="Forks">
+        <a data-category="Forks" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Model
         </a>
-        <a class="panel-block" data-category="Forks">
+        <a data-category="Forks" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         ModalCard
         </a>
@@ -355,18 +355,18 @@ final class PanelTest extends TestCase
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
         <p class="panel-tabs">
-        <a href="#w1-panel-0" data-all>All</a>
-        <a href="#w1-panel-1" data-target="Public">Public</a>
+        <a data-all href="#w1-panel-0">All</a>
+        <a data-target="Public" href="#w1-panel-1">Public</a>
         </p>
-        <a class="panel-block is-active" data-category="All">
+        <a data-category="All" class="panel-block is-active">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
@@ -558,7 +558,7 @@ final class PanelTest extends TestCase
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
-        <a class="is-active" href="#w1-panel" data-all>All</a>
+        <a data-all href="#w1-panel" class="is-active">All</a>
         <a data-target="Public">Public</a>
         <a data-target="Private">Private</a>
         <a data-target="Sources">Sources</a>
@@ -573,15 +573,15 @@ final class PanelTest extends TestCase
         </span>
         </p>
         </div>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         bulma
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         marksheet
         </a>

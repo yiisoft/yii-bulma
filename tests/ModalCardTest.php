@@ -17,13 +17,13 @@ final class ModalCardTest extends TestCase
     public function testAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-        <div id="w1-modal" class="bg-white modal">
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
+        <div class="bg-white modal" id="w1-modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -59,13 +59,13 @@ final class ModalCardTest extends TestCase
     public function testBodyAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="bg-white modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -101,13 +101,13 @@ final class ModalCardTest extends TestCase
     public function testCardAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="bg-white modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -143,13 +143,13 @@ final class ModalCardTest extends TestCase
     public function testCloseButtonAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" disabled aria-label="close"></button>
+        <button type="button" disabled aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -185,13 +185,13 @@ final class ModalCardTest extends TestCase
     public function testCloseButtonCssClass(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button is-danger is-outline" disabled aria-label="close"></button>
+        <button type="button" disabled aria-label="close" class="button is-danger is-outline"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -228,13 +228,13 @@ final class ModalCardTest extends TestCase
     public function testCloseButtonSize(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete is-large" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete is-large"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -299,13 +299,13 @@ final class ModalCardTest extends TestCase
     public function testFooterAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -341,13 +341,13 @@ final class ModalCardTest extends TestCase
     public function testHeaderOptions(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="bg-info modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -416,13 +416,13 @@ final class ModalCardTest extends TestCase
     public function testTitleAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="text-info modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="bg-white modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -459,13 +459,13 @@ final class ModalCardTest extends TestCase
     public function testToggleButtonAttributes(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" disabled data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" disabled id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -501,13 +501,13 @@ final class ModalCardTest extends TestCase
     public function testToggleButtonColor(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="is-success button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="is-success button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -543,13 +543,13 @@ final class ModalCardTest extends TestCase
     public function testToggleButtonLabel(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Launch modal</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Launch modal</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -585,13 +585,13 @@ final class ModalCardTest extends TestCase
     public function testToggleButtonSize(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="is-large button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="is-large button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -630,13 +630,13 @@ final class ModalCardTest extends TestCase
     public function testRender(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>
@@ -671,7 +671,7 @@ final class ModalCardTest extends TestCase
     public function testWithoutCloseButton(): void
     {
         $expected = <<<HTML
-        <button id="w2-button" class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" id="w2-button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -717,7 +717,7 @@ final class ModalCardTest extends TestCase
         <div class="modal-card">
         <header class="modal-card-head">
         <p class="modal-card-title">Modal title.</p>
-        <button class="button delete" aria-label="close"></button>
+        <button type="button" aria-label="close" class="button delete"></button>
         </header>
         <section class="modal-card-body">
         <p class="image is-4by3"><img src="https://bulma.io/images/placeholders/1280x960.png"></p>

@@ -14,12 +14,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="is-link button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="is-link button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -42,12 +42,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class="fas fa-angle-down"></i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -71,12 +71,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-link"><i class>&#8593;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -100,12 +100,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Dropdown Label</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -128,12 +128,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span class="text-danger">Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -156,12 +156,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content-test">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -184,12 +184,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <hr class="dropdown-divider-test">
         <a class="dropdown-item" href="#">Dropdown item</a>
@@ -214,12 +214,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="id-test">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="id-test">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="id-test" class="dropdown-menu">
+        <div class="dropdown-menu" id="id-test">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -270,12 +270,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item active" href="#">Dropdown item</a>
         </div>
@@ -298,12 +298,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item-test" href="#">Dropdown item</a>
         </div>
@@ -326,14 +326,14 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
-        <a class="dropdown-item" href="#" style="opacity:.65;">Dropdown item</a>
+        <a class="dropdown-item" style="opacity:.65;" href="#">Dropdown item</a>
         </div>
         </div>
         </div>
@@ -354,12 +354,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <h6 class="dropdown-header is-link">Dropdown header</h6>
         </div>
@@ -382,12 +382,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu-test">
+        <div class="dropdown-menu-test" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>
@@ -422,12 +422,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         <a class="dropdown-item" href="#">Other dropdown item</a>
@@ -459,12 +459,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Encode &amp; Labels</a>
         </div>
@@ -490,12 +490,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#"><span><i class>&#8962; </i></span>Icon</a>
         </div>
@@ -522,14 +522,14 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
-        <a class="dropdown-item" href="#" style="opacity:.65;pointer-events:none;">Disable</a>
+        <a class="dropdown-item" style="opacity:.65;pointer-events:none;" href="#">Disable</a>
         <div class="dropdown">
         <div class="dropdown-trigger">
         <a class="dropdown-item">
@@ -537,7 +537,7 @@ final class DropdownTest extends TestCase
         <span class="icon is-small"><i class>&#8595;</i></span>
         </a>
         </div>
-        <div id="w2-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w2-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="/page2">Option 2</a>
         </div>
@@ -573,12 +573,12 @@ final class DropdownTest extends TestCase
         $expected = <<<HTML
         <div class="dropdown">
         <div class="dropdown-trigger-test">
-        <button class="button" aria-haspopup="true" aria-controls="w1-dropdown">
+        <button type="button" class="button" aria-haspopup="true" aria-controls="w1-dropdown">
         <span>Click Me</span>
         <span class="icon is-small"><i class>&#8595;</i></span>
         </button>
         </div>
-        <div id="w1-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w1-dropdown">
         <div class="dropdown-content">
         <a class="dropdown-item" href="#">Dropdown item</a>
         </div>

@@ -11,9 +11,9 @@ final class NavBarTest extends TestCase
     public function testAriaLabel(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -32,9 +32,9 @@ final class NavBarTest extends TestCase
     public function testBrandAttributes(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="text-danger navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -53,9 +53,9 @@ final class NavBarTest extends TestCase
     public function testBrandCssClass(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="has-text-center navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -74,10 +74,10 @@ final class NavBarTest extends TestCase
     public function testBrandImageAndUrl(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io"><img src="https://bulma.io/images/bulma-logo.png" style="width: 112; height: 28;"></a>
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -99,10 +99,10 @@ final class NavBarTest extends TestCase
     public function testBrandText(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <a class="navbar-item" href="/">My Project</a>
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -118,10 +118,10 @@ final class NavBarTest extends TestCase
     public function testBrandImageUrlText(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io"><img src="https://bulma.io/images/bulma-logo.png" title="bulma" style="width: 112; height: 28;">My Project</a>
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -144,10 +144,10 @@ final class NavBarTest extends TestCase
     public function testBrandUrlEmptyText(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <span class="has-text-primary navbar-item">My Project</span>
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -169,7 +169,7 @@ final class NavBarTest extends TestCase
     public function testBurgerAttributes(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <a class="has-text-center navbar-burger" aria-expanded="false" aria-label="menu" role="button">
         <span aria-hidden="true"></span>
@@ -190,9 +190,9 @@ final class NavBarTest extends TestCase
     public function testBurgerCssClass(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="has-text-center navbar-burguer" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="has-text-center navbar-burguer">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -211,9 +211,9 @@ final class NavBarTest extends TestCase
     public function testButtonLinkAriaExpanded(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="true" aria-label="menu" role="button">
+        <a aria-expanded="true" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -232,9 +232,9 @@ final class NavBarTest extends TestCase
     public function testButtonLinkAriaLabelText(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu-text" role="button">
+        <a aria-expanded="false" aria-label="menu-text" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -253,9 +253,9 @@ final class NavBarTest extends TestCase
     public function testButtonLinkContent(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a>
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger"><span class="icon"><i class="mdi mdi-menu mdi-24px"></i></span></a>
         </div>
         </nav>
         HTML;
@@ -271,9 +271,9 @@ final class NavBarTest extends TestCase
     public function testButtonLinkRole(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button-text">
+        <a aria-expanded="false" aria-label="menu" role="button-text" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -292,9 +292,9 @@ final class NavBarTest extends TestCase
     public function testCssClass(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="has-text-danger navbar" aria-label="main navigation" role="navigation">
+        <nav class="has-text-danger navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -315,7 +315,7 @@ final class NavBarTest extends TestCase
         $expected = <<<HTML
         <nav id="id-test" class="navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -357,10 +357,10 @@ final class NavBarTest extends TestCase
     public function testItemCssClass(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
         <a class="has-text-center navbar-item" href="/">link-text</a>
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -381,9 +381,9 @@ final class NavBarTest extends TestCase
     public function testRender(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -397,9 +397,9 @@ final class NavBarTest extends TestCase
     public function testRole(): void
     {
         $expected = <<<HTML
-        <nav id="w1-navbar" class="navbar" aria-label="main navigation" role="navigation-text">
+        <nav class="navbar" id="w1-navbar" aria-label="main navigation" role="navigation-text">
         <div class="navbar-brand">
-        <a class="navbar-burger" aria-expanded="false" aria-label="menu" role="button">
+        <a aria-expanded="false" aria-label="menu" role="button" class="navbar-burger">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>

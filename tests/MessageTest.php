@@ -12,7 +12,7 @@ final class MessageTest extends TestCase
     public function testAttributes(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="has-text-justified message is-dark">
+        <div class="has-text-justified message is-dark" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -35,7 +35,7 @@ final class MessageTest extends TestCase
     public function testBodyAttributes(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -58,7 +58,7 @@ final class MessageTest extends TestCase
     public function testCloseButtonAttributes(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="btn delete"><span aria-hidden="true">&times;</span></button>
@@ -81,7 +81,7 @@ final class MessageTest extends TestCase
     public function testHeaderAttributes(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="has-text-justified message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -104,7 +104,7 @@ final class MessageTest extends TestCase
     public function testHeaderColor(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-success">
+        <div class="message is-success" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -138,7 +138,7 @@ final class MessageTest extends TestCase
     public function testId(): void
     {
         $expected = <<<HTML
-        <div id="id-tests" class="message is-dark">
+        <div class="message is-dark" id="id-tests">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -180,7 +180,7 @@ final class MessageTest extends TestCase
     public function testRender(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -202,7 +202,7 @@ final class MessageTest extends TestCase
     public function testRenderWithEncode(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete"><span aria-hidden="true">&times;</span></button>
@@ -225,7 +225,7 @@ final class MessageTest extends TestCase
     public function testSize(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark is-large">
+        <div class="message is-dark is-large" id="w1-message">
         <div class="message-header">
         <p>Very important</p>
         <button type="button" class="delete is-large"><span aria-hidden="true">&times;</span></button>
@@ -257,7 +257,7 @@ final class MessageTest extends TestCase
     public function testWithoutCloseButton(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-header">Very important</div>
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
@@ -277,7 +277,7 @@ final class MessageTest extends TestCase
     public function testWithoutHeader(): void
     {
         $expected = <<<HTML
-        <div id="w1-message" class="message is-dark">
+        <div class="message is-dark" id="w1-message">
         <div class="message-body">
         <strong>Holy guacamole!</strong> You should check in on some of those fields below.
         </div>

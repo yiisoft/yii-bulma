@@ -12,7 +12,7 @@ final class BreadcrumbsTest extends TestCase
     public function testAriaLabel(): void
     {
         $expected = <<<'HTML'
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="main">
+        <nav id="w1-breadcrumbs" aria-label="main" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
@@ -31,7 +31,7 @@ final class BreadcrumbsTest extends TestCase
     public function testAttributes(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" autofocus>
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" autofocus class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -51,7 +51,7 @@ final class BreadcrumbsTest extends TestCase
     public function testEncodeLabels(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">&lt;span&gt;&lt;i class =fas fas-profile&gt;&lt;/i&gt;Setting Profile&lt;/span&gt;</a></li>
@@ -72,7 +72,7 @@ final class BreadcrumbsTest extends TestCase
         );
 
         $expected = <<<HTML
-        <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w2-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about"><span><i class =fas fas-profile></i>Setting Profile</span></a></li>
@@ -105,7 +105,7 @@ final class BreadcrumbsTest extends TestCase
     public function testHomeLink(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -121,7 +121,7 @@ final class BreadcrumbsTest extends TestCase
         );
 
         $expected = <<<HTML
-        <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w2-breadcrumbs" class="breadcrumb">
         <ul>
         <li>Index</li>
         <li><a href="/about">About</a></li>
@@ -143,7 +143,7 @@ final class BreadcrumbsTest extends TestCase
     public function testIcons(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="is-centered breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="is-centered breadcrumb">
         <ul>
         <li><a href="/"><span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span><span>Bulma</span></a></li>
         <li><a href="/docs"><span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span><span>Documentation</span></a></li>
@@ -208,7 +208,7 @@ final class BreadcrumbsTest extends TestCase
     public function testItemsAttributes(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul class="testMe">
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -228,7 +228,7 @@ final class BreadcrumbsTest extends TestCase
     public function testItemTemplate(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <div><a href="/index">Index</a></div>
         <div><a href="/about">About</a></div>
@@ -248,7 +248,7 @@ final class BreadcrumbsTest extends TestCase
     public function testItemTemplateActive(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -275,7 +275,7 @@ final class BreadcrumbsTest extends TestCase
     public function testLinksEmptyUrl(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li class="is-active"><a aria-current="page">about</a></li>
@@ -299,7 +299,7 @@ final class BreadcrumbsTest extends TestCase
     public function testLinksTemplate(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <div><a href="/about">about</a></div>
@@ -320,7 +320,7 @@ final class BreadcrumbsTest extends TestCase
     public function testRender(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/bulma">Bulma</a></li>
         <li><a href="/documentation">Documentation</a></li>
@@ -347,7 +347,7 @@ final class BreadcrumbsTest extends TestCase
     public function testWithoutHomeItem(): void
     {
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/about">About</a></li>
         </ul>

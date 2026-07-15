@@ -15,10 +15,10 @@ final class ModalTest extends TestCase
     public function testAttributes(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
-        <div id="w1-modal" class="widescreen modal">
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
+        <div class="widescreen modal" id="w1-modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         <div class="box">Say hello...</div>
         </div>
@@ -39,10 +39,10 @@ final class ModalTest extends TestCase
     public function testBackgroundClass(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="test-class"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -58,10 +58,10 @@ final class ModalTest extends TestCase
     public function testButtonClass(): void
     {
         $expected = <<<HTML
-        <button class="test-class" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="test-class">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -77,10 +77,10 @@ final class ModalTest extends TestCase
     public function testCloseButtonAttributes(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="some-class modal-close" aria-label="close"></button>
+        <button type="button" class="some-class modal-close" aria-label="close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -96,10 +96,10 @@ final class ModalTest extends TestCase
     public function testCloseButtonSize(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="is-large modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="is-large modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -115,10 +115,10 @@ final class ModalTest extends TestCase
     public function testContentAttributes(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="some-class modal-content">
         </div>
         </div>
@@ -134,10 +134,10 @@ final class ModalTest extends TestCase
     public function testContentClass(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="test-class">
         </div>
         </div>
@@ -198,10 +198,10 @@ final class ModalTest extends TestCase
     public function testModalClass(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="test-class">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -217,10 +217,10 @@ final class ModalTest extends TestCase
     public function testRender(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         <div class="box">Say hello...</div>
         </div>
@@ -240,10 +240,10 @@ final class ModalTest extends TestCase
     public function testToggleButtonAttributes(): void
     {
         $expected = <<<HTML
-        <button class="testMe button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" class="testMe button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -259,10 +259,10 @@ final class ModalTest extends TestCase
     public function testToggleButtonColor(): void
     {
         $expected = <<<HTML
-        <button class="is-info button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="is-info button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -278,10 +278,10 @@ final class ModalTest extends TestCase
     public function testToggleButtonLabel(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Click to open.</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Click to open.</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -297,10 +297,10 @@ final class ModalTest extends TestCase
     public function testToggleButtonSize(): void
     {
         $expected = <<<HTML
-        <button class="is-large button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="is-large button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
@@ -316,7 +316,7 @@ final class ModalTest extends TestCase
     public function testWithoutCloseButton(): void
     {
         $expected = <<<HTML
-        <button class="button modal-button" data-target="#w1-modal" aria-haspopup="true">Toggle button</button>
+        <button type="button" data-target="#w1-modal" aria-haspopup="true" class="button modal-button">Toggle button</button>
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -333,7 +333,7 @@ final class ModalTest extends TestCase
         $expected = <<<HTML
         <div id="w1-modal" class="modal">
         <div class="modal-background"></div>
-        <button class="modal-close" aria-label="close"></button>
+        <button type="button" aria-label="close" class="modal-close"></button>
         <div class="modal-content">
         </div>
         </div>
