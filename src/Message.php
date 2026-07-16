@@ -299,7 +299,7 @@ final class Message extends Widget
             Html::addCssClass($closeButtonAttributes, $this->size);
         }
 
-        return Html::tag('button', $label, $closeButtonAttributes)
+        return Html::button($label, $closeButtonAttributes)
             ->encode(false) . PHP_EOL;
     }
 

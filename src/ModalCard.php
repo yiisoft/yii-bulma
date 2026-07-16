@@ -552,7 +552,7 @@ final class ModalCard extends Widget
             Html::addCssClass($closeButtonAttributes, $this->closeButtonSize);
         }
 
-        return Html::tag('button', attributes: $closeButtonAttributes) . PHP_EOL;
+        return Html::button('', $closeButtonAttributes) . PHP_EOL;
     }
 
     /**
@@ -617,6 +617,6 @@ final class ModalCard extends Widget
 
         Html::addCssClass($toggleButtonAttributes, $this->buttonClass);
 
-        return Html::tag('button', $this->toggleButtonLabel, $toggleButtonAttributes)->render();
+        return Html::button($this->toggleButtonLabel, $toggleButtonAttributes)->render();
     }
 }

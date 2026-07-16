@@ -5,22 +5,13 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Img;
 use Yiisoft\Yii\Bulma\Nav;
 
 final class NavTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testDeepActivateParents(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <div class="navbar-item has-dropdown is-hoverable">
@@ -33,7 +24,7 @@ final class NavTest extends TestCase
         <span class="icon is-small"><i class>&#8595;</i></span>
         </a>
         </div>
-        <div id="w2-dropdown" class="dropdown-menu">
+        <div class="dropdown-menu" id="w2-dropdown">
         <div class="dropdown-content">
         <a class="navbar-item is-active" href="#">Page</a>
         </div>
@@ -65,12 +56,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testDropdown(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <div class="navbar-item has-dropdown is-hoverable">
@@ -102,18 +89,14 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testDropdownWithDropdownAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Page1</a>
         <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="#">Dropdown1</a>
-        <div id="test1" class="is-link navbar-dropdown" data-id="t1">
+        <div class="is-link navbar-dropdown" data-id="t1" id="test1">
         <a class="navbar-item" href="#">Page2</a>
         <a class="navbar-item" href="#">Page3</a>
         </div>
@@ -150,12 +133,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testEnclosedByEndMenu(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <div class="navbar-end">
@@ -190,12 +169,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testEnclosedByStartMenu(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <div class="navbar-start">
@@ -230,12 +205,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testEncodeLabels(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">a &amp; b</a>
@@ -249,12 +220,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testExplicitActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Item1</a>
@@ -270,12 +237,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testExplicitActiveSubItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Item1</a>
@@ -309,18 +272,14 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testIcon(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="/setting/account"><span class="icon"><i class="fas fa-user-cog"></i></span>Setting Account</a>
         <a class="navbar-item" href="/profile"><span class="icon"><i class="fas fa-users"></i></span>Profile</a>
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="#">Admin<img class="img-rounded" src="../../docs/images/icon-avatar.png" aria-expanded="false"></a>
+        <a class="navbar-link" href="#">Admin<img class="img-rounded" aria-expanded="false" src="../../docs/images/icon-avatar.png"></a>
         <div class="navbar-dropdown">
         <a class="navbar-item" href="/auth/logout">Logout</a>
         </div>
@@ -357,12 +316,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImplicitActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="is-active navbar-item" href="#">Item1</a>
@@ -378,12 +333,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImplicitActiveSubItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Item1</a>
@@ -415,9 +366,6 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Nav::widget();
@@ -431,12 +379,8 @@ final class NavTest extends TestCase
         $this->assertNotSame($widget, $widget->withoutActivateItems());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testMissingLabel(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "label" option is required.');
         Nav::widget()
@@ -444,12 +388,8 @@ final class NavTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Page1</a>
@@ -463,15 +403,11 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderItemsDisabled(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
-        <a class="navbar-item" href="#" style="opacity:.65; pointer-events:none;">a & b</a>
+        <a style="opacity:.65; pointer-events:none;" class="navbar-item" href="#">a & b</a>
         </div>
         HTML;
         $this->assertEqualsWithoutLE(
@@ -482,13 +418,8 @@ final class NavTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderItemsEmpty(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
-
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Page1</a>
@@ -507,12 +438,8 @@ final class NavTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRenderItemsWithoutUrl(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <div class="navbar-menu">
         <a class="navbar-item" href="#">Page1</a>

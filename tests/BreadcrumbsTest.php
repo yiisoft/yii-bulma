@@ -5,23 +5,14 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Breadcrumbs;
 
 final class BreadcrumbsTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAriaLabel(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<'HTML'
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="main">
+        <nav id="w1-breadcrumbs" aria-label="main" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">About</a></li>
@@ -37,14 +28,10 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs" autofocus>
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" autofocus class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -61,14 +48,10 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testEncodeLabels(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about">&lt;span&gt;&lt;i class =fas fas-profile&gt;&lt;/i&gt;Setting Profile&lt;/span&gt;</a></li>
@@ -89,7 +72,7 @@ final class BreadcrumbsTest extends TestCase
         );
 
         $expected = <<<HTML
-        <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w2-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about"><span><i class =fas fas-profile></i>Setting Profile</span></a></li>
@@ -110,9 +93,6 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHomeItemThrowExceptionForEmptyArray(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -122,14 +102,10 @@ final class BreadcrumbsTest extends TestCase
         Breadcrumbs::widget()->homeItem([]);
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHomeLink(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -145,7 +121,7 @@ final class BreadcrumbsTest extends TestCase
         );
 
         $expected = <<<HTML
-        <nav id="w2-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w2-breadcrumbs" class="breadcrumb">
         <ul>
         <li>Index</li>
         <li><a href="/about">About</a></li>
@@ -162,15 +138,12 @@ final class BreadcrumbsTest extends TestCase
     }
 
     /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     *
      * @link https://bulma.io/documentation/components/breadcrumb/#icons
      */
     public function testIcons(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="is-centered breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="is-centered breadcrumb">
         <ul>
         <li><a href="/"><span class="icon is-small"><i class="fas fa-home" aria-hidden="true"></i></span><span>Bulma</span></a></li>
         <li><a href="/docs"><span class="icon is-small"><i class="fas fa-book" aria-hidden="true"></i></span><span>Documentation</span></a></li>
@@ -216,9 +189,6 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Breadcrumbs::widget();
@@ -235,14 +205,10 @@ final class BreadcrumbsTest extends TestCase
         $this->assertNotSame($widget, $widget->itemTemplate(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul class="testMe">
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -259,14 +225,10 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <div><a href="/index">Index</a></div>
         <div><a href="/about">About</a></div>
@@ -283,14 +245,10 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemTemplateActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/index">Index</a></li>
         <li><a href="/about">About</a></li>
@@ -307,9 +265,6 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testLinksEmpty(): void
     {
         $this->assertempty(Breadcrumbs::widget()
@@ -317,14 +272,10 @@ final class BreadcrumbsTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testLinksEmptyUrl(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <li class="is-active"><a aria-current="page">about</a></li>
@@ -336,9 +287,6 @@ final class BreadcrumbsTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testLinksException(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -348,14 +296,10 @@ final class BreadcrumbsTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testLinksTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/">Home</a></li>
         <div><a href="/about">about</a></div>
@@ -371,15 +315,12 @@ final class BreadcrumbsTest extends TestCase
     }
 
     /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     *
      * @link https://bulma.io/documentation/components/breadcrumb/
      */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/bulma">Bulma</a></li>
         <li><a href="/documentation">Documentation</a></li>
@@ -403,14 +344,10 @@ final class BreadcrumbsTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testWithoutHomeItem(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-breadcrumbs" class="breadcrumb" aria-label="breadcrumbs">
+        <nav aria-label="breadcrumbs" id="w1-breadcrumbs" class="breadcrumb">
         <ul>
         <li><a href="/about">About</a></li>
         </ul>

@@ -381,8 +381,7 @@ final class Dropdown extends Widget
         $buttonAttributes['aria-haspopup'] = 'true';
         $buttonAttributes['aria-controls'] = $id;
 
-        return Html::tag(
-            'button',
+        return Html::button(
             $this->renderLabelButton(
                 $this->buttonLabel,
                 $this->buttonLabelAttributes,
@@ -473,7 +472,7 @@ final class Dropdown extends Widget
         /** @var array|string $item */
         foreach ($this->items as $item) {
             if ($item === '-') {
-                $lines[] = Html::tag('hr', attributes: ['class' => $this->dividerCssClass])->render();
+                $lines[] = Html::hr(['class' => $this->dividerCssClass])->render();
             } else {
                 if (!isset($item['label'])) {
                     throw new InvalidArgumentException('The "label" option is required.');
@@ -528,7 +527,7 @@ final class Dropdown extends Widget
 
                 if ($items === []) {
                     if ($itemLabel === '-') {
-                        $content = Html::tag('hr', attributes: ['class' => $this->dividerCssClass])->render();
+                        $content = Html::hr(['class' => $this->dividerCssClass])->render();
                     } elseif ($enclose === false) {
                         $content = $itemLabel;
                     } elseif ($url === '') {

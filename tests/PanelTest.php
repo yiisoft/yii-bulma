@@ -5,23 +5,14 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Bulma\Tests;
 
 use InvalidArgumentException;
-use Yiisoft\Definitions\Exception\CircularReferenceException;
-use Yiisoft\Definitions\Exception\InvalidConfigException;
-use Yiisoft\Definitions\Exception\NotInstantiableException;
-use Yiisoft\Factory\NotFoundException;
-use Yiisoft\Html\Html;
 use Yiisoft\Yii\Bulma\Panel;
 
 final class PanelTest extends TestCase
 {
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
-        <nav id="w1-panel" class="my-class panel">
+        <nav class="my-class panel" id="w1-panel">
         </nav>
         HTML;
         $this->assertEqualsWithoutLE($expected, Panel::widget()
@@ -29,12 +20,8 @@ final class PanelTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testBlockClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -54,12 +41,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testColor(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Repositories</p>
@@ -74,12 +57,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testCssClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="test-class">
         <p class="panel-tabs">
@@ -96,9 +75,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testExceptionColor(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -110,12 +86,8 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeading(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-heading">Repositories</p>
@@ -126,12 +98,8 @@ final class PanelTest extends TestCase
             ->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeadingClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="test-class">Repositories</p>
@@ -146,12 +114,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testHeadingAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="my-class panel-heading">Repositories</p>
@@ -166,9 +130,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testImmutability(): void
     {
         $widget = Panel::widget();
@@ -190,9 +151,6 @@ final class PanelTest extends TestCase
         $this->assertNotSame($widget, $widget->template(''));
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -201,91 +159,87 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItems(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
         <p class="panel-tabs">
-        <a class="is-active" href="#w1-panel-0" data-all>All</a>
-        <a href="#w1-panel-1" data-target="Public">Public</a>
-        <a href="#w1-panel-2" data-target="Private">Private</a>
-        <a href="#w1-panel-3" data-target="Sources">Sources</a>
-        <a href="#w1-panel-4" data-target="Forks">Forks</a>
+        <a data-all class="is-active" href="#w1-panel-0">All</a>
+        <a data-target="Public" href="#w1-panel-1">Public</a>
+        <a data-target="Private" href="#w1-panel-2">Private</a>
+        <a data-target="Sources" href="#w1-panel-3">Sources</a>
+        <a data-target="Forks" href="#w1-panel-4">Forks</a>
         </p>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Dropdown
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Panel
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
-        <a class="panel-block" data-category="Private">
+        <a data-category="Private" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Dropdown
         </a>
-        <a class="panel-block" data-category="Private">
+        <a data-category="Private" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Panel
         </a>
-        <a class="panel-block" data-category="Sources">
+        <a data-category="Sources" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Nav
         </a>
-        <a class="panel-block" data-category="Sources">
+        <a data-category="Sources" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         NavBar
         </a>
-        <a class="panel-block" data-category="Forks">
+        <a data-category="Forks" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Model
         </a>
-        <a class="panel-block" data-category="Forks">
+        <a data-category="Forks" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         ModalCard
         </a>
@@ -395,28 +349,24 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testItemsActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel is-primary">
         <p class="panel-heading">Primary</p>
         <p class="panel-tabs">
-        <a href="#w1-panel-0" data-all>All</a>
-        <a href="#w1-panel-1" data-target="Public">Public</a>
+        <a data-all href="#w1-panel-0">All</a>
+        <a data-target="Public" href="#w1-panel-1">Public</a>
         </p>
-        <a class="panel-block is-active" data-category="All">
+        <a data-category="All" class="panel-block is-active">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Breadcrumbs
         </a>
-        <a class="panel-block" data-category="Public">
+        <a data-category="Public" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         Tabs
         </a>
@@ -458,12 +408,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testRender(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         </nav>
@@ -471,12 +417,8 @@ final class PanelTest extends TestCase
         $this->assertEqualsWithoutLE($expected, Panel::widget()->render());
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabActive(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -502,9 +444,6 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabMissigLabel(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -513,12 +452,8 @@ final class PanelTest extends TestCase
             ->render();
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabClass(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="test-class">
@@ -545,12 +480,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabs(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
@@ -576,12 +507,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTabsAttributes(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="my-class panel-tabs">
@@ -608,12 +535,8 @@ final class PanelTest extends TestCase
         );
     }
 
-    /**
-     * @throws CircularReferenceException|InvalidConfigException|NotFoundException|NotInstantiableException
-     */
     public function testTemplate(): void
     {
-        $this->setInaccessibleProperty(new Html(), 'generateIdCounter', []);
         $template = <<<HTML
         {panelBegin}{panelHeading}{panelTabs}
         <div class="panel-block">
@@ -635,7 +558,7 @@ final class PanelTest extends TestCase
         $expected = <<<HTML
         <nav id="w1-panel" class="panel">
         <p class="panel-tabs">
-        <a class="is-active" href="#w1-panel" data-all>All</a>
+        <a data-all href="#w1-panel" class="is-active">All</a>
         <a data-target="Public">Public</a>
         <a data-target="Private">Private</a>
         <a data-target="Sources">Sources</a>
@@ -650,15 +573,15 @@ final class PanelTest extends TestCase
         </span>
         </p>
         </div>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         bulma
         </a>
-        <a class="panel-block" data-category="All">
+        <a data-category="All" class="panel-block">
         <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-book"></i>
         </span>
         marksheet
         </a>
