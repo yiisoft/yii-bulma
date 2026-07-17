@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<roave-bc-check
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/roave/backward-compatibility-check/Resources/schema.xsd">
+    <baseline>
+        <ignored-regex>#Yiisoft\\Widget\\Widget::#</ignored-regex>
+        <ignored-regex>#was added to Method widget\(\) of class Yiisoft\\Widget\\Widget#</ignored-regex>
+        <ignored-regex>#Asset\#\$publishOptions changed default value#</ignored-regex>
+    </baseline>
+</roave-bc-check>
