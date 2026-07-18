@@ -1,5 +1,9 @@
 # Yii Bulma Extension Change Log
 
+## 1.1.1 under development
+
+- no changes in this release.
+
 ## 1.1.0 July 18, 2026
 
 - Chg #101, #110: Bump `yiisoft/html` version to `^4.2.0` (@samdark, @vjik)
