@@ -295,9 +295,7 @@ final class NavBar extends Widget
         $attributes = $this->attributes;
         Html::addCssClass($attributes, $this->cssClass);
 
-        if (!isset($attributes['id'])) {
-            $attributes['id'] = Html::generateId($this->autoIdPrefix) . '-navbar';
-        }
+        $attributes['id'] ??= Html::generateId($this->autoIdPrefix) . '-navbar';
 
         $attributes['aria-label'] = $this->ariaLabel;
         $attributes['role'] = $this->role;
